@@ -12,6 +12,9 @@ import jakarta.persistence.Table;
 @Table(name="ABC_MAPEO_CAMPANA_COLUMNA")
 public class ABCMapeoCampanaColumnaEntity implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "ID_ABC_CONFIG_MAPEO_CAMPANA")
 	private Long idABCConfigMapeoCampana;
