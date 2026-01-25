@@ -1,20 +1,18 @@
 package mx.com.proyectohu.service;
 
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.dto.MapeoCampanaColumnaRequestDTO;
 import mx.com.proyectohu.dto.MapeoCampanaColumnaResponseDTO;
 import mx.com.proyectohu.entity.ABCMapeoCampanaColumnaEntity;
+import mx.com.proyectohu.entity.LlaveMapeoCampanaColumna;
 import mx.com.proyectohu.mapper.MapeoCampanaColumnaMapper;
 import mx.com.proyectohu.repository.ABCMapeoCampanaColumnaRepository;
 
@@ -30,52 +28,47 @@ public class MapeoCampanaColumnaService {
 	@Autowired
 	public MapeoCampanaColumnaMapper   mapeoCampanaColumnaMapper;
 	
-	private final JdbcTemplate jdbcTemplate;
-
-	public MapeoCampanaColumnaService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-
-	public Long  registrarMapeoCampanaColumna(Long idMapeoCampanaNegocio, MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
-
-
-		ABCMapeoCampanaColumnaEntity ABCMapeoCampanaColumnaEntity = new ABCMapeoCampanaColumnaEntity();
-
-
-		ABCMapeoCampanaColumnaEntity.setIdABCConfigMapeoCampana(idMapeoCampanaNegocio);
-		ABCMapeoCampanaColumnaEntity.setIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
-		ABCMapeoCampanaColumnaEntity.setBolActivo(true);
-		ABCMapeoCampanaColumnaEntity.setBolCarga(true);
-		ABCMapeoCampanaColumnaEntity.setBolValidacion(true);
-		ABCMapeoCampanaColumnaEntity.setBolEnvio(true);
-		ABCMapeoCampanaColumnaEntity.setRegex(mapeoCampanaColumnaRequestDTO.getRegex());
-		ABCMapeoCampanaColumnaEntity.setFecCreacion(new Date());
-		ABCMapeoCampanaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaColumnaRequestDTO.getIdUsuario());
-		ABCMapeoCampanaColumnaEntity.setFecUltModificacion(new Date());
-
-
-		abcMapeoCampanaColumnaRepository.insertarMapeoCampanaColumna(ABCMapeoCampanaColumnaEntity.getIdABCConfigMapeoCampana(),
-				ABCMapeoCampanaColumnaEntity.getIdABCCatColumna(),
-				ABCMapeoCampanaColumnaEntity.getBolActivo(),
-				ABCMapeoCampanaColumnaEntity.getBolCarga(),
-				ABCMapeoCampanaColumnaEntity.getBolValidacion(),
-				ABCMapeoCampanaColumnaEntity.getBolEnvio(),
-				ABCMapeoCampanaColumnaEntity.getRegex(),
-				ABCMapeoCampanaColumnaEntity.getFecCreacion(),
-				ABCMapeoCampanaColumnaEntity.getIdABCUsuarioUltModificacion(),
-				ABCMapeoCampanaColumnaEntity.getFecUltModificacion());
 
 
 
-		return	idMapeoCampanaNegocio;	
+	public Long  registrarMapeoCampanaColumna(Long idMapeoCampana, MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
+
+
+		ABCMapeoCampanaColumnaEntity abcMapeoCampanaColumnaEntity = new ABCMapeoCampanaColumnaEntity();
+		LlaveMapeoCampanaColumna llaveMapeoCampanaColumna = new LlaveMapeoCampanaColumna();
+		llaveMapeoCampanaColumna.setIdABCConfigMapeoCampana(idMapeoCampana);
+		llaveMapeoCampanaColumna.setIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
+		
+		Optional<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityOptional = abcMapeoCampanaColumnaRepository.findById(llaveMapeoCampanaColumna);
+		
+		if(abcMapeoCampanaColumnaEntityOptional.isPresent()) {
+			return idMapeoCampana=null;
+		}
+		abcMapeoCampanaColumnaEntity.setLlaveMapeoCampanaColumna(llaveMapeoCampanaColumna);
+		abcMapeoCampanaColumnaEntity.setBolActivo(true);
+		abcMapeoCampanaColumnaEntity.setBolCarga(true);
+		abcMapeoCampanaColumnaEntity.setBolValidacion(true);
+		abcMapeoCampanaColumnaEntity.setBolEnvio(true);
+		abcMapeoCampanaColumnaEntity.setRegex(mapeoCampanaColumnaRequestDTO.getRegex());
+		abcMapeoCampanaColumnaEntity.setFecCreacion(new Date());
+		abcMapeoCampanaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaColumnaRequestDTO.getIdUsuario());
+		abcMapeoCampanaColumnaEntity.setFecUltModificacion(new Date());
+
+		idMapeoCampana = abcMapeoCampanaColumnaRepository.save(abcMapeoCampanaColumnaEntity).getLlaveMapeoCampanaColumna().getIdABCConfigMapeoCampana();
+
+		return	idMapeoCampana;	
 
 	}
 
 	public MapeoCampanaColumnaResponseDTO consultarMapeoCampanaColumna(Long id, Long idABCCatColumna) {
 		MapeoCampanaColumnaResponseDTO mapeoCampanaColumnaResponseDTO = new MapeoCampanaColumnaResponseDTO();
+		
+		
+		LlaveMapeoCampanaColumna llaveMapeoCampanaColumna = new LlaveMapeoCampanaColumna();
+		llaveMapeoCampanaColumna.setIdABCConfigMapeoCampana(id);
+		llaveMapeoCampanaColumna.setIdABCCatColumna(idABCCatColumna);
 
-		Optional<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityOptional = abcMapeoCampanaColumnaRepository.findByIdABCConfigMapeoCampanaAndIdABCCatColumna(id,idABCCatColumna);
+		Optional<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityOptional = abcMapeoCampanaColumnaRepository.findById(llaveMapeoCampanaColumna);
 
 		if (abcMapeoCampanaColumnaEntityOptional.isPresent()) {
 
@@ -109,7 +102,7 @@ public class MapeoCampanaColumnaService {
 
 			}
 		}else {
-			List<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityLista = abcMapeoCampanaColumnaRepository.findByIdABCConfigMapeoCampana(id);
+			List<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityLista = abcMapeoCampanaColumnaRepository.findByLlaveMapeoCampanaColumna_IdABCConfigMapeoCampana(id);
 
 
 			if(!abcMapeoCampanaColumnaEntityLista.isEmpty()) {
@@ -133,8 +126,10 @@ public class MapeoCampanaColumnaService {
 	public MapeoCampanaColumnaResponseDTO actualizarMapeoCampanaColumna(MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
 
 		MapeoCampanaColumnaResponseDTO mapeoCampanaColumnaResponseDTO = new MapeoCampanaColumnaResponseDTO();
-		Optional<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityOptional = 
-				abcMapeoCampanaColumnaRepository.findByIdABCConfigMapeoCampanaAndIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCConfigMapeoCampana(),mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
+		LlaveMapeoCampanaColumna llaveMapeoCampanaColumna = new LlaveMapeoCampanaColumna();
+		llaveMapeoCampanaColumna.setIdABCConfigMapeoCampana(mapeoCampanaColumnaRequestDTO.getIdABCConfigMapeoCampana());
+		llaveMapeoCampanaColumna.setIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
+		Optional<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityOptional = abcMapeoCampanaColumnaRepository.findById(llaveMapeoCampanaColumna);
 
 		if (abcMapeoCampanaColumnaEntityOptional.isPresent()) {
 
@@ -148,27 +143,8 @@ public class MapeoCampanaColumnaService {
 			abcMapeoCampanaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaColumnaRequestDTO.getIdUsuario());
 			abcMapeoCampanaColumnaEntity.setFecUltModificacion(new Date());
 
-
-			 String sql = "UPDATE ABC_MAPEO_CAMPANA_COLUMNA SET BOL_CARGA=?,\r\n"
-	 			 		+ "BOL_VALIDACION=?,\r\n"
-	 			 		+ "BOL_ENVIO=?,\r\n"
-	 			 		+ "REGEX=?,\r\n"
-	 			 		+ "ID_ABC_USUARIO_ULT_MODIFICACION= ?,\r\n"
-	 			 		+ "FEC_ULT_MODIFICACION= ?\r\n"
-	 			 		+ "where ID_ABC_CONFIG_MAPEO_CAMPANA = ?\r\n"
-	 			 		+ "and ID_ABC_CAT_COLUMNA=?";
-			
-			
-		
-			 jdbcTemplate.update(sql,
-					 abcMapeoCampanaColumnaEntity.getBolCarga(),
-					 abcMapeoCampanaColumnaEntity.getBolValidacion(),
-					 abcMapeoCampanaColumnaEntity.getBolEnvio(),
-					 abcMapeoCampanaColumnaEntity.getRegex(),
-					 abcMapeoCampanaColumnaEntity.getIdABCUsuarioUltModificacion(),
-					 abcMapeoCampanaColumnaEntity.getFecUltModificacion(),
-					 abcMapeoCampanaColumnaEntity.getIdABCConfigMapeoCampana(),
-					 abcMapeoCampanaColumnaEntity.getIdABCCatColumna());
+			abcMapeoCampanaColumnaEntity = abcMapeoCampanaColumnaRepository.save(abcMapeoCampanaColumnaEntity);
+	
 			 
 			mapeoCampanaColumnaResponseDTO = mapeoCampanaColumnaMapper.llenarDTO(abcMapeoCampanaColumnaEntity);
 
@@ -185,10 +161,13 @@ public class MapeoCampanaColumnaService {
 
 	public Boolean activar(MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
 		Boolean activado= false;
-
+		
+		LlaveMapeoCampanaColumna llaveMapeoCampanaColumna = new LlaveMapeoCampanaColumna();
+		llaveMapeoCampanaColumna.setIdABCConfigMapeoCampana(mapeoCampanaColumnaRequestDTO.getIdABCConfigMapeoCampana());
+		llaveMapeoCampanaColumna.setIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
 
 		Optional<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityOptional = 
-				abcMapeoCampanaColumnaRepository.findByIdABCConfigMapeoCampanaAndIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCConfigMapeoCampana(),mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
+				abcMapeoCampanaColumnaRepository.findById(llaveMapeoCampanaColumna);
 		if (abcMapeoCampanaColumnaEntityOptional.isPresent()) {
 
 			ABCMapeoCampanaColumnaEntity abcMapeoCampanaColumnaEntity = abcMapeoCampanaColumnaEntityOptional.get();
@@ -208,9 +187,13 @@ public class MapeoCampanaColumnaService {
 
 	public Boolean desactivar(MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
 		Boolean desactivado= false;
+		LlaveMapeoCampanaColumna llaveMapeoCampanaColumna = new LlaveMapeoCampanaColumna();
+		llaveMapeoCampanaColumna.setIdABCConfigMapeoCampana(mapeoCampanaColumnaRequestDTO.getIdABCConfigMapeoCampana());
+		llaveMapeoCampanaColumna.setIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
+
 
 		Optional<ABCMapeoCampanaColumnaEntity> abcMapeoCampanaColumnaEntityOptional = 
-				abcMapeoCampanaColumnaRepository.findByIdABCConfigMapeoCampanaAndIdABCCatColumna(mapeoCampanaColumnaRequestDTO.getIdABCConfigMapeoCampana(),mapeoCampanaColumnaRequestDTO.getIdABCCatColumna());
+				abcMapeoCampanaColumnaRepository.findById(llaveMapeoCampanaColumna);
 		if (abcMapeoCampanaColumnaEntityOptional.isPresent()) {
 
 			ABCMapeoCampanaColumnaEntity abcMapeoCampanaColumnaEntity = abcMapeoCampanaColumnaEntityOptional.get();
