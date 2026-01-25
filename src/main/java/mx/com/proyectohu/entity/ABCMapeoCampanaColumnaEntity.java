@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -15,12 +16,9 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_ABC_CONFIG_MAPEO_CAMPANA")
-	private Long idABCConfigMapeoCampana;
+	@EmbeddedId
+	private LlaveMapeoCampanaColumna llaveMapeoCampanaColumna;
 	
-	@Column(name = "ID_ABC_CAT_COLUMNA")
-	private Long idABCCatColumna;
 	
 	@Column(name = "BOL_ACTIVO")
 	private Boolean bolActivo;
@@ -51,32 +49,21 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 
 	
 
+
+
+	
 	/**
-	 * @return the idABCConfigMapeoCampana
+	 * @return the llaveMapeoCampanaColumna
 	 */
-	public Long getIdABCConfigMapeoCampana() {
-		return idABCConfigMapeoCampana;
+	public LlaveMapeoCampanaColumna getLlaveMapeoCampanaColumna() {
+		return llaveMapeoCampanaColumna;
 	}
 
 	/**
-	 * @param idABCConfigMapeoCampana the idABCConfigMapeoCampana to set
+	 * @param llaveMapeoCampanaColumna the llaveMapeoCampanaColumna to set
 	 */
-	public void setIdABCConfigMapeoCampana(Long idABCConfigMapeoCampana) {
-		this.idABCConfigMapeoCampana = idABCConfigMapeoCampana;
-	}
-
-	/**
-	 * @return the idABCCatColumna
-	 */
-	public Long getIdABCCatColumna() {
-		return idABCCatColumna;
-	}
-
-	/**
-	 * @param idABCCatColumna the idABCCatColumna to set
-	 */
-	public void setIdABCCatColumna(Long idABCCatColumna) {
-		this.idABCCatColumna = idABCCatColumna;
+	public void setLlaveMapeoCampanaColumna(LlaveMapeoCampanaColumna llaveMapeoCampanaColumna) {
+		this.llaveMapeoCampanaColumna = llaveMapeoCampanaColumna;
 	}
 
 	/**
