@@ -11,7 +11,7 @@ import mx.com.proyectohu.entity.LlaveMapeoLineaColumna;
 public interface  ABCMapeoLineaColumnaRepository extends JpaRepository<ABCMapeoLineaColumnaEntity, LlaveMapeoLineaColumna> {
 
 
-	public  List<ABCMapeoLineaColumnaEntity> findByLlavelineacolumna_IdABCConfigMapeoLinea(Long idABCConfigMapeoLinea );
+	public  List<ABCMapeoLineaColumnaEntity> findByLlaveMapeoLineaColumna_IdABCConfigMapeoLinea(Long idABCConfigMapeoLinea );
 
 
 
