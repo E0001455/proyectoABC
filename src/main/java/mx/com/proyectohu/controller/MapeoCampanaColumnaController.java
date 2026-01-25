@@ -43,6 +43,12 @@ public class MapeoCampanaColumnaController {
 		Long idMapeoCampanaColumna;
 		idMapeoCampanaColumna = mapeoCampanaColumnaService.registrarMapeoCampanaColumna(id,mapeoCampanaColumnaRequestDTO);
 		
+		if(idMapeoCampanaColumna==null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		
+		
 		return ResponseEntity.ok(idMapeoCampanaColumna);
 	}
 	
