@@ -8,8 +8,7 @@ public class MapeoCampanaColumnaResponseDTO {
 	
 	
 	
-	private Long 	idABCConfigMapeoCampana;
-	private Long 	idABCCatColumna;
+	private LlaveMapeoCampanaColumnaDTO llaveMapeoCampanaColumna;
 	private Boolean	bolActivo;
 	private Boolean bolCarga;
 	private Boolean bolValidacion;
@@ -21,29 +20,19 @@ public class MapeoCampanaColumnaResponseDTO {
 	
 	
 	
+	
+	
 	/**
-	 * @return the idABCConfigMapeoCampana
+	 * @return the llaveMapeoCampanaColumna
 	 */
-	public Long getIdABCConfigMapeoCampana() {
-		return idABCConfigMapeoCampana;
+	public LlaveMapeoCampanaColumnaDTO getLlaveMapeoCampanaColumna() {
+		return llaveMapeoCampanaColumna;
 	}
 	/**
-	 * @param idABCConfigMapeoCampana the idABCConfigMapeoCampana to set
+	 * @param llaveMapeoCampanaColumna the llaveMapeoCampanaColumna to set
 	 */
-	public void setIdABCConfigMapeoCampana(Long idABCConfigMapeoCampana) {
-		this.idABCConfigMapeoCampana = idABCConfigMapeoCampana;
-	}
-	/**
-	 * @return the idABCCatColumna
-	 */
-	public Long getIdABCCatColumna() {
-		return idABCCatColumna;
-	}
-	/**
-	 * @param idABCCatColumna the idABCCatColumna to set
-	 */
-	public void setIdABCCatColumna(Long idABCCatColumna) {
-		this.idABCCatColumna = idABCCatColumna;
+	public void setLlaveMapeoCampanaColumna(LlaveMapeoCampanaColumnaDTO llaveMapeoCampanaColumna) {
+		this.llaveMapeoCampanaColumna = llaveMapeoCampanaColumna;
 	}
 	/**
 	 * @return the bolActivo

@@ -2,14 +2,11 @@ package mx.com.proyectohu.dto;
 
 import java.util.Date;
 
-
-
 public class MapeoLineaColumnaResponseDTO {
 	
 	
 	
-	private Long 	idABCConfigMapeoLinea;
-	private Long 	idABCCatColumna;
+	private LlaveMapeoLineaColumnaDTO llaveMapeoLineaColumna;
 	private Boolean	bolActivo;
 	private Boolean bolCarga;
 	private Boolean bolValidacion;
@@ -18,29 +15,21 @@ public class MapeoLineaColumnaResponseDTO {
 	private Date 	fecCreacion;
 	private Long 	idABCUsuarioUltModificacion;
 	private Date 	fecUltModificacion;
+
+
+	
+	
 	/**
-	 * @return the idABCConfigMapeoLinea
+	 * @return the llaveMapeoLineaColumna
 	 */
-	public Long getIdABCConfigMapeoLinea() {
-		return idABCConfigMapeoLinea;
+	public LlaveMapeoLineaColumnaDTO getLlaveMapeoLineaColumna() {
+		return llaveMapeoLineaColumna;
 	}
 	/**
-	 * @param idABCConfigMapeoLinea the idABCConfigMapeoLinea to set
+	 * @param llaveMapeoLineaColumna the llaveMapeoLineaColumna to set
 	 */
-	public void setIdABCConfigMapeoLinea(Long idABCConfigMapeoLinea) {
-		this.idABCConfigMapeoLinea = idABCConfigMapeoLinea;
-	}
-	/**
-	 * @return the idABCCatColumna
-	 */
-	public Long getIdABCCatColumna() {
-		return idABCCatColumna;
-	}
-	/**
-	 * @param idABCCatColumna the idABCCatColumna to set
-	 */
-	public void setIdABCCatColumna(Long idABCCatColumna) {
-		this.idABCCatColumna = idABCCatColumna;
+	public void setLlaveMapeoLineaColumna(LlaveMapeoLineaColumnaDTO llaveMapeoLineaColumna) {
+		this.llaveMapeoLineaColumna = llaveMapeoLineaColumna;
 	}
 	/**
 	 * @return the bolActivo

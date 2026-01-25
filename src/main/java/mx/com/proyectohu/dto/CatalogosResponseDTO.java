@@ -6,7 +6,7 @@ public class CatalogosResponseDTO {
 	
 	
 
-	private Long id;
+	private Long 	id;
 	private Boolean bolActivo;
 	private String 	codigo;
 	private String 	nombre;
