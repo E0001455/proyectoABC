@@ -10,12 +10,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import mx.com.proyectohu.interfaces.CatalogoInterface;
+import mx.com.proyectohu.notacion.CatalogoNotacion;
 
-
+@CatalogoNotacion
 @Entity
-@Table(name="ABC_CAT_CAMPANA;" )
+@Table(name="ABC_CAT_CAMPANA" )
 @SequenceGenerator(name = "mapeo_seq_gen",sequenceName = "ABC_SEQ_CAT_CAMPANA",allocationSize = 1)
-public class ABCCatColumnaEntity implements Serializable {
+public class ABCCatColumnaEntity implements Serializable,CatalogoInterface {
 	
 	/**
 	 * 
@@ -24,7 +26,7 @@ public class ABCCatColumnaEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mapeo_seq_gen")
 	@Column(name = "ID_ABC_CAT_CAMPANA")
-	private Long 	idABCCatCampana;
+	private Long 	id;
 	
 	@Column(name = "BOL_ACTIVO")
 	private Boolean bolActivo;
@@ -45,18 +47,20 @@ public class ABCCatColumnaEntity implements Serializable {
 	
 	
 
+
+
 	/**
-	 * @return the idABCCatCampana
+	 * @return the id
 	 */
-	public Long getIdABCCatCampana() {
-		return idABCCatCampana;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param idABCCatCampana the idABCCatCampana to set
+	 * @param id the id to set
 	 */
-	public void setIdABCCatCampana(Long idABCCatCampana) {
-		this.idABCCatCampana = idABCCatCampana;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

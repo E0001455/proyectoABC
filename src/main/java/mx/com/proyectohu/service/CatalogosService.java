@@ -2,7 +2,11 @@ package mx.com.proyectohu.service;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +14,16 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import mx.com.proyectohu.repository.CatalogosRepository;
+import mx.com.proyectohu.component.CatalogosDAO;
+import mx.com.proyectohu.component.CatalogosMapComponent;
+import mx.com.proyectohu.dto.CatalogosRequestDTO;
 import mx.com.proyectohu.dto.CatalogosResponseDTO;
 import mx.com.proyectohu.entity.CatalogosEntity;
+import mx.com.proyectohu.interfaces.CatalogoInterface;
 import mx.com.proyectohu.mapper.CatalogosMapper;
 
 
@@ -21,36 +32,141 @@ public class CatalogosService {
 
 	@Autowired
 	public CatalogosRepository catalogosRepository;
-	
+
+	@Autowired
+	public CatalogosDAO catalogosDAO;
+
 	@Autowired
 	public CatalogosMapper   catalogosMapper;
-	
-	private final JdbcTemplate jdbcTemplate;
 
-	public CatalogosService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-	
-	public List<CatalogosResponseDTO>  consultarCatalogo(String codigo) {
-		
-		 List<CatalogosResponseDTO>  catalogosResponseDTOLista= new ArrayList<CatalogosResponseDTO>();
-		
-		Optional<CatalogosEntity> catalogosEntity = catalogosRepository.findByCodigo(codigo);
-		
-		if(catalogosEntity.get().getBolActivo()) {
-			
-			 String sql = "SELECT ID_"+catalogosEntity.get().getNombre()+" AS ID "+",BOL_ACTIVO,CODIGO,NOMBRE,FEC_CREACION,FEC_ULT_MODIFICACION FROM " + catalogosEntity.get().getNombre()+ " WHERE BOL_ACTIVO = 1";
+	@Autowired
+	public CatalogosMapComponent catalogosMapComponent;
 
-			  catalogosResponseDTOLista= jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CatalogosResponseDTO.class));
-			 
-	
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	private final Map<String, Map<String, List<CatalogosResponseDTO>>> catalogCache = new HashMap<String, Map<String,List<CatalogosResponseDTO>>>();
+
+	public synchronized Collection<List<CatalogosResponseDTO>> obtenerCatalogoCache(String codigo) {
+
+
+		if (catalogCache.containsKey(codigo)) {
+			return catalogCache.get(codigo).values();
 		}
-		
 
-		return catalogosResponseDTOLista;
+		Map<String, List<CatalogosResponseDTO>> catalogo = consultarCatalogoBD(codigo);
+		catalogCache.put(codigo, catalogo);
+
+		return catalogo.values();
+	}
+
+
+	public Map<String, List<CatalogosResponseDTO>>  consultarCatalogoBD(String codigo) {
+
+		Map<String, List<CatalogosResponseDTO>>  catalogosResponseDTOmap= new HashMap<String, List<CatalogosResponseDTO>>();
+		List<CatalogosResponseDTO>  catalogosResponseDTOLista= new ArrayList<CatalogosResponseDTO>();
+
+		Optional<CatalogosEntity> catalogosEntity = catalogosRepository.findByCodigo(codigo);
+
+		if(catalogosEntity.get().getBolActivo()) {
+
+			String idNombreColumna = catalogosDAO.obtenerNombreColumnaId(catalogosEntity.get().getNombre());
+
+			if (idNombreColumna.equals(null)) {
+
+				return catalogosResponseDTOmap;
+
+			}
+
+
+
+			catalogosResponseDTOLista = catalogosDAO.obtenerCatalogo(idNombreColumna, catalogosEntity.get().getNombre());
+
+			catalogosResponseDTOmap.put(catalogosEntity.get().getNombre(), catalogosResponseDTOLista);
+
+		}
+
+
+		return catalogosResponseDTOmap;
+	}
+
+	@Transactional
+	public Long registrarCatalogo(String codigo, CatalogosRequestDTO catalogosRequestDTO) {
+		Long idCatalogo=null;
+		CatalogoInterface catalogoInterface=null;
+
+
+		Optional<CatalogosEntity> catalogosEntity = catalogosRepository.findByCodigo(codigo);
+
+		if(catalogosEntity.get().getBolActivo()) {
+
+			String idNombreColumna = catalogosDAO.obtenerNombreColumnaId(catalogosEntity.get().getNombre());
+
+			if (idNombreColumna.equals(null)) {
+
+				return idCatalogo=null;
+
+			}
+
+
+			Class<? extends CatalogoInterface> claseEntidad =  catalogosMapComponent.obtenerNombreTabla(catalogosEntity.get().getNombre());
+
+
+
+			if (claseEntidad==null) {
+				return idCatalogo=null;
+			}
+
+			try {
+				catalogoInterface= claseEntidad.getDeclaredConstructor().newInstance();	
+				catalogoInterface.setBolActivo(false);
+				catalogoInterface.setCodigo(catalogosRequestDTO.getCodigo());
+				catalogoInterface.setNombre(catalogosRequestDTO.getNombre());
+				catalogoInterface.setFecCreacion(new Date());
+				catalogoInterface.setFecUltModificacion(new Date());
+
+
+
+				entityManager.persist(catalogoInterface);
+
+				idCatalogo= catalogoInterface.getId();
+
+			} catch (Exception e) {
+				throw new RuntimeException("Error cargando la entidad " + claseEntidad.getName(), e);
+			}
+
+
+
+		}
+		return idCatalogo;
+
 	}
 	
 	
+	public synchronized Boolean activarCatalogo(String codigo) {
+		Boolean catalogoActivado=false;
+		
+		Optional<CatalogosEntity> catalogosEntity = catalogosRepository.findByCodigo(codigo);
 
+		if(catalogosEntity.get().getBolActivo()) {
+
+			String idNombreColumna = catalogosDAO.obtenerNombreColumnaId(catalogosEntity.get().getNombre());
+
+			if (idNombreColumna.equals(null)) {
+
+				return catalogoActivado;
+
+			}
+			
+			catalogosDAO.activarCatalogo(catalogosEntity.get().getNombre());
+			Map<String, List<CatalogosResponseDTO>> catalogo = consultarCatalogoBD(codigo);
+			
+			catalogCache.put(codigo, catalogo);
+			catalogoActivado=true;
+		
+		}
+			return catalogoActivado;
+		
+	}
 
 }
