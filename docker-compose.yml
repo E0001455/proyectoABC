@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  spring-api:
+    build: .
+    container_name: spring-api
+    environment:
+      # Conexión a tu Oracle local en Windows
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@host.docker.internal:1521/XE
+      - SPRING_DATASOURCE_USERNAME=SYSTEM
+      - SPRING_DATASOURCE_PASSWORD=system
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"

@@ -9,6 +9,12 @@ public class MapeoDTO {
 	private String 	nombre;
 	private String 	descripcion;
 	
+	@JsonAlias("validar")
+	private Boolean bolValidacion;
+	
+	@JsonAlias("envio")	
+	private Boolean bolEnvio;
+	
 	
 	
 	public Long getIdABCConfigMapeoLinea() {
@@ -28,6 +34,30 @@ public class MapeoDTO {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	/**
+	 * @return the bolValidacion
+	 */
+	public Boolean getBolValidacion() {
+		return bolValidacion;
+	}
+	/**
+	 * @param bolValidacion the bolValidacion to set
+	 */
+	public void setBolValidacion(Boolean bolValidacion) {
+		this.bolValidacion = bolValidacion;
+	}
+	/**
+	 * @return the bolEnvio
+	 */
+	public Boolean getBolEnvio() {
+		return bolEnvio;
+	}
+	/**
+	 * @param bolEnvio the bolEnvio to set
+	 */
+	public void setBolEnvio(Boolean bolEnvio) {
+		this.bolEnvio = bolEnvio;
 	}
 	
 	

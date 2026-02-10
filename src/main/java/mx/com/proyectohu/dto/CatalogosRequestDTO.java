@@ -1,38 +1,46 @@
 package mx.com.proyectohu.dto;
 
-
-
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CatalogosRequestDTO {
+	@JsonProperty("registro")
+	private RegistroDTO registroDTO;
 	
-	private String 	codigo;
-	private String 	nombre;
+	private Long idUsuario;
+
 	/**
-	 * @return the codigo
+	 * @return the registroDTO
 	 */
-	public String getCodigo() {
-		return codigo;
+	public RegistroDTO getRegistroDTO() {
+		return registroDTO;
 	}
+
 	/**
-	 * @param codigo the codigo to set
+	 * @param registroDTO the registroDTO to set
 	 */
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setRegistroDTO(RegistroDTO registroDTO) {
+		this.registroDTO = registroDTO;
 	}
+
 	/**
-	 * @return the nombre
+	 * @return the idUsuario
 	 */
-	public String getNombre() {
-		return nombre;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
+
 	/**
-	 * @param nombre the nombre to set
+	 * @param idUsuario the idUsuario to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-	
 
 
+	
+	
+	
+	
+	
+	
 }

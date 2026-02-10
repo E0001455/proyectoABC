@@ -9,6 +9,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import mx.com.proyectohu.repository.ABCMapeoLineaColumnaRepository;
+import mx.com.proyectohu.dto.CatCadenaDTO;
+import mx.com.proyectohu.dto.CatCadenaDTO.TipoCadena;
+import mx.com.proyectohu.dto.CatNumeroDTO.TipoNumero;
+import mx.com.proyectohu.dto.CatNumeroDTO;
+import mx.com.proyectohu.dto.CatValorDTO;
+import mx.com.proyectohu.dto.CatValorDTO.TipoValor;
+import mx.com.proyectohu.dto.LineaColumnaDTO;
+import mx.com.proyectohu.dto.LineaColumnaDTO.CatColumna;
 import mx.com.proyectohu.dto.MapeoLineaColumnaRequestDTO;
 import mx.com.proyectohu.dto.MapeoLineaColumnaResponseDTO;
 import mx.com.proyectohu.entity.ABCMapeoLineaColumnaEntity;
@@ -24,33 +32,38 @@ public class MapeoLineaColumnaService {
 	@Autowired
 	public MapeoLineasColumnaMapper   mapeoLineasColumnaMapper;
 
-	
+
 
 
 	public Long  registrarMapeoLineaColumna(Long idMapeoLineaNegocio, MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
-
+		Long IdABCCatColumna = mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatColumna().getIdABCCatColumna();
 
 		ABCMapeoLineaColumnaEntity abcMapeoLineaColumnaEntity = new ABCMapeoLineaColumnaEntity();
 		LlaveMapeoLineaColumna llaveMapeoLineaColumna = new LlaveMapeoLineaColumna();
 
 		llaveMapeoLineaColumna.setIdABCConfigMapeoLinea(idMapeoLineaNegocio);
-		llaveMapeoLineaColumna.setIdABCCatColumna(mapeoLineaColumnaRequestDTO.getIdABCCatColumna());
-		
+		llaveMapeoLineaColumna.setIdABCCatColumna(IdABCCatColumna);
+
 		Optional<ABCMapeoLineaColumnaEntity> abcMapeoLineaColumnaEntityOptional = abcMapeoLineaColumnaRepository.findById(llaveMapeoLineaColumna);
-		
+
 		if (abcMapeoLineaColumnaEntityOptional.isPresent()) {
 			return	idMapeoLineaNegocio=null;
 		}
 
-		abcMapeoLineaColumnaEntity.setLlaveMapeoLineaColumna(llaveMapeoLineaColumna);;
+		abcMapeoLineaColumnaEntity.setLlaveMapeoLineaColumna(llaveMapeoLineaColumna);
 		abcMapeoLineaColumnaEntity.setBolActivo(true);
-		abcMapeoLineaColumnaEntity.setBolCarga(true);
-		abcMapeoLineaColumnaEntity.setBolValidacion(true);
-		abcMapeoLineaColumnaEntity.setBolEnvio(true);
-		abcMapeoLineaColumnaEntity.setRegex(mapeoLineaColumnaRequestDTO.getRegex());
 		abcMapeoLineaColumnaEntity.setFecCreacion(new Date());
 		abcMapeoLineaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoLineaColumnaRequestDTO.getIdUsuario());
 		abcMapeoLineaColumnaEntity.setFecUltModificacion(new Date());
+		abcMapeoLineaColumnaEntity.setIdABCCatValor(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getTipoValor().getIdABCCatValor());
+		abcMapeoLineaColumnaEntity.setIdABCCatCadena(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatCadenaDTO().getTipoCadena().getIdABCCatCadena());
+		abcMapeoLineaColumnaEntity.setIdABCCatNumero(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getTipoNumero().getIdABCCatNumero());
+		abcMapeoLineaColumnaEntity.setBolObligatorio(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getBolObligatorio());
+		abcMapeoLineaColumnaEntity.setNumMinimo(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatCadenaDTO().getNumMinimo());
+		abcMapeoLineaColumnaEntity.setNumMaximo(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatCadenaDTO().getNumMaximo());
+		abcMapeoLineaColumnaEntity.setNumEnteros(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getNumEnteros());
+		abcMapeoLineaColumnaEntity.setNumDecimales(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getNumDecimales());
+
 
 		idMapeoLineaNegocio = abcMapeoLineaColumnaRepository.save(abcMapeoLineaColumnaEntity).getLlaveMapeoLineaColumna().getIdABCConfigMapeoLinea();
 
@@ -70,7 +83,51 @@ public class MapeoLineaColumnaService {
 
 		if (abcMapeoLineaColumnaEntityOptional.isPresent()) {
 
-			mapeoLineaColumnaResponseDTO = mapeoLineasColumnaMapper.llenarDTO(abcMapeoLineaColumnaEntityOptional.get());
+
+
+			ABCMapeoLineaColumnaEntity abcMapeoLineaColumnaEntity = abcMapeoLineaColumnaEntityOptional.get();
+
+
+			LineaColumnaDTO lineaColumnaDTO = new LineaColumnaDTO();
+			CatColumna catColumna = new CatColumna();
+			CatValorDTO catValorDTO = new CatValorDTO();
+			CatCadenaDTO catCadenaDTO = new CatCadenaDTO();
+			CatNumeroDTO catNumeroDTO = new CatNumeroDTO();
+			TipoCadena tipoCadena = new TipoCadena();
+			TipoNumero tipoNumero = new TipoNumero();
+			TipoValor tipoValor = new TipoValor();
+			
+			tipoCadena.setIdABCCatCadena(abcMapeoLineaColumnaEntity.getIdABCCatCadena());
+			tipoNumero.setIdABCCatNumero(abcMapeoLineaColumnaEntity.getIdABCCatNumero());
+			
+			catNumeroDTO.setTipoNumero(tipoNumero);
+			
+			catNumeroDTO.setNumDecimales(abcMapeoLineaColumnaEntity.getNumDecimales());
+			catNumeroDTO.setNumEnteros(abcMapeoLineaColumnaEntity.getNumEnteros());
+			
+			catCadenaDTO.setTipoCadena(tipoCadena);
+			
+			catCadenaDTO.setNumMaximo(abcMapeoLineaColumnaEntity.getNumMaximo());
+			catCadenaDTO.setNumMinimo(abcMapeoLineaColumnaEntity.getNumMinimo());
+			
+			catValorDTO.setCatCadenaDTO(catCadenaDTO);
+			catValorDTO.setCatNumeroDTO(catNumeroDTO);
+			
+			
+			catColumna.setIdABCCatColumna(abcMapeoLineaColumnaEntity.getLlaveMapeoLineaColumna().getIdABCCatColumna());
+
+			lineaColumnaDTO.setBolObligatorio(abcMapeoLineaColumnaEntity.getBolObligatorio());
+			lineaColumnaDTO.setIdABCConfigMapeoLinea(abcMapeoLineaColumnaEntity.getLlaveMapeoLineaColumna().getIdABCConfigMapeoLinea());
+			lineaColumnaDTO.setCatColumna(catColumna);
+			lineaColumnaDTO.setCatValorDTO(catValorDTO);
+			
+
+
+			mapeoLineaColumnaResponseDTO.setIdUsuario(abcMapeoLineaColumnaEntity.getIdABCUsuarioUltModificacion());
+			mapeoLineaColumnaResponseDTO.setLineaColumnaDTO(lineaColumnaDTO);
+
+
+
 
 		}else {
 			mapeoLineaColumnaResponseDTO = null;
@@ -92,7 +149,50 @@ public class MapeoLineaColumnaService {
 
 				for(ABCMapeoLineaColumnaEntity abcMapeoLineaColumnaEntity: abcMapeoLineaColumnaEntityLista) {
 					MapeoLineaColumnaResponseDTO mapeoLineaColumnaResponseDTO = new MapeoLineaColumnaResponseDTO();
-					mapeoLineaColumnaResponseDTO = mapeoLineasColumnaMapper.llenarDTO(abcMapeoLineaColumnaEntity);
+					
+					LineaColumnaDTO lineaColumnaDTO = new LineaColumnaDTO();
+					CatColumna catColumna = new CatColumna();
+					CatValorDTO catValorDTO = new CatValorDTO();
+					CatCadenaDTO catCadenaDTO = new CatCadenaDTO();
+					CatNumeroDTO catNumeroDTO = new CatNumeroDTO();
+					TipoCadena tipoCadena = new TipoCadena();
+					TipoNumero tipoNumero = new TipoNumero();
+					TipoValor tipoValor = new TipoValor();
+					
+					tipoCadena.setIdABCCatCadena(abcMapeoLineaColumnaEntity.getIdABCCatCadena());
+					tipoNumero.setIdABCCatNumero(abcMapeoLineaColumnaEntity.getIdABCCatNumero());
+					tipoValor.setIdABCCatValor(abcMapeoLineaColumnaEntity.getIdABCCatValor());
+					
+					catNumeroDTO.setTipoNumero(tipoNumero);
+					
+					catNumeroDTO.setNumDecimales(abcMapeoLineaColumnaEntity.getNumDecimales());
+					catNumeroDTO.setNumEnteros(abcMapeoLineaColumnaEntity.getNumEnteros());
+					
+					catCadenaDTO.setTipoCadena(tipoCadena);
+					
+					catCadenaDTO.setNumMaximo(abcMapeoLineaColumnaEntity.getNumMaximo());
+					catCadenaDTO.setNumMinimo(abcMapeoLineaColumnaEntity.getNumMinimo());
+					
+					catValorDTO.setCatCadenaDTO(catCadenaDTO);
+					catValorDTO.setCatNumeroDTO(catNumeroDTO);
+					catValorDTO.setTipoValor(tipoValor);
+					
+					catColumna.setIdABCCatColumna(abcMapeoLineaColumnaEntity.getLlaveMapeoLineaColumna().getIdABCCatColumna());
+
+					lineaColumnaDTO.setBolObligatorio(abcMapeoLineaColumnaEntity.getBolObligatorio());
+					lineaColumnaDTO.setIdABCConfigMapeoLinea(abcMapeoLineaColumnaEntity.getLlaveMapeoLineaColumna().getIdABCConfigMapeoLinea());
+					lineaColumnaDTO.setCatColumna(catColumna);
+					lineaColumnaDTO.setCatValorDTO(catValorDTO);
+					lineaColumnaDTO.setRegex(abcMapeoLineaColumnaEntity.getRegex());
+
+
+					
+					mapeoLineaColumnaResponseDTO.setLineaColumnaDTO(lineaColumnaDTO);
+					mapeoLineaColumnaResponseDTO.setFecCreacion(abcMapeoLineaColumnaEntity.getFecCreacion());
+					mapeoLineaColumnaResponseDTO.setFecUltModificacion(abcMapeoLineaColumnaEntity.getFecUltModificacion());
+					mapeoLineaColumnaResponseDTO.setBolActivo(abcMapeoLineaColumnaEntity.getBolActivo());
+					mapeoLineaColumnaResponseDTO.setIdUsuario(abcMapeoLineaColumnaEntity.getIdABCUsuarioUltModificacion());
+				
 					mapeoLineaColumnaResponseDTOLista.add(mapeoLineaColumnaResponseDTO);
 
 
@@ -107,7 +207,53 @@ public class MapeoLineaColumnaService {
 
 				for(ABCMapeoLineaColumnaEntity abcMapeoLineaColumnaEntity: abcMapeoLineaColumnaEntityLista) {
 					MapeoLineaColumnaResponseDTO mapeoLineaColumnaResponseDTO = new MapeoLineaColumnaResponseDTO();
-					mapeoLineaColumnaResponseDTO = mapeoLineasColumnaMapper.llenarDTO(abcMapeoLineaColumnaEntity);
+					
+					LineaColumnaDTO lineaColumnaDTO = new LineaColumnaDTO();
+					CatColumna catColumna = new CatColumna();
+					CatValorDTO catValorDTO = new CatValorDTO();
+					CatCadenaDTO catCadenaDTO = new CatCadenaDTO();
+					CatNumeroDTO catNumeroDTO = new CatNumeroDTO();
+					TipoCadena tipoCadena = new TipoCadena();
+					TipoNumero tipoNumero = new TipoNumero();
+					TipoValor tipoValor = new TipoValor();
+					
+					tipoCadena.setIdABCCatCadena(abcMapeoLineaColumnaEntity.getIdABCCatCadena());
+					tipoNumero.setIdABCCatNumero(abcMapeoLineaColumnaEntity.getIdABCCatNumero());
+					tipoValor.setIdABCCatValor(abcMapeoLineaColumnaEntity.getIdABCCatValor());
+					
+					catNumeroDTO.setTipoNumero(tipoNumero);
+					
+					catNumeroDTO.setNumDecimales(abcMapeoLineaColumnaEntity.getNumDecimales());
+					catNumeroDTO.setNumEnteros(abcMapeoLineaColumnaEntity.getNumEnteros());
+					
+					catCadenaDTO.setTipoCadena(tipoCadena);
+					
+					catCadenaDTO.setNumMaximo(abcMapeoLineaColumnaEntity.getNumMaximo());
+					catCadenaDTO.setNumMinimo(abcMapeoLineaColumnaEntity.getNumMinimo());
+					
+					catValorDTO.setCatCadenaDTO(catCadenaDTO);
+					catValorDTO.setCatNumeroDTO(catNumeroDTO);
+					catValorDTO.setTipoValor(tipoValor);
+					
+					
+					
+					catColumna.setIdABCCatColumna(abcMapeoLineaColumnaEntity.getLlaveMapeoLineaColumna().getIdABCCatColumna());
+
+					lineaColumnaDTO.setBolObligatorio(abcMapeoLineaColumnaEntity.getBolObligatorio());
+					lineaColumnaDTO.setIdABCConfigMapeoLinea(abcMapeoLineaColumnaEntity.getLlaveMapeoLineaColumna().getIdABCConfigMapeoLinea());
+					lineaColumnaDTO.setCatColumna(catColumna);
+					lineaColumnaDTO.setCatValorDTO(catValorDTO);
+					lineaColumnaDTO.setRegex(abcMapeoLineaColumnaEntity.getRegex());
+					
+					mapeoLineaColumnaResponseDTO.setLineaColumnaDTO(lineaColumnaDTO);
+					mapeoLineaColumnaResponseDTO.setFecCreacion(abcMapeoLineaColumnaEntity.getFecCreacion());
+					mapeoLineaColumnaResponseDTO.setFecUltModificacion(abcMapeoLineaColumnaEntity.getFecUltModificacion());
+					mapeoLineaColumnaResponseDTO.setBolActivo(abcMapeoLineaColumnaEntity.getBolActivo());
+					mapeoLineaColumnaResponseDTO.setIdUsuario(abcMapeoLineaColumnaEntity.getIdABCUsuarioUltModificacion());
+					
+					
+					mapeoLineaColumnaResponseDTO.setLineaColumnaDTO(lineaColumnaDTO);
+					
 					mapeoLineaColumnaResponseDTOLista.add(mapeoLineaColumnaResponseDTO);
 
 
@@ -120,34 +266,45 @@ public class MapeoLineaColumnaService {
 		return mapeoLineaColumnaResponseDTOLista;
 
 	}
-	
-	public MapeoLineaColumnaResponseDTO actualizarMapeoLineaColumna(MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
 
+	public MapeoLineaColumnaResponseDTO actualizarMapeoLineaColumna(MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
+		Long IdABCCatColumna = mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatColumna().getIdABCCatColumna();
 		MapeoLineaColumnaResponseDTO mapeoLineaColumnaResponseDTO = new MapeoLineaColumnaResponseDTO();
 		LlaveMapeoLineaColumna llaveMapeoLineaColumna = new LlaveMapeoLineaColumna();
+	
 
-		llaveMapeoLineaColumna.setIdABCConfigMapeoLinea(mapeoLineaColumnaRequestDTO.getIdABCConfigMapeoLinea());
-		llaveMapeoLineaColumna.setIdABCCatColumna(mapeoLineaColumnaRequestDTO.getIdABCCatColumna());
+		llaveMapeoLineaColumna.setIdABCConfigMapeoLinea(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getIdABCConfigMapeoLinea());
+		llaveMapeoLineaColumna.setIdABCCatColumna(IdABCCatColumna);
 
-		
+
 		Optional<ABCMapeoLineaColumnaEntity> abcMapeoLineaColumnaEntityOptional = 	abcMapeoLineaColumnaRepository.findById(llaveMapeoLineaColumna);
-			
+
 
 		if (abcMapeoLineaColumnaEntityOptional.isPresent()) {
 
 			ABCMapeoLineaColumnaEntity abcMapeoLineaColumnaEntity = abcMapeoLineaColumnaEntityOptional.get();
 			
-
-			abcMapeoLineaColumnaEntity.setBolCarga(mapeoLineaColumnaRequestDTO.getBolCarga());
-			abcMapeoLineaColumnaEntity.setBolValidacion(mapeoLineaColumnaRequestDTO.getBolValidacion());
-			abcMapeoLineaColumnaEntity.setBolEnvio(mapeoLineaColumnaRequestDTO.getBolEnvio());
-			abcMapeoLineaColumnaEntity.setRegex(mapeoLineaColumnaRequestDTO.getRegex());
+		
+			abcMapeoLineaColumnaEntity.setLlaveMapeoLineaColumna(llaveMapeoLineaColumna);
+			abcMapeoLineaColumnaEntity.setBolActivo(true);
 			abcMapeoLineaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoLineaColumnaRequestDTO.getIdUsuario());
 			abcMapeoLineaColumnaEntity.setFecUltModificacion(new Date());
-
-			abcMapeoLineaColumnaEntity= abcMapeoLineaColumnaRepository.save(abcMapeoLineaColumnaEntity);
-
-			mapeoLineaColumnaResponseDTO = mapeoLineasColumnaMapper.llenarDTO(abcMapeoLineaColumnaEntity);
+			abcMapeoLineaColumnaEntity.setIdABCCatValor(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getTipoValor().getIdABCCatValor());
+			abcMapeoLineaColumnaEntity.setIdABCCatCadena(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatCadenaDTO().getTipoCadena().getIdABCCatCadena());
+			abcMapeoLineaColumnaEntity.setIdABCCatNumero(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getTipoNumero().getIdABCCatNumero());
+			abcMapeoLineaColumnaEntity.setBolObligatorio(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getBolObligatorio());
+			abcMapeoLineaColumnaEntity.setNumMinimo(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatCadenaDTO().getNumMinimo());
+			abcMapeoLineaColumnaEntity.setNumMaximo(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatCadenaDTO().getNumMaximo());
+			abcMapeoLineaColumnaEntity.setNumEnteros(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getNumEnteros());
+			abcMapeoLineaColumnaEntity.setNumDecimales(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getNumDecimales());
+			abcMapeoLineaColumnaEntity.setRegex(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getRegex());
+			abcMapeoLineaColumnaEntity = abcMapeoLineaColumnaRepository.save(abcMapeoLineaColumnaEntity);
+			
+			long id= abcMapeoLineaColumnaEntity.getLlaveMapeoLineaColumna().getIdABCConfigMapeoLinea();
+			LineaColumnaDTO lineaColumnaDTO = new LineaColumnaDTO();
+			lineaColumnaDTO.setIdABCConfigMapeoLinea(id);
+			
+			mapeoLineaColumnaResponseDTO.setLineaColumnaDTO(lineaColumnaDTO);
 
 		}else {
 			mapeoLineaColumnaResponseDTO=null;
@@ -158,15 +315,17 @@ public class MapeoLineaColumnaService {
 
 
 	}
-	
+
 
 
 	public Boolean activar(MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
+		Long IdABCCatColumna = mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatColumna().getIdABCCatColumna();
+
 		Boolean activado= false;
 		LlaveMapeoLineaColumna llaveMapeoLineaColumna = new LlaveMapeoLineaColumna();
 
-		llaveMapeoLineaColumna.setIdABCConfigMapeoLinea(mapeoLineaColumnaRequestDTO.getIdABCConfigMapeoLinea());
-		llaveMapeoLineaColumna.setIdABCCatColumna(mapeoLineaColumnaRequestDTO.getIdABCCatColumna());
+		llaveMapeoLineaColumna.setIdABCConfigMapeoLinea(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getIdABCConfigMapeoLinea());
+		llaveMapeoLineaColumna.setIdABCCatColumna(IdABCCatColumna);
 
 
 		Optional<ABCMapeoLineaColumnaEntity> abcMapeoLineaColumnaEntityOptional = abcMapeoLineaColumnaRepository.findById(llaveMapeoLineaColumna);
@@ -188,11 +347,12 @@ public class MapeoLineaColumnaService {
 	}
 
 	public Boolean desactivar(MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
+		Long IdABCCatColumna = mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatColumna().getIdABCCatColumna();
 		Boolean desactivado= false;
 		LlaveMapeoLineaColumna llaveMapeoLineaColumna = new LlaveMapeoLineaColumna();
 
-		llaveMapeoLineaColumna.setIdABCConfigMapeoLinea(mapeoLineaColumnaRequestDTO.getIdABCConfigMapeoLinea());
-		llaveMapeoLineaColumna.setIdABCCatColumna(mapeoLineaColumnaRequestDTO.getIdABCCatColumna());
+		llaveMapeoLineaColumna.setIdABCConfigMapeoLinea(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getIdABCConfigMapeoLinea());
+		llaveMapeoLineaColumna.setIdABCCatColumna(IdABCCatColumna);
 
 		Optional<ABCMapeoLineaColumnaEntity> abcMapeoLineaColumnaEntityOptional =  abcMapeoLineaColumnaRepository.findById(llaveMapeoLineaColumna);
 		if (abcMapeoLineaColumnaEntityOptional.isPresent()) {
@@ -212,7 +372,7 @@ public class MapeoLineaColumnaService {
 		return desactivado;
 	}
 
-	 
+
 
 
 }

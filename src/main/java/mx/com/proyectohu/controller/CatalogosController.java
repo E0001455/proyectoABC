@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -30,8 +33,8 @@ public class CatalogosController {
 	@Autowired
 	public CatalogosService catalogosService;
 
-	@GetMapping("/catalogos")
-	public ResponseEntity<?> consultarCatalogo(@RequestParam String codigo) {
+	@GetMapping("/catalogos/{codigo}")
+	public ResponseEntity<?> consultarCatalogo(@PathVariable String codigo) {
 
 		Collection<List<CatalogosResponseDTO>>  catalogosResponseDTOlista;
 
@@ -45,22 +48,41 @@ public class CatalogosController {
 
 	}
 
-	@PostMapping("/catalogos")
-	public ResponseEntity<?> registrarCatalogo(@RequestParam String codigo,@RequestBody CatalogosRequestDTO catalogosRequestDTO) {
+	@PostMapping("/catalogos/{codigo}")
+	public ResponseEntity<?> registrarCatalogo(@PathVariable String codigo,@RequestBody CatalogosRequestDTO catalogosRequestDTO) {
 
 		Long idCatalogo=null;
 
 
 		idCatalogo=catalogosService.registrarCatalogo(codigo,catalogosRequestDTO);
 
+		if(idCatalogo==null){
+			return ResponseEntity.badRequest().build();
 
-		return ResponseEntity.ok(idCatalogo);
+		}else {
+			return ResponseEntity.ok("Operacion exitosa");
+
+		}
 
 
 	}
-	
-	@PostMapping("/catalogos/recarga")
-	public ResponseEntity<?> recargarCatalogo(@RequestParam String codigo) {
+
+	@PutMapping("/catalogos/{codigo}")
+	public ResponseEntity<?> actualizar(@PathVariable String codigo,@RequestBody CatalogosRequestDTO catalogosRequestDTO) {
+
+		Long idCatalogo=null;
+
+
+		idCatalogo=catalogosService.actualizar(codigo,catalogosRequestDTO);
+
+
+		return ResponseEntity.ok("operacion exitosa");
+
+
+	}
+
+	@PostMapping("/catalogos/{codigo}/recarga")
+	public ResponseEntity<?> recargarCatalogo(@PathVariable String codigo) {
 
 		Boolean catalogoActivado= false;
 
@@ -68,12 +90,12 @@ public class CatalogosController {
 		catalogoActivado = catalogosService.activarCatalogo(codigo);
 
 		if(catalogoActivado) {
-			return ResponseEntity.noContent().build();
+			return ResponseEntity.ok("creado");
 		}else {
 			return ResponseEntity.notFound().build();
 		}
 
-		
+
 
 
 	}

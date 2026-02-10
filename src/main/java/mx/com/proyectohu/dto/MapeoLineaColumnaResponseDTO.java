@@ -2,35 +2,27 @@ package mx.com.proyectohu.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
+
 public class MapeoLineaColumnaResponseDTO {
 	
-	
-	
-	private LlaveMapeoLineaColumnaDTO llaveMapeoLineaColumna;
-	private Boolean	bolActivo;
-	private Boolean bolCarga;
-	private Boolean bolValidacion;
-	private Boolean	bolEnvio;
-	private String  regex;
-	private Date 	fecCreacion;
-	private Long 	idABCUsuarioUltModificacion;
-	private Date 	fecUltModificacion;
+	@JsonProperty("columna")
+	private LineaColumnaDTO lineaColumnaDTO;
 
-
+	private Long idUsuario;
+	
+	private Boolean bolActivo;
+	
+	@JsonProperty("fechaCreacion")
+	private Date fecCreacion;
+	
+	@JsonProperty("fechaUltimaModificacion")
+	private Date fecUltModificacion;
 	
 	
-	/**
-	 * @return the llaveMapeoLineaColumna
-	 */
-	public LlaveMapeoLineaColumnaDTO getLlaveMapeoLineaColumna() {
-		return llaveMapeoLineaColumna;
-	}
-	/**
-	 * @param llaveMapeoLineaColumna the llaveMapeoLineaColumna to set
-	 */
-	public void setLlaveMapeoLineaColumna(LlaveMapeoLineaColumnaDTO llaveMapeoLineaColumna) {
-		this.llaveMapeoLineaColumna = llaveMapeoLineaColumna;
-	}
+	
 	/**
 	 * @return the bolActivo
 	 */
@@ -44,52 +36,28 @@ public class MapeoLineaColumnaResponseDTO {
 		this.bolActivo = bolActivo;
 	}
 	/**
-	 * @return the bolCarga
+	 * @return the idUsuario
 	 */
-	public Boolean getBolCarga() {
-		return bolCarga;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 	/**
-	 * @param bolCarga the bolCarga to set
+	 * @param idUsuario the idUsuario to set
 	 */
-	public void setBolCarga(Boolean bolCarga) {
-		this.bolCarga = bolCarga;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	/**
-	 * @return the bolValidacion
+	 * @return the lineaColumnaDTO
 	 */
-	public Boolean getBolValidacion() {
-		return bolValidacion;
+	public LineaColumnaDTO getLineaColumnaDTO() {
+		return lineaColumnaDTO;
 	}
 	/**
-	 * @param bolValidacion the bolValidacion to set
+	 * @param lineaColumnaDTO the lineaColumnaDTO to set
 	 */
-	public void setBolValidacion(Boolean bolValidacion) {
-		this.bolValidacion = bolValidacion;
-	}
-	/**
-	 * @return the bolEnvio
-	 */
-	public Boolean getBolEnvio() {
-		return bolEnvio;
-	}
-	/**
-	 * @param bolEnvio the bolEnvio to set
-	 */
-	public void setBolEnvio(Boolean bolEnvio) {
-		this.bolEnvio = bolEnvio;
-	}
-	/**
-	 * @return the regex
-	 */
-	public String getRegex() {
-		return regex;
-	}
-	/**
-	 * @param regex the regex to set
-	 */
-	public void setRegex(String regex) {
-		this.regex = regex;
+	public void setLineaColumnaDTO(LineaColumnaDTO lineaColumnaDTO) {
+		this.lineaColumnaDTO = lineaColumnaDTO;
 	}
 	/**
 	 * @return the fecCreacion
@@ -104,18 +72,6 @@ public class MapeoLineaColumnaResponseDTO {
 		this.fecCreacion = fecCreacion;
 	}
 	/**
-	 * @return the idABCUsuarioUltModificacion
-	 */
-	public Long getIdABCUsuarioUltModificacion() {
-		return idABCUsuarioUltModificacion;
-	}
-	/**
-	 * @param idABCUsuarioUltModificacion the idABCUsuarioUltModificacion to set
-	 */
-	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
-		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
-	}
-	/**
 	 * @return the fecUltModificacion
 	 */
 	public Date getFecUltModificacion() {
@@ -128,10 +84,10 @@ public class MapeoLineaColumnaResponseDTO {
 		this.fecUltModificacion = fecUltModificacion;
 	}
 	
-
 	
 	
-
 	
 
 }
+
+

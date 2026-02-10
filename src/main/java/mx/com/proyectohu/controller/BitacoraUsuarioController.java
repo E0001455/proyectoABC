@@ -23,7 +23,7 @@ public class BitacoraUsuarioController {
 	
 	
 	
-	@PostMapping("/bitacoras/usuarios")
+	@PostMapping("/bitacoras/eventos")
 	public ResponseEntity<?> registrarBitacoraUsuario(@RequestBody BitacoraUsuarioRequestDTO bitacoraUsuarioRequestDTO ) {
 		
 				

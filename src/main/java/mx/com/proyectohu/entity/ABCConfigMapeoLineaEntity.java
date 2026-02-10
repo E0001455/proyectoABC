@@ -41,9 +41,6 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	@Column(name = "DESCRIPCION")
 	private String 	descripcion;
 	
-	@Column(name = "BOL_DICTAMINACION")
-	private Boolean bolDictaminacion;
-	
 	@Column(name = "FEC_CREACION")
 	private Date 	fecCreacion;
 	
@@ -52,6 +49,13 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	
 	@Column(name = "FEC_ULT_MODIFICACION")
 	private Date 	fecUltModificacion;
+	
+	@Column(name = "BOL_VALIDACION")
+	private Boolean bolValidacion;
+	
+	@Column(name = "BOL_ENVIO")
+	private Boolean bolEnvio;
+	
 	
 	/**
 	 * @return the idABCConfigMapeoLinea
@@ -125,18 +129,7 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	/**
-	 * @return the bolDictaminacion
-	 */
-	public Boolean getBolDictaminacion() {
-		return bolDictaminacion;
-	}
-	/**
-	 * @param bolDictaminacion the bolDictaminacion to set
-	 */
-	public void setBolDictaminacion(Boolean bolDictaminacion) {
-		this.bolDictaminacion = bolDictaminacion;
-	}
+
 	/**
 	 * @return the fecCreacion
 	 */
@@ -172,6 +165,30 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	 */
 	public void setFecUltModificacion(Date fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
+	}
+	/**
+	 * @return the bolValidacion
+	 */
+	public Boolean getBolValidacion() {
+		return bolValidacion;
+	}
+	/**
+	 * @param bolValidacion the bolValidacion to set
+	 */
+	public void setBolValidacion(Boolean bolValidacion) {
+		this.bolValidacion = bolValidacion;
+	}
+	/**
+	 * @return the bolEnvio
+	 */
+	public Boolean getBolEnvio() {
+		return bolEnvio;
+	}
+	/**
+	 * @param bolEnvio the bolEnvio to set
+	 */
+	public void setBolEnvio(Boolean bolEnvio) {
+		this.bolEnvio = bolEnvio;
 	}
 	
 	

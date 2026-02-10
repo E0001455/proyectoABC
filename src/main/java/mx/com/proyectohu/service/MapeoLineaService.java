@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
+import mx.com.proyectohu.dto.MapeoLineaRecordDTO;
 import mx.com.proyectohu.dto.MapeoLineaRequestDTO;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO;
 import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
@@ -21,7 +22,7 @@ public class MapeoLineaService {
 
 	@Autowired
 	public ABCConfigMapeoLineaRepository abcConfigMapeoLineaRepository;
-	
+
 	@Autowired
 	public MapeoLineasMapper   mapeoLineasMapper;
 
@@ -37,10 +38,11 @@ public class MapeoLineaService {
 		abcConfigMapeoLineaEntity.setBolActivo(true);
 		abcConfigMapeoLineaEntity.setNombre(mapeoLineaRequestDTO.getMapeoDTO().getNombre());
 		abcConfigMapeoLineaEntity.setDescripcion(mapeoLineaRequestDTO.getMapeoDTO().getDescripcion());
-		abcConfigMapeoLineaEntity.setBolDictaminacion(null);
 		abcConfigMapeoLineaEntity.setFecCreacion(new Date());
 		abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
 		abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+		abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
+		abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
 
 
 		idMapeoLineaNegocio=abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity).getIdABCConfigMapeoLinea();
@@ -50,123 +52,120 @@ public class MapeoLineaService {
 		return	idMapeoLineaNegocio;	
 
 	}
-	
-	public MapeoLineaResponseDTO consultarMapeoLinea(Long id) {
-		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
-		
-		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(id);
-		
-		if (abcConfigMapeoLineaEntityOptional.isPresent()) {
-			
-			mapeoLineaResponseDTO = mapeoLineasMapper.llenarDTO(abcConfigMapeoLineaEntityOptional.get());
-			
-		}else {
-			mapeoLineaResponseDTO = null;
+
+
+	public List<MapeoLineaResponseDTO>  consultarMapeosLinea(){
+		List<MapeoLineaResponseDTO> mapeoLineaResponseDTOLista = new ArrayList<MapeoLineaResponseDTO>();
+
+
+		List<MapeoLineaRecordDTO> mapeoLineaRecordDTOLista = abcConfigMapeoLineaRepository.consultarMapeoLineasColumnas();
+
+
+		if(!mapeoLineaRecordDTOLista.isEmpty()) {
+
+			for(MapeoLineaRecordDTO mapeoLineaRecordDTO: mapeoLineaRecordDTOLista) {
+				MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
+				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea( mapeoLineaRecordDTO.idABCConfigMapeoLinea() );
+				mapeoLineaResponseDTO.setIdABCCatLineaNegocio(mapeoLineaRecordDTO.idABCCatLineaNegocio());
+				mapeoLineaResponseDTO.setBolActivo(mapeoLineaRecordDTO.bolActivo());
+				mapeoLineaResponseDTO.setNombre(mapeoLineaRecordDTO.nombre() );
+				mapeoLineaResponseDTO.setDescripcion(mapeoLineaRecordDTO.descripcion() );
+				mapeoLineaResponseDTO.setFecCreacion(mapeoLineaRecordDTO.fecCreacion() );
+				mapeoLineaResponseDTO.setFecUltModificacion( mapeoLineaRecordDTO.fecUltModificacion() );
+				mapeoLineaResponseDTO.setBolValidacion(mapeoLineaRecordDTO.bolValidacion());
+				mapeoLineaResponseDTO.setBolEnvio(mapeoLineaRecordDTO.bolEnvio());
+				mapeoLineaResponseDTO.setColumnas(mapeoLineaRecordDTO.columnas().intValue());
+				
+				mapeoLineaResponseDTOLista.add(mapeoLineaResponseDTO);
+
+
+			}
+
 		}
-		
+
+
+		return mapeoLineaResponseDTOLista;
+
+	}
+	
+	
+
+	public MapeoLineaResponseDTO actualizarMapeoLinea(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
+
+		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
+
+		if (abcConfigMapeoLineaEntityOptional.isPresent()) {
+
+			ABCConfigMapeoLineaEntity abcConfigMapeoLineaEntity = abcConfigMapeoLineaEntityOptional.get();
+			abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
+			abcConfigMapeoLineaEntity.setNombre(mapeoLineaRequestDTO.getMapeoDTO().getNombre());
+			abcConfigMapeoLineaEntity.setDescripcion(mapeoLineaRequestDTO.getMapeoDTO().getDescripcion());
+			abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+			abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
+			abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
+
+
+			abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
+			mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
+			
+
+		}else {
+			mapeoLineaResponseDTO=null;
+		}
+
+
+		return mapeoLineaResponseDTO;
+
+
+	}
+
+
+	public MapeoLineaResponseDTO activar(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
+		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
+
+
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
+
+		if (abcConfigMapeoLineaEntityOptional.isPresent()) {
+
+			ABCConfigMapeoLineaEntity abcConfigMapeoLineaEntity = abcConfigMapeoLineaEntityOptional.get();
+
+			if (!abcConfigMapeoLineaEntity.getBolActivo()) {
+				abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
+				abcConfigMapeoLineaEntity.setBolActivo(true);
+				abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+				abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
+				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
+			}
+		}
 
 		return mapeoLineaResponseDTO;
 	}
-	
-	
-	public List<MapeoLineaResponseDTO>  consultarMapeosLinea(){
-		List<MapeoLineaResponseDTO> mapeoLineaResponseDTOLista = new ArrayList<MapeoLineaResponseDTO>();
-		
-		
-		List<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityLista = abcConfigMapeoLineaRepository.findAll(Sort.by(Sort.Direction.ASC,"idABCConfigMapeoLinea"));
-		
-		
-		if(!abcConfigMapeoLineaEntityLista.isEmpty()) {
-			
-			for(ABCConfigMapeoLineaEntity abcConfigMapeoLineaEntity: abcConfigMapeoLineaEntityLista) {
-				MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
-				mapeoLineaResponseDTO = mapeoLineasMapper.llenarDTO(abcConfigMapeoLineaEntity);
-				mapeoLineaResponseDTOLista.add(mapeoLineaResponseDTO);
-				
-				
-			}
-			
-		}
-		
-		
-		return mapeoLineaResponseDTOLista;
-		
-	}
-	
-	public MapeoLineaResponseDTO actualizarMapeoLinea(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
-	
+
+	public MapeoLineaResponseDTO desactivar(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
 		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
-	Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
-	
-	if (abcConfigMapeoLineaEntityOptional.isPresent()) {
-		
-		ABCConfigMapeoLineaEntity abcConfigMapeoLineaEntity = abcConfigMapeoLineaEntityOptional.get();
-		abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
-		abcConfigMapeoLineaEntity.setNombre(mapeoLineaRequestDTO.getMapeoDTO().getNombre());
-		abcConfigMapeoLineaEntity.setDescripcion(mapeoLineaRequestDTO.getMapeoDTO().getDescripcion());
-		abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
-		
-		
-		abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
-		
-		mapeoLineaResponseDTO = mapeoLineasMapper.llenarDTO(abcConfigMapeoLineaEntity);
-		
-	}else {
-		mapeoLineaResponseDTO=null;
-	}
-	
-		
-	return mapeoLineaResponseDTO;
-		
-		
-	}
-	
-	
-public Boolean activar(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
-	Boolean activado= false;
-	
-	
-	Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
-	
-	if (abcConfigMapeoLineaEntityOptional.isPresent()) {
 
-		ABCConfigMapeoLineaEntity abcConfigMapeoLineaEntity = abcConfigMapeoLineaEntityOptional.get();
-		
-		if (!abcConfigMapeoLineaEntity.getBolActivo()) {
-		abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
-		abcConfigMapeoLineaEntity.setBolActivo(true);
-		abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
-		abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
-		activado=true;
+
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
+
+		if (abcConfigMapeoLineaEntityOptional.isPresent()) {
+
+			ABCConfigMapeoLineaEntity abcConfigMapeoLineaEntity = abcConfigMapeoLineaEntityOptional.get();
+
+			if (abcConfigMapeoLineaEntity.getBolActivo()) {
+				abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
+				abcConfigMapeoLineaEntity.setBolActivo(false);
+				abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+				abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
+				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
+			}
 		}
-	}
-	
-	return activado;
-}
 
-public Boolean desactivar(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
-	Boolean desactivado= false;
-	
-
-	Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
-	
-	if (abcConfigMapeoLineaEntityOptional.isPresent()) {
-		
-		ABCConfigMapeoLineaEntity abcConfigMapeoLineaEntity = abcConfigMapeoLineaEntityOptional.get();
-		
-		if (abcConfigMapeoLineaEntity.getBolActivo()) {
-		abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
-		abcConfigMapeoLineaEntity.setBolActivo(false);
-		abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
-		abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
-		desactivado=true;
-		}
+		return mapeoLineaResponseDTO;
 	}
-	
-	return desactivado;
-}
-	
-	
-	
+
+
+
 
 }

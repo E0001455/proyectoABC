@@ -58,5 +58,16 @@ public class CatalogosDAO {
 		
 		
 	}
+	
+	public void  actualizarCatalogo(String nombreTabla,String codigo, String nombre,String idNombreColumna,Long id) {
+		
+		
+		 String sql = "UPDATE "+ nombreTabla +" SET CODIGO='" +codigo+"', NOMBRE='"+nombre+"', FEC_CREACION=SYSDATE, FEC_ULT_MODIFICACION=SYSDATE"
+		 		+ " WHERE "+idNombreColumna+" = "+id;
+		
+		 jdbcTemplate.update(sql);
+		
+		
+	}
 
 }

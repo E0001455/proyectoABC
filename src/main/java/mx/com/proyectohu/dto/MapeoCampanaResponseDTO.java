@@ -2,23 +2,49 @@ package mx.com.proyectohu.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MapeoCampanaResponseDTO {
 	
 	
-	
+	@JsonProperty("id")
 	private Long 	idABCConfigMapeoCampana;
+	
 	private Long 	idABCUsuario;
+	
 	private Long 	idABCCatLineaNegocio;
+	
 	private Long 	idABCCatCampana;
+	
 	private Boolean bolActivo;
+	
+	@JsonProperty("nombre")
 	private String 	nombre;
+	
+	@JsonProperty("descripcion")
 	private String 	descripcion;
-	private Boolean bolDictaminacion;
+	
+	@JsonProperty("fechaCreacion")
 	private Date 	fecCreacion;
+	
 	private Long 	idABCUsuarioUltModificacion;
+	
+	@JsonProperty("fechaUltimaModificacion")
 	private Date 	fecUltModificacion;
+	
+	@JsonProperty("columnas")
+	private Integer columnas;
+	
+	@JsonProperty("validar")
+	private Boolean bolValidacion;
+	
+	@JsonProperty("envio")
+	private Boolean bolEnvio;
+	
+	
 	/**
 	 * @return the idABCConfigMapeoCampana
 	 */
@@ -103,18 +129,7 @@ public class MapeoCampanaResponseDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	/**
-	 * @return the bolDictaminacion
-	 */
-	public Boolean getBolDictaminacion() {
-		return bolDictaminacion;
-	}
-	/**
-	 * @param bolDictaminacion the bolDictaminacion to set
-	 */
-	public void setBolDictaminacion(Boolean bolDictaminacion) {
-		this.bolDictaminacion = bolDictaminacion;
-	}
+
 	/**
 	 * @return the fecCreacion
 	 */
@@ -150,6 +165,42 @@ public class MapeoCampanaResponseDTO {
 	 */
 	public void setFecUltModificacion(Date fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
+	}
+	/**
+	 * @return the columnas
+	 */
+	public Integer getColumnas() {
+		return columnas;
+	}
+	/**
+	 * @param columnas the columnas to set
+	 */
+	public void setColumnas(Integer columnas) {
+		this.columnas = columnas;
+	}
+	/**
+	 * @return the bolValidacion
+	 */
+	public Boolean getBolValidacion() {
+		return bolValidacion;
+	}
+	/**
+	 * @param bolValidacion the bolValidacion to set
+	 */
+	public void setBolValidacion(Boolean bolValidacion) {
+		this.bolValidacion = bolValidacion;
+	}
+	/**
+	 * @return the bolEnvio
+	 */
+	public Boolean getBolEnvio() {
+		return bolEnvio;
+	}
+	/**
+	 * @param bolEnvio the bolEnvio to set
+	 */
+	public void setBolEnvio(Boolean bolEnvio) {
+		this.bolEnvio = bolEnvio;
 	}
 	
 

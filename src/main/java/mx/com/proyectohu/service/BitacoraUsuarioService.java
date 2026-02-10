@@ -25,12 +25,13 @@ public class BitacoraUsuarioService {
 
 	
 		bitacoraUsuarioEntity.setIdABCUsuario(bitacoraUsuarioRequestDTO.getIdABCUsuario());
-		bitacoraUsuarioEntity.setIdABCCatEvento(bitacoraUsuarioRequestDTO.getIdABCCatEvento());
-		bitacoraUsuarioEntity.setIdABCCatObjeto(bitacoraUsuarioRequestDTO.getIdABCCatObjeto());
-		bitacoraUsuarioEntity.setIdABCCatColumna(bitacoraUsuarioRequestDTO.getIdABCCatColumna());
-		bitacoraUsuarioEntity.setDetalle(bitacoraUsuarioRequestDTO.getDetalle());
-		bitacoraUsuarioEntity.setIp(bitacoraUsuarioRequestDTO.getIp());
-		bitacoraUsuarioEntity.setNavegador(bitacoraUsuarioRequestDTO.getNavegador());
+		bitacoraUsuarioEntity.setIdABCCatEvento(bitacoraUsuarioRequestDTO.getBitacoraDTO().getEventoDTO().getIdABCCatEvento());
+		bitacoraUsuarioEntity.setIdABCCatObjeto(bitacoraUsuarioRequestDTO.getBitacoraDTO().getObjetoDTO().getIdABCCatObjeto());
+		bitacoraUsuarioEntity.setIdABCCatColumna(bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaDTO()!=null
+				?bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaDTO().getIdABCCatColumna():null);
+		bitacoraUsuarioEntity.setDetalle(bitacoraUsuarioRequestDTO.getBitacoraDTO().getDetalle());
+		bitacoraUsuarioEntity.setIp(bitacoraUsuarioRequestDTO.getBitacoraDTO().getIp());
+		bitacoraUsuarioEntity.setNavegador(bitacoraUsuarioRequestDTO.getBitacoraDTO().getNavegador());
 		bitacoraUsuarioEntity.setFecCreacion(new Date());
 		bitacoraUsuarioEntity.setFecUltModificacion(new Date());
 

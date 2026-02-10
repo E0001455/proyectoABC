@@ -120,8 +120,8 @@ public class CatalogosService {
 			try {
 				catalogoInterface= claseEntidad.getDeclaredConstructor().newInstance();	
 				catalogoInterface.setBolActivo(false);
-				catalogoInterface.setCodigo(catalogosRequestDTO.getCodigo());
-				catalogoInterface.setNombre(catalogosRequestDTO.getNombre());
+				catalogoInterface.setCodigo(catalogosRequestDTO.getRegistroDTO().getCodigo());
+				catalogoInterface.setNombre(catalogosRequestDTO.getRegistroDTO().getNombre());
 				catalogoInterface.setFecCreacion(new Date());
 				catalogoInterface.setFecUltModificacion(new Date());
 
@@ -130,6 +130,55 @@ public class CatalogosService {
 				entityManager.persist(catalogoInterface);
 
 				idCatalogo= catalogoInterface.getId();
+
+			} catch (Exception e) {
+				throw new RuntimeException("Error cargando la entidad " + claseEntidad.getName(), e);
+			}
+
+
+
+		}
+		return idCatalogo;
+
+	}
+
+	@Transactional
+	public Long actualizar(String codigo, CatalogosRequestDTO catalogosRequestDTO) {
+		Long idCatalogo=null;
+		CatalogoInterface catalogoInterface=null;
+
+
+		Optional<CatalogosEntity> catalogosEntity = catalogosRepository.findByCodigo(codigo);
+
+		if(catalogosEntity.get().getBolActivo()) {
+
+			String idNombreColumna = catalogosDAO.obtenerNombreColumnaId(catalogosEntity.get().getNombre());
+
+			if (idNombreColumna.equals(null)) {
+
+				return idCatalogo=null;
+
+			}
+
+
+			Class<? extends CatalogoInterface> claseEntidad =  catalogosMapComponent.obtenerNombreTabla(catalogosEntity.get().getNombre());
+
+
+
+			if (claseEntidad==null) {
+				return idCatalogo=null;
+			}
+
+			try {
+				
+
+
+				catalogosDAO.actualizarCatalogo(catalogosEntity.get().getNombre(),
+						catalogosRequestDTO.getRegistroDTO().getCodigo(),catalogosRequestDTO.getRegistroDTO().getNombre(),idNombreColumna,catalogosRequestDTO.getRegistroDTO().getId());
+			
+				idCatalogo= catalogosRequestDTO.getRegistroDTO().getId();
+			
+			
 
 			} catch (Exception e) {
 				throw new RuntimeException("Error cargando la entidad " + claseEntidad.getName(), e);
@@ -168,5 +217,6 @@ public class CatalogosService {
 			return catalogoActivado;
 		
 	}
+	
 
 }
