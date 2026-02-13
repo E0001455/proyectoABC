@@ -1,44 +1,19 @@
 package mx.com.proyectohu.dto;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CatalogosResponseDTO {
 	
+	private String codigo;
 	
-
-	private Long 	id;
-	private Boolean bolActivo;
-	private String 	codigo;
-	private String 	nombre;
-	private Date 	fecCreacion;
-	private Date 	fecUltModificacion;
+	@JsonProperty("nombre")
+	private String nombreCatalogo;
+	@JsonProperty("registros")
+	private List<RegistrosCatalogosDTO> registrosCatalogosDTOLista;
 	
-	
-	
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-	/**
-	 * @return the bolActivo
-	 */
-	public Boolean getBolActivo() {
-		return bolActivo;
-	}
-	/**
-	 * @param bolActivo the bolActivo to set
-	 */
-	public void setBolActivo(Boolean bolActivo) {
-		this.bolActivo = bolActivo;
-	}
 	/**
 	 * @return the codigo
 	 */
@@ -52,47 +27,30 @@ public class CatalogosResponseDTO {
 		this.codigo = codigo;
 	}
 	/**
-	 * @return the nombre
+	 * @return the nombreCatalogo
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreCatalogo() {
+		return nombreCatalogo;
 	}
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreCatalogo the nombreCatalogo to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreCatalogo(String nombreCatalogo) {
+		this.nombreCatalogo = nombreCatalogo;
 	}
 	/**
-	 * @return the fecCreacion
+	 * @return the registrosCatalogosDTOLista
 	 */
-	public Date getFecCreacion() {
-		return fecCreacion;
+	public List<RegistrosCatalogosDTO> getRegistrosCatalogosDTOLista() {
+		return registrosCatalogosDTOLista;
 	}
 	/**
-	 * @param fecCreacion the fecCreacion to set
+	 * @param registrosCatalogosDTOLista the registrosCatalogosDTOLista to set
 	 */
-	public void setFecCreacion(Date fecCreacion) {
-		this.fecCreacion = fecCreacion;
-	}
-	/**
-	 * @return the fecUltModificacion
-	 */
-	public Date getFecUltModificacion() {
-		return fecUltModificacion;
-	}
-	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
-	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
-		this.fecUltModificacion = fecUltModificacion;
+	public void setRegistrosCatalogosDTOLista(List<RegistrosCatalogosDTO> registrosCatalogosDTOLista) {
+		this.registrosCatalogosDTOLista = registrosCatalogosDTOLista;
 	}
 
-	
-
-	
-	
-	
 	
 	
 	

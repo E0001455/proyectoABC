@@ -22,6 +22,7 @@ import mx.com.proyectohu.component.CatalogosDAO;
 import mx.com.proyectohu.component.CatalogosMapComponent;
 import mx.com.proyectohu.dto.CatalogosRequestDTO;
 import mx.com.proyectohu.dto.CatalogosResponseDTO;
+import mx.com.proyectohu.dto.RegistrosCatalogosDTO;
 import mx.com.proyectohu.entity.CatalogosEntity;
 import mx.com.proyectohu.interfaces.CatalogoInterface;
 import mx.com.proyectohu.mapper.CatalogosMapper;
@@ -45,7 +46,77 @@ public class CatalogosService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	private final  Map<String,CatalogosResponseDTO> catalogCacheSimple = new HashMap<String,CatalogosResponseDTO>();
+	
 	private final Map<String, Map<String, List<CatalogosResponseDTO>>> catalogCache = new HashMap<String, Map<String,List<CatalogosResponseDTO>>>();
+
+
+
+	public synchronized Collection<CatalogosResponseDTO> obtenerCatalogoCache() {
+
+
+		if (!catalogCache.isEmpty()) {
+			return catalogCacheSimple.values();
+		}
+
+		Map<String,CatalogosResponseDTO> catalogo = consultarCatalogoBD();
+		
+		catalogCacheSimple.putAll(catalogo);
+		
+		return catalogo.values();
+	}
+
+
+	public Map<String, CatalogosResponseDTO>  consultarCatalogoBD() {
+
+		Map<String,CatalogosResponseDTO>  catalogosResponseDTOmap= new HashMap<String, CatalogosResponseDTO>();
+
+		List<CatalogosResponseDTO>  catalogosResponseDTOLista= new ArrayList<CatalogosResponseDTO>();
+		List<RegistrosCatalogosDTO> registrosCatalogosDTOLista = new ArrayList<RegistrosCatalogosDTO>();
+		//Optional<CatalogosEntity> catalogosEntity = catalogosRepository.findByCodigo();
+
+		Iterable<CatalogosEntity> catalogosEntityIterable = catalogosRepository.findAll();
+
+		for(CatalogosEntity catalogosEntity:catalogosEntityIterable) {
+	
+
+			if(catalogosEntity.getBolActivo()) {
+
+				String idNombreColumna = catalogosDAO.obtenerNombreColumnaId(catalogosEntity.getNombre());
+
+				if (idNombreColumna.equals(null)) {
+
+					continue;
+
+				}
+
+
+
+				registrosCatalogosDTOLista = catalogosDAO.obtenerCatalogoRegistro(idNombreColumna, catalogosEntity.getNombre());
+				
+				CatalogosResponseDTO catalogosResponseDTO = new CatalogosResponseDTO();
+				
+				catalogosResponseDTO.setCodigo(catalogosEntity.getCodigo());
+				catalogosResponseDTO.setNombreCatalogo(catalogosEntity.getNombre().trim().replaceAll("ABC_CAT_", ""));
+				catalogosResponseDTO.setRegistrosCatalogosDTOLista(registrosCatalogosDTOLista);
+			
+				
+				catalogosResponseDTOmap.put(catalogosEntity.getNombre(), catalogosResponseDTO);
+			
+			}
+		}
+
+
+		return catalogosResponseDTOmap;
+	}
+
+
+
+
+
+
+
+
 
 	public synchronized Collection<List<CatalogosResponseDTO>> obtenerCatalogoCache(String codigo) {
 
@@ -170,15 +241,15 @@ public class CatalogosService {
 			}
 
 			try {
-				
+
 
 
 				catalogosDAO.actualizarCatalogo(catalogosEntity.get().getNombre(),
 						catalogosRequestDTO.getRegistroDTO().getCodigo(),catalogosRequestDTO.getRegistroDTO().getNombre(),idNombreColumna,catalogosRequestDTO.getRegistroDTO().getId());
-			
+
 				idCatalogo= catalogosRequestDTO.getRegistroDTO().getId();
-			
-			
+
+
 
 			} catch (Exception e) {
 				throw new RuntimeException("Error cargando la entidad " + claseEntidad.getName(), e);
@@ -190,11 +261,11 @@ public class CatalogosService {
 		return idCatalogo;
 
 	}
-	
-	
+
+
 	public synchronized Boolean activarCatalogo(String codigo) {
 		Boolean catalogoActivado=false;
-		
+
 		Optional<CatalogosEntity> catalogosEntity = catalogosRepository.findByCodigo(codigo);
 
 		if(catalogosEntity.get().getBolActivo()) {
@@ -206,17 +277,17 @@ public class CatalogosService {
 				return catalogoActivado;
 
 			}
-			
+
 			catalogosDAO.activarCatalogo(catalogosEntity.get().getNombre());
-			Map<String, List<CatalogosResponseDTO>> catalogo = consultarCatalogoBD(codigo);
-			
-			catalogCache.put(codigo, catalogo);
+			Map<String, CatalogosResponseDTO> catalogo = consultarCatalogoBD();
+
+			catalogCacheSimple.putAll(catalogo);
 			catalogoActivado=true;
-		
+
 		}
-			return catalogoActivado;
-		
+		return catalogoActivado;
+
 	}
-	
+
 
 }

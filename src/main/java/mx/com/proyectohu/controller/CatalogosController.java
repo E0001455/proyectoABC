@@ -33,13 +33,13 @@ public class CatalogosController {
 	@Autowired
 	public CatalogosService catalogosService;
 
-	@GetMapping("/catalogos/{codigo}")
-	public ResponseEntity<?> consultarCatalogo(@PathVariable String codigo) {
+	@GetMapping("/catalogos")
+	public ResponseEntity<?> consultarCatalogo() {
 
-		Collection<List<CatalogosResponseDTO>>  catalogosResponseDTOlista;
+		Collection<CatalogosResponseDTO>  catalogosResponseDTOlista ;
 
 
-		catalogosResponseDTOlista=catalogosService.obtenerCatalogoCache(codigo);
+		catalogosResponseDTOlista=catalogosService.obtenerCatalogoCache();
 
 
 

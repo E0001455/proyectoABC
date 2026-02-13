@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import mx.com.proyectohu.dto.CatalogosResponseDTO;
+import mx.com.proyectohu.dto.RegistrosCatalogosDTO;
 
 
 
@@ -33,6 +34,17 @@ public class CatalogosDAO {
 		return idNombreColumna;
 		
 		
+	}
+	
+	public  List<RegistrosCatalogosDTO>  obtenerCatalogoRegistro(String idNombreColumna, String nombreTabla) {
+		 List<RegistrosCatalogosDTO>  catalogosResponseDTOLista= new ArrayList<RegistrosCatalogosDTO>();
+		
+		 String sql = "SELECT " +idNombreColumna+" AS ID ,CODIGO,NOMBRE FROM "
+		 + nombreTabla+ " WHERE BOL_ACTIVO = 1";
+
+		  catalogosResponseDTOLista= jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RegistrosCatalogosDTO.class));
+		
+		return catalogosResponseDTOLista;
 	}
 	
 	
