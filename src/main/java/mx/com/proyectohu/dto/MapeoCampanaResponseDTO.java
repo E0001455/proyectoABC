@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import mx.com.proyectohu.dto.MapeoLineaResponseDTO.CatLineaNegocio;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MapeoCampanaResponseDTO {
@@ -15,9 +15,8 @@ public class MapeoCampanaResponseDTO {
 	
 	private Long 	idABCUsuario;
 	
-	private Long 	idABCCatLineaNegocio;
-	
-	private Long 	idABCCatCampana;
+	@JsonProperty("linea")
+	private  CatLineaNegocio	catLineaNegocio;
 	
 	private Boolean bolActivo;
 	
@@ -41,7 +40,7 @@ public class MapeoCampanaResponseDTO {
 	@JsonProperty("validar")
 	private Boolean bolValidacion;
 	
-	@JsonProperty("envio")
+	@JsonProperty("enviar")
 	private Boolean bolEnvio;
 	
 	
@@ -69,29 +68,18 @@ public class MapeoCampanaResponseDTO {
 	public void setIdABCUsuario(Long idABCUsuario) {
 		this.idABCUsuario = idABCUsuario;
 	}
+	
 	/**
-	 * @return the idABCCatLineaNegocio
+	 * @return the catLineaNegocio
 	 */
-	public Long getIdABCCatLineaNegocio() {
-		return idABCCatLineaNegocio;
+	public CatLineaNegocio getCatLineaNegocio() {
+		return catLineaNegocio;
 	}
 	/**
-	 * @param idABCCatLineaNegocio the idABCCatLineaNegocio to set
+	 * @param catLineaNegocio the catLineaNegocio to set
 	 */
-	public void setIdABCCatLineaNegocio(Long idABCCatLineaNegocio) {
-		this.idABCCatLineaNegocio = idABCCatLineaNegocio;
-	}
-	/**
-	 * @return the idABCCatCampana
-	 */
-	public Long getIdABCCatCampana() {
-		return idABCCatCampana;
-	}
-	/**
-	 * @param idABCCatCampana the idABCCatCampana to set
-	 */
-	public void setIdABCCatCampana(Long idABCCatCampana) {
-		this.idABCCatCampana = idABCCatCampana;
+	public void setCatLineaNegocio(CatLineaNegocio catLineaNegocio) {
+		this.catLineaNegocio = catLineaNegocio;
 	}
 	/**
 	 * @return the bolActivo

@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="ABC_CONFIG_MAPEO_LINEA" )
-@SequenceGenerator(name = "mapeo_seq_gen",sequenceName = "ABC_SEQ_CONFIG_MAPEO_LINEA",allocationSize = 1)
+@Table(name="TTABCCFG_MAPEO_LINEA" )
+@SequenceGenerator(name = "SEQ_MAPEO_LINE_GEN",sequenceName = "SEQ_TTABCCFG_MAPEO_LINEA",allocationSize = 1)
 public class ABCConfigMapeoLineaEntity implements Serializable {
 	
 	/**
@@ -22,39 +22,44 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mapeo_seq_gen")
-	@Column(name = "ID_ABC_CONFIG_MAPEO_LINEA")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MAPEO_LINE_GEN")
+	@Column(name = "ID_MAPEO_LINEA")
 	private Long 	idABCConfigMapeoLinea;
 	
-	@Column(name = "ID_ABC_USUARIO")
+	@Column(name = "ID_USUARIO")
 	private Long 	idABCUsuario;
 	
-	@Column(name = "ID_ABC_CAT_LINEA_NEGOCIO")
+	@Column(name = "ID_LINEA_NEGOCIO")
 	private Long 	idABCCatLineaNegocio;
 	
-	@Column(name = "BOL_ACTIVO")
+	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
 	
-	@Column(name = "NOMBRE")
+	@Column(name = "FCNOMBRE")
 	private String 	nombre;
 	
-	@Column(name = "DESCRIPCION")
+	@Column(name = "FCDESCRIPCION")
 	private String 	descripcion;
 	
-	@Column(name = "FEC_CREACION")
-	private Date 	fecCreacion;
-	
-	@Column(name = "ID_ABC_USUARIO_ULT_MODIFICACION")
-	private Long 	idABCUsuarioUltModificacion;
-	
-	@Column(name = "FEC_ULT_MODIFICACION")
-	private Date 	fecUltModificacion;
-	
-	@Column(name = "BOL_VALIDACION")
+	@Column(name = "FIVALIDACION")
 	private Boolean bolValidacion;
 	
-	@Column(name = "BOL_ENVIO")
+	@Column(name = "FIENVIO")
 	private Boolean bolEnvio;
+	
+	@Column(name = "FIDICTAMINADO")
+	private Boolean dictaminado;
+	
+	@Column(name = "FDFECHACREACION")
+	private Date 	fecCreacion;
+	
+	@Column(name = "FIIDUSUARIOULTMODIFICACION")
+	private Long 	idABCUsuarioUltModificacion;
+	
+	@Column(name = "FDFECHAULTMODIFICACION")
+	private Date 	fecUltModificacion;
+	
+
 	
 	
 	/**
@@ -189,6 +194,12 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	 */
 	public void setBolEnvio(Boolean bolEnvio) {
 		this.bolEnvio = bolEnvio;
+	}
+	public Boolean getDictaminado() {
+		return dictaminado;
+	}
+	public void setDictaminado(Boolean dictaminado) {
+		this.dictaminado = dictaminado;
 	}
 	
 	

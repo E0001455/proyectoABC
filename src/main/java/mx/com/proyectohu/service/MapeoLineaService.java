@@ -14,6 +14,7 @@ import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.dto.MapeoLineaRecordDTO;
 import mx.com.proyectohu.dto.MapeoLineaRequestDTO;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO;
+import mx.com.proyectohu.dto.MapeoLineaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
 import mx.com.proyectohu.mapper.MapeoLineasMapper;
 
@@ -43,6 +44,7 @@ public class MapeoLineaService {
 		abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
 		abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
 		abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
+		abcConfigMapeoLineaEntity.setDictaminado(true);
 
 
 		idMapeoLineaNegocio=abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity).getIdABCConfigMapeoLinea();
@@ -65,8 +67,11 @@ public class MapeoLineaService {
 
 			for(MapeoLineaRecordDTO mapeoLineaRecordDTO: mapeoLineaRecordDTOLista) {
 				MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
+				CatLineaNegocio   catLineaNegocio   = new CatLineaNegocio();
+				
 				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea( mapeoLineaRecordDTO.idABCConfigMapeoLinea() );
-				mapeoLineaResponseDTO.setIdABCCatLineaNegocio(mapeoLineaRecordDTO.idABCCatLineaNegocio());
+				catLineaNegocio.setIdABCConfigMapeoLinea(mapeoLineaRecordDTO.idABCCatLineaNegocio());
+				mapeoLineaResponseDTO.setCatLineaNegocio(catLineaNegocio);
 				mapeoLineaResponseDTO.setBolActivo(mapeoLineaRecordDTO.bolActivo());
 				mapeoLineaResponseDTO.setNombre(mapeoLineaRecordDTO.nombre() );
 				mapeoLineaResponseDTO.setDescripcion(mapeoLineaRecordDTO.descripcion() );
@@ -75,7 +80,7 @@ public class MapeoLineaService {
 				mapeoLineaResponseDTO.setBolValidacion(mapeoLineaRecordDTO.bolValidacion());
 				mapeoLineaResponseDTO.setBolEnvio(mapeoLineaRecordDTO.bolEnvio());
 				mapeoLineaResponseDTO.setColumnas(mapeoLineaRecordDTO.columnas().intValue());
-				
+
 				mapeoLineaResponseDTOLista.add(mapeoLineaResponseDTO);
 
 
@@ -87,8 +92,8 @@ public class MapeoLineaService {
 		return mapeoLineaResponseDTOLista;
 
 	}
-	
-	
+
+
 
 	public MapeoLineaResponseDTO actualizarMapeoLinea(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
 
@@ -108,7 +113,7 @@ public class MapeoLineaService {
 
 			abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
 			mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
-			
+
 
 		}else {
 			mapeoLineaResponseDTO=null;

@@ -14,7 +14,8 @@ public class MapeoLineaResponseDTO {
 	
 	private Long 	idABCUsuario;
 	
-	private Long 	idABCCatLineaNegocio;
+	@JsonProperty("linea")
+	private CatLineaNegocio 	catLineaNegocio;
 	
 	private Boolean bolActivo;
 	
@@ -38,7 +39,7 @@ public class MapeoLineaResponseDTO {
 	@JsonProperty("validar")
 	private Boolean bolValidacion;
 	
-	@JsonProperty("envio")
+	@JsonProperty("enviar")
 	private Boolean bolEnvio;
 	
 	
@@ -67,17 +68,18 @@ public class MapeoLineaResponseDTO {
 	public void setIdABCUsuario(Long idABCUsuario) {
 		this.idABCUsuario = idABCUsuario;
 	}
+	
 	/**
-	 * @return the idABCCatLineaNegocio
+	 * @return the catLineaNegocio
 	 */
-	public Long getIdABCCatLineaNegocio() {
-		return idABCCatLineaNegocio;
+	public CatLineaNegocio getCatLineaNegocio() {
+		return catLineaNegocio;
 	}
 	/**
-	 * @param idABCCatLineaNegocio the idABCCatLineaNegocio to set
+	 * @param catLineaNegocio the catLineaNegocio to set
 	 */
-	public void setIdABCCatLineaNegocio(Long idABCCatLineaNegocio) {
-		this.idABCCatLineaNegocio = idABCCatLineaNegocio;
+	public void setCatLineaNegocio(CatLineaNegocio catLineaNegocio) {
+		this.catLineaNegocio = catLineaNegocio;
 	}
 	/**
 	 * @return the bolActivo
@@ -189,6 +191,74 @@ public class MapeoLineaResponseDTO {
 		this.bolEnvio = bolEnvio;
 	}
 	
+	
+	public static class CatLineaNegocio {
+
+		@JsonProperty("id")
+		private Long idABCConfigMapeoLinea;
+		
+		@JsonProperty("campana")
+		private CatCampana  catCampana;
+
+		/**
+		 * @return the catCampana
+		 */
+		public CatCampana getCatCampana() {
+			return catCampana;
+		}
+
+		/**
+		 * @param catCampana the catCampana to set
+		 */
+		public void setCatCampana(CatCampana catCampana) {
+			this.catCampana = catCampana;
+		}
+
+		/**
+		 * @return the idABCConfigMapeoLinea
+		 */
+		public Long getIdABCConfigMapeoLinea() {
+			return idABCConfigMapeoLinea;
+		}
+
+		/**
+		 * @param idABCConfigMapeoLinea the idABCConfigMapeoLinea to set
+		 */
+		public void setIdABCConfigMapeoLinea(Long idABCConfigMapeoLinea) {
+			this.idABCConfigMapeoLinea = idABCConfigMapeoLinea;
+		}
+
+		
+		
+		
+	}
+	
+	public static class CatCampana {
+
+		@JsonProperty("id")
+		private Long 	idABCCatCampana;
+
+		/**
+		 * @return the idABCCatCampana
+		 */
+		public Long getIdABCCatCampana() {
+			return idABCCatCampana;
+		}
+
+		/**
+		 * @param idABCCatCampana the idABCCatCampana to set
+		 */
+		public void setIdABCCatCampana(Long idABCCatCampana) {
+			this.idABCCatCampana = idABCCatCampana;
+		}
+		
+		
+
+	
+		
+		
+		
+	}
 
 	
 

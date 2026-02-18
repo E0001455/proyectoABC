@@ -2,6 +2,8 @@ package mx.com.proyectohu.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RegistrosCatalogosDTO {
 	
 
@@ -9,9 +11,11 @@ public class RegistrosCatalogosDTO {
 
 	private Long 	id;
 	
-	private String 	codigo;
-	private String 	nombre;
+	@JsonProperty("codigo")
+	private String 	fcCodigo;
 	
+	@JsonProperty("nombre")
+	private String 	fcNombre;
 	
 	/**
 	 * @return the id
@@ -25,29 +29,31 @@ public class RegistrosCatalogosDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	/**
-	 * @return the codigo
+	 * @return the fcCodigo
 	 */
-	public String getCodigo() {
-		return codigo;
+	public String getFcCodigo() {
+		return fcCodigo;
 	}
 	/**
-	 * @param codigo the codigo to set
+	 * @param fcCodigo the fcCodigo to set
 	 */
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setFcCodigo(String fcCodigo) {
+		this.fcCodigo = fcCodigo;
 	}
 	/**
-	 * @return the nombre
+	 * @return the fcNombre
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getFcNombre() {
+		return fcNombre;
 	}
 	/**
-	 * @param nombre the nombre to set
+	 * @param fcNombre the fcNombre to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setFcNombre(String fcNombre) {
+		this.fcNombre = fcNombre;
 	}
+	
+	
+	
 }

@@ -39,8 +39,8 @@ public class CatalogosDAO {
 	public  List<RegistrosCatalogosDTO>  obtenerCatalogoRegistro(String idNombreColumna, String nombreTabla) {
 		 List<RegistrosCatalogosDTO>  catalogosResponseDTOLista= new ArrayList<RegistrosCatalogosDTO>();
 		
-		 String sql = "SELECT " +idNombreColumna+" AS ID ,CODIGO,NOMBRE FROM "
-		 + nombreTabla+ " WHERE BOL_ACTIVO = 1";
+		 String sql = "SELECT " +idNombreColumna+" AS ID ,FCCODIGO,FCNOMBRE FROM "
+		 + nombreTabla+ " WHERE FIACTIVO = 1";
 
 		  catalogosResponseDTOLista= jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RegistrosCatalogosDTO.class));
 		
@@ -52,8 +52,8 @@ public class CatalogosDAO {
 	public  List<CatalogosResponseDTO>  obtenerCatalogo(String idNombreColumna, String nombreTabla) {
 		 List<CatalogosResponseDTO>  catalogosResponseDTOLista= new ArrayList<CatalogosResponseDTO>();
 		
-		 String sql = "SELECT " +idNombreColumna+" AS ID ,BOL_ACTIVO,CODIGO,NOMBRE,FEC_CREACION,FEC_ULT_MODIFICACION FROM "
-		 + nombreTabla+ " WHERE BOL_ACTIVO = 1";
+		 String sql = "SELECT " +idNombreColumna+" AS ID ,FIACTIVO,FCCODIGO,FCNOMBRE,FDFECHACREACION,FDFECHAULTMODIFICACION FROM "
+		 + nombreTabla+ " WHERE FIACTIVO = 1";
 
 		  catalogosResponseDTOLista= jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CatalogosResponseDTO.class));
 		
@@ -64,7 +64,7 @@ public class CatalogosDAO {
 	public void  activarCatalogo(String nombreTabla) {
 		
 		
-		 String sql = "UPDATE "+ nombreTabla +" SET BOL_ACTIVO = 1";
+		 String sql = "UPDATE "+ nombreTabla +" SET FIACTIVO = 1";
 		
 		 jdbcTemplate.update(sql);
 		
@@ -74,7 +74,7 @@ public class CatalogosDAO {
 	public void  actualizarCatalogo(String nombreTabla,String codigo, String nombre,String idNombreColumna,Long id) {
 		
 		
-		 String sql = "UPDATE "+ nombreTabla +" SET CODIGO='" +codigo+"', NOMBRE='"+nombre+"', FEC_CREACION=SYSDATE, FEC_ULT_MODIFICACION=SYSDATE"
+		 String sql = "UPDATE "+ nombreTabla +" SET FIACTIVO='" +codigo+"', FCNOMBRE='"+nombre+"', FDFECHACREACION=SYSDATE, FDFECHAULTMODIFICACION=SYSDATE"
 		 		+ " WHERE "+idNombreColumna+" = "+id;
 		
 		 jdbcTemplate.update(sql);

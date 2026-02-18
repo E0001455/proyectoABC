@@ -15,8 +15,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 @CatalogoNotacion
 @Entity
-@Table(name="ABC_CAT_CADENA" )
-@SequenceGenerator(name = "mapeo_seq_gen",sequenceName = "ABC_SEQ_CAT_CADENA",allocationSize = 1)
+@Table(name="TCABCCAT_CADENA")
+@SequenceGenerator(name = "SEQ_CADENA_GEN",sequenceName = "SEQ_TCABCCAT_CADENA",allocationSize = 1)
 public class ABCCatCadena implements Serializable,CatalogoInterface {
 	
 	/**
@@ -24,23 +24,23 @@ public class ABCCatCadena implements Serializable,CatalogoInterface {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mapeo_seq_gen")
-	@Column(name = "ID_ABC_CAT_CADENA")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CADENA_GEN")
+	@Column(name = "ID_CADENA")
 	private Long 	id;
 	
-	@Column(name = "BOL_ACTIVO")
+	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
 	
-	@Column(name = "CODIGO")
+	@Column(name = "FCCODIGO")
 	private String 	codigo;
 	
-	@Column(name = "NOMBRE")
+	@Column(name = "FCNOMBRE")
 	private String 	nombre;
 	
-	@Column(name = "FEC_CREACION")
+	@Column(name = "FDFECHACREACION")
 	private Date 	fecCreacion;
 	
-	@Column(name = "FEC_ULT_MODIFICACION")
+	@Column(name = "FDFECHAULTMODIFICACION")
 	private Date 	fecUltModificacion;
 
 	

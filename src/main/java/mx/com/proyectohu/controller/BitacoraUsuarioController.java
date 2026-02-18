@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.com.proyectohu.dto.BitacoraUsuarioRequestDTO;
 import mx.com.proyectohu.service.BitacoraUsuarioService;
 
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class BitacoraUsuarioController {
 		Long idBitacoraUsuario;
 		idBitacoraUsuario=bitacoraUsuarioService.registrarBitacoraUsuario(bitacoraUsuarioRequestDTO);
 		
-		return ResponseEntity.ok(idBitacoraUsuario);
+		return ResponseEntity.ok(Map.of("id",idBitacoraUsuario));
 	}
 	
 	

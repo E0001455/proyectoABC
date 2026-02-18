@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import mx.com.proyectohu.dto.MapeoCampanaRecordDTO;
 import mx.com.proyectohu.dto.MapeoCampanaRequestDTO;
 import mx.com.proyectohu.dto.MapeoCampanaResponseDTO;
+import mx.com.proyectohu.dto.MapeoLineaResponseDTO.CatCampana;
+import mx.com.proyectohu.dto.MapeoLineaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
 import mx.com.proyectohu.mapper.MapeoCampanaMapper;
 import mx.com.proyectohu.repository.ABCConfigMapeoCampanaRepository;
@@ -42,7 +44,7 @@ public class MapeoCampanaService {
 		abcConfigMapeoCampanaEntity.setBolActivo(true);
 		abcConfigMapeoCampanaEntity.setNombre(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getNombre());
 		abcConfigMapeoCampanaEntity.setDescripcion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getDescripcion());
-		
+		abcConfigMapeoCampanaEntity.setDictaminado(true);
 		abcConfigMapeoCampanaEntity.setFecCreacion(new Date());
 		abcConfigMapeoCampanaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaRequestDTO.getIdUsuario());
 		abcConfigMapeoCampanaEntity.setFecUltModificacion(new Date());
@@ -67,10 +69,15 @@ public class MapeoCampanaService {
 
 			for(MapeoCampanaRecordDTO mapeoCampanaRecordDTO: mapeoCampanaRecordDTOLista) {
 				MapeoCampanaResponseDTO mapeoCampanaResponseDTO= new MapeoCampanaResponseDTO();
-
+				CatLineaNegocio catLineaNegocio = new CatLineaNegocio();
+				CatCampana catCampana = new CatCampana();
+				
+				catCampana.setIdABCCatCampana(mapeoCampanaRecordDTO.idABCCatCampana());
+				catLineaNegocio.setCatCampana(catCampana);
+				catLineaNegocio.setIdABCConfigMapeoLinea(mapeoCampanaRecordDTO.idABCCatLineaNegocio());
+				
 				mapeoCampanaResponseDTO.setIdABCConfigMapeoCampana( mapeoCampanaRecordDTO.idABCConfigMapeoCampana() );
-				mapeoCampanaResponseDTO.setIdABCCatLineaNegocio(mapeoCampanaRecordDTO.idABCCatLineaNegocio());
-				mapeoCampanaResponseDTO.setIdABCCatCampana(mapeoCampanaRecordDTO.idABCCatCampana());
+				mapeoCampanaResponseDTO.setCatLineaNegocio(catLineaNegocio);
 				mapeoCampanaResponseDTO.setBolActivo(mapeoCampanaRecordDTO.bolActivo());
 				mapeoCampanaResponseDTO.setNombre(mapeoCampanaRecordDTO.nombre() );
 				mapeoCampanaResponseDTO.setDescripcion(mapeoCampanaRecordDTO.descripcion() );

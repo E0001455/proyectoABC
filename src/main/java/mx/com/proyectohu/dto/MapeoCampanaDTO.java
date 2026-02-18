@@ -12,7 +12,7 @@ public class MapeoCampanaDTO {
 	@JsonAlias("validar")
 	private Boolean bolValidacion;
 	
-	@JsonAlias("envio")	
+	@JsonAlias("enviar")	
 	private Boolean bolEnvio;
 	
 	

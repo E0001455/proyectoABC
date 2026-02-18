@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="ABC_MAPEO_LINEA_COLUMNA")
+@Table(name="TTABCCFG_COLUMNA_LINEA")
 public class ABCMapeoLineaColumnaEntity implements Serializable {
 
 
@@ -18,44 +18,48 @@ public class ABCMapeoLineaColumnaEntity implements Serializable {
 	@EmbeddedId
 	private LlaveMapeoLineaColumna llaveMapeoLineaColumna;
 	
-	@Column(name = "BOL_ACTIVO")
-	private Boolean bolActivo;
+	@Column(name = "ID_USUARIO")
+	private Long idUsusario;
 	
-	@Column(name = "REGEX")
-	private String regex;
-	
-	@Column(name = "FEC_CREACION")
-	private Date fecCreacion;
-	
-	@Column(name = "ID_ABC_USUARIO_ULT_MODIFICACION")
-	private Long idABCUsuarioUltModificacion;
-	
-	@Column(name = "FEC_ULT_MODIFICACION")
-	private Date fecUltModificacion;
-	
-	@Column(name = "ID_ABC_CAT_VALOR")
+	@Column(name = "ID_VALOR")
 	private Long idABCCatValor;
 	
-	@Column(name = "ID_ABC_CAT_CADENA")
+	@Column(name = "ID_CADENA")
 	private Long idABCCatCadena;
 	
-	@Column(name = "ID_ABC_CAT_NUMERO")
+	@Column(name = "ID_NUMERO")
 	private Long idABCCatNumero;
 	
-	@Column(name = "BOL_OBLIGATORIO")
+	@Column(name = "FIACTIVO")
+	private Boolean bolActivo;
+	
+	@Column(name = "FIOBLIGATORIO")
 	private Boolean bolObligatorio;
 	
-	@Column(name = "NUM_MINIMO")
+	@Column(name = "FCREGEX")
+	private String regex;
+	
+	@Column(name = "FINOMINIMO")
 	private Long numMinimo;
 	
-	@Column(name = "NUM_MAXIMO")
+	@Column(name = "FINOMAXIMO")
 	private Long numMaximo;
 	
-	@Column(name = "NUM_ENTEROS")
+	@Column(name = "FINOENTEROS")
 	private Long numEnteros;
 	
-	@Column(name = "NUM_DECIMALES")
+	@Column(name = "FINODECIMALES")
 	private Long numDecimales;
+	
+	@Column(name = "FDFECHACREACION")
+	private Date fecCreacion;
+	
+	@Column(name = "FIIDUSUARIOULTMODIFICACION")
+	private Long idABCUsuarioUltModificacion;
+	
+	@Column(name = "FDFECHAULTMODIFICACION")
+	private Date fecUltModificacion;
+	
 
 	/**
 	 * @return the llaveMapeoLineaColumna
@@ -69,6 +73,21 @@ public class ABCMapeoLineaColumnaEntity implements Serializable {
 	 */
 	public void setLlaveMapeoLineaColumna(LlaveMapeoLineaColumna llaveMapeoLineaColumna) {
 		this.llaveMapeoLineaColumna = llaveMapeoLineaColumna;
+	}
+	
+
+	/**
+	 * @return the idUsusario
+	 */
+	public Long getIdUsusario() {
+		return idUsusario;
+	}
+
+	/**
+	 * @param idUsusario the idUsusario to set
+	 */
+	public void setIdUsusario(Long idUsusario) {
+		this.idUsusario = idUsusario;
 	}
 
 	/**

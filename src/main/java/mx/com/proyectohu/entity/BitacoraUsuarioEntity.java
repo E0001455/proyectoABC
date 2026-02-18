@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="ABC_BITACORA_USUARIO" )
-@SequenceGenerator(name = "mapeo_seq_gen",sequenceName = "ABC_SEQ_BITACORA_USUARIO",allocationSize = 1)
+@Table(name="TTABCUSU_BITACORA_USUARIO" )
+@SequenceGenerator(name = "SEQ_BITACORA_USUARIO_GEN",sequenceName = "SEQ_TTABCUSU_BITACORA_USUARIO",allocationSize = 1)
 public class BitacoraUsuarioEntity implements Serializable {
 	
 	/**
@@ -22,20 +22,20 @@ public class BitacoraUsuarioEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mapeo_seq_gen")
-	@Column(name = "ID_ABC_BITACORA_USUARIO")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_BITACORA_USUARIO_GEN")
+	@Column(name = "ID_BITACORA_USUARIO")
 	private Long 	idABCBitacoraUsuario;
 	
-	@Column(name = "ID_ABC_USUARIO")
+	@Column(name = "ID_USUARIO")
 	private Long 	idABCUsuario;
 	
-	@Column(name = "ID_ABC_CAT_EVENTO")
+	@Column(name = "ID_EVENTO")
 	private Long 	idABCCatEvento;
 	
-	@Column(name = "ID_ABC_CAT_OBJETO")
+	@Column(name = "ID_OBJETO")
 	private Long idABCCatObjeto;
 	
-	@Column(name = "ID_ABC_CAT_COLUMNA")
+	@Column(name = "ID_COLUMNA")
 	private Long 	idABCCatColumna;
 	
 	@Column(name = "DETALLE")
@@ -47,15 +47,10 @@ public class BitacoraUsuarioEntity implements Serializable {
 	@Column(name = "NAVEGADOR")
 	private String 	navegador;
 	
-	@Column(name = "FEC_CREACION")
+	@Column(name = "FDFECHACREACION")
 	private Date 	fecCreacion;
 	
-	@Column(name = "FEC_ULT_MODIFICACION")
-	private Date 	fecUltModificacion;
 
-	/**
-	 * @return the idABCBitacoraUsuario
-	 */
 	public Long getIdABCBitacoraUsuario() {
 		return idABCBitacoraUsuario;
 	}
@@ -181,30 +176,7 @@ public class BitacoraUsuarioEntity implements Serializable {
 
 
 
-	/**
-	 * @return the fecUltModificacion
-	 */
-	public Date getFecUltModificacion() {
-		return fecUltModificacion;
-	}
-
-	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
-	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
-		this.fecUltModificacion = fecUltModificacion;
-	}
-
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
-	
-	
-
 	
 	
 	

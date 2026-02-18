@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="ABC_CATALOGO" )
-@SequenceGenerator(name = "mapeo_seq_gen",sequenceName = "ABC_SEQ_CATALOGO",allocationSize = 1)
+@Table(name="TCABCCAT_CATALOGO" )
+@SequenceGenerator(name = "SEQ_CATALOGO_GEN",sequenceName = "SEQ_TCABCCAT_CATALOGO",allocationSize = 1)
 public class CatalogosEntity implements Serializable {
 	
 	/**
@@ -22,23 +22,23 @@ public class CatalogosEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mapeo_seq_gen")
-	@Column(name = "ID_ABC_CATALOGO")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CATALOGO_GEN")
+	@Column(name = "ID_CATALOGO")
 	private Long 	idABCCatalogo;
 	
-	@Column(name = "BOL_ACTIVO")
+	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
 	
-	@Column(name = "CODIGO")
+	@Column(name = "FCCODIGO")
 	private String 	codigo;
 	
-	@Column(name = "NOMBRE")
+	@Column(name = "FCNOMBRE")
 	private String 	nombre;
 	
-	@Column(name = "FEC_CREACION")
+	@Column(name = "FDFECHACREACION")
 	private Date 	fecCreacion;
 	
-	@Column(name = "FEC_ULT_MODIFICACION")
+	@Column(name = "FDFECHAULTMODIFICACION")
 	private Date 	fecUltModificacion;
 
 	/**

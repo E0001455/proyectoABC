@@ -53,6 +53,7 @@ public class MapeoLineaColumnaService {
 		abcMapeoLineaColumnaEntity.setLlaveMapeoLineaColumna(llaveMapeoLineaColumna);
 		abcMapeoLineaColumnaEntity.setBolActivo(true);
 		abcMapeoLineaColumnaEntity.setFecCreacion(new Date());
+		abcMapeoLineaColumnaEntity.setIdUsusario(mapeoLineaColumnaRequestDTO.getIdUsuario());
 		abcMapeoLineaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoLineaColumnaRequestDTO.getIdUsuario());
 		abcMapeoLineaColumnaEntity.setFecUltModificacion(new Date());
 		abcMapeoLineaColumnaEntity.setIdABCCatValor(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getTipoValor().getIdABCCatValor());

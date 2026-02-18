@@ -33,7 +33,6 @@ public class BitacoraUsuarioService {
 		bitacoraUsuarioEntity.setIp(bitacoraUsuarioRequestDTO.getBitacoraDTO().getIp());
 		bitacoraUsuarioEntity.setNavegador(bitacoraUsuarioRequestDTO.getBitacoraDTO().getNavegador());
 		bitacoraUsuarioEntity.setFecCreacion(new Date());
-		bitacoraUsuarioEntity.setFecUltModificacion(new Date());
 
 
 		idBitacoraUsuario=bitacoraUsarioRepository.save(bitacoraUsuarioEntity).getIdABCBitacoraUsuario();

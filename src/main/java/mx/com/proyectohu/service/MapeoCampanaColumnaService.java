@@ -57,6 +57,7 @@ public class MapeoCampanaColumnaService {
 		abcMapeoCampanaColumnaEntity.setLlaveMapeoCampanaColumna(llaveMapeoCampanaColumna);
 		abcMapeoCampanaColumnaEntity.setBolActivo(true);
 		abcMapeoCampanaColumnaEntity.setFecCreacion(new Date());
+		abcMapeoCampanaColumnaEntity.setIdUsusario(mapeoCampanaColumnaRequestDTO.getIdUsuario());
 		abcMapeoCampanaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaColumnaRequestDTO.getIdUsuario());
 		abcMapeoCampanaColumnaEntity.setFecUltModificacion(new Date());
 		abcMapeoCampanaColumnaEntity.setIdABCCatValor(mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().getCatValorDTO().getTipoValor().getIdABCCatValor());

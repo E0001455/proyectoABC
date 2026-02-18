@@ -13,10 +13,10 @@ public class LlaveMapeoLineaColumna implements Serializable {
 	  
 	private static final long serialVersionUID = 1L;
 
-		@Column(name = "ID_ABC_CONFIG_MAPEO_LINEA")
+		@Column(name = "ID_MAPEO_LINEA")
 	    private Long idABCConfigMapeoLinea;
 
-	    @Column(name = "ID_ABC_CAT_COLUMNA")
+	    @Column(name = "ID_COLUMNA")
 	    private Long idABCCatColumna;
 
 	    public LlaveMapeoLineaColumna() {}
