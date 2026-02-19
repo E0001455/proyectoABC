@@ -32,7 +32,7 @@ public class MapeoCampanaService {
 	public MapeoCampanaMapper   mapeoCampanaMapper;
 
 
-	public Long  registrarLineaNegocio(Long idCatLineaNegocio, Long idCatCampana, MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
+	public Long  registrarCampana(Long idCatLineaNegocio, Long idCatCampana, MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 
 
 		ABCConfigMapeoCampanaEntity abcConfigMapeoCampanaEntity = new ABCConfigMapeoCampanaEntity();

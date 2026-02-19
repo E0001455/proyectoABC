@@ -35,7 +35,7 @@ public class MapeoCampanaController {
 	public ResponseEntity<?> registrarCampanaLinea(@PathVariable Long idLinea,@PathVariable Long idCampana, @RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO ) {
 		
 		MapeoCampanaResponseDTO mapeoCampanaResponseDTO = new MapeoCampanaResponseDTO();
-		mapeoCampanaResponseDTO.setIdABCConfigMapeoCampana(mapeoCampanaService.registrarLineaNegocio(idLinea,idCampana,mapeoCampanaRequestDTO));
+		mapeoCampanaResponseDTO.setIdABCConfigMapeoCampana(mapeoCampanaService.registrarCampana(idLinea,idCampana,mapeoCampanaRequestDTO));
 		
 		
 		return ResponseEntity.ok(mapeoCampanaResponseDTO);
