@@ -38,7 +38,6 @@ public class TareasLineaController {
 	public TareaLineaService tareaLineaService;
 
 
-
 	@PostMapping("/lineas/{id}/tareas")
 	public ResponseEntity<?> registrarNuevaTareaLinea(@PathVariable Long id, @RequestBody TareaLineaRequestDTO tareaLineaRequestDTO ) {
 
@@ -66,7 +65,7 @@ public class TareasLineaController {
 	}
 
 	@PutMapping("/lineas/tareas")
-	public ResponseEntity<?> actualizarMapeoLinea(@RequestBody TareaLineaRequestDTO tareaLineaRequestDTO) {
+	public ResponseEntity<?> actualizarTareaLinea(@RequestBody TareaLineaRequestDTO tareaLineaRequestDTO) {
 
 		TareaLineaResponseDTO tareaLineaResponseDTO= tareaLineaService.actualizarTareaLinea(tareaLineaRequestDTO);
 

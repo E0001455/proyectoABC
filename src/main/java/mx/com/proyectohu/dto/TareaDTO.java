@@ -13,10 +13,23 @@ public class TareaDTO {
 	@JsonAlias("tipo")
 	private Actividad actividad;
 	
+	@JsonAlias("mapeo")
+	private MapeoDTO	mapeoDTO;
 	
 	
 	
-	
+	/**
+	 * @return the mapeoDTO
+	 */
+	public MapeoDTO getMapeoDTO() {
+		return mapeoDTO;
+	}
+	/**
+	 * @param mapeoDTO the mapeoDTO to set
+	 */
+	public void setMapeoDTO(MapeoDTO mapeoDTO) {
+		this.mapeoDTO = mapeoDTO;
+	}
 	/**
 	 * @return the idCFGTareaLineaCampana
 	 */

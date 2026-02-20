@@ -66,7 +66,7 @@ public class TareasCampanaController {
 	}
 
 	@PutMapping("/campanas/tareas")
-	public ResponseEntity<?> actualizarMapeoCampana(@RequestBody TareaCampanaRequestDTO tareaCampanaRequestDTO) {
+	public ResponseEntity<?> actualizarTareaCampana(@RequestBody TareaCampanaRequestDTO tareaCampanaRequestDTO) {
 
 		TareaCampanaResponseDTO tareaCampanaResponseDTO= tareaCampanaService.actualizarTareaCampana(tareaCampanaRequestDTO);
 

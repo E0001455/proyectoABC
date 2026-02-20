@@ -12,22 +12,29 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.proyectohu.repository.MapeoTareaCampanaRepository;
 import mx.com.proyectohu.repository.TareaCampanaRepository;
-
-
+import mx.com.proyectohu.dto.MapeoDTO;
 import mx.com.proyectohu.dto.TareaCampanaRequestDTO;
 import mx.com.proyectohu.dto.TareaCampanaResponseDTO;
 import mx.com.proyectohu.dto.TareaCampanaResponseDTO.CatActividad;
 import mx.com.proyectohu.dto.TareaCampanaResponseDTO.CatEjecucion;
 import mx.com.proyectohu.dto.TareaCampanaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.dto.TareaCampanaResponseDTO.CatLineaNegocio.CatCampana;
+import mx.com.proyectohu.entity.LlaveTareaMapeoCampana;
+import mx.com.proyectohu.entity.LlaveTareaMapeoLinea;
 import mx.com.proyectohu.entity.TareaCampanaEntity;
+import mx.com.proyectohu.entity.TareaMapeoCampanaEntity;
+import mx.com.proyectohu.entity.TareaMapeoLineaEntity;
 
 @Service
 public class TareaCampanaService {
 
 	@Autowired
 	public TareaCampanaRepository tareaCampanaRepository;
+	
+	@Autowired
+	public MapeoTareaCampanaRepository mapeoTareaCampanaRepository;
 
 
 	public Long  registrarTareaCampana(Long idLinea, Long idCampana,TareaCampanaRequestDTO tareaCampanaRequestDTO) {
@@ -49,6 +56,7 @@ public class TareaCampanaService {
 
 		idTareaCampana=tareaCampanaRepository.save(tareaCampanaEntity).getIdCFGTareaCampana();
 
+		registrarMapeoTarea(idTareaCampana,tareaCampanaRequestDTO.getTareaDTO().getMapeoDTO().getIdABCConfigMapeoLinea(),tareaCampanaRequestDTO.getIdUsuario()); 
 
 
 		return	idTareaCampana;	
@@ -91,6 +99,22 @@ public class TareaCampanaService {
 				tareaCampanaResponseDTO.setBolActivo(tareaCampanaEntity.getBolActivo());
 				tareaCampanaResponseDTO.setFechaCreacion(tareaCampanaEntity.getFechaCreacion());
 				tareaCampanaResponseDTO.setFechaUltModificacion(tareaCampanaEntity.getFechaUltModificacion());
+				
+				TareaMapeoCampanaEntity tareaMapeoCampanaEntity = new TareaMapeoCampanaEntity();
+
+				tareaMapeoCampanaEntity = mapeoTareaCampanaRepository.findByLlaveTareaMapeoCampana_idCFGTareaCampana(tareaCampanaResponseDTO.getIdCFGTareaCampana());
+				
+				if(tareaMapeoCampanaEntity== null) {
+					continue;
+				}
+				
+				MapeoDTO mapeoDTO = new MapeoDTO();
+				mapeoDTO.setIdABCConfigMapeoLinea(tareaMapeoCampanaEntity.getLlaveTareaMapeoCampana().getIdABCConfigMapeoCampana());
+			
+				tareaCampanaResponseDTO.setMapeoDTO(mapeoDTO);
+
+			
+				
 
 
 				tareaCampanaResponseDTOLista.add(tareaCampanaResponseDTO);
@@ -179,7 +203,28 @@ public class TareaCampanaService {
 		return tareaCampanaResponseDTO;
 	}
 
-
+	public void registrarMapeoTarea(Long idTareaCampana, Long idMapeoCampana,Long idUsuario) {
+		
+		TareaMapeoCampanaEntity tareaMapeoCampanaEntity = new  TareaMapeoCampanaEntity();
+		LlaveTareaMapeoCampana llaveTareaMapeoCampana = new LlaveTareaMapeoCampana();
+		
+		llaveTareaMapeoCampana.setIdABCConfigMapeoCampana(idMapeoCampana);
+		llaveTareaMapeoCampana.setIdCFGTareaCampana(idTareaCampana);
+		
+		tareaMapeoCampanaEntity.setLlaveTareaMapeoCampana(llaveTareaMapeoCampana);
+		tareaMapeoCampanaEntity.setBolActivo(true);
+		tareaMapeoCampanaEntity.setIdABCUsuarioUltModificacion(idUsuario);
+		tareaMapeoCampanaEntity.setFecCreacion(new Date());
+		tareaMapeoCampanaEntity.setFecUltModificacion(new Date());
+		
+		mapeoTareaCampanaRepository.save(tareaMapeoCampanaEntity);
+		
+		
+		
+		
+		
+	}
+	
 
 
 }

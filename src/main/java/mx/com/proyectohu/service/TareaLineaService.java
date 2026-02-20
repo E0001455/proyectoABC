@@ -12,21 +12,26 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.proyectohu.repository.MapeoTareaLineaRepository;
 import mx.com.proyectohu.repository.TareaLineaRepository;
-
-
+import mx.com.proyectohu.dto.MapeoDTO;
 import mx.com.proyectohu.dto.TareaLineaRequestDTO;
 import mx.com.proyectohu.dto.TareaLineaResponseDTO;
 import mx.com.proyectohu.dto.TareaLineaResponseDTO.CatActividad;
 import mx.com.proyectohu.dto.TareaLineaResponseDTO.CatEjecucion;
 import mx.com.proyectohu.dto.TareaLineaResponseDTO.CatLineaNegocio;
+import mx.com.proyectohu.entity.LlaveTareaMapeoLinea;
 import mx.com.proyectohu.entity.TareaLineaEntity;
+import mx.com.proyectohu.entity.TareaMapeoLineaEntity;
 
 @Service
 public class TareaLineaService {
 
 	@Autowired
 	public TareaLineaRepository tareaLineaRepository;
+	
+	@Autowired
+	public MapeoTareaLineaRepository mapeoTareaLineaRepository;
 
 
 	public Long  registrarTareaLinea(Long idLineaNegocio,TareaLineaRequestDTO tareaLineaRequestDTO) {
@@ -46,6 +51,11 @@ public class TareaLineaService {
 
 
 		idTareaLinea=tareaLineaRepository.save(tareaLineaEntity).getIdCFGTareaLinea();
+		
+		
+		
+		registrarMapeoTarea(idTareaLinea,tareaLineaRequestDTO.getTareaDTO().getMapeoDTO().getIdABCConfigMapeoLinea(),tareaLineaRequestDTO.getIdUsuario()); 
+		
 
 
 
@@ -84,7 +94,19 @@ public class TareaLineaService {
 				tareaLineaResponseDTO.setBolActivo(tareaLineaEntity.getBolActivo());
 				tareaLineaResponseDTO.setFechaCreacion(tareaLineaEntity.getFechaCreacion());
 				tareaLineaResponseDTO.setFechaUltModificacion(tareaLineaEntity.getFechaUltModificacion());
+				
+				TareaMapeoLineaEntity tareaMapeoLineaEntity = new TareaMapeoLineaEntity();
 
+				tareaMapeoLineaEntity = mapeoTareaLineaRepository.findByLlaveTareaMapeoLinea_idCFGTareaLinea(tareaLineaEntity.getIdCFGTareaLinea());
+				
+				if(tareaMapeoLineaEntity== null) {
+					continue;
+				}
+				
+				MapeoDTO mapeoDTO = new MapeoDTO();
+				mapeoDTO.setIdABCConfigMapeoLinea(tareaMapeoLineaEntity.getLlaveTareaMapeoLinea().getIdABCConfigMapeoLinea());
+			
+				tareaLineaResponseDTO.setMapeoDTO(mapeoDTO);
 
 				tareaLineaResponseDTOLista.add(tareaLineaResponseDTO);
 
@@ -171,6 +193,31 @@ public class TareaLineaService {
 
 		return tareaLineaResponseDTO;
 	}
+	
+	
+	public void registrarMapeoTarea(Long idTareaLinea, Long idMapeoLinea,Long idUsuario) {
+		
+		TareaMapeoLineaEntity tareaMapeoLineaEntity = new  TareaMapeoLineaEntity();
+		LlaveTareaMapeoLinea llaveTareaMapeoLinea = new LlaveTareaMapeoLinea();
+		
+		llaveTareaMapeoLinea.setIdABCConfigMapeoLinea(idMapeoLinea);
+		llaveTareaMapeoLinea.setIdCFGTareaLinea(idTareaLinea);
+		
+		tareaMapeoLineaEntity.setLlaveTareaMapeoLinea(llaveTareaMapeoLinea);
+		tareaMapeoLineaEntity.setBolActivo(true);
+		tareaMapeoLineaEntity.setIdABCUsuarioUltModificacion(idUsuario);
+		tareaMapeoLineaEntity.setFecCreacion(new Date());
+		tareaMapeoLineaEntity.setFecUltModificacion(new Date());
+		
+		mapeoTareaLineaRepository.save(tareaMapeoLineaEntity);
+		
+		
+		
+		
+		
+	}
+	
+	
 
 
 

@@ -1,25 +1,28 @@
 package mx.com.proyectohu.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MapeoDTO {
-	
-	@JsonAlias("id")
+
+	@JsonProperty("id")
 	private Long 	idABCConfigMapeoLinea;
+
 	private String 	nombre;
 	private String 	descripcion;
-	
-	
-	@JsonAlias("validar")
+
+
+	@JsonProperty("validar")
 	private Boolean bolValidacion;
-	
-	@JsonAlias("enviar")	
+
+	@JsonProperty("enviar")	
 	private Boolean bolEnvio;
-	
-	
-	
-	
+
+
+
+
 	public Long getIdABCConfigMapeoLinea() {
 		return idABCConfigMapeoLinea;
 	}
@@ -62,53 +65,17 @@ public class MapeoDTO {
 	public void setBolEnvio(Boolean bolEnvio) {
 		this.bolEnvio = bolEnvio;
 	}
-	
-	
-	public static class Ejecucion {
-		
-		@JsonProperty("id")
-		private Long idEjecucion;
-
-		/**
-		 * @return the idEjecucion
-		 */
-		public Long getIdEjecucion() {
-			return idEjecucion;
-		}
-
-		/**
-		 * @param idEjecucion the idEjecucion to set
-		 */
-		public void setIdEjecucion(Long idEjecucion) {
-			this.idEjecucion = idEjecucion;
-		}
-
-	}
-	
-	public static class Actividad {
-		
-		@JsonProperty("id")
-		private Long idActividad;
-
-		/**
-		 * @return the idActividad
-		 */
-		public Long getIdActividad() {
-			return idActividad;
-		}
-
-		/**
-		 * @param idActividad the idActividad to set
-		 */
-		public void setIdActividad(Long idActividad) {
-			this.idActividad = idActividad;
-		}
 
 
 
-	}	
-	
-	
-	
 
-}
+
+
+
+
+
+}	
+
+
+
+

@@ -35,8 +35,7 @@ public class MapeoCampanaColumnaService {
 	@Autowired
 	public ABCMapeoCampanaColumnaRepository abcMapeoCampanaColumnaRepository;
 
-	@Autowired
-	public MapeoCampanaColumnaMapper   mapeoCampanaColumnaMapper;
+
 	
 
 
@@ -86,7 +85,7 @@ public class MapeoCampanaColumnaService {
 
 		if (abcMapeoCampanaColumnaEntityOptional.isPresent()) {
 
-			mapeoCampanaColumnaResponseDTO = mapeoCampanaColumnaMapper.llenarDTO(abcMapeoCampanaColumnaEntityOptional.get());
+		//	mapeoCampanaColumnaResponseDTO = mapeoCampanaColumnaMapper.llenarDTO(abcMapeoCampanaColumnaEntityOptional.get());
 
 		}else {
 			mapeoCampanaColumnaResponseDTO = null;

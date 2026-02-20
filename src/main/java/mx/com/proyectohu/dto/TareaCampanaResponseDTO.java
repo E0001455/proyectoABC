@@ -14,6 +14,9 @@ public class TareaCampanaResponseDTO {
 	@JsonProperty("id")
 	private Long 	idCFGTareaCampana;
 	
+	@JsonProperty("mapeo")
+	private MapeoDTO	mapeoDTO;
+	
 	@JsonProperty("linea")
 	private CatLineaNegocio catLineaNegocio;
 	
@@ -30,6 +33,24 @@ public class TareaCampanaResponseDTO {
 
 	@JsonProperty("fechaUltimaModificacion")
 	private Date 	fechaUltModificacion;
+
+
+
+	/**
+	 * @return the mapeoDTO
+	 */
+	public MapeoDTO getMapeoDTO() {
+		return mapeoDTO;
+	}
+
+
+
+	/**
+	 * @param mapeoDTO the mapeoDTO to set
+	 */
+	public void setMapeoDTO(MapeoDTO mapeoDTO) {
+		this.mapeoDTO = mapeoDTO;
+	}
 
 
 

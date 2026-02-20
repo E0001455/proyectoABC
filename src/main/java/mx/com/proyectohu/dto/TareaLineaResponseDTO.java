@@ -2,6 +2,7 @@ package mx.com.proyectohu.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,6 +14,9 @@ public class TareaLineaResponseDTO {
 
 	@JsonProperty("id")
 	private Long 	idCFGTareaLinea;
+	
+	@JsonProperty("mapeo")
+	private MapeoDTO	mapeoDTO;
 	
 	@JsonProperty("linea")
 	private CatLineaNegocio catLineaNegocio;
@@ -33,9 +37,21 @@ public class TareaLineaResponseDTO {
 
 
 
+	/**
+	 * @return the mapeoDTO
+	 */
+	public MapeoDTO getMapeoDTO() {
+		return mapeoDTO;
+	}
 
 
 
+	/**
+	 * @param mapeoDTO the mapeoDTO to set
+	 */
+	public void setMapeoDTO(MapeoDTO mapeoDTO) {
+		this.mapeoDTO = mapeoDTO;
+	}
 
 
 

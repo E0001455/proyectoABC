@@ -28,8 +28,7 @@ public class MapeoCampanaService {
 	@Autowired
 	public ABCConfigMapeoCampanaRepository abcConfigMapeoCampanaRepository;
 
-	@Autowired
-	public MapeoCampanaMapper   mapeoCampanaMapper;
+	
 
 
 	public Long  registrarCampana(Long idCatLineaNegocio, Long idCatCampana, MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {

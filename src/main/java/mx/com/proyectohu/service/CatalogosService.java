@@ -25,7 +25,7 @@ import mx.com.proyectohu.dto.CatalogosResponseDTO;
 import mx.com.proyectohu.dto.RegistrosCatalogosDTO;
 import mx.com.proyectohu.entity.CatalogosEntity;
 import mx.com.proyectohu.interfaces.CatalogoInterface;
-import mx.com.proyectohu.mapper.CatalogosMapper;
+
 
 
 @Service
@@ -37,8 +37,7 @@ public class CatalogosService {
 	@Autowired
 	public CatalogosDAO catalogosDAO;
 
-	@Autowired
-	public CatalogosMapper   catalogosMapper;
+
 
 	@Autowired
 	public CatalogosMapComponent catalogosMapComponent;
@@ -55,7 +54,7 @@ public class CatalogosService {
 	public synchronized Collection<CatalogosResponseDTO> obtenerCatalogoCache() {
 
 
-		if (!catalogCache.isEmpty()) {
+		if (!catalogCacheSimple.isEmpty()) {
 			return catalogCacheSimple.values();
 		}
 

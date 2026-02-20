@@ -24,8 +24,7 @@ public class MapeoLineaService {
 	@Autowired
 	public ABCConfigMapeoLineaRepository abcConfigMapeoLineaRepository;
 
-	@Autowired
-	public MapeoLineasMapper   mapeoLineasMapper;
+	
 
 
 	public Long  registrarLineaNegocio(Long idLineaNegocio,MapeoLineaRequestDTO mapeoLineaRequestDTO) {

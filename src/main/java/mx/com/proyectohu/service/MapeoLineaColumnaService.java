@@ -29,8 +29,7 @@ public class MapeoLineaColumnaService {
 	@Autowired
 	public ABCMapeoLineaColumnaRepository abcMapeoLineaColumnaRepository;
 
-	@Autowired
-	public MapeoLineasColumnaMapper   mapeoLineasColumnaMapper;
+
 
 
 
