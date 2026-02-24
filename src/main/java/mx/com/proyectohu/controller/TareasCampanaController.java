@@ -65,7 +65,7 @@ public class TareasCampanaController {
 
 	}
 
-	@PutMapping("/campanas/tareas")
+	@PutMapping("/lineas/campanas/tareas")
 	public ResponseEntity<?> actualizarTareaCampana(@RequestBody TareaCampanaRequestDTO tareaCampanaRequestDTO) {
 
 		TareaCampanaResponseDTO tareaCampanaResponseDTO= tareaCampanaService.actualizarTareaCampana(tareaCampanaRequestDTO);
@@ -80,7 +80,7 @@ public class TareasCampanaController {
 	}
 
 
-	@PatchMapping("/campanas/tareas/activar")
+	@PatchMapping("/lineas/campanas/tareas/activar")
 	public ResponseEntity<?> activar(@RequestBody TareaCampanaRequestDTO tareaCampanaRequestDTO) {
 		TareaCampanaResponseDTO tareaCampanaResponseDTO = new TareaCampanaResponseDTO();
 		tareaCampanaResponseDTO = tareaCampanaService.activar(tareaCampanaRequestDTO);
@@ -96,7 +96,7 @@ public class TareasCampanaController {
 
 
 
-	@PatchMapping("/campanas/tareas/desactivar")
+	@PatchMapping("/lineas/campanas/tareas/desactivar")
 	public ResponseEntity<?> desactivar(@RequestBody TareaCampanaRequestDTO tareaCampanaRequestDTO){
 		TareaCampanaResponseDTO tareaCampanaResponseDTO = new TareaCampanaResponseDTO();
 		tareaCampanaResponseDTO = tareaCampanaService.desactivar(tareaCampanaRequestDTO);

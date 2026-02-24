@@ -70,7 +70,7 @@ public class TareasHorarioLineaController {
 	
 	
 	
-	@PatchMapping("/lineas/tareas/{idTareaLinea}/activar")
+	@PatchMapping("/lineas/tareas/{idTareaLinea}/horarios/activar")
 	public ResponseEntity<?> activar(@PathVariable Long idTareaLinea, @RequestBody TareaLineaHorarioRequestDTO tareaLineaHorarioRequestDTO) {
 		
 		TareaLineaHorarioResponseDTO tareaLineaHorarioResponseDTO = new TareaLineaHorarioResponseDTO();
@@ -87,7 +87,7 @@ public class TareasHorarioLineaController {
 
 
 
-	@PatchMapping("/lineas/tareas/{idTareaLinea}/desactivar")
+	@PatchMapping("/lineas/tareas/{idTareaLinea}/horarios/desactivar")
 	public ResponseEntity<?> desactivar(@PathVariable Long idTareaLinea, @RequestBody TareaLineaHorarioRequestDTO tareaLineaHorarioRequestDTO){
 		TareaLineaHorarioResponseDTO tareaLineaHorarioResponseDTO = new TareaLineaHorarioResponseDTO();
 		tareaLineaHorarioResponseDTO = tareaLineaHorarioService.desactivar(idTareaLinea,tareaLineaHorarioRequestDTO);

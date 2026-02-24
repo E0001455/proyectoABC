@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.proyectohu.dto.MapeoCampanaRequestDTO;
 import mx.com.proyectohu.dto.MapeoCampanaResponseDTO;
-
+import mx.com.proyectohu.dto.TareaCampanaHorarioRequestDTO;
+import mx.com.proyectohu.dto.TareaCampanaHorarioResponseDTO;
 import mx.com.proyectohu.dto.TareaCampanaRequestDTO;
 import mx.com.proyectohu.dto.TareaCampanaResponseDTO;
 import mx.com.proyectohu.service.MapeoCampanaService;
 
 import mx.com.proyectohu.service.TareaCampanaService;
+import mx.com.proyectohu.service.TareaHorarioCampanaService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +38,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/profuturo/api/v1")
 public class TareasHorarioCampanaController {
 
-	/*
+	
 	@Autowired
 	public TareaHorarioCampanaService tareaCampanaHorarioService;
 
 
 
-	@PostMapping("/Campanas/tareas/{idTareaCampana}/horario")
+	@PostMapping("/campanas/tareas/{idTareaCampana}/horarios")
 	public ResponseEntity<?> registrarNuevaTareaCampanaHorario(@PathVariable Long idTareaCampana, @RequestBody TareaCampanaHorarioRequestDTO tareaCampanaHorarioRequestDTO) {
 
 	
@@ -55,7 +57,7 @@ public class TareasHorarioCampanaController {
 	}
 
 
-	@GetMapping("/Campanas/tareas/{idTareaCampana}/horarios")
+	@GetMapping("/campanas/tareas/{idTareaCampana}/horarios")
 	public ResponseEntity<?> consultarTareasCampanaHorarios(@PathVariable Long idTareaCampana) {
 
 
@@ -70,7 +72,7 @@ public class TareasHorarioCampanaController {
 	
 	
 	
-	@PatchMapping("/Campanas/tareas/{idTareaCampana}/activar")
+	@PatchMapping("/campanas/tareas/{idTareaCampana}/horarios/activar")
 	public ResponseEntity<?> activar(@PathVariable Long idTareaCampana, @RequestBody TareaCampanaHorarioRequestDTO tareaCampanaHorarioRequestDTO) {
 		
 		TareaCampanaHorarioResponseDTO tareaCampanaHorarioResponseDTO = new TareaCampanaHorarioResponseDTO();
@@ -87,7 +89,7 @@ public class TareasHorarioCampanaController {
 
 
 
-	@PatchMapping("/Campanas/tareas/{idTareaCampana}/desactivar")
+	@PatchMapping("/campanas/tareas/{idTareaCampana}/horarios/desactivar")
 	public ResponseEntity<?> desactivar(@PathVariable Long idTareaCampana, @RequestBody TareaCampanaHorarioRequestDTO tareaCampanaHorarioRequestDTO){
 		TareaCampanaHorarioResponseDTO tareaCampanaHorarioResponseDTO = new TareaCampanaHorarioResponseDTO();
 		tareaCampanaHorarioResponseDTO = tareaCampanaHorarioService.desactivar(idTareaCampana,tareaCampanaHorarioRequestDTO);
@@ -99,7 +101,7 @@ public class TareasHorarioCampanaController {
 		}
 	}
 
-*/
+
 
 
 
