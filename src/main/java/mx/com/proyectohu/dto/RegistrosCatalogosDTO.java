@@ -2,8 +2,10 @@ package mx.com.proyectohu.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegistrosCatalogosDTO {
 	
 
@@ -17,6 +19,24 @@ public class RegistrosCatalogosDTO {
 	@JsonProperty("nombre")
 	private String 	fcNombre;
 	
+	
+	@JsonProperty("esRequerido")
+	private Boolean 	fiRequerido;
+	
+	
+	
+	/**
+	 * @return the fiRequerido
+	 */
+	public Boolean getFiRequerido() {
+		return fiRequerido;
+	}
+	/**
+	 * @param fiRequerido the fiRequerido to set
+	 */
+	public void setFiRequerido(Boolean fiRequerido) {
+		this.fiRequerido = fiRequerido;
+	}
 	/**
 	 * @return the id
 	 */

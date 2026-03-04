@@ -11,9 +11,11 @@ public class BitacoraDTO {
 	@JsonProperty("objeto")
 	private ObjetoDTO 	ObjetoDTO;
 	
-	@JsonProperty("columna")
-	private ColumnaDTO 	columnaDTO;
+	@JsonProperty("columnaLinea")
+	private ColumnaLineaDTO 	columnaLineaDTO;
 	
+	@JsonProperty("columnaCampana")
+	private ColumnaCampanaDTO 	columnaCampanaDTO;
 
 	
 	private String 		detalle;
@@ -95,21 +97,47 @@ public class BitacoraDTO {
 	public void setNavegador(String navegador) {
 		this.navegador = navegador;
 	}
+	
+	
+
+
+	
+
+
 
 
 	/**
-	 * @return the columnaDTO
+	 * @return the columnaLineaDTO
 	 */
-	public ColumnaDTO getColumnaDTO() {
-		return columnaDTO;
+	public ColumnaLineaDTO getColumnaLineaDTO() {
+		return columnaLineaDTO;
 	}
 
 	/**
-	 * @param columnaDTO the columnaDTO to set
+	 * @param columnaLineaDTO the columnaLineaDTO to set
 	 */
-	public void setColumnaDTO(ColumnaDTO columnaDTO) {
-		this.columnaDTO = columnaDTO;
+	public void setColumnaLineaDTO(ColumnaLineaDTO columnaLineaDTO) {
+		this.columnaLineaDTO = columnaLineaDTO;
 	}
+
+	/**
+	 * @return the columnaCampanaDTO
+	 */
+	public ColumnaCampanaDTO getColumnaCampanaDTO() {
+		return columnaCampanaDTO;
+	}
+
+	/**
+	 * @param columnaCampanaDTO the columnaCampanaDTO to set
+	 */
+	public void setColumnaCampanaDTO(ColumnaCampanaDTO columnaCampanaDTO) {
+		this.columnaCampanaDTO = columnaCampanaDTO;
+	}
+
+
+
+
+
 
 
 
@@ -137,24 +165,52 @@ public class BitacoraDTO {
 
 	}
 
-	public static class ColumnaDTO {
+	public static class ColumnaLineaDTO {
 
 		@JsonAlias("id")
-		private Long idABCCatColumna;
+		private Long idABCCatColumnaLinea;
 
 		/**
-		 * @return the idABCCatColumna
+		 * @return the idABCCatColumnaLinea
 		 */
-		public Long getIdABCCatColumna() {
-			return idABCCatColumna;
+		public Long getIdABCCatColumnaLinea() {
+			return idABCCatColumnaLinea;
 		}
 
 		/**
-		 * @param idABCCatColumna the idABCCatColumna to set
+		 * @param idABCCatColumnaLinea the idABCCatColumnaLinea to set
 		 */
-		public void setIdABCCatColumna(Long idABCCatColumna) {
-			this.idABCCatColumna = idABCCatColumna;
+		public void setIdABCCatColumnaLinea(Long idABCCatColumnaLinea) {
+			this.idABCCatColumnaLinea = idABCCatColumnaLinea;
 		}
+
+		
+
+	
+
+
+	}
+	
+	public static class ColumnaCampanaDTO {
+
+		@JsonAlias("id")
+		private Long idABCCatColumnaCampana;
+
+		/**
+		 * @return the idABCCatColumnaCampana
+		 */
+		public Long getIdABCCatColumnaCampana() {
+			return idABCCatColumnaCampana;
+		}
+
+		/**
+		 * @param idABCCatColumnaCampana the idABCCatColumnaCampana to set
+		 */
+		public void setIdABCCatColumnaCampana(Long idABCCatColumnaCampana) {
+			this.idABCCatColumnaCampana = idABCCatColumnaCampana;
+		}
+
+	
 
 	
 

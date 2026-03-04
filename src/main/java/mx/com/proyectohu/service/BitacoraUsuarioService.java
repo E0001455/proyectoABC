@@ -27,8 +27,10 @@ public class BitacoraUsuarioService {
 		bitacoraUsuarioEntity.setIdABCUsuario(bitacoraUsuarioRequestDTO.getIdABCUsuario());
 		bitacoraUsuarioEntity.setIdABCCatEvento(bitacoraUsuarioRequestDTO.getBitacoraDTO().getEventoDTO().getIdABCCatEvento());
 		bitacoraUsuarioEntity.setIdABCCatObjeto(bitacoraUsuarioRequestDTO.getBitacoraDTO().getObjetoDTO().getIdABCCatObjeto());
-		bitacoraUsuarioEntity.setIdABCCatColumna(bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaDTO()!=null
-				?bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaDTO().getIdABCCatColumna():null);
+		bitacoraUsuarioEntity.setIdABCCatColumnaLinea(bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaLineaDTO()!=null
+				?bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaLineaDTO().getIdABCCatColumnaLinea():null);
+		bitacoraUsuarioEntity.setIdABCCatColumnaCampana(bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaCampanaDTO()!=null
+				?bitacoraUsuarioRequestDTO.getBitacoraDTO().getColumnaCampanaDTO().getIdABCCatColumnaCampana():null);
 		bitacoraUsuarioEntity.setDetalle(bitacoraUsuarioRequestDTO.getBitacoraDTO().getDetalle());
 		bitacoraUsuarioEntity.setIp(bitacoraUsuarioRequestDTO.getBitacoraDTO().getIp());
 		bitacoraUsuarioEntity.setNavegador(bitacoraUsuarioRequestDTO.getBitacoraDTO().getNavegador());

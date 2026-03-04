@@ -97,6 +97,7 @@ public class CatalogosService {
 				
 				catalogosResponseDTO.setCodigo(catalogosEntity.getCodigo());
 				catalogosResponseDTO.setNombreCatalogo(catalogosEntity.getNombre().trim().replaceAll("TCABCCAT_", ""));
+				
 				catalogosResponseDTO.setRegistrosCatalogosDTOLista(registrosCatalogosDTOLista);
 			
 				

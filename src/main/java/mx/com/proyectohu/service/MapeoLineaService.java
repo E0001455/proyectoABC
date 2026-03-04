@@ -43,7 +43,8 @@ public class MapeoLineaService {
 		abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
 		abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
 		abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
-		abcConfigMapeoLineaEntity.setDictaminado(true);
+		abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
+		abcConfigMapeoLineaEntity.setFiPorcentajeError(mapeoLineaRequestDTO.getMapeoDTO().getFiPorcentajeError());
 
 
 		idMapeoLineaNegocio=abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity).getIdABCConfigMapeoLinea();
@@ -78,8 +79,10 @@ public class MapeoLineaService {
 				mapeoLineaResponseDTO.setFecUltModificacion( mapeoLineaRecordDTO.fecUltModificacion() );
 				mapeoLineaResponseDTO.setBolValidacion(mapeoLineaRecordDTO.bolValidacion());
 				mapeoLineaResponseDTO.setBolEnvio(mapeoLineaRecordDTO.bolEnvio());
+				mapeoLineaResponseDTO.setFiDictaminacion(mapeoLineaRecordDTO.fiDictaminacion());
+				mapeoLineaResponseDTO.setFiPorcentajeError(mapeoLineaRecordDTO.fiPorcentajeError());
 				mapeoLineaResponseDTO.setColumnas(mapeoLineaRecordDTO.columnas().intValue());
-
+				
 				mapeoLineaResponseDTOLista.add(mapeoLineaResponseDTO);
 
 
@@ -108,8 +111,9 @@ public class MapeoLineaService {
 			abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
 			abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
 			abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
-
-
+			abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
+			abcConfigMapeoLineaEntity.setFiPorcentajeError(mapeoLineaRequestDTO.getMapeoDTO().getFiPorcentajeError());
+			
 			abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
 			mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
 

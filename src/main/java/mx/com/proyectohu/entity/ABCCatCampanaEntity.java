@@ -15,8 +15,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 @CatalogoNotacion
 @Entity
-@Table(name="TCABCCAT_COLUMNA" )
-@SequenceGenerator(name = "SEQ_COLUMNA_GEN",sequenceName = "SEQ_TCABCCAT_COLUMNA",allocationSize = 1)
+@Table(name="TCABCCAT_CAMPANA" )
+@SequenceGenerator(name = "SEQ_CAMPANA_GEN",sequenceName = "SEQ_TCABCCAT_CAMPANA",allocationSize = 1)
 public class ABCCatCampanaEntity implements Serializable,CatalogoInterface {
 	
 	/**
@@ -24,8 +24,8 @@ public class ABCCatCampanaEntity implements Serializable,CatalogoInterface {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_COLUMNA_GEN")
-	@Column(name = "ID_COLUMNA")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CAMPANA_GEN")
+	@Column(name = "ID_CAMPANA")
 	private Long 	id;
 	
 	@Column(name = "FIACTIVO")
@@ -45,8 +45,6 @@ public class ABCCatCampanaEntity implements Serializable,CatalogoInterface {
 
 	
 	
-	
-
 	
 
 

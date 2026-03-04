@@ -15,6 +15,8 @@ public record MapeoLineaRecordDTO(
 		Date 	fecUltModificacion,
 		Boolean bolValidacion,
 		Boolean bolEnvio,
+		Boolean fiDictaminacion,
+		Integer fiPorcentajeError,
 		Long columnas
 		) {
 

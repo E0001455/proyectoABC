@@ -13,13 +13,13 @@ public class LineaColumnaDTO {
 	@JsonProperty("tipo")
 	private CatColumna catColumna;
 	
-	@JsonProperty("obligatorio")
-	private Boolean bolObligatorio;	
-	
 	private String regex;
 	
 	@JsonProperty("valor")
 	private CatValorDTO catValorDTO;
+	
+	@JsonProperty("esRequerido")
+	private Boolean  fiRequerido;
 	
 	
 	
@@ -61,24 +61,23 @@ public class LineaColumnaDTO {
 		this.idABCConfigMapeoLinea = idABCConfigMapeoLinea;
 	}
 
-	
-	
-	
 	/**
-	 * @return the bolObligatorio
+	 * @return the fiRequerido
 	 */
-	public Boolean getBolObligatorio() {
-		return bolObligatorio;
+	public Boolean getFiRequerido() {
+		return fiRequerido;
 	}
 	/**
-	 * @param bolObligatorio the bolObligatorio to set
+	 * @param fiRequerido the fiRequerido to set
 	 */
-	public void setBolObligatorio(Boolean bolObligatorio) {
-		this.bolObligatorio = bolObligatorio;
+	public void setFiRequerido(Boolean fiRequerido) {
+		this.fiRequerido = fiRequerido;
 	}
 
-	
-	
+
+
+
+
 	public static class CatColumna {
 
 		@JsonProperty("id")

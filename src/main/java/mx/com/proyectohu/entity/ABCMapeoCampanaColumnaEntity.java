@@ -21,7 +21,7 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 	private LlaveMapeoCampanaColumna llaveMapeoCampanaColumna;
 	
 	@Column(name = "ID_USUARIO")
-	private Long idUsusario;
+	private Long idUsuario;
 	
 	@Column(name = "ID_VALOR")
 	private Long idABCCatValor;
@@ -32,11 +32,14 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 	@Column(name = "ID_NUMERO")
 	private Long idABCCatNumero;
 	
+	@Column(name = "ID_FECHA")
+	private Long idFecha;
+	
 	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
 	
-	@Column(name = "FIOBLIGATORIO")
-	private Boolean bolObligatorio;
+	@Column(name = "FIREQUERIDO")
+	private Boolean fiRequerido;
 	
 	@Column(name = "FCREGEX")
 	private String regex;
@@ -61,9 +64,7 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
 	private Date fecUltModificacion;
-	
 
-	
 	/**
 	 * @return the llaveMapeoCampanaColumna
 	 */
@@ -78,90 +79,20 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 		this.llaveMapeoCampanaColumna = llaveMapeoCampanaColumna;
 	}
 
-
-	/**
-	 * @return the idUsusario
-	 */
-	public Long getIdUsusario() {
-		return idUsusario;
-	}
-
-	/**
-	 * @param idUsusario the idUsusario to set
-	 */
-	public void setIdUsusario(Long idUsusario) {
-		this.idUsusario = idUsusario;
-	}
-
 	
+
 	/**
-	 * @return the bolActivo
+	 * @return the idUsuario
 	 */
-	public Boolean getBolActivo() {
-		return bolActivo;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 
 	/**
-	 * @param bolActivo the bolActivo to set
+	 * @param idUsuario the idUsuario to set
 	 */
-	public void setBolActivo(Boolean bolActivo) {
-		this.bolActivo = bolActivo;
-	}
-
-	/**
-	 * @return the regex
-	 */
-	public String getRegex() {
-		return regex;
-	}
-
-	/**
-	 * @param regex the regex to set
-	 */
-	public void setRegex(String regex) {
-		this.regex = regex;
-	}
-
-	/**
-	 * @return the fecCreacion
-	 */
-	public Date getFecCreacion() {
-		return fecCreacion;
-	}
-
-	/**
-	 * @param fecCreacion the fecCreacion to set
-	 */
-	public void setFecCreacion(Date fecCreacion) {
-		this.fecCreacion = fecCreacion;
-	}
-
-	/**
-	 * @return the idABCUsuarioUltModificacion
-	 */
-	public Long getIdABCUsuarioUltModificacion() {
-		return idABCUsuarioUltModificacion;
-	}
-
-	/**
-	 * @param idABCUsuarioUltModificacion the idABCUsuarioUltModificacion to set
-	 */
-	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
-		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
-	}
-
-	/**
-	 * @return the fecUltModificacion
-	 */
-	public Date getFecUltModificacion() {
-		return fecUltModificacion;
-	}
-
-	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
-	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
-		this.fecUltModificacion = fecUltModificacion;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	/**
@@ -207,17 +138,60 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 	}
 
 	/**
-	 * @return the bolObligatorio
+	 * @return the idFecha
 	 */
-	public Boolean getBolObligatorio() {
-		return bolObligatorio;
+	public Long getIdFecha() {
+		return idFecha;
 	}
 
 	/**
-	 * @param bolObligatorio the bolObligatorio to set
+	 * @param idFecha the idFecha to set
 	 */
-	public void setBolObligatorio(Boolean bolObligatorio) {
-		this.bolObligatorio = bolObligatorio;
+	public void setIdFecha(Long idFecha) {
+		this.idFecha = idFecha;
+	}
+
+	/**
+	 * @return the bolActivo
+	 */
+	public Boolean getBolActivo() {
+		return bolActivo;
+	}
+
+	/**
+	 * @param bolActivo the bolActivo to set
+	 */
+	public void setBolActivo(Boolean bolActivo) {
+		this.bolActivo = bolActivo;
+	}
+
+	/**
+	 * @return the fiRequerido
+	 */
+	public Boolean getFiRequerido() {
+		return fiRequerido;
+	}
+
+	/**
+	 * @param fiRequerido the fiRequerido to set
+	 */
+	public void setFiRequerido(Boolean fiRequerido) {
+		this.fiRequerido = fiRequerido;
+	}
+
+
+	/**
+	 * @return the regex
+	 */
+	public String getRegex() {
+		return regex;
+	}
+
+	/**
+	 * @param regex the regex to set
+	 */
+	public void setRegex(String regex) {
+		this.regex = regex;
 	}
 
 	/**
@@ -275,9 +249,47 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 	public void setNumDecimales(Long numDecimales) {
 		this.numDecimales = numDecimales;
 	}
-	                   
-	                    
-	               
-	
+
+	/**
+	 * @return the fecCreacion
+	 */
+	public Date getFecCreacion() {
+		return fecCreacion;
+	}
+
+	/**
+	 * @param fecCreacion the fecCreacion to set
+	 */
+	public void setFecCreacion(Date fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
+
+	/**
+	 * @return the idABCUsuarioUltModificacion
+	 */
+	public Long getIdABCUsuarioUltModificacion() {
+		return idABCUsuarioUltModificacion;
+	}
+
+	/**
+	 * @param idABCUsuarioUltModificacion the idABCUsuarioUltModificacion to set
+	 */
+	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
+		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
+	}
+
+	/**
+	 * @return the fecUltModificacion
+	 */
+	public Date getFecUltModificacion() {
+		return fecUltModificacion;
+	}
+
+	/**
+	 * @param fecUltModificacion the fecUltModificacion to set
+	 */
+	public void setFecUltModificacion(Date fecUltModificacion) {
+		this.fecUltModificacion = fecUltModificacion;
+	}
 	
 }

@@ -7,17 +7,33 @@ public class CatValorDTO {
 
 	@JsonProperty("tipo")
 	private TipoValor tipoValor;
-	
+
 	@JsonProperty("cadena")
 	private CatCadenaDTO catCadenaDTO;
-	
-	
+
 	@JsonProperty("numero")
 	private CatNumeroDTO catNumeroDTO;
 
+	@JsonProperty("fecha")
+	private CatFechaDTO catFechaDTO;
 
 
 
+
+	/**
+	 * @return the catFechaDTO
+	 */
+	public CatFechaDTO getCatFechaDTO() {
+		return catFechaDTO;
+	}
+
+
+	/**
+	 * @param catFechaDTO the catFechaDTO to set
+	 */
+	public void setCatFechaDTO(CatFechaDTO catFechaDTO) {
+		this.catFechaDTO = catFechaDTO;
+	}
 
 
 	/**
@@ -26,10 +42,6 @@ public class CatValorDTO {
 	public TipoValor getTipoValor() {
 		return tipoValor;
 	}
-
-
-
-
 
 
 	/**

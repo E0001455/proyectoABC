@@ -43,13 +43,13 @@ public class MapeoCampanaService {
 		abcConfigMapeoCampanaEntity.setBolActivo(true);
 		abcConfigMapeoCampanaEntity.setNombre(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getNombre());
 		abcConfigMapeoCampanaEntity.setDescripcion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getDescripcion());
-		abcConfigMapeoCampanaEntity.setDictaminado(true);
 		abcConfigMapeoCampanaEntity.setFecCreacion(new Date());
 		abcConfigMapeoCampanaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaRequestDTO.getIdUsuario());
 		abcConfigMapeoCampanaEntity.setFecUltModificacion(new Date());
 		abcConfigMapeoCampanaEntity.setBolValidacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolValidacion());
 		abcConfigMapeoCampanaEntity.setBolEnvio(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolEnvio());
-
+		abcConfigMapeoCampanaEntity.setFiDictaminacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiDictaminacion());
+		abcConfigMapeoCampanaEntity.setFiPorcentajeError(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiPorcentajeError());
 		idMapeoCampana=abcConfigMapeoCampanaRepository.save(abcConfigMapeoCampanaEntity).getIdABCConfigMapeoCampana();
 
 
@@ -85,6 +85,8 @@ public class MapeoCampanaService {
 				mapeoCampanaResponseDTO.setColumnas(mapeoCampanaRecordDTO.columnas().intValue());
 				mapeoCampanaResponseDTO.setBolValidacion(mapeoCampanaRecordDTO.bolValidacion() );
 				mapeoCampanaResponseDTO.setBolEnvio(mapeoCampanaRecordDTO.bolEnvio() );
+				mapeoCampanaResponseDTO.setFiDictaminacion(mapeoCampanaRecordDTO.fiDictaminacion());
+				mapeoCampanaResponseDTO.setFiPorcentajeError(mapeoCampanaRecordDTO.fiPorcentajeError());
 				mapeoCampanaResponseDTOlista.add(mapeoCampanaResponseDTO);
 			}
 
@@ -106,7 +108,9 @@ public class MapeoCampanaService {
 			abcConfigMapeoCampanaEntity.setFecUltModificacion(new Date());
 			abcConfigMapeoCampanaEntity.setBolValidacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolValidacion());
 			abcConfigMapeoCampanaEntity.setBolEnvio(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolEnvio());
-
+			abcConfigMapeoCampanaEntity.setFiDictaminacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiDictaminacion());
+			abcConfigMapeoCampanaEntity.setFiPorcentajeError(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiPorcentajeError());
+			
 			abcConfigMapeoCampanaEntity = abcConfigMapeoCampanaRepository.save(abcConfigMapeoCampanaEntity);
 			mapeoCampanaResponseDTO.setIdABCConfigMapeoCampana(abcConfigMapeoCampanaEntity.getIdABCConfigMapeoCampana());
 			

@@ -16,7 +16,7 @@ public class LlaveMapeoCampanaColumna implements Serializable {
 		@Column(name = "ID_MAPEO_CAMPANA")
 	    private Long idABCConfigMapeoCampana;
 
-	    @Column(name = "ID_COLUMNA")
+	    @Column(name = "ID_COLUMNA_CAMPANA")
 	    private Long idABCCatColumna;
 
 	    public LlaveMapeoCampanaColumna() {}

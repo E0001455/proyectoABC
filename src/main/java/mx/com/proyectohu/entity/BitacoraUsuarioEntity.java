@@ -35,8 +35,11 @@ public class BitacoraUsuarioEntity implements Serializable {
 	@Column(name = "ID_OBJETO")
 	private Long idABCCatObjeto;
 	
-	@Column(name = "ID_COLUMNA")
-	private Long 	idABCCatColumna;
+	@Column(name = "ID_COLUMNA_LINEA")
+	private Long 	idABCCatColumnaLinea;
+	
+	@Column(name = "ID_COLUMNA_CAMPANA")
+	private Long 	idABCCatColumnaCampana;
 	
 	@Column(name = "DETALLE")
 	private String 	detalle;
@@ -104,18 +107,34 @@ public class BitacoraUsuarioEntity implements Serializable {
 		this.idABCCatObjeto = idABCCatObjeto;
 	}
 
+
 	/**
-	 * @return the idABCCatColumna
+	 * @return the idABCCatColumnaLinea
 	 */
-	public Long getIdABCCatColumna() {
-		return idABCCatColumna;
+	public Long getIdABCCatColumnaLinea() {
+		return idABCCatColumnaLinea;
 	}
 
 	/**
-	 * @param idABCCatColumna the idABCCatColumna to set
+	 * @param idABCCatColumnaLinea the idABCCatColumnaLinea to set
 	 */
-	public void setIdABCCatColumna(Long idABCCatColumna) {
-		this.idABCCatColumna = idABCCatColumna;
+	public void setIdABCCatColumnaLinea(Long idABCCatColumnaLinea) {
+		this.idABCCatColumnaLinea = idABCCatColumnaLinea;
+	}
+
+
+	/**
+	 * @return the idABCCatColumnaCampana
+	 */
+	public Long getIdABCCatColumnaCampana() {
+		return idABCCatColumnaCampana;
+	}
+
+	/**
+	 * @param idABCCatColumnaCampana the idABCCatColumnaCampana to set
+	 */
+	public void setIdABCCatColumnaCampana(Long idABCCatColumnaCampana) {
+		this.idABCCatColumnaCampana = idABCCatColumnaCampana;
 	}
 
 	/**

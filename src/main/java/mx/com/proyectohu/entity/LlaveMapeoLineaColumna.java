@@ -16,7 +16,7 @@ public class LlaveMapeoLineaColumna implements Serializable {
 		@Column(name = "ID_MAPEO_LINEA")
 	    private Long idABCConfigMapeoLinea;
 
-	    @Column(name = "ID_COLUMNA")
+	    @Column(name = "ID_COLUMNA_LINEA")
 	    private Long idABCCatColumna;
 
 	    public LlaveMapeoLineaColumna() {}

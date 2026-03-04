@@ -47,8 +47,11 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	@Column(name = "FIENVIO")
 	private Boolean bolEnvio;
 	
-	@Column(name = "FIDICTAMINADO")
-	private Boolean dictaminado;
+	@Column(name = "FIDICTAMINACION")
+	private Boolean fiDictaminacion;
+	
+	@Column(name = "FIPORCENTAJEERROR")
+	private Integer fiPorcentajeError;
 	
 	@Column(name = "FDFECHACREACION")
 	private Date 	fecCreacion;
@@ -195,15 +198,29 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	public void setBolEnvio(Boolean bolEnvio) {
 		this.bolEnvio = bolEnvio;
 	}
-	public Boolean getDictaminado() {
-		return dictaminado;
+	/**
+	 * @return the fiDictaminacion
+	 */
+	public Boolean getFiDictaminacion() {
+		return fiDictaminacion;
 	}
-	public void setDictaminado(Boolean dictaminado) {
-		this.dictaminado = dictaminado;
+	/**
+	 * @param fiDictaminacion the fiDictaminacion to set
+	 */
+	public void setFiDictaminacion(Boolean fiDictaminacion) {
+		this.fiDictaminacion = fiDictaminacion;
+	}
+	/**
+	 * @return the fiPorcentajeError
+	 */
+	public Integer getFiPorcentajeError() {
+		return fiPorcentajeError;
+	}
+	/**
+	 * @param fiPorcentajeError the fiPorcentajeError to set
+	 */
+	public void setFiPorcentajeError(Integer fiPorcentajeError) {
+		this.fiPorcentajeError = fiPorcentajeError;
 	}
 	
-	
-	
-
-
 }

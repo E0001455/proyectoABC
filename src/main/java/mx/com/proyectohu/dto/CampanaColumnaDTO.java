@@ -10,8 +10,8 @@ public class CampanaColumnaDTO {
 	@JsonProperty("tipo")
 	private CatColumna catColumna;
 	
-	@JsonProperty("obligatorio")
-	private Boolean bolObligatorio;	
+	@JsonProperty("esRequerido")
+	private Boolean finRequerido;	
 	
 	private String regex;
 	
@@ -72,14 +72,11 @@ public class CampanaColumnaDTO {
 
 
 
-
-
-
 	/**
-	 * @return the bolObligatorio
+	 * @return the finRequerido
 	 */
-	public Boolean getBolObligatorio() {
-		return bolObligatorio;
+	public Boolean getFinRequerido() {
+		return finRequerido;
 	}
 
 
@@ -88,10 +85,10 @@ public class CampanaColumnaDTO {
 
 
 	/**
-	 * @param bolObligatorio the bolObligatorio to set
+	 * @param finRequerido the finRequerido to set
 	 */
-	public void setBolObligatorio(Boolean bolObligatorio) {
-		this.bolObligatorio = bolObligatorio;
+	public void setFinRequerido(Boolean finRequerido) {
+		this.finRequerido = finRequerido;
 	}
 
 

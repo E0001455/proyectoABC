@@ -42,6 +42,11 @@ public class MapeoLineaResponseDTO {
 	@JsonProperty("enviar")
 	private Boolean bolEnvio;
 	
+	@JsonProperty("dictaminar")	
+	private Boolean fiDictaminacion;
+	
+	@JsonProperty("porcentajeError")	
+	private Integer fiPorcentajeError;
 	
 	
 	/**
@@ -191,7 +196,37 @@ public class MapeoLineaResponseDTO {
 		this.bolEnvio = bolEnvio;
 	}
 	
+	/**
+	 * @return the fiDictaminacion
+	 */
+	public Boolean getFiDictaminacion() {
+		return fiDictaminacion;
+	}
+	/**
+	 * @param fiDictaminacion the fiDictaminacion to set
+	 */
+	public void setFiDictaminacion(Boolean fiDictaminacion) {
+		this.fiDictaminacion = fiDictaminacion;
+	}
 	
+	/**
+	 * @return the fiPorcentajeError
+	 */
+	public Integer getFiPorcentajeError() {
+		return fiPorcentajeError;
+	}
+	/**
+	 * @param fiPorcentajeError the fiPorcentajeError to set
+	 */
+	public void setFiPorcentajeError(Integer fiPorcentajeError) {
+		this.fiPorcentajeError = fiPorcentajeError;
+	}
+
+
+
+
+
+
 	public static class CatLineaNegocio {
 
 		@JsonProperty("id")

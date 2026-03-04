@@ -6,19 +6,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class HorarioCampanaDTO {
 	
 	@JsonAlias("id")
-	private Long 	idCFGTareaCampana;
+	private Long 	idActividadCampana;
 
 	private Dia 	dia;
 	
 	
 
-
-	public Long getIdCFGTareaCampana() {
-		return idCFGTareaCampana;
+	/**
+	 * @return the idActividadCampana
+	 */
+	public Long getIdActividadCampana() {
+		return idActividadCampana;
 	}
 
-	public void setIdCFGTareaCampana(Long idCFGTareaCampana) {
-		this.idCFGTareaCampana = idCFGTareaCampana;
+	/**
+	 * @param idActividadCampana the idActividadCampana to set
+	 */
+	public void setIdActividadCampana(Long idActividadCampana) {
+		this.idActividadCampana = idActividadCampana;
 	}
 
 	public Dia getDia() {
