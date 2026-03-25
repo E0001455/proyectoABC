@@ -26,6 +26,7 @@ public class ActividadCampanaResponseDTO {
 	@JsonProperty("ejecucion")
 	private CatEjecucion catEjecucion; 
 
+	@JsonProperty("activo")
 	private Boolean bolActivo;
 
 	@JsonProperty("fechaCreacion")
@@ -191,6 +192,7 @@ public class ActividadCampanaResponseDTO {
 		@JsonProperty("id")
 		private Long idLineaNegocio;
 		
+		@JsonProperty("campana")
 		private CatCampana catCampana;
 
 		/**

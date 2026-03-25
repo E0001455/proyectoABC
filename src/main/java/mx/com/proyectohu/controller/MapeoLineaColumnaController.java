@@ -80,7 +80,7 @@ public class MapeoLineaColumnaController {
 
 		Long idMapeoLineaNegocio;
 
-		idMapeoLineaNegocio= mapeoLineaColumnaService.actualizarMapeoLineaColumna(mapeoLineaColumnaRequestDTO).getLineaColumnaDTO().getIdABCConfigMapeoLinea();
+		idMapeoLineaNegocio= mapeoLineaColumnaService.actualizarMapeoLineaColumna(mapeoLineaColumnaRequestDTO);
 
 
 		if (idMapeoLineaNegocio==null) {
@@ -89,7 +89,7 @@ public class MapeoLineaColumnaController {
 		}
 
 
-		return ResponseEntity.ok(Map.of("id",idMapeoLineaNegocio));
+		return ResponseEntity.ok("operacion exitosa");
 	}
 
 

@@ -27,6 +27,7 @@ public class ActividadLineaResponseDTO {
 	@JsonProperty("ejecucion")
 	private CatEjecucion catEjecucion; 
 
+	@JsonProperty("activo")
 	private Boolean bolActivo;
 
 	@JsonProperty("fechaCreacion")

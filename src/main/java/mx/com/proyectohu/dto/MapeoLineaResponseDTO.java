@@ -12,7 +12,7 @@ public class MapeoLineaResponseDTO {
 	@JsonProperty("id")
 	private Long 	idABCConfigMapeoLinea;
 	
-	private Long 	idABCUsuario;
+
 	
 	@JsonProperty("linea")
 	private CatLineaNegocio 	catLineaNegocio;
@@ -61,18 +61,7 @@ public class MapeoLineaResponseDTO {
 	public void setIdABCConfigMapeoLinea(Long idABCConfigMapeoLinea) {
 		this.idABCConfigMapeoLinea = idABCConfigMapeoLinea;
 	}
-	/**
-	 * @return the idABCUsuario
-	 */
-	public Long getIdABCUsuario() {
-		return idABCUsuario;
-	}
-	/**
-	 * @param idABCUsuario the idABCUsuario to set
-	 */
-	public void setIdABCUsuario(Long idABCUsuario) {
-		this.idABCUsuario = idABCUsuario;
-	}
+	
 	
 	/**
 	 * @return the catLineaNegocio

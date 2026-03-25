@@ -8,11 +8,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MapeoLineaColumnaResponseDTO {
 	
-	@JsonProperty("columna")
-	private LineaColumnaDTO lineaColumnaDTO;
-
-	private Long idUsuario;
+	@JsonProperty("tipo")
+	private CatColumna catColumna;
 	
+	@JsonProperty("valor")
+	private CatValorDTO catValorDTO;
+
+	@JsonProperty("activo")
 	private Boolean bolActivo;
 	
 	@JsonProperty("fechaCreacion")
@@ -21,6 +23,10 @@ public class MapeoLineaColumnaResponseDTO {
 	@JsonProperty("fechaUltimaModificacion")
 	private Date fecUltModificacion;
 	
+	private String regex;
+	
+	@JsonProperty("esRequerido")
+	private Boolean finRequerido;	
 	
 	
 	/**
@@ -35,30 +41,8 @@ public class MapeoLineaColumnaResponseDTO {
 	public void setBolActivo(Boolean bolActivo) {
 		this.bolActivo = bolActivo;
 	}
-	/**
-	 * @return the idUsuario
-	 */
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-	/**
-	 * @param idUsuario the idUsuario to set
-	 */
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-	/**
-	 * @return the lineaColumnaDTO
-	 */
-	public LineaColumnaDTO getLineaColumnaDTO() {
-		return lineaColumnaDTO;
-	}
-	/**
-	 * @param lineaColumnaDTO the lineaColumnaDTO to set
-	 */
-	public void setLineaColumnaDTO(LineaColumnaDTO lineaColumnaDTO) {
-		this.lineaColumnaDTO = lineaColumnaDTO;
-	}
+	
+
 	/**
 	 * @return the fecCreacion
 	 */
@@ -84,6 +68,83 @@ public class MapeoLineaColumnaResponseDTO {
 		this.fecUltModificacion = fecUltModificacion;
 	}
 	
+	/**
+	 * @return the regex
+	 */
+	public String getRegex() {
+		return regex;
+	}
+	/**
+	 * @param regex the regex to set
+	 */
+	public void setRegex(String regex) {
+		this.regex = regex;
+	}
+	/**
+	 * @return the finRequerido
+	 */
+	public Boolean getFinRequerido() {
+		return finRequerido;
+	}
+	/**
+	 * @param finRequerido the finRequerido to set
+	 */
+	public void setFinRequerido(Boolean finRequerido) {
+		this.finRequerido = finRequerido;
+	}
+	/**
+	 * @return the catValorDTO
+	 */
+	public CatValorDTO getCatValorDTO() {
+		return catValorDTO;
+	}
+	/**
+	 * @param catValorDTO the catValorDTO to set
+	 */
+	public void setCatValorDTO(CatValorDTO catValorDTO) {
+		this.catValorDTO = catValorDTO;
+	}
+	
+	
+	
+	
+	/**
+	 * @return the catColumna
+	 */
+	public CatColumna getCatColumna() {
+		return catColumna;
+	}
+	/**
+	 * @param catColumna the catColumna to set
+	 */
+	public void setCatColumna(CatColumna catColumna) {
+		this.catColumna = catColumna;
+	}
+
+
+
+
+	public static class CatColumna {
+
+		@JsonProperty("id")
+		private Long idABCCatColumna;
+
+		/**
+		 * @return the idABCCatColumna
+		 */
+		
+		public Long getIdABCCatColumna() {
+			return idABCCatColumna;
+		}
+
+		/**
+		 * @param idABCCatColumna the idABCCatColumna to set
+		 */
+		public void setIdABCCatColumna(Long idABCCatColumna) {
+			this.idABCCatColumna = idABCCatColumna;
+		}
+
+	}
 	
 	
 	

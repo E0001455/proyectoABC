@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.repository.MapeoActividadCampanaRepository;
+import mx.com.proyectohu.repository.ABCConfigMapeoCampanaRepository;
 import mx.com.proyectohu.repository.ActividadCampanaRepository;
 import mx.com.proyectohu.dto.MapeoDTO;
 import mx.com.proyectohu.dto.ActividadCampanaRequestDTO;
@@ -19,6 +20,7 @@ import mx.com.proyectohu.dto.ActividadCampanaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.dto.ActividadCampanaResponseDTO.CatLineaNegocio.CatCampana;
 import mx.com.proyectohu.entity.LlaveActividadMapeoCampana;
 import mx.com.proyectohu.entity.LlaveActividadMapeoLinea;
+import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
 import mx.com.proyectohu.entity.ActividadCampanaEntity;
 import mx.com.proyectohu.entity.ActividadMapeoCampanaEntity;
 import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
@@ -31,6 +33,10 @@ public class ActividadCampanaService {
 	
 	@Autowired
 	public MapeoActividadCampanaRepository mapeoActividadCampanaRepository;
+	
+	@Autowired
+	public ABCConfigMapeoCampanaRepository abcConfigMapeoCampanaRepository;
+
 
 
 	public Long  registrarActividadCampana(Long idLinea, Long idCampana,ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
@@ -107,6 +113,9 @@ public class ActividadCampanaService {
 				MapeoDTO mapeoDTO = new MapeoDTO();
 				mapeoDTO.setIdABCConfigMapeoLinea(actividadMapeoCampanaEntity.getLlaveActividadMapeoCampana().getIdABCConfigMapeoCampana());
 			
+				Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(actividadMapeoCampanaEntity.getLlaveActividadMapeoCampana().getIdABCConfigMapeoCampana());
+				mapeoDTO.setNombre(abcConfigMapeoCampanaEntityOptional.get().getNombre());
+				
 				actividadCampanaResponseDTO.setMapeoDTO(mapeoDTO);
 
 			

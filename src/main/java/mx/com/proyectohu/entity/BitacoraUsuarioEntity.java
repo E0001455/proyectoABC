@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TTABCUSU_BITACORA_USUARIO" )
-@SequenceGenerator(name = "SEQ_BITACORA_USUARIO_GEN",sequenceName = "SEQ_TTABCUSU_BITACORA_USUARIO",allocationSize = 1)
+@Table(name="TTABCTRA_BITACORA_USUARIO" )
+@SequenceGenerator(name = "SEQ_BITACORA_USUARIO_GEN",sequenceName = "SEQ_TTABCTRA_BITACORA_USUARIO",allocationSize = 1)
 public class BitacoraUsuarioEntity implements Serializable {
 	
 	/**

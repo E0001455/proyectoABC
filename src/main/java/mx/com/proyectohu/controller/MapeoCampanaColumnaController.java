@@ -82,17 +82,17 @@ public class MapeoCampanaColumnaController {
 
 		Long idMapeoCampana;
 
-		MapeoCampanaColumnaResponseDTO mapeoCampanaColumnaResponseDTO= mapeoCampanaColumnaService.actualizarMapeoCampanaColumna(mapeoCampanaColumnaRequestDTO);
+		 idMapeoCampana= mapeoCampanaColumnaService.actualizarMapeoCampanaColumna(mapeoCampanaColumnaRequestDTO);
 
 
-		if (mapeoCampanaColumnaResponseDTO==null) {
+		if (idMapeoCampana==null) {
 			return ResponseEntity.notFound().build();
 
 		}
 
-		idMapeoCampana= mapeoCampanaColumnaResponseDTO.getCampanaColumnaDTO().getIdABCConfigMapeoCampana();
+	
 
-		return ResponseEntity.ok(Map.of("id",idMapeoCampana));
+		return ResponseEntity.ok("operacion exitosa");
 	}
 
 	@PatchMapping("/campanas/mapeos/{id}/columnas/activar")

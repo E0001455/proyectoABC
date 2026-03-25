@@ -1,14 +1,19 @@
 package mx.com.proyectohu.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MapeoCampanaDTO {
 	
-	@JsonAlias("id")
+	@JsonProperty("id")
 	private Long 	idABCConfigMapeoCampana;
 	private String 	nombre;
 	private String 	descripcion;
+	
+	
+	
 	
 	@JsonAlias("validar")
 	private Boolean bolValidacion;
@@ -106,5 +111,8 @@ public class MapeoCampanaDTO {
 	public void setFiPorcentajeError(Integer fiPorcentajeError) {
 		this.fiPorcentajeError = fiPorcentajeError;
 	}
+	
+	
+	
 	
 }

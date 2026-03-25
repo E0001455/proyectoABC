@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.repository.MapeoActividadLineaRepository;
+import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.ActividadLineaRepository;
 import mx.com.proyectohu.dto.MapeoDTO;
 import mx.com.proyectohu.dto.ActividadLineaRequestDTO;
@@ -21,6 +22,7 @@ import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatActividad;
 import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatEjecucion;
 import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.entity.LlaveActividadMapeoLinea;
+import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
 import mx.com.proyectohu.entity.ActividadLineaEntity;
 import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
 
@@ -33,6 +35,8 @@ public class ActividadLineaService {
 	@Autowired
 	public MapeoActividadLineaRepository mapeoActividadLineaRepository;
 
+	@Autowired
+	public ABCConfigMapeoLineaRepository abcConfigMapeoLineaRepository;
 
 	public Long  registrarActividadLinea(Long idLineaNegocio,ActividadLineaRequestDTO actividadLineaRequestDTO) {
 
@@ -105,7 +109,8 @@ public class ActividadLineaService {
 				
 				MapeoDTO mapeoDTO = new MapeoDTO();
 				mapeoDTO.setIdABCConfigMapeoLinea(actividadMapeoLineaEntity.getLlaveActividadMapeoLinea().getIdABCConfigMapeoLinea());
-			
+				Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoDTO.getIdABCConfigMapeoLinea());
+				mapeoDTO.setNombre(abcConfigMapeoLineaEntityOptional.get().getNombre());
 				actividadLineaResponseDTO.setMapeoDTO(mapeoDTO);
 
 				actividadLineaResponseDTOLista.add(actividadLineaResponseDTO);
