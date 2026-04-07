@@ -3,8 +3,6 @@ package mx.com.proyectohu.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.com.proyectohu.dto.TareaCampanaResponseDTO;
-import mx.com.proyectohu.dto.TareaLineaResponseDTO;
 import mx.com.proyectohu.service.TareaCampanaService;
 import mx.com.proyectohu.service.TareaLineaService;
 
@@ -30,7 +28,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/profuturo/api/v1")
-public class TareasLineaController {
+public class TareasController {
 
 	@Autowired
 	public TareaLineaService tareaLineaService;
@@ -39,10 +37,10 @@ public class TareasLineaController {
 	public TareaCampanaService tareaCampanaService;
 
 
-/*	@PostMapping("/lineas/tareas")
+	/*	@PostMapping("/lineas/tareas")
 	public ResponseEntity<?> registrarNuevaTareaLinea(@PathVariable Long idLinea, @RequestBody TareaLineaRequestDTO tareaLineaRequestDTO ) {
 
-	
+
 		TareaLineaResponseDTO tareaLineaResponseDTO = new TareaLineaResponseDTO();
 
 
@@ -51,30 +49,38 @@ public class TareasLineaController {
 		return ResponseEntity.ok(tareaLineaResponseDTO);
 	}
 
-*/
-	@GetMapping("/lineas/tareas")
+	 */
+	@GetMapping(value="/lineas/tareas", produces = "application/json")
 	public ResponseEntity<?> consultarTareasLineas() {
-
+		/*
 
 			List<TareaLineaResponseDTO> tareaLineaResponseDTOLista = new ArrayList<TareaLineaResponseDTO>();
 
 			tareaLineaResponseDTOLista = tareaLineaService.consultarTareasLinea();
 
 			return ResponseEntity.ok(tareaLineaResponseDTOLista);
-		
+		 */
+		String json = tareaLineaService.consultarTareaslinea();
+
+		return ResponseEntity.ok(json);
 
 	}
-	
-	@GetMapping("/lineas/campanas/tareas")
-	public ResponseEntity<?> consultarTareasCampanas() {
 
+	@GetMapping(value="/lineas/campanas/tareas", produces = "application/json" )
+	public ResponseEntity<?> consultarTareasCampanas() {
+		/*
 
 			List<TareaCampanaResponseDTO> tareaCampanaResponseDTOLista = new ArrayList<TareaCampanaResponseDTO>();
 
 			tareaCampanaResponseDTOLista = tareaCampanaService.consultarTareasCampanas();
 
 			return ResponseEntity.ok(tareaCampanaResponseDTOLista);
-		
+		 */
+
+		String json = tareaCampanaService.consultarTareasCampana();
+
+		return ResponseEntity.ok(json);
+
 
 	}
 

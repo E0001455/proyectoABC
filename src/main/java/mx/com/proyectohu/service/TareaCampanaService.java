@@ -1,32 +1,15 @@
 package mx.com.proyectohu.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import mx.com.proyectohu.dto.BitacoraTareaCampanaDTO;
-import mx.com.proyectohu.dto.DiaDTO;
-import mx.com.proyectohu.dto.HoraDTO;
-import mx.com.proyectohu.dto.MapeoCampanaDTO;
-import mx.com.proyectohu.dto.MapeoDTO;
-import mx.com.proyectohu.dto.TareaCampanaDTO;
-import mx.com.proyectohu.dto.TareaCampanaDTO.CatActividad;
-import mx.com.proyectohu.dto.TareaCampanaDTO.CatEjecucion;
-import mx.com.proyectohu.dto.TareaCampanaDTO.CatEstatus;
-import mx.com.proyectohu.dto.TareaCampanaResponseDTO;
-import mx.com.proyectohu.dto.TareaCampanaResponseDTO.CatCampana;
-import mx.com.proyectohu.dto.TareaCampanaResponseDTO.CatLineaNegocio;
-import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
-import mx.com.proyectohu.entity.BitacoraTareaCampanaEntity;
-import mx.com.proyectohu.entity.TareaCampanaEntity;
+import mx.com.proyectohu.component.TareaCampanaDAO;
 import mx.com.proyectohu.repository.ABCConfigMapeoCampanaRepository;
 import mx.com.proyectohu.repository.BitacoraTareaCampanaRepository;
 import mx.com.proyectohu.repository.TareaCampanaRepository;
+
+
 
 
 @Service
@@ -41,6 +24,9 @@ public class TareaCampanaService {
 
 	@Autowired
 	public BitacoraTareaCampanaRepository bitacoraTareaCampanaRepository;
+	
+	@Autowired
+	public TareaCampanaDAO tareaCampanaDAO;
 
 	/*
 
@@ -70,7 +56,7 @@ public class TareaCampanaService {
 
 	}
 
-	 */
+	 
 	public List<TareaCampanaResponseDTO>  consultarTareasCampanas(){
 		List<TareaCampanaResponseDTO> tareaCampanaResponseDTOLista = new ArrayList<TareaCampanaResponseDTO>();
 		List<TareaCampanaEntity>  tareaCampanaEntityLista= new ArrayList<TareaCampanaEntity>();
@@ -213,5 +199,14 @@ public class TareaCampanaService {
 
 		return tareaCampanaResponseDTOLista;
 
+	}
+	*/
+	
+	public String consultarTareasCampana() {
+		
+	String json= tareaCampanaDAO.consultarTareas();
+		
+		
+		return json;
 	}
 }

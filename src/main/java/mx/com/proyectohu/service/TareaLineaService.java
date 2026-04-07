@@ -1,31 +1,18 @@
 package mx.com.proyectohu.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import mx.com.proyectohu.dto.BitacoraTareaLineaDTO;
-import mx.com.proyectohu.dto.DiaDTO;
-import mx.com.proyectohu.dto.HoraDTO;
-import mx.com.proyectohu.dto.MapeoDTO;
-import mx.com.proyectohu.dto.TareaDTO;
-import mx.com.proyectohu.dto.TareaDTO.CatActividad;
-import mx.com.proyectohu.dto.TareaDTO.CatEjecucion;
-import mx.com.proyectohu.dto.TareaDTO.CatEstatus;
-import mx.com.proyectohu.dto.TareaLineaResponseDTO;
-
-import mx.com.proyectohu.dto.TareaLineaResponseDTO.CatLineaNegocio;
-import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
-import mx.com.proyectohu.entity.BitacoraTareaLineaEntity;
-import mx.com.proyectohu.entity.TareaLineaEntity;
+import mx.com.proyectohu.component.TareaLineaDAO;
 import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.BitacoraTareaLineaRepository;
 import mx.com.proyectohu.repository.TareaLineaRepository;
+
+
+
+
 
 
 @Service
@@ -40,6 +27,9 @@ public class TareaLineaService {
 
 	@Autowired
 	public BitacoraTareaLineaRepository bitacoraTareaLineaRepository;
+	
+	@Autowired
+	public TareaLineaDAO tareaLineaDAO;
 
 	/*
 
@@ -69,7 +59,7 @@ public class TareaLineaService {
 
 	}
 
-	 */
+	 
 	public List<TareaLineaResponseDTO>  consultarTareasLinea(){
 		List<TareaLineaResponseDTO> tareaLineaResponseDTOLista = new ArrayList<TareaLineaResponseDTO>();
 		List<TareaLineaEntity>  tareaLineaEntityLista= new ArrayList<TareaLineaEntity>();
@@ -209,5 +199,15 @@ public class TareaLineaService {
 
 		return tareaLineaResponseDTOLista;
 
+	}
+	
+	 */
+	
+	public String consultarTareaslinea() {
+		
+	String json= tareaLineaDAO.consultarTareas();
+		
+		
+		return json;
 	}
 }
