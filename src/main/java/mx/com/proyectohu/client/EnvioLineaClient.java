@@ -11,30 +11,30 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ValidarCampanaClient {
+public class EnvioLineaClient {
 
 
 
 	private final HttpClient httpClient;
 	
-	@Value("${validacion.campana.url}")
-	public String validaCampanaURL;
+	@Value("${envio.linea.url}")
+	public String envioListaContactoURL;
 
 
-	public ValidarCampanaClient() {
+	public EnvioLineaClient() {
 		this.httpClient = HttpClient.newHttpClient();
 	}
 
 
-	
-	public String llamarValidarCampana(String lineaNegocio, Long idTareaCampana){
+
+	public String llamarEnvioLinea(String lineaNegocio, Long idTareaLinea){
 		Integer statusCode=null;
 		String body=null;
-		String url= validaCampanaURL;
+		String url= envioListaContactoURL;
 		JSONObject json = new JSONObject();
 		
 		json.put("lineaNegocio", lineaNegocio);
-		json.put("idTareaCampana", idTareaCampana);
+		json.put("idTareaLinea", idTareaLinea);
 		
 		try {
 			HttpRequest request = HttpRequest.newBuilder()
@@ -47,13 +47,8 @@ public class ValidarCampanaClient {
 
 			response = httpClient.send(request,	HttpResponse.BodyHandlers.ofString());
 
-
-			
 			statusCode = response.statusCode();
 			body = response.body();
-
-			
-
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

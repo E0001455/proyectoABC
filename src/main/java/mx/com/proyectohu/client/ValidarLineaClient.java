@@ -7,6 +7,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +16,9 @@ public class ValidarLineaClient {
 
 
 	private final HttpClient httpClient;
+	
+	@Value("${validacion.linea.url}")
+	public String validaLineaURL;
 
 
 	public ValidarLineaClient() {
@@ -26,7 +30,7 @@ public class ValidarLineaClient {
 	public String llamarValidarLinea(String lineaNegocio, Long idTareaLinea){
 		Integer statusCode=null;
 		String body=null;
-		String url= "http://localhost:8080/profuturo/api/v1/valida/lista/contacto";
+		String url= validaLineaURL;
 		JSONObject json = new JSONObject();
 		
 		json.put("lineaNegocio", lineaNegocio);

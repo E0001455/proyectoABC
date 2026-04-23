@@ -1,6 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -8,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -26,8 +29,9 @@ public class TareaCampanaEntity implements Serializable {
 	@Column(name = "ID_TAREA_CAMPANA")
 	private Long 	idTareaCampana;
 	
-	@Column(name = "ID_MAPEO_CAMPANA")
-	private Long 	idMapeoCampana;
+	@ManyToOne
+	@JoinColumn(name = "ID_MAPEO_CAMPANA")
+	private ABCConfigMapeoCampanaEntity MapeoCampana;
 	
 	@Column(name = "ID_ACTIVIDAD_CAMPANA")
 	private Long 	idActividadCampana;
@@ -51,7 +55,7 @@ public class TareaCampanaEntity implements Serializable {
 	private Date 	fdFechaInicio;
 	
 	@Column(name = "FDFECHAFIN")
-	private Date 	fdFechaFin;
+	private LocalDateTime 	fdFechaFin;
 	
 	@Column(name = "FINREGISTROS")
 	private Integer finRegistros;
@@ -70,6 +74,12 @@ public class TareaCampanaEntity implements Serializable {
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
 	private Date 	fechaUltModificacion;
+	
+	@Column(name = "FINOACEPTADOS")
+	private Integer registrosAprobados;
+	
+	@Column(name = "FINORECHAZADOS")
+	private Integer registrosRechazados;
 
 	/**
 	 * @return the idTareaCampana
@@ -85,18 +95,20 @@ public class TareaCampanaEntity implements Serializable {
 		this.idTareaCampana = idTareaCampana;
 	}
 
+
+
 	/**
-	 * @return the idMapeoCampana
+	 * @return the mapeoCampana
 	 */
-	public Long getIdMapeoCampana() {
-		return idMapeoCampana;
+	public ABCConfigMapeoCampanaEntity getMapeoCampana() {
+		return MapeoCampana;
 	}
 
 	/**
-	 * @param idMapeoCampana the idMapeoCampana to set
+	 * @param mapeoCampana the mapeoCampana to set
 	 */
-	public void setIdMapeoCampana(Long idMapeoCampana) {
-		this.idMapeoCampana = idMapeoCampana;
+	public void setMapeoCampana(ABCConfigMapeoCampanaEntity mapeoCampana) {
+		MapeoCampana = mapeoCampana;
 	}
 
 	/**
@@ -197,17 +209,18 @@ public class TareaCampanaEntity implements Serializable {
 		this.fdFechaInicio = fdFechaInicio;
 	}
 
+	
 	/**
 	 * @return the fdFechaFin
 	 */
-	public Date getFdFechaFin() {
+	public LocalDateTime getFdFechaFin() {
 		return fdFechaFin;
 	}
 
 	/**
 	 * @param fdFechaFin the fdFechaFin to set
 	 */
-	public void setFdFechaFin(Date fdFechaFin) {
+	public void setFdFechaFin(LocalDateTime fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 
@@ -293,6 +306,34 @@ public class TareaCampanaEntity implements Serializable {
 	 */
 	public void setFechaUltModificacion(Date fechaUltModificacion) {
 		this.fechaUltModificacion = fechaUltModificacion;
+	}
+
+	/**
+	 * @return the registrosAprobados
+	 */
+	public Integer getRegistrosAprobados() {
+		return registrosAprobados;
+	}
+
+	/**
+	 * @param registrosAprobados the registrosAprobados to set
+	 */
+	public void setRegistrosAprobados(Integer registrosAprobados) {
+		this.registrosAprobados = registrosAprobados;
+	}
+
+	/**
+	 * @return the registrosRechazados
+	 */
+	public Integer getRegistrosRechazados() {
+		return registrosRechazados;
+	}
+
+	/**
+	 * @param registrosRechazados the registrosRechazados to set
+	 */
+	public void setRegistrosRechazados(Integer registrosRechazados) {
+		this.registrosRechazados = registrosRechazados;
 	}
 
 	

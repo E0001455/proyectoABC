@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -26,8 +28,9 @@ public class TareaLineaEntity implements Serializable {
 	@Column(name = "ID_TAREA_LINEA")
 	private Long 	idTareaLinea;
 	
-	@Column(name = "ID_MAPEO_LINEA")
-	private Long 	idMapeoLinea;
+	@ManyToOne
+	@JoinColumn(name = "ID_MAPEO_LINEA")
+	private ABCConfigMapeoLineaEntity 	MapeoLinea;
 	
 	@Column(name = "ID_ACTIVIDAD_LINEA")
 	private Long 	idActividadLinea;
@@ -71,6 +74,12 @@ public class TareaLineaEntity implements Serializable {
 	@Column(name = "FDFECHAULTMODIFICACION")
 	private Date 	fechaUltModificacion;
 
+	@Column(name = "FINOACEPTADOS")
+	private Integer registrosAprobados;
+	
+	@Column(name = "FINORECHAZADOS")
+	private Integer registrosRechazados;
+	
 	/**
 	 * @return the idTareaLinea
 	 */
@@ -85,18 +94,14 @@ public class TareaLineaEntity implements Serializable {
 		this.idTareaLinea = idTareaLinea;
 	}
 
-	/**
-	 * @return the idMapeoLinea
-	 */
-	public Long getIdMapeoLinea() {
-		return idMapeoLinea;
+
+
+	public ABCConfigMapeoLineaEntity getMapeoLinea() {
+		return MapeoLinea;
 	}
 
-	/**
-	 * @param idMapeoLinea the idMapeoLinea to set
-	 */
-	public void setIdMapeoLinea(Long idMapeoLinea) {
-		this.idMapeoLinea = idMapeoLinea;
+	public void setMapeoLinea(ABCConfigMapeoLineaEntity mapeoLinea) {
+		MapeoLinea = mapeoLinea;
 	}
 
 	/**
@@ -295,6 +300,34 @@ public class TareaLineaEntity implements Serializable {
 	 */
 	public void setFinPorcentajeError(Integer finPorcentajeError) {
 		this.finPorcentajeError = finPorcentajeError;
+	}
+
+	/**
+	 * @return the registrosAprobados
+	 */
+	public Integer getRegistrosAprobados() {
+		return registrosAprobados;
+	}
+
+	/**
+	 * @param registrosAprobados the registrosAprobados to set
+	 */
+	public void setRegistrosAprobados(Integer registrosAprobados) {
+		this.registrosAprobados = registrosAprobados;
+	}
+
+	/**
+	 * @return the registrosRechazados
+	 */
+	public Integer getRegistrosRechazados() {
+		return registrosRechazados;
+	}
+
+	/**
+	 * @param registrosRechazados the registrosRechazados to set
+	 */
+	public void setRegistrosRechazados(Integer registrosRechazados) {
+		this.registrosRechazados = registrosRechazados;
 	}
 
 

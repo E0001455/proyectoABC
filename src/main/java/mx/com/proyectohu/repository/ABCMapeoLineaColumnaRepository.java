@@ -12,6 +12,8 @@ public interface  ABCMapeoLineaColumnaRepository extends JpaRepository<ABCMapeoL
 
 
 	public  List<ABCMapeoLineaColumnaEntity> findByLlaveMapeoLineaColumna_IdABCConfigMapeoLinea(Long idABCConfigMapeoLinea );
+	
+	
 
 
 

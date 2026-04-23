@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mx.com.proyectohu.client.CargarLineaClient;
+import mx.com.proyectohu.client.EnvioLineaClient;
 import mx.com.proyectohu.client.ValidarLineaClient;
 import mx.com.proyectohu.component.TareaCampanaDAO;
 import mx.com.proyectohu.component.TareaLineaDAO;
@@ -51,6 +52,9 @@ public class MonitoreoLineaCronService {
 	@Autowired
 	public LineaNegocioRepository lineaNegocioRepository;
 	
+	@Autowired
+	public EnvioLineaClient envioLineaClient;
+	
 	@Value("${hora.cron.monitoreo}")
 	public String codigoHoraAPP;
 	
@@ -63,7 +67,6 @@ public class MonitoreoLineaCronService {
 
 			for (ABCCatHora h : horarios) {
 				String horaTabla = h.getNombre();
-
 
 				LocalTime horaBase = LocalTime.parse(horaTabla,DateTimeFormatter.ofPattern("HH:mm"));
 
@@ -106,6 +109,11 @@ public class MonitoreoLineaCronService {
 										if(codigoActividad.equals("VLD")) {
 										
 											validarLineaClient.llamarValidarLinea(lineaNegocio,idTareaLinea);
+											
+										}
+										if(codigoActividad.equals("ENV")) {
+											
+											envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
 											
 										}
 										

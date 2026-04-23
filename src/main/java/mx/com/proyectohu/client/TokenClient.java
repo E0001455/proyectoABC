@@ -11,38 +11,43 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ValidarCampanaClient {
+public class TokenClient {
 
 
 
 	private final HttpClient httpClient;
 	
-	@Value("${validacion.campana.url}")
-	public String validaCampanaURL;
+	@Value("${token.url}")
+	public String tokenUrl;
 
 
-	public ValidarCampanaClient() {
+	public TokenClient() {
 		this.httpClient = HttpClient.newHttpClient();
 	}
 
 
-	
-	public String llamarValidarCampana(String lineaNegocio, Long idTareaCampana){
+
+	public String conseguirToken(){
 		Integer statusCode=null;
 		String body=null;
-		String url= validaCampanaURL;
-		JSONObject json = new JSONObject();
-		
-		json.put("lineaNegocio", lineaNegocio);
-		json.put("idTareaCampana", idTareaCampana);
+		String url= tokenUrl;
+		String token="";
 		
 		try {
-			HttpRequest request = HttpRequest.newBuilder()
-					.uri(URI.create(url))
-					.header("Content-Type", "application/json")
-					.POST(HttpRequest.BodyPublishers.ofString(json.toString()))
-					.build();
+			
+			
+			String form = "auth_type=password"
+			        + "&user_name=CapgemTest.Integration"
+			        + "&password=Oracle123#";
 
+			HttpRequest request = HttpRequest.newBuilder()
+			        .uri(URI.create(tokenUrl))
+			        .header("Content-Type", "application/x-www-form-urlencoded")
+			        .POST(HttpRequest.BodyPublishers.ofString(form))
+			        .build();
+			
+			
+			
 			HttpResponse<String> response;
 
 			response = httpClient.send(request,	HttpResponse.BodyHandlers.ofString());
@@ -54,6 +59,10 @@ public class ValidarCampanaClient {
 
 			
 
+			JSONObject json = new JSONObject(body);
+			
+			 token= json.getString("authToken");
+
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -64,7 +73,7 @@ public class ValidarCampanaClient {
 		}
 		
 		if (statusCode == 200) {
-			return body;
+			return token;
 		} else {
 			throw new RuntimeException("Error en la llamada: " + statusCode);
 		}
