@@ -23,7 +23,7 @@ public class BitacoraListaContactoEntity {
     @Column(name = "FDFECHACREACION")
     private LocalDateTime fechaCreacion;
 
-    @Column(name = "DETALLE")
+    @Column(name = "FCDETALLE")
     private String detalle;
     
     

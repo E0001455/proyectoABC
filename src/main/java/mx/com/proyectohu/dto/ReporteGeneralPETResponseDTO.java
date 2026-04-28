@@ -29,7 +29,7 @@ public class ReporteGeneralPETResponseDTO {
 	
 	@JsonProperty("fecha")
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDateTime 	fdFechaFin;
+	private LocalDate 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer  totalRegistros;
@@ -72,17 +72,12 @@ public class ReporteGeneralPETResponseDTO {
 
 
 	
-	/**
-	 * @return the fdFechaFin
-	 */
-	public LocalDateTime getFdFechaFin() {
+	
+	public LocalDate getFdFechaFin() {
 		return fdFechaFin;
 	}
 
-	/**
-	 * @param fdFechaFin the fdFechaFin to set
-	 */
-	public void setFdFechaFin(LocalDateTime fdFechaFin) {
+	public void setFdFechaFin(LocalDate fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 

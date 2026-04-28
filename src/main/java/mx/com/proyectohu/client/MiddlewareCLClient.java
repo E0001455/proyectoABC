@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import mx.com.proyectohu.dto.MiddlewareDTO;
 
 @Service
-public class MiddlewareClient {
+public class MiddlewareCLClient {
 
 
 

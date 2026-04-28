@@ -55,12 +55,12 @@ public class TareaCampanaEntity implements Serializable {
 	private Date 	fdFechaInicio;
 	
 	@Column(name = "FDFECHAFIN")
-	private LocalDateTime 	fdFechaFin;
+	private Date 	fdFechaFin;
 	
-	@Column(name = "FINREGISTROS")
+	@Column(name = "FINOREGISTROS")
 	private Integer finRegistros;
 	
-	@Column(name = "FINPROCESADOS")
+	@Column(name = "FINOPROCESADOS")
 	private Integer finProcesados;
 	
 	@Column(name = "FIDICTAMINACION")
@@ -69,13 +69,7 @@ public class TareaCampanaEntity implements Serializable {
 	@Column(name = "FIPORCENTAJEERROR")
 	private Integer finPorcentajeError;
 	
-	@Column(name = "FDFECHACREACION")
-	private Date 	fechaCreacion;
-	
-	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date 	fechaUltModificacion;
-	
-	@Column(name = "FINOACEPTADOS")
+	@Column(name = "FINOAPROBADOS")
 	private Integer registrosAprobados;
 	
 	@Column(name = "FINORECHAZADOS")
@@ -210,17 +204,13 @@ public class TareaCampanaEntity implements Serializable {
 	}
 
 	
-	/**
-	 * @return the fdFechaFin
-	 */
-	public LocalDateTime getFdFechaFin() {
+	
+
+	public Date getFdFechaFin() {
 		return fdFechaFin;
 	}
 
-	/**
-	 * @param fdFechaFin the fdFechaFin to set
-	 */
-	public void setFdFechaFin(LocalDateTime fdFechaFin) {
+	public void setFdFechaFin(Date fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 
@@ -278,34 +268,6 @@ public class TareaCampanaEntity implements Serializable {
 	 */
 	public void setFinPorcentajeError(Integer finPorcentajeError) {
 		this.finPorcentajeError = finPorcentajeError;
-	}
-
-	/**
-	 * @return the fechaCreacion
-	 */
-	public Date getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	/**
-	 * @param fechaCreacion the fechaCreacion to set
-	 */
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	/**
-	 * @return the fechaUltModificacion
-	 */
-	public Date getFechaUltModificacion() {
-		return fechaUltModificacion;
-	}
-
-	/**
-	 * @param fechaUltModificacion the fechaUltModificacion to set
-	 */
-	public void setFechaUltModificacion(Date fechaUltModificacion) {
-		this.fechaUltModificacion = fechaUltModificacion;
 	}
 
 	/**

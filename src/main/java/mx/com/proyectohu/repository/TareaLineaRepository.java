@@ -17,23 +17,6 @@ public interface  TareaLineaRepository extends JpaRepository<TareaLineaEntity, L
 
 
 
-	@Query(value = """
-			SELECT 
-			T
-			FROM TareaLineaEntity T
-			WHERE 1=1
-			AND T.idActividad= (SELECT A.id FROM ABCCatActividad A WHERE codigo='CAG' )
-			AND(:idLineaNegocio IS NULL OR T.MapeoLinea.idABCCatLineaNegocio = :idLineaNegocio)
-			AND (:fechaInicio IS NULL OR T.fdFechaFin >= :fechaInicio)
-			   AND (:fechaFin IS NULL OR T.fdFechaFin <= :fechaFin)
-
-			""")
-	List<TareaLineaEntity> obtenerTareasCargaXFechas(
-			@Param("idLineaNegocio") Long idlineaNegocio,		
-			@Param("fechaInicio") LocalDateTime fechaInicio,
-			@Param("fechaFin") LocalDateTime fechaFin
-			);
-
 
 	@Query(value = """
 			SELECT 
@@ -67,9 +50,9 @@ public interface  TareaLineaRepository extends JpaRepository<TareaLineaEntity, L
 	List<String> obtenerColumnasXidTarea(
 			@Param("idTareaLinea") Long idTareaLinea
 			);
-	
-	
-	
+
+
+
 	@Query(value = """
 			SELECT 
 			T

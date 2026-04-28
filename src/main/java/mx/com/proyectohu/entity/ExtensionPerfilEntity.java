@@ -17,196 +17,193 @@ public class ExtensionPerfilEntity implements Serializable {
     @Column(name = "ID_TAREA_CAMPANA", nullable = false)
     private Long idTareaCampana;
 
-    @Column(name = "ID_ESTATUS_ABC", nullable = false)
-    private Long idEstatusAbc;
-
-    @Column(name = "ID_AFORE")
+    @Column(name = "FCID_AFORE")
     private String idAfore;
 
-    @Column(name = "DESCRIPCION_DE_AFORE")
+    @Column(name = "FCDESCRIPCION_DE_AFORE")
     private String descripcionDeAfore;
 
-    @Column(name = "SIEFORE")
+    @Column(name = "FCSIEFORE")
     private String siefore;
 
-    @Column(name = "SEGMENTO")
+    @Column(name = "FCSEGMENTO")
     private String segmento;
 
-    @Column(name = "REGIMEN")
+    @Column(name = "FCREGIMEN")
     private String regimen;
 
-    @Column(name = "ID_CLIENTE_AHORRADOR")
+    @Column(name = "FCID_CLIENTE_AHORRADOR")
     private String idClienteAhorrador;
 
-    @Column(name = "ID_PRESTAMO_PENSIONADO")
+    @Column(name = "FCID_PRESTAMO_PENSIONADO")
     private String idPrestamoPensionado;
 
-    @Column(name = "ID_SUSCEPTIBLE_PRESTAMO")
+    @Column(name = "FCID_SUSCEPTIBLE_PRESTAMO")
     private String idSusceptiblePrestamo;
 
-    @Column(name = "TIPO_PENSION")
+    @Column(name = "FCTIPO_PENSION")
     private String tipoPension;
 
-    @Column(name = "GRUPO_PAGO")
+    @Column(name = "FCGRUPO_PAGO")
     private String grupoPago;
 
-    @Column(name = "CUSTOMER_ID_")
+    @Column(name = "FCCUSTOMER_ID_")
     private String customerId;
 
-    @Column(name = "NUM_LOTE")
+    @Column(name = "FCNUM_LOTE")
     private String numLote;
 
-    @Column(name = "NOMBRE_CAMPANA")
+    @Column(name = "FCNOMBRE_CAMPANA")
     private String nombreCampana;
 
-    @Column(name = "ID_CAMPANA")
+    @Column(name = "FCID_CAMPANA")
     private String idCampana;
 
-    @Column(name = "ID_BAJA_CAMBIO")
+    @Column(name = "FCID_BAJA_CAMBIO")
     private String idBajaCambio;
 
-    @Column(name = "FECHA_BAJA_CAMBIO")
+    @Column(name = "FCFECHA_BAJA_CAMBIO")
     private String fechaBajaCambio;
 
-    @Column(name = "REGIMEN_IMSS")
+    @Column(name = "FCREGIMEN_IMSS")
     private String regimenImss;
 
-    @Column(name = "SEGMENTO_AFO")
+    @Column(name = "FCSEGMENTO_AFO")
     private String segmentoAfo;
 
-    @Column(name = "EDAD")
+    @Column(name = "FCEDAD")
     private String edad;
 
-    @Column(name = "GENERO")
+    @Column(name = "FCGENERO")
     private String genero;
 
-    @Column(name = "LIGA_RSALDOS")
+    @Column(name = "FCLIGA_RSALDOS")
     private String ligaRsaldos;
 
-    @Column(name = "LINEA_DE_NEGOCIO")
+    @Column(name = "FCLINEA_DE_NEGOCIO")
     private String lineaDeNegocio;
 
-    @Column(name = "SEGMENTO_PRE")
+    @Column(name = "FCSEGMENTO_PRE")
     private String segmentoPre;
 
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FCFIRST_NAME")
     private String firstName;
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "FCLAST_NAME")
     private String lastName;
 
-    @Column(name = "ID_COMUNICACION")
+    @Column(name = "FCID_COMUNICACION")
     private String idComunicacion;
 
-    @Column(name = "DOMICILIO_PREFERENTE")
+    @Column(name = "FCDOMICILIO_PREFERENTE")
     private String domicilioPreferente;
 
-    @Column(name = "EMPRESA")
+    @Column(name = "FCEMPRESA")
     private String empresa;
 
-    @Column(name = "SEGMENTO_PROY")
+    @Column(name = "FCSEGMENTO_PROY")
     private String segmentoProy;
 
-    @Column(name = "IDPERSONA")
+    @Column(name = "FCIDPERSONA")
     private String idpersona;
 
-    @Column(name = "PATERNO")
+    @Column(name = "FCPATERNO")
     private String paterno;
 
-    @Column(name = "LIGA_TITULAR")
+    @Column(name = "FCLIGA_TITULAR")
     private String ligaTitular;
 
-    @Column(name = "INSTITUTO")
+    @Column(name = "FCINSTITUTO")
     private String instituto;
 
-    @Column(name = "TRABAJADOR")
+    @Column(name = "FCTRABAJADOR")
     private String trabajador;
 
-    @Column(name = "ENTIDAD")
+    @Column(name = "FCENTIDAD")
     private String entidad;
 
-    @Column(name = "MEDIOS_DIGITALES")
+    @Column(name = "FCMEDIOS_DIGITALES")
     private String mediosDigitales;
 
-    @Column(name = "APERTURA")
+    @Column(name = "FCAPERTURA")
     private String apertura;
 
-    @Column(name = "NUMERO_HIJOS")
+    @Column(name = "FCNUMERO_HIJOS")
     private String numeroHijos;
 
-    @Column(name = "MASY65")
+    @Column(name = "FCMASY65")
     private String masy65;
 
-    @Column(name = "MENORES")
+    @Column(name = "FCMENORES")
     private String menores;
 
-    @Column(name = "CUENTA_MENOR_1")
+    @Column(name = "FCCUENTA_MENOR_1")
     private String cuentaMenor1;
 
-    @Column(name = "NOMBRE_HIJO_1")
+    @Column(name = "FCNOMBRE_HIJO_1")
     private String nombreHijo1;
 
-    @Column(name = "LIGA_HIJO_1")
+    @Column(name = "FCLIGA_HIJO_1")
     private String ligaHijo1;
 
-    @Column(name = "CUENTA_MENOR_2")
+    @Column(name = "FCCUENTA_MENOR_2")
     private String cuentaMenor2;
 
-    @Column(name = "NOMBRE_HIJO_2")
+    @Column(name = "FCNOMBRE_HIJO_2")
     private String nombreHijo2;
 
-    @Column(name = "LIGA_HIJO_2")
+    @Column(name = "FCLIGA_HIJO_2")
     private String ligaHijo2;
 
-    @Column(name = "CUENTA_MENOR_3")
+    @Column(name = "FCCUENTA_MENOR_3")
     private String cuentaMenor3;
 
-    @Column(name = "NOMBRE_HIJO_3")
+    @Column(name = "FCNOMBRE_HIJO_3")
     private String nombreHijo3;
 
-    @Column(name = "LIGA_HIJO_3")
+    @Column(name = "FCLIGA_HIJO_3")
     private String ligaHijo3;
 
-    @Column(name = "CUENTA_MENOR_4")
+    @Column(name = "FCCUENTA_MENOR_4")
     private String cuentaMenor4;
 
-    @Column(name = "NOMBRE_HIJO_4")
+    @Column(name = "FCNOMBRE_HIJO_4")
     private String nombreHijo4;
 
-    @Column(name = "LIGA_HIJO_4")
+    @Column(name = "FCLIGA_HIJO_4")
     private String ligaHijo4;
 
-    @Column(name = "CUENTA_MENOR_5")
+    @Column(name = "FCCUENTA_MENOR_5")
     private String cuentaMenor5;
 
-    @Column(name = "NOMBRE_HIJO_5")
+    @Column(name = "FCNOMBRE_HIJO_5")
     private String nombreHijo5;
 
-    @Column(name = "LIGA_HIJO_5")
+    @Column(name = "FCLIGA_HIJO_5")
     private String ligaHijo5;
 
-    @Column(name = "CUENTA_MENOR_6")
+    @Column(name = "FCCUENTA_MENOR_6")
     private String cuentaMenor6;
 
-    @Column(name = "NOMBRE_HIJO_6")
+    @Column(name = "FCNOMBRE_HIJO_6")
     private String nombreHijo6;
 
-    @Column(name = "LIGA_HIJO_6")
+    @Column(name = "FCLIGA_HIJO_6")
     private String ligaHijo6;
 
-    @Column(name = "PERFIL")
+    @Column(name = "FCPERFIL")
     private String perfil;
 
-    @Column(name = "HIJOS")
+    @Column(name = "FCHIJOS")
     private String hijos;
 
-    @Column(name = "ESTATUS_EXP")
+    @Column(name = "FCESTATUS_EXP")
     private String estatusExp;
 
-    @Column(name = "SUCURSAL")
+    @Column(name = "FCSUCURSAL")
     private String sucursal;
 
-    @Column(name = "DOM_SUCURSAL")
+    @Column(name = "FCDOM_SUCURSAL")
     private String domSucursal;
     
     @Column(name = "EMAIL_ADDRESS_")
@@ -249,15 +246,7 @@ public class ExtensionPerfilEntity implements Serializable {
 	public void setIdTareaCampana(Long idTareaCampana) {
 		this.idTareaCampana = idTareaCampana;
 	}
-
-	public Long getIdEstatusAbc() {
-		return idEstatusAbc;
-	}
-
-	public void setIdEstatusAbc(Long idEstatusAbc) {
-		this.idEstatusAbc = idEstatusAbc;
-	}
-
+	
 	public String getIdAfore() {
 		return idAfore;
 	}

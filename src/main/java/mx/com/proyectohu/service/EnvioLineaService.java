@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.client.EnvioLineaClient;
-import mx.com.proyectohu.client.MiddlewareClient;
+import mx.com.proyectohu.client.MiddlewareCLClient;
 import mx.com.proyectohu.component.EnvioLineaDAO;
 import mx.com.proyectohu.dto.MergeRuleDTO;
 import mx.com.proyectohu.dto.MiddlewareDTO;
@@ -39,7 +39,7 @@ public class EnvioLineaService {
 	public EnvioLineaDAO   envioLineaDAO;
 	
 	@Autowired
-	public MiddlewareClient  middlewareClient;
+	public MiddlewareCLClient  middlewareClient;
 	
 	@Autowired
 	public BitacoraTareaLineaRepository  bitacoraTareaLineaRepository;
@@ -102,7 +102,7 @@ public class EnvioLineaService {
 		mergeRuleDTO.setRejectRecordIfChannelEmpty(null);
 		mergeRuleDTO.setDefaultPermissionStatus("OPTIN");
 		
-		middlewareDTO.setMergeRule(mergeRuleDTO);
+	//	middlewareDTO.setMergeRule(mergeRuleDTO);
 		
 		middlewareClient.llamadoAsyncUpdateCL(middlewareDTO, lineaNegocio);
 		

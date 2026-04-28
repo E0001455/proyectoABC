@@ -10,6 +10,15 @@ public class RecordDataDTO {
 	
 	private List<String> fieldNames;
 	private List<List<String>>  records;
+	 private String mapTemplateName; 
+
+	public String getMapTemplateName() {
+		return mapTemplateName;
+	}
+
+	 public void setMapTemplateName(String mapTemplateName) {
+		 this.mapTemplateName = mapTemplateName;
+	 }
 
 	/**
 	 * @return the fieldNames

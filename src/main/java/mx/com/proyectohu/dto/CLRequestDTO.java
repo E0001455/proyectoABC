@@ -28,6 +28,7 @@ public class CLRequestDTO {
 	    private LocalDate fechaFin;
 
 	    private String tipoActividad;
+	    private String tipoConsulta;
 	   
 
 	    /**
@@ -138,6 +139,14 @@ public class CLRequestDTO {
 
 		public void setFechaFin(LocalDate fechaFin) {
 			this.fechaFin = fechaFin;
+		}
+
+		public String getTipoConsulta() {
+			return tipoConsulta;
+		}
+
+		public void setTipoConsulta(String tipoConsulta) {
+			this.tipoConsulta = tipoConsulta;
 		}
 
 	

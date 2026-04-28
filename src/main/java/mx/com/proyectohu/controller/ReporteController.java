@@ -12,6 +12,8 @@ import mx.com.proyectohu.dto.PETResponseDTO;
 import mx.com.proyectohu.dto.ReporteGeneralLCResponseDTO;
 import mx.com.proyectohu.dto.ReporteGeneralPETResponseDTO;
 import mx.com.proyectohu.service.BitacoraUsuarioService;
+import mx.com.proyectohu.service.ReporteGeneralCampanaService;
+import mx.com.proyectohu.service.ReporteGeneralLineaService;
 import mx.com.proyectohu.service.ReporteIndividualCampanaService;
 import mx.com.proyectohu.service.ReporteIndividualLineaService;
 
@@ -32,16 +34,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 @CrossOrigin(origins = "*")
 @RequestMapping("/profuturo/api/v1")
 public class ReporteController {
-	
-	
-	
+
+
+
 	@Autowired
 	public ReporteIndividualLineaService reporteIndividualLineaService;
-	
+
 	@Autowired
 	public ReporteIndividualCampanaService reporteIndividualCampanaService;
+
+	@Autowired
+	public ReporteGeneralLineaService reporteGeneralLineaService;
 	
-	
+	@Autowired
+	public ReporteGeneralCampanaService reporteGeneralCampanaService;
+
 	@GetMapping("/cl/reporte/individual/carga")
 	public ResponseEntity<?> consultaCLCarga(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String riid,
@@ -57,11 +64,9 @@ public class ReporteController {
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-	
+
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
-		
-		
-		
+
 		clRequestDTO.setRiid(riid);
 		clRequestDTO.setNombre(nombre);
 		clRequestDTO.setApellidoPaterno(apellidoPaterno);
@@ -72,28 +77,28 @@ public class ReporteController {
 		clRequestDTO.setCurp(curp);
 		clRequestDTO.setRfc(rfc);
 		clRequestDTO.setPoliza(poliza);
-	
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-	
+
+		}
+
+
+
+
 		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
-		
+
 		if (idLineaNegocio==null) {
 			clResponseDTOLista =reporteIndividualLineaService.consultaCLCarga(clRequestDTO);
-			
-		}
-			
-		
-		
-		
 
-		
+		}
+
+
 		return ResponseEntity.ok(clResponseDTOLista);
 	}
-	
+
 	@GetMapping("/cl/reporte/individual/validacion")
 	public ResponseEntity<?> consultaCLValidacion(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String riid,
@@ -109,9 +114,9 @@ public class ReporteController {
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String  fechaFin
 			) {
-	
+
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
-	
+
 		clRequestDTO.setRiid(riid);
 		clRequestDTO.setNombre(nombre);
 		clRequestDTO.setApellidoPaterno(apellidoPaterno);
@@ -122,27 +127,23 @@ public class ReporteController {
 		clRequestDTO.setCurp(curp);
 		clRequestDTO.setRfc(rfc);
 		clRequestDTO.setPoliza(poliza);
-	
-		
+
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-	
-		
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
-		if (idLineaNegocio==null) {
-			clResponseDTOLista =reporteIndividualLineaService.consultaCLValidacion(clRequestDTO);
-			
 		}
-			
-		
-		
+
+
+		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
+
+		clResponseDTOLista =reporteIndividualLineaService.consultaCLValidacion(clRequestDTO);
+
 		return ResponseEntity.ok(clResponseDTOLista);
 
 	}
-	
+
 	@GetMapping("/cl/reporte/individual/envio")
 	public ResponseEntity<?> consultaCLEnvio(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String riid,
@@ -158,9 +159,9 @@ public class ReporteController {
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-	
+
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
-	
+
 		clRequestDTO.setRiid(riid);
 		clRequestDTO.setNombre(nombre);
 		clRequestDTO.setApellidoPaterno(apellidoPaterno);
@@ -171,106 +172,108 @@ public class ReporteController {
 		clRequestDTO.setCurp(curp);
 		clRequestDTO.setRfc(rfc);
 		clRequestDTO.setPoliza(poliza);
-	
-		
+
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-	
-		
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
-		if (idLineaNegocio==null) {
-			clResponseDTOLista =reporteIndividualLineaService.consultaCLEnvio(clRequestDTO);
-			
 		}
-			
+
+
+		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
 		
+			clResponseDTOLista =reporteIndividualLineaService.consultaCLEnvio(clRequestDTO);
+
 		
+
+
+
 		return ResponseEntity.ok(clResponseDTOLista);
 
 	}
-	
+
+
+
 	@GetMapping("/cl/reporte/general/carga")
 	public ResponseEntity<?> consultaCLGeneralCarga(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-	
+
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
-	
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-		
-		
-	
+		}
+
+
+
 		List<ReporteGeneralLCResponseDTO> clResponseDTOLista = new ArrayList<ReporteGeneralLCResponseDTO>();
-			
-			clResponseDTOLista =reporteIndividualLineaService.consultaCLCargaLineaNegocio(idLineaNegocio,clRequestDTO);
-			
+
+		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralCarga(idLineaNegocio,clRequestDTO);
+
 		return ResponseEntity.ok(clResponseDTOLista);
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	@GetMapping("/cl/reporte/general/validacion")
 	public ResponseEntity<?> consultaCLGeneralValidacion(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String  fechaFin
 			) {
-	
+
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
-		
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-	
-		
+		}
+
+
 		List<ReporteGeneralLCResponseDTO> clResponseDTOLista = new ArrayList<ReporteGeneralLCResponseDTO>();
-		
-			clResponseDTOLista =reporteIndividualLineaService.consultaCLValidacionLineaNegocio(idLineaNegocio,clRequestDTO);
-			
-		
+
+		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralValidacion(idLineaNegocio,clRequestDTO);
+
+
 		return ResponseEntity.ok(clResponseDTOLista);
 
 	}
-	
+
 	@GetMapping("/cl/reporte/general/envio")
 	public ResponseEntity<?> consultaCLGeneralEnvio(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String  fechaFin
 			) {
-	
+
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
-		
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-	
-		
+		}
+
+
 		List<ReporteGeneralLCResponseDTO> clResponseDTOLista = new ArrayList<ReporteGeneralLCResponseDTO>();
-		
-			clResponseDTOLista =reporteIndividualLineaService.consultaCLEnvioLineaNegocio(idLineaNegocio,clRequestDTO);
-			
-		
+
+		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralEnvio(idLineaNegocio,clRequestDTO);
+
+
 		return ResponseEntity.ok(clResponseDTOLista);
 
 	}
-	
-	
-	
-	
+
+
+
+
 	@GetMapping("/pet/reporte/individual/carga")
 	public ResponseEntity<?> consultaPETCarga(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String noLote,
@@ -289,10 +292,10 @@ public class ReporteController {
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-		
-		
+
+
 		PETRequestDTO petRequestDTO = new PETRequestDTO();
-		
+
 		petRequestDTO.setNoLote(noLote);
 		petRequestDTO.setIdCliente(idCliente);
 		petRequestDTO.setIdAfore(idAfore);
@@ -306,26 +309,28 @@ public class ReporteController {
 		petRequestDTO.setApellido(apellido);
 		petRequestDTO.setCorreo(correo);
 		petRequestDTO.setTelefono(telefono);
-		
-		
+
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-		
-		
-		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
-		if (idLineaNegocio==null) {
-			petResponseDTOLista =reporteIndividualCampanaService.consultaPETCarga(petRequestDTO);
-			
 		}
-			
+
+
+		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
 		
+			petResponseDTOLista =reporteIndividualCampanaService.consultaPETCarga(petRequestDTO);
+
 	
+
+
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 	
+	
+	
+
 	@GetMapping("/pet/reporte/individual/validacion")
 	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String noLote,
@@ -344,10 +349,10 @@ public class ReporteController {
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-		
-		
+
+
 		PETRequestDTO petRequestDTO = new PETRequestDTO();
-		
+
 		petRequestDTO.setNoLote(noLote);
 		petRequestDTO.setIdCliente(idCliente);
 		petRequestDTO.setIdAfore(idAfore);
@@ -361,27 +366,27 @@ public class ReporteController {
 		petRequestDTO.setApellido(apellido);
 		petRequestDTO.setCorreo(correo);
 		petRequestDTO.setTelefono(telefono);
-		
-		
+
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-		
-		
+		}
+
+
 		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
-		
+
 		if (idLineaNegocio==null) {
 			petResponseDTOLista =reporteIndividualCampanaService.consultaPETValidacion(petRequestDTO);
-			
+
 		}
-			
-		
-	
+
+
+
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
-	
+
 	@GetMapping("/pet/reporte/individual/envio")
 	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) String noLote,
@@ -400,10 +405,10 @@ public class ReporteController {
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-		
-		
+
+
 		PETRequestDTO petRequestDTO = new PETRequestDTO();
-		
+
 		petRequestDTO.setNoLote(noLote);
 		petRequestDTO.setIdCliente(idCliente);
 		petRequestDTO.setIdAfore(idAfore);
@@ -417,113 +422,110 @@ public class ReporteController {
 		petRequestDTO.setApellido(apellido);
 		petRequestDTO.setCorreo(correo);
 		petRequestDTO.setTelefono(telefono);
-		
-		
+
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-		
-		
+		}
+
+
 		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
-		
+
 		if (idLineaNegocio==null) {
 			petResponseDTOLista =reporteIndividualCampanaService.consultaPETEnvio(petRequestDTO);
-			
+
 		}
-			
-		
-	
+
+
+
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
-	
-	
+
+
 	@GetMapping("/pet/reporte/general/carga")
 	public ResponseEntity<?> consultaPETGeneralCarga(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-		
-		
+
+
 		PETRequestDTO petRequestDTO = new PETRequestDTO();
-		
-	
-		
-		
+
+
+
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-		
-		
+		}
+
+
 		List<ReporteGeneralPETResponseDTO> petResponseDTOLista = new ArrayList<ReporteGeneralPETResponseDTO>();
-		
-		
-			petResponseDTOLista =reporteIndividualCampanaService.consultaPETCargaLineaNegocio(idLineaNegocio,idCampana, petRequestDTO);
-			
-		
+
+
+		petResponseDTOLista =reporteGeneralCampanaService.consultaPETCargaLineaNegocio(idLineaNegocio,idCampana, petRequestDTO);
+
+
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
-	
+
 	@GetMapping("/pet/reporte/general/validacion")
 	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-		
-		
-		PETRequestDTO petRequestDTO = new PETRequestDTO();
-		
 
-		
-		
+
+		PETRequestDTO petRequestDTO = new PETRequestDTO();
+
+
+
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-		
-		
+		}
+
+
 		List<ReporteGeneralPETResponseDTO> petResponseDTOLista = new ArrayList<ReporteGeneralPETResponseDTO>();
-		
-	
-			petResponseDTOLista =reporteIndividualCampanaService.consultaPETValidacionLineaNegocio(idLineaNegocio,idCampana,petRequestDTO);
-			
-		
+
+
+		petResponseDTOLista =reporteGeneralCampanaService.consultaPETGeneralValidacion(idLineaNegocio,idCampana,petRequestDTO);
+
+
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
-	
+
 	@GetMapping("/pet/reporte/general/envio")
 	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLineaNegocio,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String fechaInicio,
 			@RequestParam(required = false) String fechaFin
 			) {
-		
-		
-		PETRequestDTO petRequestDTO = new PETRequestDTO();
-		
 
-		
-		
+
+		PETRequestDTO petRequestDTO = new PETRequestDTO();
+
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
 			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
-			}
-		
-		
+		}
+
+
 		List<ReporteGeneralPETResponseDTO> petResponseDTOLista = new ArrayList<ReporteGeneralPETResponseDTO>();
-		
-	
-			petResponseDTOLista =reporteIndividualCampanaService.consultaPETEnvioLineaNegocio(idLineaNegocio,idCampana,petRequestDTO);
-			
-		
+
+
+		petResponseDTOLista =reporteGeneralCampanaService.consultaPETEnvioLineaNegocio(idLineaNegocio,idCampana,petRequestDTO);
+
+
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
-	
+
 }

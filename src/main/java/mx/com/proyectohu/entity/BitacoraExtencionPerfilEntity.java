@@ -1,7 +1,6 @@
 package mx.com.proyectohu.entity;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +22,7 @@ public class BitacoraExtencionPerfilEntity {
     @Column(name = "FDFECHACREACION")
     private LocalDateTime fechaCreacion;
 
-    @Column(name = "DETALLE")
+    @Column(name = "FCDETALLE")
     private String detalle;
     
     

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.proyectohu.dto.MiddlewareDTO;
-import mx.com.proyectohu.service.MiddlewareCLService;
+import mx.com.proyectohu.service.MiddlewarePETService;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/profuturo/api/v1")
-public class MiddlewareCLController {
+public class MiddlewarePETController {
 	@Autowired
-	public MiddlewareCLService middlewareService;
+	public MiddlewarePETService middlewarePETService;
 	
-	@PostMapping("/cl/middleware/{lineaNegocio}")
+	@PostMapping("/pet/middleware/{lineaNegocio}")
 	public ResponseEntity<?> postMethodName(@PathVariable String lineaNegocio, @RequestBody MiddlewareDTO middlewareDTO) {
 		
-		String response = middlewareService.llamarAsynUpdateCL(middlewareDTO,lineaNegocio);
+		String response = middlewarePETService.llamarAsynUpdatePET(middlewareDTO,lineaNegocio);
 		
 		return ResponseEntity.ok(response);
 	}

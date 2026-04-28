@@ -74,7 +74,7 @@ public class PETResponseDTO implements Serializable {
     private String estatusExp;
     private String sucursal;
     private String domSucursal;
-
+    private String campana;
     private String estatus;
     private String detalle;
     
@@ -630,6 +630,14 @@ public class PETResponseDTO implements Serializable {
 
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getCampana() {
+		return campana;
+	}
+
+	public void setCampana(String campana) {
+		this.campana = campana;
 	}
 
 

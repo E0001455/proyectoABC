@@ -22,74 +22,77 @@ public class ListaContactoEntity implements Serializable {
     @Column(name = "ID_TAREA_LINEA", nullable = false)
     private Long idTareaLinea;
 
-    @Column(name = "ID_ESTATUS_ABC", nullable = false)
-    private Long idEstatusAbc;
-
-    @Column(name = "RIID_")
+    @Column(name = "FIOPERATIVO")
+    private Boolean operativo;
+    
+    @Column(name = "FCRIID_")
     private String riid;
 
-    @Column(name = "NOMBRE")
+    @Column(name = "FCNOMBRE")
     private String nombre;
 
-    @Column(name = "APELLIDO_PATERNO")
+    @Column(name = "FCAPELLIDO_PATERNO")
     private String apellidoPaterno;
 
-    @Column(name = "APELLIDO_MATERNO")
+    @Column(name = "FCAPELLIDO_MATERNO")
     private String apellidoMaterno;
 
-    @Column(name = "EMAIL_ADDRESS_")
+    @Column(name = "FCEMAIL_ADDRESS_")
     private String emailAddress;
 
-    @Column(name = "MOBILE_NUMBER_")
+    @Column(name = "FCMOBILE_NUMBER_")
     private String mobileNumber;
 
-    @Column(name = "MOBILE_COUNTRY_")
+    @Column(name = "FCMOBILE_COUNTRY_")
     private String mobileCountry;
 
-    @Column(name = "LINEA_DE_NEGOCIO")
+    @Column(name = "FCLINEA_DE_NEGOCIO")
     private String lineaDeNegocio;
 
-    @Column(name = "NUMERO_DE_CUENTA")
+    @Column(name = "FCNUMERO_DE_CUENTA")
     private String numeroDeCuenta;
 
-    @Column(name = "NSS")
+    @Column(name = "FCNSS")
     private String nss;
 
-    @Column(name = "CURP")
+    @Column(name = "FCCURP")
     private String curp;
 
-    @Column(name = "RFC")
+    @Column(name = "FCRFC")
     private String rfc;
 
-    @Column(name = "DATE_OF_BIRTH")
+    @Column(name = "FCDATE_OF_BIRTH")
     private String dateOfBirth;
 
-    @Column(name = "POSTAL_STREET_1_")
+    @Column(name = "FCPOSTAL_STREET_1_")
     private String postalStreet1;
 
-    @Column(name = "POSTAL_STREET_2_")
+    @Column(name = "FCPOSTAL_STREET_2_")
     private String postalStreet2;
 
-    @Column(name = "CITY_")
+    @Column(name = "FCCITY_")
     private String city;
 
-    @Column(name = "STATE_")
+    @Column(name = "FCSTATE_")
     private String state;
 
-    @Column(name = "POSTAL_CODE_")
+    @Column(name = "FCPOSTAL_CODE_")
     private String postalCode;
 
-    @Column(name = "POLIZA")
+    @Column(name = "FCPOLIZA")
     private String poliza;
 
-    @Column(name = "SUSPENSION_LOGICA")
+    @Column(name = "FCSUSPENSION_LOGICA")
     private String suspensionLogica;
 
-    @Column(name = "USUARIO_PRUEBA")
+    @Column(name = "FCUSUARIO_PRUEBA")
     private String usuarioPrueba;
 
-    @Column(name = "GENERO")
+    @Column(name = "FCGENERO")
     private String genero;
+    
+    @Column(name = "CUSTOMER_ID_")
+    private String customerid;
     
     @OneToMany(mappedBy = "listaContacto", fetch = FetchType.LAZY)
     private List<BitacoraListaContactoEntity> bitacoras;
@@ -110,14 +113,6 @@ public class ListaContactoEntity implements Serializable {
 
 	public void setIdTareaLinea(Long idTareaLinea) {
 		this.idTareaLinea = idTareaLinea;
-	}
-
-	public Long getIdEstatusAbc() {
-		return idEstatusAbc;
-	}
-
-	public void setIdEstatusAbc(Long idEstatusAbc) {
-		this.idEstatusAbc = idEstatusAbc;
 	}
 
 	public String getRiid() {
@@ -302,6 +297,22 @@ public class ListaContactoEntity implements Serializable {
 
 	public void setBitacoras(List<BitacoraListaContactoEntity> bitacoras) {
 		this.bitacoras = bitacoras;
+	}
+
+	public Boolean getOperativo() {
+		return operativo;
+	}
+
+	public void setOperativo(Boolean operativo) {
+		this.operativo = operativo;
+	}
+
+	public String getCustomerid() {
+		return customerid;
+	}
+
+	public void setCustomerid(String customerid) {
+		this.customerid = customerid;
 	}
     
     

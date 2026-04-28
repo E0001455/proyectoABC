@@ -23,9 +23,27 @@ public class PETRequestDTO {
 	    private String apellido;
 	    private String correo;
 	    private String telefono;
+	    private String tipoActividad;
+	    private String tipoConsulta;
 	    
 	    
-	    @JsonFormat(pattern = "dd/MM/yyyy")
+	    public String getTipoActividad() {
+			return tipoActividad;
+		}
+
+		public void setTipoActividad(String tipoActividad) {
+			this.tipoActividad = tipoActividad;
+		}
+
+		public String getTipoConsulta() {
+			return tipoConsulta;
+		}
+
+		public void setTipoConsulta(String tipoConsulta) {
+			this.tipoConsulta = tipoConsulta;
+		}
+
+		@JsonFormat(pattern = "dd/MM/yyyy")
 	    private LocalDate fechaInicio;
 
 	    @JsonFormat(pattern = "dd/MM/yyyy")

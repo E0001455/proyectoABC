@@ -10,8 +10,10 @@ public record ReporteGeneralCampanaRecordDTO(
 		Long idTareaCampana,
 		String idCampana,
 		String lineaDeNegocio,
+		String nombreCampana,
 		Long registros,
-		LocalDateTime  fecha
+		LocalDateTime  fecha 
+		
 		) {
 
 

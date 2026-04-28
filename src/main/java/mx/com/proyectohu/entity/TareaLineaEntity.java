@@ -56,10 +56,10 @@ public class TareaLineaEntity implements Serializable {
 	@Column(name = "FDFECHAFIN")
 	private Date 	fdFechaFin;
 	
-	@Column(name = "FINREGISTROS")
+	@Column(name = "FINOREGISTROS")
 	private Integer finRegistros;
 	
-	@Column(name = "FINPROCESADOS")
+	@Column(name = "FINOPROCESADOS")
 	private Integer finProcesados;
 	
 	@Column(name = "FIDICTAMINACION")
@@ -74,7 +74,7 @@ public class TareaLineaEntity implements Serializable {
 	@Column(name = "FDFECHAULTMODIFICACION")
 	private Date 	fechaUltModificacion;
 
-	@Column(name = "FINOACEPTADOS")
+	@Column(name = "FINOAPROBADOS")
 	private Integer registrosAprobados;
 	
 	@Column(name = "FINORECHAZADOS")

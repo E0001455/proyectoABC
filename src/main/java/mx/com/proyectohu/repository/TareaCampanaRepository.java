@@ -26,6 +26,7 @@ public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntit
 			tep.idTareaCampana,
 			tep.idCampana,
 			tep.lineaDeNegocio,
+			tep.nombreCampana,
 			COUNT(DISTINCT tep.idExtensionPerfil),
 			MAX(tbep.fechaCreacion) 
 			)
@@ -36,7 +37,7 @@ public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntit
 			WHERE tbep.estatus.id = (
 			SELECT e.id 
 			FROM EstatusABCEntity e 
-			WHERE e.codigo = 'CRG'
+			WHERE e.codigo = 'CRB'
 			)
 			AND(:idCampana IS NULL OR tep.idCampana = :idCampana)
 			AND(:idLineaNegocio IS NULL OR tep.lineaDeNegocio = :idLineaNegocio)
@@ -46,7 +47,8 @@ public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntit
 			GROUP BY 
 			tep.idTareaCampana,
 			tep.idCampana,
-			tep.lineaDeNegocio 
+			tep.lineaDeNegocio,
+			tep.nombreCampana 
 
 
 			""")
@@ -96,6 +98,20 @@ public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntit
 			@Param("fechaFin") LocalDateTime fechaFin
 			);
 
+	@Query(value = """
+			SELECT 
+			TCATCL.nombre
+			FROM TareaCampanaEntity TTL
+			INNER JOIN ABCMapeoCampanaColumnaEntity TCL
+			ON TTL.MapeoCampana.idABCConfigMapeoCampana = TCL.llaveMapeoCampanaColumna.idABCConfigMapeoCampana
+			INNER JOIN ABCCatColumnaCampanaEntity TCATCL
+			ON TCATCL.id = TCL.llaveMapeoCampanaColumna.idABCCatColumna
+			WHERE TTL.idTareaCampana =:idTareaCampana
+
+			""")
+	List<String> obtenerColumnasXidTarea(
+			@Param("idTareaCampana") Long idTareaCampana
+			);
 
 
 }

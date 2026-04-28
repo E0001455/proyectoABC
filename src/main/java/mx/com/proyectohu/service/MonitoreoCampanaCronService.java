@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import mx.com.proyectohu.client.EnvioCampanaClient;
 import mx.com.proyectohu.client.ValidarCampanaClient;
 import mx.com.proyectohu.component.TareaCampanaDAO;
 import mx.com.proyectohu.entity.ABCCatActividad;
@@ -43,6 +44,8 @@ public class MonitoreoCampanaCronService {
 	@Autowired
 	public ValidarCampanaClient validarCampanaClient;
 	
+	@Autowired
+	public EnvioCampanaClient envioCampanaClient;
 	
 	
 	@Value("${hora.cron.monitoreo}")
@@ -91,6 +94,11 @@ public class MonitoreoCampanaCronService {
 										if(codigoActividad.equals("VLD")) {
 										
 											validarCampanaClient.llamarValidarCampana(lineaNegocio,idTareaCampana);
+											
+										}
+										if(codigoActividad.equals("ENV")) {
+											
+											envioCampanaClient.llamarEnvioCampana(lineaNegocio,idTareaCampana);
 											
 										}
 										
