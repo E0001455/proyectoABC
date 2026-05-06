@@ -1,6 +1,7 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -25,10 +26,10 @@ public class TareaLineaResponseDTO {
 	private List<TareaDTO>   tareaDTO;
 	
 	@JsonProperty("fechaInicio")
-	private Date 	fdFechaInicio;
+	private Timestamp 	fdFechaInicio;
 	
 	@JsonProperty("fechaFin")
-	private Date 	fdFechaFin;
+	private Timestamp 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer finRegistros;
@@ -41,7 +42,7 @@ public class TareaLineaResponseDTO {
 	
 	
 	@JsonProperty("fechaCreacion")
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 
 
 
@@ -98,46 +99,6 @@ public class TareaLineaResponseDTO {
 		this.catLineaNegocio = catLineaNegocio;
 	}
 
-
-
-	
-
-	/**
-	 * @return the fdFechaInicio
-	 */
-	public Date getFdFechaInicio() {
-		return fdFechaInicio;
-	}
-
-
-
-	/**
-	 * @param fdFechaInicio the fdFechaInicio to set
-	 */
-	public void setFdFechaInicio(Date fdFechaInicio) {
-		this.fdFechaInicio = fdFechaInicio;
-	}
-
-
-
-	/**
-	 * @return the fdFechaFin
-	 */
-	public Date getFdFechaFin() {
-		return fdFechaFin;
-	}
-
-
-
-	/**
-	 * @param fdFechaFin the fdFechaFin to set
-	 */
-	public void setFdFechaFin(Date fdFechaFin) {
-		this.fdFechaFin = fdFechaFin;
-	}
-
-
-
 	/**
 	 * @return the finRegistros
 	 */
@@ -172,14 +133,46 @@ public class TareaLineaResponseDTO {
 		this.finProcesados = finProcesados;
 	}
 
+	/**
+	 * @return the fdFechaInicio
+	 */
+	public Timestamp getFdFechaInicio() {
+		return fdFechaInicio;
+	}
 
+
+
+	/**
+	 * @param fdFechaInicio the fdFechaInicio to set
+	 */
+	public void setFdFechaInicio(Timestamp fdFechaInicio) {
+		this.fdFechaInicio = fdFechaInicio;
+	}
+
+
+
+	/**
+	 * @return the fdFechaFin
+	 */
+	public Timestamp getFdFechaFin() {
+		return fdFechaFin;
+	}
+
+
+
+	/**
+	 * @param fdFechaFin the fdFechaFin to set
+	 */
+	public void setFdFechaFin(Timestamp fdFechaFin) {
+		this.fdFechaFin = fdFechaFin;
+	}
 
 
 
 	/**
 	 * @return the fechaCreacion
 	 */
-	public Date getFechaCreacion() {
+	public Timestamp getFechaCreacion() {
 		return fechaCreacion;
 	}
 
@@ -188,9 +181,14 @@ public class TareaLineaResponseDTO {
 	/**
 	 * @param fechaCreacion the fechaCreacion to set
 	 */
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
+
+
+
+
+
 
 
 

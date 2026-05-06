@@ -4,8 +4,8 @@ package mx.com.proyectohu.service;
 
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,8 +53,9 @@ public class HorarioActividadCampanaService {
 			horarioActividadCampanaEntity.setIdUsuario(horarioActividadCampanaRequestDTO.getIdUsuario());
 			horarioActividadCampanaEntity.setIdUsuarioUltModificacion(horarioActividadCampanaRequestDTO.getIdUsuario());
 			horarioActividadCampanaEntity.setBolActivo(true);
-			horarioActividadCampanaEntity.setFechaCreacion(new Date());
-			horarioActividadCampanaEntity.setFechaUltModificacion(new Date());
+			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+			horarioActividadCampanaEntity.setFechaCreacion(fechaActual);
+			horarioActividadCampanaEntity.setFechaUltModificacion(fechaActual);
 
 
 
@@ -126,7 +127,8 @@ public class HorarioActividadCampanaService {
 
 					horarioActividadCampanaEntity.setIdUsuarioUltModificacion(horarioActividadCampanaRequestDTO.getIdUsuario());
 					horarioActividadCampanaEntity.setBolActivo(true);
-					horarioActividadCampanaEntity.setFechaUltModificacion(new Date());
+					Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+					horarioActividadCampanaEntity.setFechaUltModificacion(fechaActual);
 					horarioActividadCampanaRepository.save(horarioActividadCampanaEntity);
 					horarioActividadCampanaResponseDTO.setIdActividadCampana(idTareaCampana);
 				}
@@ -157,7 +159,8 @@ public class HorarioActividadCampanaService {
 
 					horarioActividadCampanaEntity.setIdUsuarioUltModificacion(horarioActividadCampanaRequestDTO.getIdUsuario());
 					horarioActividadCampanaEntity.setBolActivo(false);
-					horarioActividadCampanaEntity.setFechaUltModificacion(new Date());
+					Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+					horarioActividadCampanaEntity.setFechaUltModificacion(fechaActual);
 					horarioActividadCampanaRepository.save(horarioActividadCampanaEntity);
 					
 					horarioActividadCampanaResponseDTO.setIdActividadCampana(idTareaCampana);

@@ -2,15 +2,15 @@ package mx.com.proyectohu.dto;
 
 
 
-import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.sql.Timestamp;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CLResponseDTO {
 	
+	private Long idTarea;
 	   private String lineaNegocio;
 	    private String riid;
 	    private String nombre;
@@ -36,8 +36,8 @@ public class CLResponseDTO {
 	    private String estatus;
 	    private String detalle;
 	    
-	    @JsonFormat(pattern = "dd/MM/yyyy")
-	    private LocalDate fecha;
+	    private String customerID;
+	    private Timestamp fecha;
 
 	 
 	   
@@ -218,13 +218,24 @@ public class CLResponseDTO {
 	        this.suspension = suspension;
 	    }
 
-	    public LocalDate getFecha() {
-	        return fecha;
-	    }
 
-	    public void setFecha(LocalDate fecha) {
-	        this.fecha = fecha;
-	    }
+	
+
+		public String getCustomerID() {
+			return customerID;
+		}
+
+		public void setCustomerID(String customerID) {
+			this.customerID = customerID;
+		}
+
+		public Timestamp getFecha() {
+			return fecha;
+		}
+
+		public void setFecha(Timestamp fecha) {
+			this.fecha = fecha;
+		}
 
 		public String getEstatus() {
 			return estatus;
@@ -241,6 +252,22 @@ public class CLResponseDTO {
 		public void setDetalle(String detalle) {
 			this.detalle = detalle;
 		}
+
+		/**
+		 * @return the idTarea
+		 */
+		public Long getIdTarea() {
+			return idTarea;
+		}
+
+		/**
+		 * @param idTarea the idTarea to set
+		 */
+		public void setIdTarea(Long idTarea) {
+			this.idTarea = idTarea;
+		}
+		
+		
 	    
 	    
 	}

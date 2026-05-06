@@ -9,12 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import mx.com.proyectohu.dto.MapeoLineaRecordDTO;
-import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
-import mx.com.proyectohu.entity.ActividadLineaEntity;
-import mx.com.proyectohu.entity.BitacoraExtencionPerfilEntity;
 import mx.com.proyectohu.entity.ExtensionPerfilEntity;
-import mx.com.proyectohu.entity.ListaContactoEntity;
 
 @Repository
 public interface  ExtencionPerfilRepository extends JpaRepository<ExtensionPerfilEntity, Long> {

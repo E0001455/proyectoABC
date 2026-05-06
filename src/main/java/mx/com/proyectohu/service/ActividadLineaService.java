@@ -5,7 +5,6 @@ package mx.com.proyectohu.service;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.repository.MapeoActividadLineaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.ActividadLineaRepository;
 import mx.com.proyectohu.dto.MapeoDTO;
@@ -49,9 +49,9 @@ public class ActividadLineaService {
 		actividadLineaEntity.setIdActividad(actividadLineaRequestDTO.getActividadDTO().getActividad().getIdActividad());
 		actividadLineaEntity.setIdEjecucion(actividadLineaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
 		actividadLineaEntity.setBolActivo(true);
-		actividadLineaEntity.setFechaCreacion(new Date());
+		actividadLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 		actividadLineaEntity.setIdUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
-		actividadLineaEntity.setFechaUltModificacion(new Date());
+		actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 
 
 		idTareaLinea=actividadLineaRepository.save(actividadLineaEntity).getIdActividadLinea();
@@ -138,7 +138,7 @@ public class ActividadLineaService {
 			actividadLineaEntity.setIdUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
 			actividadLineaEntity.setIdActividad(actividadLineaRequestDTO.getActividadDTO().getActividad().getIdActividad());
 			actividadLineaEntity.setIdEjecucion(actividadLineaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
-			actividadLineaEntity.setFechaUltModificacion(new Date());
+			actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 
 			actividadLineaEntity = actividadLineaRepository.save(actividadLineaEntity);
 			actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getIdActividadLinea());
@@ -168,7 +168,7 @@ public class ActividadLineaService {
 			if (!actividadLineaEntity.getBolActivo()) {
 				actividadLineaEntity.setIdUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
 				actividadLineaEntity.setBolActivo(true);
-				actividadLineaEntity.setFechaUltModificacion(new Date());
+				actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 				actividadLineaEntity = actividadLineaRepository.save(actividadLineaEntity);
 				actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getIdActividadLinea());
 			}
@@ -190,7 +190,7 @@ public class ActividadLineaService {
 			if (actividadLineaEntity.getBolActivo()) {
 				actividadLineaEntity.setIdUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
 				actividadLineaEntity.setBolActivo(false);
-				actividadLineaEntity.setFechaUltModificacion(new Date());
+				actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 				actividadLineaEntity = actividadLineaRepository.save(actividadLineaEntity);
 				actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getIdActividadLinea());
 			}
@@ -211,8 +211,8 @@ public class ActividadLineaService {
 		actividadMapeoLineaEntity.setLlaveActividadMapeoLinea(llaveActividadMapeoLinea);
 		actividadMapeoLineaEntity.setBolActivo(true);
 		actividadMapeoLineaEntity.setIdABCUsuarioUltModificacion(idUsuario);
-		actividadMapeoLineaEntity.setFecCreacion(new Date());
-		actividadMapeoLineaEntity.setFecUltModificacion(new Date());
+		actividadMapeoLineaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
+		actividadMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 		
 		mapeoActividadLineaRepository.save(actividadMapeoLineaEntity);
 		

@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,7 +51,7 @@ public class BitacoraUsuarioEntity implements Serializable {
 	private String 	navegador;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date 	fecCreacion;
+	private Timestamp 	fecCreacion;
 	
 
 	public Long getIdABCBitacoraUsuario() {
@@ -182,16 +182,17 @@ public class BitacoraUsuarioEntity implements Serializable {
 	/**
 	 * @return the fecCreacion
 	 */
-	public Date getFecCreacion() {
+	public Timestamp getFecCreacion() {
 		return fecCreacion;
 	}
 
 	/**
 	 * @param fecCreacion the fecCreacion to set
 	 */
-	public void setFecCreacion(Date fecCreacion) {
+	public void setFecCreacion(Timestamp fecCreacion) {
 		this.fecCreacion = fecCreacion;
 	}
+
 
 
 

@@ -51,7 +51,7 @@ public class ReporteController {
 
 	@GetMapping("/cl/reporte/individual/carga")
 	public ResponseEntity<?> consultaCLCarga(@RequestParam(required = false) Long idLineaNegocio,
-			@RequestParam(required = false) String riid,
+			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
 			@RequestParam(required = false) String apellidoPaterno,
 			@RequestParam(required = false) String correo,
@@ -67,7 +67,7 @@ public class ReporteController {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
 
-		clRequestDTO.setRiid(riid);
+		clRequestDTO.setCustomerID(idCliente);
 		clRequestDTO.setNombre(nombre);
 		clRequestDTO.setApellidoPaterno(apellidoPaterno);
 		clRequestDTO.setCorreo(correo);
@@ -101,7 +101,7 @@ public class ReporteController {
 
 	@GetMapping("/cl/reporte/individual/validacion")
 	public ResponseEntity<?> consultaCLValidacion(@RequestParam(required = false) Long idLineaNegocio,
-			@RequestParam(required = false) String riid,
+			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
 			@RequestParam(required = false) String apellidoPaterno,
 			@RequestParam(required = false) String correo,
@@ -117,7 +117,7 @@ public class ReporteController {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
 
-		clRequestDTO.setRiid(riid);
+		clRequestDTO.setCustomerID(idCliente);
 		clRequestDTO.setNombre(nombre);
 		clRequestDTO.setApellidoPaterno(apellidoPaterno);
 		clRequestDTO.setCorreo(correo);
@@ -146,7 +146,7 @@ public class ReporteController {
 
 	@GetMapping("/cl/reporte/individual/envio")
 	public ResponseEntity<?> consultaCLEnvio(@RequestParam(required = false) Long idLineaNegocio,
-			@RequestParam(required = false) String riid,
+			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
 			@RequestParam(required = false) String apellidoPaterno,
 			@RequestParam(required = false) String correo,
@@ -162,7 +162,7 @@ public class ReporteController {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
 
-		clRequestDTO.setRiid(riid);
+		clRequestDTO.setCustomerID(idCliente);
 		clRequestDTO.setNombre(nombre);
 		clRequestDTO.setApellidoPaterno(apellidoPaterno);
 		clRequestDTO.setCorreo(correo);

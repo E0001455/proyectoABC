@@ -1,6 +1,6 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -30,10 +30,10 @@ public class TareaCampanaDTO {
 	private List<BitacoraTareaCampanaDTO> bitacoraTareaCampana;
 	
 	@JsonProperty("fechaInicio")
-	private Date 	fdFechaInicio;
+	private Timestamp 	fdFechaInicio;
 	
 	@JsonProperty("fechaFin")
-	private Date 	fdFechaFin;
+	private Timestamp 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer finRegistros;
@@ -46,7 +46,7 @@ public class TareaCampanaDTO {
 	
 	
 	@JsonProperty("fechaCreacion")
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 	
 	
 	
@@ -151,36 +151,7 @@ public class TareaCampanaDTO {
 	}
 	
 
-	/**
-	 * @return the fdFechaInicio
-	 */
-	public Date getFdFechaInicio() {
-		return fdFechaInicio;
-	}
 
-
-	/**
-	 * @param fdFechaInicio the fdFechaInicio to set
-	 */
-	public void setFdFechaInicio(Date fdFechaInicio) {
-		this.fdFechaInicio = fdFechaInicio;
-	}
-
-
-	/**
-	 * @return the fdFechaFin
-	 */
-	public Date getFdFechaFin() {
-		return fdFechaFin;
-	}
-
-
-	/**
-	 * @param fdFechaFin the fdFechaFin to set
-	 */
-	public void setFdFechaFin(Date fdFechaFin) {
-		this.fdFechaFin = fdFechaFin;
-	}
 
 
 	/**
@@ -231,10 +202,50 @@ public class TareaCampanaDTO {
 	}
 
 
+
+
+
+
+
+
+
+
+	/**
+	 * @return the fdFechaInicio
+	 */
+	public Timestamp getFdFechaInicio() {
+		return fdFechaInicio;
+	}
+
+
+	/**
+	 * @param fdFechaInicio the fdFechaInicio to set
+	 */
+	public void setFdFechaInicio(Timestamp fdFechaInicio) {
+		this.fdFechaInicio = fdFechaInicio;
+	}
+
+
+	/**
+	 * @return the fdFechaFin
+	 */
+	public Timestamp getFdFechaFin() {
+		return fdFechaFin;
+	}
+
+
+	/**
+	 * @param fdFechaFin the fdFechaFin to set
+	 */
+	public void setFdFechaFin(Timestamp fdFechaFin) {
+		this.fdFechaFin = fdFechaFin;
+	}
+
+
 	/**
 	 * @return the fechaCreacion
 	 */
-	public Date getFechaCreacion() {
+	public Timestamp getFechaCreacion() {
 		return fechaCreacion;
 	}
 
@@ -242,9 +253,12 @@ public class TareaCampanaDTO {
 	/**
 	 * @param fechaCreacion the fechaCreacion to set
 	 */
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
+
+
+
 
 
 

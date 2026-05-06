@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -22,13 +22,13 @@ public class ActividadMapeoCampanaEntity implements Serializable {
 	private Boolean bolActivo;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date fecCreacion;
+	private Timestamp fecCreacion;
 	
 	@Column(name = "FIIDUSUARIOULTMODIFICACION")
 	private Long idABCUsuarioUltModificacion;
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date fecUltModificacion;
+	private Timestamp fecUltModificacion;
 
 
 
@@ -61,19 +61,6 @@ public class ActividadMapeoCampanaEntity implements Serializable {
 		this.bolActivo = bolActivo;
 	}
 
-	/**
-	 * @return the fecCreacion
-	 */
-	public Date getFecCreacion() {
-		return fecCreacion;
-	}
-
-	/**
-	 * @param fecCreacion the fecCreacion to set
-	 */
-	public void setFecCreacion(Date fecCreacion) {
-		this.fecCreacion = fecCreacion;
-	}
 
 	/**
 	 * @return the idABCUsuarioUltModificacion
@@ -90,19 +77,34 @@ public class ActividadMapeoCampanaEntity implements Serializable {
 	}
 
 	/**
+	 * @return the fecCreacion
+	 */
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+
+	/**
+	 * @param fecCreacion the fecCreacion to set
+	 */
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
+
+	/**
 	 * @return the fecUltModificacion
 	 */
-	public Date getFecUltModificacion() {
+	public Timestamp getFecUltModificacion() {
 		return fecUltModificacion;
 	}
 
 	/**
 	 * @param fecUltModificacion the fecUltModificacion to set
 	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
+	public void setFecUltModificacion(Timestamp fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
 	}
-	
+
+
 
 
 	

@@ -1,29 +1,46 @@
 package mx.com.proyectohu.dto;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+
+
 public class PETResponseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+	@JsonProperty("lineaNegocio")
     private String lineaDeNegocio;
-    private String idCampana;
+    
+	private String idCampana;
+	
+    @JsonProperty("noLote")
     private String numLote;
+    
+    @JsonProperty("idCliente")
     private String customerId;
+    
     private String idAfore;
+    
+    @JsonProperty("afore")
     private String descripcionDeAfore;
-    private String idClienteAhorrrador;
+    
+    
+    private String idClienteAhorrador;
+    
     private String idPrestamoPensionado;
     private String idSusceptiblePrestamo;
     private String idBajaCambio;
     private String idComunicacion;
     private String idPersona;
+    
+    @JsonProperty("nombre")
     private String firstName;
+    
+    @JsonProperty("apellido")
     private String lastName;
+    
     private String correo;
     private String telefono;
     private String siefore;
@@ -32,6 +49,8 @@ public class PETResponseDTO implements Serializable {
     private String tipoPension;
     private String grupoPago;
     private String fechaBajaCambio;
+    
+    @JsonProperty("regimenIMSS")
     private String regimenImss;
     private String segmentoAfo;
     private String edad;
@@ -78,23 +97,28 @@ public class PETResponseDTO implements Serializable {
     private String estatus;
     private String detalle;
     
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate fecha;
-
+ 
+    private Timestamp fecha;
+    private Long idTarea;
    
   
 
  
-    
-    
-   
+    /**
+	 * @return the idTarea
+	 */
+	public Long getIdTarea() {
+		return idTarea;
+	}
 
-    
-   
-   
+	/**
+	 * @param idTarea the idTarea to set
+	 */
+	public void setIdTarea(Long idTarea) {
+		this.idTarea = idTarea;
+	}
 
-    
-    public String getIdAfore() {
+	public String getIdAfore() {
         return idAfore;
     }
 
@@ -150,15 +174,17 @@ public class PETResponseDTO implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public String getIdClienteAhorrrador() {
-        return idClienteAhorrrador;
-    }
+	
 
-    public void setIdClienteAhorrrador(String idClienteAhorrrador) {
-        this.idClienteAhorrrador = idClienteAhorrrador;
-    }
+    public String getIdClienteAhorrador() {
+		return idClienteAhorrador;
+	}
 
-    public String getIdPrestamoPensionado() {
+	public void setIdClienteAhorrador(String idClienteAhorrador) {
+		this.idClienteAhorrador = idClienteAhorrador;
+	}
+
+	public String getIdPrestamoPensionado() {
         return idPrestamoPensionado;
     }
 
@@ -624,11 +650,15 @@ public class PETResponseDTO implements Serializable {
 		this.detalle = detalle;
 	}
 
-	public LocalDate getFecha() {
+
+
+
+
+	public Timestamp getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
 

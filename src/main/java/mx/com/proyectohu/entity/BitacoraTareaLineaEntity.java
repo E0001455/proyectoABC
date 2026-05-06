@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,7 +36,7 @@ public class BitacoraTareaLineaEntity implements Serializable {
 	private String 	detalle;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 
 	/**
 	 * @return the idBitacoraTareaLinea
@@ -99,16 +99,17 @@ public class BitacoraTareaLineaEntity implements Serializable {
 	/**
 	 * @return the fechaCreacion
 	 */
-	public Date getFechaCreacion() {
+	public Timestamp getFechaCreacion() {
 		return fechaCreacion;
 	}
 
 	/**
 	 * @param fechaCreacion the fechaCreacion to set
 	 */
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
+
 	
 
 	

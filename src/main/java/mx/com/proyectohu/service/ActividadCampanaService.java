@@ -1,7 +1,8 @@
 package mx.com.proyectohu.service;
 
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.repository.MapeoActividadCampanaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.repository.ABCConfigMapeoCampanaRepository;
 import mx.com.proyectohu.repository.ActividadCampanaRepository;
 import mx.com.proyectohu.dto.MapeoDTO;
@@ -19,11 +21,9 @@ import mx.com.proyectohu.dto.ActividadCampanaResponseDTO.CatEjecucion;
 import mx.com.proyectohu.dto.ActividadCampanaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.dto.ActividadCampanaResponseDTO.CatLineaNegocio.CatCampana;
 import mx.com.proyectohu.entity.LlaveActividadMapeoCampana;
-import mx.com.proyectohu.entity.LlaveActividadMapeoLinea;
 import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
 import mx.com.proyectohu.entity.ActividadCampanaEntity;
 import mx.com.proyectohu.entity.ActividadMapeoCampanaEntity;
-import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
 
 @Service
 public class ActividadCampanaService {
@@ -51,9 +51,10 @@ public class ActividadCampanaService {
 		actividadCampanaEntity.setIdActividad(actividadCampanaRequestDTO.getActividadDTO().getActividad().getIdActividad());
 		actividadCampanaEntity.setIdEjecucion(actividadCampanaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
 		actividadCampanaEntity.setBolActivo(true);
-		actividadCampanaEntity.setFechaCreacion(new Date());
+		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+		actividadCampanaEntity.setFechaCreacion(fechaActual);
 		actividadCampanaEntity.setIdUsuarioUltModificacion(actividadCampanaRequestDTO.getIdUsuario());
-		actividadCampanaEntity.setFechaUltModificacion(new Date());
+		actividadCampanaEntity.setFechaUltModificacion(fechaActual);
 
 
 		idTareaCampana=actividadCampanaRepository.save(actividadCampanaEntity).getIdActividadCampana();
@@ -147,7 +148,8 @@ public class ActividadCampanaService {
 			actividadCampanaEntity.setIdUsuarioUltModificacion(actividadCampanaRequestDTO.getIdUsuario());
 			actividadCampanaEntity.setIdActividad(actividadCampanaRequestDTO.getActividadDTO().getActividad().getIdActividad());
 			actividadCampanaEntity.setIdEjecucion(actividadCampanaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
-			actividadCampanaEntity.setFechaUltModificacion(new Date());
+			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+			actividadCampanaEntity.setFechaUltModificacion(fechaActual);
 
 			actividadCampanaEntity = actividadCampanaRepository.save(actividadCampanaEntity);
 			actividadCampanaResponseDTO.setIdActividadCampana(actividadCampanaEntity.getIdActividadCampana());
@@ -177,7 +179,8 @@ public class ActividadCampanaService {
 			if (!actividadCampanaEntity.getBolActivo()) {
 				actividadCampanaEntity.setIdUsuarioUltModificacion(actividadCampanaRequestDTO.getIdUsuario());
 				actividadCampanaEntity.setBolActivo(true);
-				actividadCampanaEntity.setFechaUltModificacion(new Date());
+				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+				actividadCampanaEntity.setFechaUltModificacion(fechaActual);
 				actividadCampanaEntity = actividadCampanaRepository.save(actividadCampanaEntity);
 				actividadCampanaResponseDTO.setIdActividadCampana(actividadCampanaEntity.getIdActividadCampana());
 			}
@@ -199,7 +202,8 @@ public class ActividadCampanaService {
 			if (actividadCampanaEntity.getBolActivo()) {
 				actividadCampanaEntity.setIdUsuarioUltModificacion(actividadCampanaRequestDTO.getIdUsuario());
 				actividadCampanaEntity.setBolActivo(false);
-				actividadCampanaEntity.setFechaUltModificacion(new Date());
+				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+				actividadCampanaEntity.setFechaUltModificacion(fechaActual);
 				actividadCampanaEntity = actividadCampanaRepository.save(actividadCampanaEntity);
 				actividadCampanaResponseDTO.setIdActividadCampana(actividadCampanaEntity.getIdActividadCampana());
 			}
@@ -219,8 +223,8 @@ public class ActividadCampanaService {
 		actividadMapeoCampanaEntity.setLlaveActividadMapeoCampana(llaveActividadMapeoCampana);
 		actividadMapeoCampanaEntity.setBolActivo(true);
 		actividadMapeoCampanaEntity.setIdABCUsuarioUltModificacion(idUsuario);
-		actividadMapeoCampanaEntity.setFecCreacion(new Date());
-		actividadMapeoCampanaEntity.setFecUltModificacion(new Date());
+		actividadMapeoCampanaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
+		actividadMapeoCampanaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 		
 		mapeoActividadCampanaRepository.save(actividadMapeoCampanaEntity);
 		

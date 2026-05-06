@@ -3,7 +3,7 @@ package mx.com.proyectohu.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class MiddlewareDTO {
+public class MiddlewarePETDTO {
 	
     private RecordDataDTO recordData;
     

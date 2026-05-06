@@ -1,13 +1,13 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class BitacoraTareaLineaDTO {
 	
 	
 	private Long id;
 	private String 	detalle;
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 	/**
 	 * @return the id
 	 */
@@ -35,15 +35,16 @@ public class BitacoraTareaLineaDTO {
 	/**
 	 * @return the fechaCreacion
 	 */
-	public Date getFechaCreacion() {
+	public Timestamp getFechaCreacion() {
 		return fechaCreacion;
 	}
 	/**
 	 * @param fechaCreacion the fechaCreacion to set
 	 */
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
+	
 
 	
 	

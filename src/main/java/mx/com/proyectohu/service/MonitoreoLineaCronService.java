@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mx.com.proyectohu.client.CargarLineaClient;
 import mx.com.proyectohu.client.EnvioLineaClient;
+import mx.com.proyectohu.client.EnvioLineaClientFeign;
 import mx.com.proyectohu.client.ValidarLineaClient;
 import mx.com.proyectohu.component.TareaCampanaDAO;
 import mx.com.proyectohu.component.TareaLineaDAO;
@@ -55,6 +56,8 @@ public class MonitoreoLineaCronService {
 	@Autowired
 	public EnvioLineaClient envioLineaClient;
 	
+
+	
 	@Value("${hora.cron.monitoreo}")
 	public String codigoHoraAPP;
 	
@@ -86,7 +89,7 @@ public class MonitoreoLineaCronService {
 					if (rootArray.isArray()) {
 						for (JsonNode item : rootArray) {
 							Long idLineaNegocio = item.path("linea").path("id").asLong();
-							JsonNode tareas = item.path("tarea");
+							JsonNode tareas = item.path("tareas");
 							if (tareas.isArray()) {
 								for (JsonNode tarea : tareas) {
 									Long idActividad = tarea.path("actividad").path("id").asLong();
@@ -114,6 +117,8 @@ public class MonitoreoLineaCronService {
 										if(codigoActividad.equals("ENV")) {
 											
 											envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
+											
+											
 											
 										}
 										

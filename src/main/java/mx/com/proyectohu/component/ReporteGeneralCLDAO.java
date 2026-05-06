@@ -48,10 +48,11 @@ public class ReporteGeneralCLDAO {
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					 clResponseDTO= new ReporteGeneralLCResponseDTO();
+					clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					clResponseDTO.setFdFechaFin(resultado.getDate("FDFECHAFIN").toLocalDate());
-					clResponseDTO.setTotalRegistros(resultado.getInt("FINREGISTROS"));
+					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					clResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
 										
 					reporteGeneralLCResponseDTOlist.add(clResponseDTO);
 			
@@ -91,11 +92,12 @@ public class ReporteGeneralCLDAO {
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					 clResponseDTO= new ReporteGeneralLCResponseDTO();
+					 clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					clResponseDTO.setFdFechaFin(resultado.getDate("FDFECHAFIN").toLocalDate());
-					clResponseDTO.setTotalRegistros(resultado.getInt("FINREGISTROS"));
-					clResponseDTO.setTotalRegistrosAprobados(resultado.getInt("FINOACEPTADOS"));	
+					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					clResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
+					clResponseDTO.setTotalRegistrosAprobados(resultado.getInt("FINOAPROBADOS"));	
 					clResponseDTO.setTotalRegistrosRechazados(resultado.getInt("FINORECHAZADOS"));
 					
 					
@@ -138,10 +140,13 @@ public class ReporteGeneralCLDAO {
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					 clResponseDTO= new ReporteGeneralLCResponseDTO();
+					 clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					clResponseDTO.setFdFechaFin(resultado.getDate("FDFECHAFIN").toLocalDate());
-					clResponseDTO.setTotalRegistros(resultado.getInt("FINREGISTROS"));
+					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					clResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
+					clResponseDTO.setTotalRegistrosAprobados(0);	
+					clResponseDTO.setTotalRegistrosRechazados(0);
 				
 					
 					

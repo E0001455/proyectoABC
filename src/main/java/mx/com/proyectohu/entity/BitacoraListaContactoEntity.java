@@ -1,7 +1,6 @@
 package mx.com.proyectohu.entity;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

@@ -1,9 +1,6 @@
 package mx.com.proyectohu.service;
 
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +12,7 @@ import mx.com.proyectohu.repository.TareaLineaRepository;
 import mx.com.proyectohu.component.ReporteGeneralCLDAO;
 import mx.com.proyectohu.component.ReporteIndividualCLDAO;
 import mx.com.proyectohu.dto.CLRequestDTO;
-import mx.com.proyectohu.dto.CLResponseDTO;
 import mx.com.proyectohu.dto.ReporteGeneralLCResponseDTO;
-import mx.com.proyectohu.entity.BitacoraListaContactoEntity;
-import mx.com.proyectohu.entity.ListaContactoEntity;
-import mx.com.proyectohu.entity.TareaLineaEntity;
 
 
 @Service

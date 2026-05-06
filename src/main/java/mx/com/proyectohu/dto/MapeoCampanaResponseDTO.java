@@ -1,6 +1,8 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+
+
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +20,7 @@ public class MapeoCampanaResponseDTO {
 	@JsonProperty("linea")
 	private  CatLineaNegocio	catLineaNegocio;
 	
+	@JsonProperty("activo")
 	private Boolean bolActivo;
 	
 	@JsonProperty("nombre")
@@ -27,12 +30,12 @@ public class MapeoCampanaResponseDTO {
 	private String 	descripcion;
 	
 	@JsonProperty("fechaCreacion")
-	private Date 	fecCreacion;
+	private Timestamp 	fecCreacion;
 	
 	private Long 	idABCUsuarioUltModificacion;
 	
 	@JsonProperty("fechaUltimaModificacion")
-	private Date 	fecUltModificacion;
+	private Timestamp 	fecUltModificacion;
 	
 	@JsonProperty("columnas")
 	private Integer columnas;
@@ -124,18 +127,7 @@ public class MapeoCampanaResponseDTO {
 		this.descripcion = descripcion;
 	}
 
-	/**
-	 * @return the fecCreacion
-	 */
-	public Date getFecCreacion() {
-		return fecCreacion;
-	}
-	/**
-	 * @param fecCreacion the fecCreacion to set
-	 */
-	public void setFecCreacion(Date fecCreacion) {
-		this.fecCreacion = fecCreacion;
-	}
+	
 	/**
 	 * @return the idABCUsuarioUltModificacion
 	 */
@@ -148,18 +140,7 @@ public class MapeoCampanaResponseDTO {
 	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
 		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
 	}
-	/**
-	 * @return the fecUltModificacion
-	 */
-	public Date getFecUltModificacion() {
-		return fecUltModificacion;
-	}
-	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
-	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
-		this.fecUltModificacion = fecUltModificacion;
-	}
+	
 	/**
 	 * @return the columnas
 	 */
@@ -219,6 +200,30 @@ public class MapeoCampanaResponseDTO {
 	 */
 	public void setFiPorcentajeError(Integer fiPorcentajeError) {
 		this.fiPorcentajeError = fiPorcentajeError;
+	}
+	/**
+	 * @return the fecCreacion
+	 */
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+	/**
+	 * @param fecCreacion the fecCreacion to set
+	 */
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
+	/**
+	 * @return the fecUltModificacion
+	 */
+	public Timestamp getFecUltModificacion() {
+		return fecUltModificacion;
+	}
+	/**
+	 * @param fecUltModificacion the fecUltModificacion to set
+	 */
+	public void setFecUltModificacion(Timestamp fecUltModificacion) {
+		this.fecUltModificacion = fecUltModificacion;
 	}
 	
 

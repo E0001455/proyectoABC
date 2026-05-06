@@ -1,9 +1,7 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RecordDataDTO {
 	

@@ -1,16 +1,11 @@
 package mx.com.proyectohu.dto;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.sql.Timestamp;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Column;
 
 
 
@@ -28,8 +23,8 @@ public class ReporteGeneralPETResponseDTO {
 	private String	nombreMapeo;
 	
 	@JsonProperty("fecha")
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate 	fdFechaFin;
+	
+	private Timestamp 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer  totalRegistros;
@@ -39,6 +34,9 @@ public class ReporteGeneralPETResponseDTO {
 	
 	@JsonProperty("rechazados")
 	private Integer  totalRegistrosRechazados;
+	
+	@JsonProperty("pendientes")
+	private Integer  pendientes;
 
 	
 	/**
@@ -70,14 +68,11 @@ public class ReporteGeneralPETResponseDTO {
 	}
 
 
-
-	
-	
-	public LocalDate getFdFechaFin() {
+	public Timestamp getFdFechaFin() {
 		return fdFechaFin;
 	}
 
-	public void setFdFechaFin(LocalDate fdFechaFin) {
+	public void setFdFechaFin(Timestamp fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 
@@ -135,6 +130,14 @@ public class ReporteGeneralPETResponseDTO {
 	 */
 	public void setNombreCampana(String nombreCampana) {
 		this.nombreCampana = nombreCampana;
+	}
+
+	public Integer getPendientes() {
+		return pendientes;
+	}
+
+	public void setPendientes(Integer pendientes) {
+		this.pendientes = pendientes;
 	}
 	
 	

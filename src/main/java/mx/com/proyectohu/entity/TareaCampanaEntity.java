@@ -1,8 +1,9 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,10 +53,10 @@ public class TareaCampanaEntity implements Serializable {
 	private Long 	idEstatusTarea;
 	
 	@Column(name = "FDFECHAINICIO")
-	private Date 	fdFechaInicio;
+	private Timestamp 	fdFechaInicio;
 	
 	@Column(name = "FDFECHAFIN")
-	private Date 	fdFechaFin;
+	private Timestamp 	fdFechaFin;
 	
 	@Column(name = "FINOREGISTROS")
 	private Integer finRegistros;
@@ -189,28 +190,32 @@ public class TareaCampanaEntity implements Serializable {
 		this.idEstatusTarea = idEstatusTarea;
 	}
 
+	
 	/**
 	 * @return the fdFechaInicio
 	 */
-	public Date getFdFechaInicio() {
+	public Timestamp getFdFechaInicio() {
 		return fdFechaInicio;
 	}
 
 	/**
 	 * @param fdFechaInicio the fdFechaInicio to set
 	 */
-	public void setFdFechaInicio(Date fdFechaInicio) {
+	public void setFdFechaInicio(Timestamp fdFechaInicio) {
 		this.fdFechaInicio = fdFechaInicio;
 	}
 
-	
-	
-
-	public Date getFdFechaFin() {
+	/**
+	 * @return the fdFechaFin
+	 */
+	public Timestamp getFdFechaFin() {
 		return fdFechaFin;
 	}
 
-	public void setFdFechaFin(Date fdFechaFin) {
+	/**
+	 * @param fdFechaFin the fdFechaFin to set
+	 */
+	public void setFdFechaFin(Timestamp fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 

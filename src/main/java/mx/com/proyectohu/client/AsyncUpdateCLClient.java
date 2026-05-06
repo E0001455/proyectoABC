@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import mx.com.proyectohu.component.EnvioLineaDAO;
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
 
 @Service
 public class AsyncUpdateCLClient {
@@ -35,7 +35,7 @@ public class AsyncUpdateCLClient {
 
 
 
-	public String llamadoAsyncUpdateCL (String token,  MiddlewareDTO middlewareDTO, String lineaNegocio){
+	public String llamadoAsyncUpdateCL (String token,  MiddlewareCLDTO middlewareDTO, String lineaNegocio){
 		Integer statusCode=null;
 		String body=null;
 		String url= null;
@@ -62,9 +62,7 @@ public class AsyncUpdateCLClient {
 			 System.out.print(response);				
 		
 		
-		if (response!=null) {
-			envioLineaDAO.actualizarEstatusBitacora(true);
-		}
+	
 		
 		return response;
 

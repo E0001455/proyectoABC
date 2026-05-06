@@ -5,13 +5,20 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
+import java.util.Map;
 
+import mx.com.proyectohu.ProyectoApplication;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EnvioLineaClient {
+
+    private final ProyectoApplication proyectoApplication;
 
 
 
@@ -19,10 +26,14 @@ public class EnvioLineaClient {
 	
 	@Value("${envio.linea.url}")
 	public String envioListaContactoURL;
+	
+//	@Autowired
+//	public EnvioLineaClientFeign envioLineaClientFeign;
 
 
-	public EnvioLineaClient() {
+	public EnvioLineaClient(ProyectoApplication proyectoApplication) {
 		this.httpClient = HttpClient.newHttpClient();
+		this.proyectoApplication = proyectoApplication;
 	}
 
 
@@ -36,7 +47,18 @@ public class EnvioLineaClient {
 		json.put("lineaNegocio", lineaNegocio);
 		json.put("idTareaLinea", idTareaLinea);
 		
+		
+	/*	Map<String, Object>  body= new HashMap<String, Object>(); 
+		
+		body.put("lineaNegocio", lineaNegocio);
+		body.put("idTareaLinea", idTareaLinea);
+		
+		ResponseEntity<?> respuesta =envioLineaClientFeign.envioListaContacto(body);
+		
+		System.out.print("nunca");
+		*/
 		try {
+			
 			HttpRequest request = HttpRequest.newBuilder()
 					.uri(URI.create(url))
 					.header("Content-Type", "application/json")
@@ -57,7 +79,7 @@ public class EnvioLineaClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		if (statusCode == 200) {
 			return body;
 		} else {

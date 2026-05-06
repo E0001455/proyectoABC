@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import mx.com.proyectohu.client.AsyncUpdateCLClient;
 import mx.com.proyectohu.client.AsyncUpdatePETClient;
 import mx.com.proyectohu.client.TokenClient;
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
+import mx.com.proyectohu.dto.MiddlewarePETDTO;
 import mx.com.proyectohu.repository.ListaContactoRepository;
 
 @Service
@@ -34,12 +35,12 @@ public class MiddlewarePETService {
 		return token;
 		
 	}
-	public String llamarAsynUpdatePET(MiddlewareDTO middlewareDTO,String lineaNegocio) {
+	public String llamarAsynUpdatePET(MiddlewarePETDTO middlewarePETDTO,String lineaNegocio) {
 		String token="";
 		
 		token = llamarToken();
 		
-		String response = asyncUpdatePETClient.llamadoAsyncUpdatePET(token, middlewareDTO,lineaNegocio);
+		String response = asyncUpdatePETClient.llamadoAsyncUpdatePET(token, middlewarePETDTO,lineaNegocio);
 		
 		
 		return response;

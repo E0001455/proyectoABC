@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,13 +45,13 @@ public class ActividadCampanaEntity implements Serializable {
 	private Boolean bolActivo;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 	
 	@Column(name = "FIIDUSUARIOULTMODIFICACION")
 	private Long 	idUsuarioUltModificacion;
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date 	fechaUltModificacion;
+	private Timestamp 	fechaUltModificacion;
 	
 
 	/**
@@ -152,20 +152,7 @@ public class ActividadCampanaEntity implements Serializable {
 		this.bolActivo = bolActivo;
 	}
 
-	/**
-	 * @return the fechaCreacion
-	 */
-	public Date getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	/**
-	 * @param fechaCreacion the fechaCreacion to set
-	 */
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
+	
 	/**
 	 * @return the idUsuarioUltModificacion
 	 */
@@ -180,19 +167,22 @@ public class ActividadCampanaEntity implements Serializable {
 		this.idUsuarioUltModificacion = idUsuarioUltModificacion;
 	}
 
-	/**
-	 * @return the fechaUltModificacion
-	 */
-	public Date getFechaUltModificacion() {
+	public Timestamp getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Timestamp fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Timestamp getFechaUltModificacion() {
 		return fechaUltModificacion;
 	}
 
-	/**
-	 * @param fechaUltModificacion the fechaUltModificacion to set
-	 */
-	public void setFechaUltModificacion(Date fechaUltModificacion) {
+	public void setFechaUltModificacion(Timestamp fechaUltModificacion) {
 		this.fechaUltModificacion = fechaUltModificacion;
 	}
+
 
 	
 	

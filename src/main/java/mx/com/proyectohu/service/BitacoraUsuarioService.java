@@ -1,6 +1,7 @@
 package mx.com.proyectohu.service;
 
-import java.util.Date;
+
+import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,8 @@ public class BitacoraUsuarioService {
 		bitacoraUsuarioEntity.setDetalle(bitacoraUsuarioRequestDTO.getBitacoraDTO().getDetalle());
 		bitacoraUsuarioEntity.setIp(bitacoraUsuarioRequestDTO.getBitacoraDTO().getIp());
 		bitacoraUsuarioEntity.setNavegador(bitacoraUsuarioRequestDTO.getBitacoraDTO().getNavegador());
-		bitacoraUsuarioEntity.setFecCreacion(new Date());
+		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+		bitacoraUsuarioEntity.setFecCreacion(fechaActual);
 
 
 		idBitacoraUsuario=bitacoraUsarioRepository.save(bitacoraUsuarioEntity).getIdABCBitacoraUsuario();

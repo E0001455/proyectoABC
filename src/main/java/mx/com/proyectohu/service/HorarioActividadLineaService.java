@@ -1,7 +1,7 @@
 package mx.com.proyectohu.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +41,9 @@ public class HorarioActividadLineaService {
 			horarioActividadLineaEntity.setIdUsuario(horarioActividadLineaRequestDTO.getIdUsuario());
 			horarioActividadLineaEntity.setIdUsuarioUltModificacion(horarioActividadLineaRequestDTO.getIdUsuario());
 			horarioActividadLineaEntity.setBolActivo(true);
-			horarioActividadLineaEntity.setFechaCreacion(new Date());
-			horarioActividadLineaEntity.setFechaUltModificacion(new Date());
+			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+			horarioActividadLineaEntity.setFechaCreacion(fechaActual);
+			horarioActividadLineaEntity.setFechaUltModificacion(fechaActual);
 			horarioActividadLineaRepository.save(horarioActividadLineaEntity);
 
 		}
@@ -102,7 +103,8 @@ public class HorarioActividadLineaService {
 
 					horarioActividadLineaEntity.setIdUsuarioUltModificacion(horarioActividadLineaRequestDTO.getIdUsuario());
 					horarioActividadLineaEntity.setBolActivo(true);
-					horarioActividadLineaEntity.setFechaUltModificacion(new Date());
+					Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+					horarioActividadLineaEntity.setFechaUltModificacion(fechaActual);
 					horarioActividadLineaRepository.save(horarioActividadLineaEntity);
 					horarioActividadLineaResponseDTO.setIdActividadLinea(idTareaLinea);
 				}
@@ -132,7 +134,8 @@ public class HorarioActividadLineaService {
 
 					horarioActividadLineaEntity.setIdUsuarioUltModificacion(horarioActividadLineaRequestDTO.getIdUsuario());
 					horarioActividadLineaEntity.setBolActivo(false);
-					horarioActividadLineaEntity.setFechaUltModificacion(new Date());
+					Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+					horarioActividadLineaEntity.setFechaUltModificacion(fechaActual);
 					horarioActividadLineaRepository.save(horarioActividadLineaEntity);
 
 					horarioActividadLineaResponseDTO.setIdActividadLinea(idTareaLinea);

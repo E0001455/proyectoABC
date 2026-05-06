@@ -2,8 +2,8 @@ package mx.com.proyectohu.service;
 
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,9 +38,10 @@ public class MapeoLineaService {
 		abcConfigMapeoLineaEntity.setBolActivo(true);
 		abcConfigMapeoLineaEntity.setNombre(mapeoLineaRequestDTO.getMapeoDTO().getNombre());
 		abcConfigMapeoLineaEntity.setDescripcion(mapeoLineaRequestDTO.getMapeoDTO().getDescripcion());
-		abcConfigMapeoLineaEntity.setFecCreacion(new Date());
+		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+		abcConfigMapeoLineaEntity.setFecCreacion(fechaActual);
 		abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
-		abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+		abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
 		abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
 		abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
 		abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
@@ -108,7 +109,8 @@ public class MapeoLineaService {
 			abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
 			abcConfigMapeoLineaEntity.setNombre(mapeoLineaRequestDTO.getMapeoDTO().getNombre());
 			abcConfigMapeoLineaEntity.setDescripcion(mapeoLineaRequestDTO.getMapeoDTO().getDescripcion());
-			abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+			abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
 			abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
 			abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
 			abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
@@ -142,7 +144,8 @@ public class MapeoLineaService {
 			if (!abcConfigMapeoLineaEntity.getBolActivo()) {
 				abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
 				abcConfigMapeoLineaEntity.setBolActivo(true);
-				abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+				abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
 				abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
 				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
 			}
@@ -164,7 +167,8 @@ public class MapeoLineaService {
 			if (abcConfigMapeoLineaEntity.getBolActivo()) {
 				abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
 				abcConfigMapeoLineaEntity.setBolActivo(false);
-				abcConfigMapeoLineaEntity.setFecUltModificacion(new Date());
+				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+				abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
 				abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
 				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
 			}

@@ -3,9 +3,7 @@ package mx.com.proyectohu.dto;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PETRequestDTO {

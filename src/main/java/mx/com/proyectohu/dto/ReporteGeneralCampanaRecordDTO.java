@@ -1,7 +1,6 @@
 package mx.com.proyectohu.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 

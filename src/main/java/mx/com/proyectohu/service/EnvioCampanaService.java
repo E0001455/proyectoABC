@@ -3,7 +3,6 @@ package mx.com.proyectohu.service;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,7 +14,8 @@ import mx.com.proyectohu.client.MiddlewareCLClient;
 import mx.com.proyectohu.client.MiddlewarePETClient;
 import mx.com.proyectohu.component.EnvioCampanaDAO;
 import mx.com.proyectohu.dto.MergeRuleDTO;
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
+import mx.com.proyectohu.dto.MiddlewarePETDTO;
 import mx.com.proyectohu.dto.RecordDataDTO;
 import mx.com.proyectohu.entity.BitacoraExtencionPerfilEntity;
 import mx.com.proyectohu.entity.BitacoraTareaCampanaEntity;
@@ -25,15 +25,13 @@ import mx.com.proyectohu.entity.TareaCampanaEntity;
 import mx.com.proyectohu.repository.BitacoraExtencionPerfilRepository;
 import mx.com.proyectohu.repository.BitacoraTareaCampanaRepository;
 import mx.com.proyectohu.repository.TareaCampanaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 
 
 @Service
 public class EnvioCampanaService {
 
 
-
-	
-	
 	@Autowired
 	public MiddlewarePETClient  middlewarePETClient;
 	
@@ -53,7 +51,7 @@ public class EnvioCampanaService {
 	Integer totalregistros =0;
 	
 	
-	public MiddlewareDTO ejecutarEnvioExtensionPerfil(String lineaNegocio,  Long idTareaCampana) throws Exception {
+	public MiddlewarePETDTO ejecutarEnvioExtensionPerfil(String lineaNegocio,  Long idTareaCampana) throws Exception {
 		List<Map<String, Object>> datos = new ArrayList<Map<String, Object>>();
 		List<String>  columnasNombreCorrecto = new ArrayList<String>();
 		List<String>  columnas = new ArrayList<String>();
@@ -76,7 +74,7 @@ public class EnvioCampanaService {
 		
 		actualizarTarea(idTareaCampana, 2L);
 		
-		MiddlewareDTO middlewareDTO = new MiddlewareDTO();
+		MiddlewarePETDTO middlewarePETDTO = new MiddlewarePETDTO();
 		
 		RecordDataDTO recordDataDTO = new RecordDataDTO();
 		
@@ -103,26 +101,26 @@ public class EnvioCampanaService {
 		
 		recordDataDTO.setMapTemplateName(null);
 		
-		middlewareDTO.setRecordData(recordDataDTO);
+		middlewarePETDTO.setRecordData(recordDataDTO);
 		
 		
-		middlewareDTO.setInsertOnNoMatch(true);
-		middlewareDTO.setUpdateOnMatch("REPLACE_ALL");
-		middlewareDTO.setMatchColumnName1("CUSTOMER_ID");
-		middlewareDTO.setMatchColumnName2(null);
+		middlewarePETDTO.setInsertOnNoMatch(true);
+		middlewarePETDTO.setUpdateOnMatch("REPLACE_ALL");
+		middlewarePETDTO.setMatchColumnName1("CUSTOMER_ID");
+		middlewarePETDTO.setMatchColumnName2(null);
 		
 		
 		
 		
-		middlewarePETClient.llamadoAsyncUpdatePET(middlewareDTO, lineaNegocio);
+		middlewarePETClient.llamadoAsyncUpdatePET(middlewarePETDTO, lineaNegocio);
 
 	List<Long> listaId = envioCampanaDAO.obtenerids();
 		
-		registrarBitacora(listaId);
+		registrarBitacora(listaId,idTareaCampana);
 		
 		actualizarTarea(idTareaCampana, 4L);
 		
-		return middlewareDTO;
+		return middlewarePETDTO;
 		
 	}
 	
@@ -138,9 +136,9 @@ public class EnvioCampanaService {
 			tareaCampanaEntity.setIdEstatusTarea(estatus);
 			
 			if (estatus==2) {
-				tareaCampanaEntity.setFdFechaInicio(new Date());
+				tareaCampanaEntity.setFdFechaInicio(FechaUtil.obtenerFechaActual());
 				}else {
-					tareaCampanaEntity.setFdFechaFin(new Date());
+					tareaCampanaEntity.setFdFechaFin(FechaUtil.obtenerFechaActual());
 					tareaCampanaEntity.setFinProcesados(totalregistros);
 					tareaCampanaEntity.setFinRegistros(totalregistros);
 				}
@@ -153,7 +151,7 @@ public class EnvioCampanaService {
 			
 			bitacoraTareaCampanaEntity.setIdTareaCampana(idTareaCampana);
 			bitacoraTareaCampanaEntity.setIdEstatusTarea(estatus);
-			bitacoraTareaCampanaEntity.setFechaCreacion(new Date());
+			bitacoraTareaCampanaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 			
 			if (estatus==2) {
 				bitacoraTareaCampanaEntity.setDetalle("EJECUCION DE ENVIO");
@@ -166,18 +164,9 @@ public class EnvioCampanaService {
 	}
 		
 		
-		public void registrarBitacora(List<Long> list) {
-			
-			
-			BitacoraExtencionPerfilEntity bitacoraExtencionPerfilEntity = null;
-			EstatusABCEntity estatusABCEntity=null;
-			ExtensionPerfilEntity extensionPerfilEntity= null;
-			
-			
+		public void registrarBitacora(List<Long> list, Long idTareaCampana) {
 			for(Long id : list) {
-				bitacoraExtencionPerfilEntity = new BitacoraExtencionPerfilEntity();
-				 estatusABCEntity = new EstatusABCEntity(); 
-				 envioCampanaDAO.insertarBitacoraExtensionPerfil(id);
+				 envioCampanaDAO.insertarBitacoraExtensionPerfil(id,idTareaCampana);
 				
 				
 			}

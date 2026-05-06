@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,13 +54,13 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	private Integer fiPorcentajeError;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date 	fecCreacion;
+	private Timestamp 	fecCreacion;
 	
 	@Column(name = "FIIDUSUARIOULTMODIFICACION")
 	private Long 	idABCUsuarioUltModificacion;
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date 	fecUltModificacion;
+	private Timestamp 	fecUltModificacion;
 	
 
 	
@@ -138,18 +138,7 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	/**
-	 * @return the fecCreacion
-	 */
-	public Date getFecCreacion() {
-		return fecCreacion;
-	}
-	/**
-	 * @param fecCreacion the fecCreacion to set
-	 */
-	public void setFecCreacion(Date fecCreacion) {
-		this.fecCreacion = fecCreacion;
-	}
+	
 	/**
 	 * @return the idABCUsuarioUltModificacion
 	 */
@@ -162,18 +151,8 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
 		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
 	}
-	/**
-	 * @return the fecUltModificacion
-	 */
-	public Date getFecUltModificacion() {
-		return fecUltModificacion;
-	}
-	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
-	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
-		this.fecUltModificacion = fecUltModificacion;
-	}
+	
+	
 	/**
 	 * @return the bolValidacion
 	 */
@@ -222,5 +201,18 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	public void setFiPorcentajeError(Integer fiPorcentajeError) {
 		this.fiPorcentajeError = fiPorcentajeError;
 	}
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
+	public Timestamp getFecUltModificacion() {
+		return fecUltModificacion;
+	}
+	public void setFecUltModificacion(Timestamp fecUltModificacion) {
+		this.fecUltModificacion = fecUltModificacion;
+	}
+	
 	
 }

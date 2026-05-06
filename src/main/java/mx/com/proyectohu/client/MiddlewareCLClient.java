@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
 
 @Service
 public class MiddlewareCLClient {
@@ -22,7 +22,7 @@ public class MiddlewareCLClient {
 	public String middlewareCLUrl;
 
 
-	public String llamadoAsyncUpdateCL (MiddlewareDTO middlewareDTO, String lineaNegocio){
+	public String llamadoAsyncUpdateCL (MiddlewareCLDTO middlewareCLDTO, String lineaNegocio){
 		Integer statusCode=null;
 		String body=null;
 		String url= middlewareCLUrl;
@@ -32,7 +32,7 @@ public class MiddlewareCLClient {
 
 		response = webClient.post()
 			    .uri(middlewareCLUrl + "/{lineaNegocio}", lineaNegocio)
-			    .bodyValue(middlewareDTO)
+			    .bodyValue(middlewareCLDTO)
 			    .retrieve()
 			    .bodyToMono(String.class)
 			    .block();

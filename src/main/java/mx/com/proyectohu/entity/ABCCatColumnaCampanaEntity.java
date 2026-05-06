@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,10 +39,10 @@ public class ABCCatColumnaCampanaEntity implements Serializable,CatalogoInterfac
 	private String 	nombre;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date 	fecCreacion;
+	private Timestamp 	fecCreacion;
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date 	fecUltModificacion;
+	private Timestamp 	fecUltModificacion;
 
 	/**
 	 * @return the id
@@ -117,30 +117,30 @@ public class ABCCatColumnaCampanaEntity implements Serializable,CatalogoInterfac
 	/**
 	 * @return the fecCreacion
 	 */
-	public Date getFecCreacion() {
+	public Timestamp getFecCreacion() {
 		return fecCreacion;
 	}
 
 	/**
 	 * @param fecCreacion the fecCreacion to set
 	 */
-	public void setFecCreacion(Date fecCreacion) {
+	public void setFecCreacion(Timestamp fecCreacion) {
 		this.fecCreacion = fecCreacion;
 	}
 
 	/**
 	 * @return the fecUltModificacion
 	 */
-	public Date getFecUltModificacion() {
+	public Timestamp getFecUltModificacion() {
 		return fecUltModificacion;
 	}
 
 	/**
 	 * @param fecUltModificacion the fecUltModificacion to set
 	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
+	public void setFecUltModificacion(Timestamp fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
 	}
 
-
+	
 }

@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import mx.com.proyectohu.component.EnvioLineaDAO;
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
+import mx.com.proyectohu.dto.MiddlewarePETDTO;
 
 @Service
 public class AsyncUpdatePETClient {
@@ -35,7 +36,7 @@ public class AsyncUpdatePETClient {
 
 
 
-	public String llamadoAsyncUpdatePET(String token,  MiddlewareDTO middlewareDTO, String lineaNegocio){
+	public String llamadoAsyncUpdatePET(String token,  MiddlewarePETDTO middlewarePETDTO, String lineaNegocio){
 		Integer statusCode=null;
 		String body=null;
 		String url= null;
@@ -50,7 +51,7 @@ public class AsyncUpdatePETClient {
 			 response = webClient.post()
 			        .uri(url)
 			        .header("Authorization", token)
-			        .bodyValue(middlewareDTO)
+			        .bodyValue(middlewarePETDTO)
 			        .retrieve()
 			        .bodyToMono(String.class)
 			        .block();

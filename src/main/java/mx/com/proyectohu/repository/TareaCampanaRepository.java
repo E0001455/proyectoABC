@@ -18,7 +18,7 @@ import mx.com.proyectohu.entity.TareaCampanaEntity;
 @Repository
 public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntity, Long> {
 
-	@Query(value = """
+/*	@Query(value = """
 
 
 			SELECT 
@@ -58,7 +58,7 @@ public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntit
 			@Param("fechaInicio") LocalDateTime fechaInicio,
 			@Param("fechaFin") LocalDateTime fechaFin
 			);
-
+*/
 
 	@Query(value = """
 			SELECT 

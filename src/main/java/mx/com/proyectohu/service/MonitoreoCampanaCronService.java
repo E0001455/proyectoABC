@@ -79,7 +79,7 @@ public class MonitoreoCampanaCronService {
 					if (rootArray.isArray()) {
 						for (JsonNode item : rootArray) {
 							Long idLineaNegocio = item.path("linea").path("id").asLong();
-							JsonNode tareas = item.path("tarea");
+							JsonNode tareas = item.path("tareas");
 							if (tareas.isArray()) {
 								for (JsonNode tarea : tareas) {
 									Long idActividad = tarea.path("actividad").path("id").asLong();

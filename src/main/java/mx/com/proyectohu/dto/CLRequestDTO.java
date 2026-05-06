@@ -3,14 +3,12 @@ package mx.com.proyectohu.dto;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class CLRequestDTO {
 	
-	 private String riid;
+	 private String customerID;
 	    private String nombre;
 	    private String apellidoPaterno;
 	    private String correo;
@@ -45,14 +43,7 @@ public class CLRequestDTO {
 			this.tipoActividad = tipoActividad;
 		}
 
-		public String getRiid() {
-	        return riid;
-	    }
-
-	    public void setRiid(String riid) {
-	        this.riid = riid;
-	    }
-
+	
 	    public String getNombre() {
 	        return nombre;
 	    }
@@ -147,6 +138,14 @@ public class CLRequestDTO {
 
 		public void setTipoConsulta(String tipoConsulta) {
 			this.tipoConsulta = tipoConsulta;
+		}
+
+		public String getCustomerID() {
+			return customerID;
+		}
+
+		public void setCustomerID(String customerID) {
+			this.customerID = customerID;
 		}
 
 	

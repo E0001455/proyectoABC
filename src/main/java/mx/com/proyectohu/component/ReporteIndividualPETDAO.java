@@ -60,14 +60,13 @@ public class ReporteIndividualPETDAO {
 				while (resultado.next()) {
 					petResponseDTO= new PETResponseDTO();
 					
-					
+			
 					petResponseDTO.setLineaDeNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
-					petResponseDTO.setIdCampana(resultado.getString("FCID_CAMPANA"));
 					petResponseDTO.setNumLote(resultado.getString("FCNUM_LOTE"));
 					petResponseDTO.setCustomerId(resultado.getString("FCCUSTOMER_ID_"));
 					petResponseDTO.setIdAfore(resultado.getString("FCID_AFORE"));
 					petResponseDTO.setDescripcionDeAfore(resultado.getString("FCDESCRIPCION_DE_AFORE"));
-					petResponseDTO.setIdClienteAhorrrador(resultado.getString("FCID_CLIENTE_AHORRADOR"));
+					petResponseDTO.setIdClienteAhorrador(resultado.getString("FCID_CLIENTE_AHORRADOR"));
 					petResponseDTO.setIdPrestamoPensionado(resultado.getString("FCID_PRESTAMO_PENSIONADO"));
 					petResponseDTO.setIdSusceptiblePrestamo(resultado.getString("FCID_SUSCEPTIBLE_PRESTAMO"));
 					petResponseDTO.setIdBajaCambio(resultado.getString("FCID_BAJA_CAMBIO"));
@@ -125,7 +124,7 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setEstatusExp(resultado.getString("FCESTATUS_EXP"));
 					petResponseDTO.setSucursal(resultado.getString("FCSUCURSAL"));
 					petResponseDTO.setDomSucursal(resultado.getString("FCDOM_SUCURSAL"));
-					petResponseDTO.setFecha(resultado.getDate("FECHA_CREACION").toLocalDate());
+					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
 					petResponseDTO.setCampana(resultado.getString("FCNOMBRE_CAMPANA"));
 					
 					petResponseDTOLista.add(petResponseDTO);
@@ -176,14 +175,13 @@ public class ReporteIndividualPETDAO {
 				while (resultado.next()) {
 					petResponseDTO= new PETResponseDTO();
 					
-					
+				
 					petResponseDTO.setLineaDeNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
-					petResponseDTO.setIdCampana(resultado.getString("FCID_CAMPANA"));
 					petResponseDTO.setNumLote(resultado.getString("FCNUM_LOTE"));
 					petResponseDTO.setCustomerId(resultado.getString("FCCUSTOMER_ID_"));
 					petResponseDTO.setIdAfore(resultado.getString("FCID_AFORE"));
 					petResponseDTO.setDescripcionDeAfore(resultado.getString("FCDESCRIPCION_DE_AFORE"));
-					petResponseDTO.setIdClienteAhorrrador(resultado.getString("FCID_CLIENTE_AHORRADOR"));
+					petResponseDTO.setIdClienteAhorrador(resultado.getString("FCID_CLIENTE_AHORRADOR"));
 					petResponseDTO.setIdPrestamoPensionado(resultado.getString("FCID_PRESTAMO_PENSIONADO"));
 					petResponseDTO.setIdSusceptiblePrestamo(resultado.getString("FCID_SUSCEPTIBLE_PRESTAMO"));
 					petResponseDTO.setIdBajaCambio(resultado.getString("FCID_BAJA_CAMBIO"));
@@ -241,7 +239,7 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setEstatusExp(resultado.getString("FCESTATUS_EXP"));
 					petResponseDTO.setSucursal(resultado.getString("FCSUCURSAL"));
 					petResponseDTO.setDomSucursal(resultado.getString("FCDOM_SUCURSAL"));
-					petResponseDTO.setFecha(resultado.getDate("FECHA_CREACION").toLocalDate());
+					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
 				petResponseDTO.setEstatus(resultado.getString("ESTATUS_ABC"));
 				petResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
 				petResponseDTO.setCampana(resultado.getString("FCNOMBRE_CAMPANA"));
@@ -295,14 +293,13 @@ public class ReporteIndividualPETDAO {
 				while (resultado.next()) {
 					petResponseDTO= new PETResponseDTO();
 					
-					
+				
 					petResponseDTO.setLineaDeNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
-					petResponseDTO.setIdCampana(resultado.getString("FCID_CAMPANA"));
 					petResponseDTO.setNumLote(resultado.getString("FCNUM_LOTE"));
 					petResponseDTO.setCustomerId(resultado.getString("FCCUSTOMER_ID_"));
 					petResponseDTO.setIdAfore(resultado.getString("FCID_AFORE"));
 					petResponseDTO.setDescripcionDeAfore(resultado.getString("FCDESCRIPCION_DE_AFORE"));
-					petResponseDTO.setIdClienteAhorrrador(resultado.getString("FCID_CLIENTE_AHORRADOR"));
+					petResponseDTO.setIdClienteAhorrador(resultado.getString("FCID_CLIENTE_AHORRADOR"));
 					petResponseDTO.setIdPrestamoPensionado(resultado.getString("FCID_PRESTAMO_PENSIONADO"));
 					petResponseDTO.setIdSusceptiblePrestamo(resultado.getString("FCID_SUSCEPTIBLE_PRESTAMO"));
 					petResponseDTO.setIdBajaCambio(resultado.getString("FCID_BAJA_CAMBIO"));
@@ -360,7 +357,7 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setEstatusExp(resultado.getString("FCESTATUS_EXP"));
 					petResponseDTO.setSucursal(resultado.getString("FCSUCURSAL"));
 					petResponseDTO.setDomSucursal(resultado.getString("FCDOM_SUCURSAL"));
-					petResponseDTO.setFecha(resultado.getDate("FECHA_CREACION").toLocalDate());
+					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
 				petResponseDTO.setEstatus(resultado.getString("ESTATUS_ABC"));
 				petResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
 				petResponseDTO.setCampana(resultado.getString("FCNOMBRE_CAMPANA"));

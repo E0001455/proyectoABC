@@ -1,16 +1,11 @@
 package mx.com.proyectohu.dto;
 
-import java.security.Timestamp;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.sql.Timestamp;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Column;
 
 
 
@@ -25,7 +20,7 @@ public class ReporteGeneralLCResponseDTO {
 	private String	nombreMapeo;
 	
 	@JsonProperty("fecha")
-	private LocalDate 	fdFechaFin;
+	private Timestamp 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer  totalRegistros;
@@ -35,8 +30,25 @@ public class ReporteGeneralLCResponseDTO {
 	
 	@JsonProperty("rechazados")
 	private Integer  totalRegistrosRechazados;
+	
+	
+	private Long idTarea;
 
 	
+	/**
+	 * @return the idTarea
+	 */
+	public Long getIdTarea() {
+		return idTarea;
+	}
+
+	/**
+	 * @param idTarea the idTarea to set
+	 */
+	public void setIdTarea(Long idTarea) {
+		this.idTarea = idTarea;
+	}
+
 	/**
 	 * @return the nombreLineaNegocio
 	 */
@@ -110,20 +122,15 @@ public class ReporteGeneralLCResponseDTO {
 		this.totalRegistrosRechazados = totalRegistrosRechazados;
 	}
 
-	/**
-	 * @return the fdFechaFin
-	 */
-	public LocalDate getFdFechaFin() {
+	public Timestamp getFdFechaFin() {
 		return fdFechaFin;
 	}
 
-	/**
-	 * @param fdFechaFin the fdFechaFin to set
-	 */
-	public void setFdFechaFin(LocalDate fdFechaFin) {
+	public void setFdFechaFin(Timestamp fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 
+	
 	
 	
 	

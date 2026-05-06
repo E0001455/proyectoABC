@@ -1,6 +1,7 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 
 
@@ -12,8 +13,8 @@ public record MapeoCampanaRecordDTO(
 		Boolean bolActivo,
 		String 	nombre,
 		String 	descripcion,
-		Date 	fecCreacion,
-		Date 	fecUltModificacion,
+		Timestamp 	fecCreacion,
+		Timestamp 	fecUltModificacion,
 		Boolean bolValidacion,
 		Boolean bolEnvio,
 		Boolean fiDictaminacion,

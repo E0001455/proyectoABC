@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
+import mx.com.proyectohu.dto.MiddlewarePETDTO;
 
 @Service
 public class MiddlewarePETClient {
@@ -15,7 +16,7 @@ public class MiddlewarePETClient {
 	public String middlewarePETUrl;
 
 
-	public String llamadoAsyncUpdatePET(MiddlewareDTO middlewareDTO, String lineaNegocio){
+	public String llamadoAsyncUpdatePET(MiddlewarePETDTO middlewarePETDTO, String lineaNegocio){
 		Integer statusCode=null;
 		String body=null;
 		String url= middlewarePETUrl;
@@ -25,7 +26,7 @@ public class MiddlewarePETClient {
 
 		response = webClient.post()
 			    .uri(middlewarePETUrl + "/{lineaNegocio}", lineaNegocio)
-			    .bodyValue(middlewareDTO)
+			    .bodyValue(middlewarePETDTO)
 			    .retrieve()
 			    .bodyToMono(String.class)
 			    .block();

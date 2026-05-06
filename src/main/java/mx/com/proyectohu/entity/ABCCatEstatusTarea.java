@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +19,36 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 @SequenceGenerator(name = "SEQ_ESTATUS_TAREA_GEN",sequenceName = "SEQ_TCABCCAT_ESTATUS_TAREA",allocationSize = 1)
 public class ABCCatEstatusTarea implements Serializable,CatalogoInterface {
 	
+	/**
+	 * @return the fecCreacion
+	 */
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+
+	/**
+	 * @param fecCreacion the fecCreacion to set
+	 */
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
+
+	/**
+	 * @return the fecUltModificacion
+	 */
+	public Timestamp getFecUltModificacion() {
+		return fecUltModificacion;
+	}
+
+	/**
+	 * @param fecUltModificacion the fecUltModificacion to set
+	 */
+	public void setFecUltModificacion(Timestamp fecUltModificacion) {
+		this.fecUltModificacion = fecUltModificacion;
+	}
+
+
+
 	/**
 	 * 
 	 */
@@ -38,10 +68,10 @@ public class ABCCatEstatusTarea implements Serializable,CatalogoInterface {
 	private String 	nombre;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date 	fecCreacion;
+	private Timestamp 	fecCreacion;
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date 	fecUltModificacion;
+	private Timestamp 	fecUltModificacion;
 
 	
 
@@ -102,33 +132,7 @@ public class ABCCatEstatusTarea implements Serializable,CatalogoInterface {
 		this.nombre = nombre;
 	}
 
-	/**
-	 * @return the fecCreacion
-	 */
-	public Date getFecCreacion() {
-		return fecCreacion;
-	}
 
-	/**
-	 * @param fecCreacion the fecCreacion to set
-	 */
-	public void setFecCreacion(Date fecCreacion) {
-		this.fecCreacion = fecCreacion;
-	}
-
-	/**
-	 * @return the fecUltModificacion
-	 */
-	public Date getFecUltModificacion() {
-		return fecUltModificacion;
-	}
-
-	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
-	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
-		this.fecUltModificacion = fecUltModificacion;
-	}
 
 	/**
 	 * @return the serialversionuid

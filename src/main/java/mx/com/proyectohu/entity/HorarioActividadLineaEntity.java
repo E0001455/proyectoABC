@@ -1,15 +1,11 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 
@@ -29,13 +25,13 @@ public class HorarioActividadLineaEntity implements Serializable {
 	private Boolean bolActivo;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 	
 	@Column(name = "FIIDUSUARIOULTMODIFICACION")
 	private Long 	idUsuarioUltModificacion;
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date 	fechaUltModificacion;
+	private Timestamp 	fechaUltModificacion;
 
 
 	/**
@@ -68,13 +64,7 @@ public class HorarioActividadLineaEntity implements Serializable {
 		this.bolActivo = bolActivo;
 	}
 
-	public Date getFechaCreacion() {
-		return fechaCreacion;
-	}
 
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
 
 	public Long getIdUsuarioUltModificacion() {
 		return idUsuarioUltModificacion;
@@ -84,13 +74,34 @@ public class HorarioActividadLineaEntity implements Serializable {
 		this.idUsuarioUltModificacion = idUsuarioUltModificacion;
 	}
 
-	public Date getFechaUltModificacion() {
+	/**
+	 * @return the fechaCreacion
+	 */
+	public Timestamp getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	/**
+	 * @param fechaCreacion the fechaCreacion to set
+	 */
+	public void setFechaCreacion(Timestamp fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	/**
+	 * @return the fechaUltModificacion
+	 */
+	public Timestamp getFechaUltModificacion() {
 		return fechaUltModificacion;
 	}
 
-	public void setFechaUltModificacion(Date fechaUltModificacion) {
+	/**
+	 * @param fechaUltModificacion the fechaUltModificacion to set
+	 */
+	public void setFechaUltModificacion(Timestamp fechaUltModificacion) {
 		this.fechaUltModificacion = fechaUltModificacion;
 	}
+
 
 
 	

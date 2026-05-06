@@ -1,7 +1,6 @@
 package mx.com.proyectohu.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +14,8 @@ import mx.com.proyectohu.dto.MapeoCampanaResponseDTO;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO.CatCampana;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
-import mx.com.proyectohu.mapper.MapeoCampanaMapper;
 import mx.com.proyectohu.repository.ABCConfigMapeoCampanaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 
 
 
@@ -43,9 +42,10 @@ public class MapeoCampanaService {
 		abcConfigMapeoCampanaEntity.setBolActivo(true);
 		abcConfigMapeoCampanaEntity.setNombre(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getNombre());
 		abcConfigMapeoCampanaEntity.setDescripcion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getDescripcion());
-		abcConfigMapeoCampanaEntity.setFecCreacion(new Date());
+		
+		abcConfigMapeoCampanaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
 		abcConfigMapeoCampanaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaRequestDTO.getIdUsuario());
-		abcConfigMapeoCampanaEntity.setFecUltModificacion(new Date());
+		abcConfigMapeoCampanaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 		abcConfigMapeoCampanaEntity.setBolValidacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolValidacion());
 		abcConfigMapeoCampanaEntity.setBolEnvio(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolEnvio());
 		abcConfigMapeoCampanaEntity.setFiDictaminacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiDictaminacion());
@@ -105,7 +105,7 @@ public class MapeoCampanaService {
 			abcConfigMapeoCampanaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaRequestDTO.getIdUsuario());
 			abcConfigMapeoCampanaEntity.setNombre(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getNombre());
 			abcConfigMapeoCampanaEntity.setDescripcion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getDescripcion());
-			abcConfigMapeoCampanaEntity.setFecUltModificacion(new Date());
+			abcConfigMapeoCampanaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 			abcConfigMapeoCampanaEntity.setBolValidacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolValidacion());
 			abcConfigMapeoCampanaEntity.setBolEnvio(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolEnvio());
 			abcConfigMapeoCampanaEntity.setFiDictaminacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiDictaminacion());
@@ -139,7 +139,7 @@ public class MapeoCampanaService {
 			if (!abcConfigMapeoCampanaEntity.getBolActivo()) {
 				abcConfigMapeoCampanaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaRequestDTO.getIdUsuario());
 				abcConfigMapeoCampanaEntity.setBolActivo(true);
-				abcConfigMapeoCampanaEntity.setFecUltModificacion(new Date());
+				abcConfigMapeoCampanaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 				abcConfigMapeoCampanaEntity = abcConfigMapeoCampanaRepository.save(abcConfigMapeoCampanaEntity);
 				mapeoCampanaResponseDTO.setIdABCConfigMapeoCampana(abcConfigMapeoCampanaEntity.getIdABCConfigMapeoCampana());
 			}
@@ -161,7 +161,7 @@ public class MapeoCampanaService {
 			if (abcConfigMapeoCampanaEntity.getBolActivo()) {
 				abcConfigMapeoCampanaEntity.setIdABCUsuarioUltModificacion(mapeoCampanaRequestDTO.getIdUsuario());
 				abcConfigMapeoCampanaEntity.setBolActivo(false);
-				abcConfigMapeoCampanaEntity.setFecUltModificacion(new Date());
+				abcConfigMapeoCampanaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 				abcConfigMapeoCampanaEntity = abcConfigMapeoCampanaRepository.save(abcConfigMapeoCampanaEntity);
 				mapeoCampanaResponseDTO.setIdABCConfigMapeoCampana(abcConfigMapeoCampanaEntity.getIdABCConfigMapeoCampana());
 			}

@@ -1,7 +1,7 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,10 +51,10 @@ public class TareaLineaEntity implements Serializable {
 	private Long 	idEstatusTarea;
 	
 	@Column(name = "FDFECHAINICIO")
-	private Date 	fdFechaInicio;
+	private Timestamp 	fdFechaInicio;
 	
 	@Column(name = "FDFECHAFIN")
-	private Date 	fdFechaFin;
+	private Timestamp 	fdFechaFin;
 	
 	@Column(name = "FINOREGISTROS")
 	private Integer finRegistros;
@@ -68,17 +68,15 @@ public class TareaLineaEntity implements Serializable {
 	@Column(name = "FIPORCENTAJEERROR")
 	private Integer finPorcentajeError;
 	
-	@Column(name = "FDFECHACREACION")
-	private Date 	fechaCreacion;
-	
-	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date 	fechaUltModificacion;
-
 	@Column(name = "FINOAPROBADOS")
 	private Integer registrosAprobados;
 	
 	@Column(name = "FINORECHAZADOS")
 	private Integer registrosRechazados;
+	
+	@Column(name = "FINOACTUALIZACIONES")
+	private Integer finoActualizaciones;
+	
 	
 	/**
 	 * @return the idTareaLinea
@@ -196,32 +194,35 @@ public class TareaLineaEntity implements Serializable {
 		return finRegistros;
 	}
 
+	
+
 	/**
 	 * @return the fdFechaInicio
 	 */
-	public Date getFdFechaInicio() {
+	public Timestamp getFdFechaInicio() {
 		return fdFechaInicio;
 	}
 
 	/**
 	 * @param fdFechaInicio the fdFechaInicio to set
 	 */
-	public void setFdFechaInicio(Date fdFechaInicio) {
+	public void setFdFechaInicio(Timestamp fdFechaInicio) {
 		this.fdFechaInicio = fdFechaInicio;
-	}
-
-	/**
-	 * @return the fdFechaFin
-	 */
-	public Date getFdFechaFin() {
-		return fdFechaFin;
 	}
 
 	/**
 	 * @param fdFechaFin the fdFechaFin to set
 	 */
-	public void setFdFechaFin(Date fdFechaFin) {
+	public void setFdFechaFin(Timestamp fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
+	}
+
+	
+	/**
+	 * @return the fdFechaFin
+	 */
+	public Timestamp getFdFechaFin() {
+		return fdFechaFin;
 	}
 
 	/**
@@ -260,33 +261,6 @@ public class TareaLineaEntity implements Serializable {
 		this.fiDictaminacion = fiDictaminacion;
 	}
 
-	/**
-	 * @return the fechaCreacion
-	 */
-	public Date getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	/**
-	 * @param fechaCreacion the fechaCreacion to set
-	 */
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	/**
-	 * @return the fechaUltModificacion
-	 */
-	public Date getFechaUltModificacion() {
-		return fechaUltModificacion;
-	}
-
-	/**
-	 * @param fechaUltModificacion the fechaUltModificacion to set
-	 */
-	public void setFechaUltModificacion(Date fechaUltModificacion) {
-		this.fechaUltModificacion = fechaUltModificacion;
-	}
 
 	/**
 	 * @return the finPorcentajeError
@@ -328,6 +302,20 @@ public class TareaLineaEntity implements Serializable {
 	 */
 	public void setRegistrosRechazados(Integer registrosRechazados) {
 		this.registrosRechazados = registrosRechazados;
+	}
+
+	/**
+	 * @return the finoActualizaciones
+	 */
+	public Integer getFinoActualizaciones() {
+		return finoActualizaciones;
+	}
+
+	/**
+	 * @param finoActualizaciones the finoActualizaciones to set
+	 */
+	public void setFinoActualizaciones(Integer finoActualizaciones) {
+		this.finoActualizaciones = finoActualizaciones;
 	}
 
 

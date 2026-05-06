@@ -1,6 +1,6 @@
 package mx.com.proyectohu.interfaces;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public interface CatalogoInterface {
 	
@@ -13,9 +13,9 @@ public interface CatalogoInterface {
 
     public void setNombre(String nombre);
 
-    public void setFecCreacion(Date fecCreacion);
+    public void setFecCreacion(Timestamp fecCreacion);
     
-    public void setFecUltModificacion(Date fecUltModificacion);
+    public void setFecUltModificacion(Timestamp fecUltModificacion);
    
 	
 	

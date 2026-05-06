@@ -1,9 +1,9 @@
 package mx.com.proyectohu.service;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -193,8 +193,9 @@ public class CatalogosService {
 				catalogoInterface.setBolActivo(false);
 				catalogoInterface.setCodigo(catalogosRequestDTO.getRegistroDTO().getCodigo());
 				catalogoInterface.setNombre(catalogosRequestDTO.getRegistroDTO().getNombre());
-				catalogoInterface.setFecCreacion(new Date());
-				catalogoInterface.setFecUltModificacion(new Date());
+				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
+				catalogoInterface.setFecCreacion(fechaActual);
+				catalogoInterface.setFecUltModificacion(fechaActual);
 
 
 

@@ -3,33 +3,30 @@ package mx.com.proyectohu.service;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.com.proyectohu.client.EnvioLineaClient;
 import mx.com.proyectohu.client.MiddlewareCLClient;
 import mx.com.proyectohu.component.EnvioLineaDAO;
 import mx.com.proyectohu.dto.MergeRuleDTO;
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
 import mx.com.proyectohu.dto.RecordDataDTO;
 import mx.com.proyectohu.entity.BitacoraTareaLineaEntity;
 import mx.com.proyectohu.entity.TareaLineaEntity;
 import mx.com.proyectohu.repository.BitacoraTareaLineaRepository;
 import mx.com.proyectohu.repository.TareaLineaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 
 
 @Service
 public class EnvioLineaService {
 
 
-	@Autowired
-	public EnvioLineaClient envioLineaClient;
+	
 	
 	@Autowired
 	public TareaLineaRepository  tareaLineaRepository;
@@ -48,9 +45,9 @@ public class EnvioLineaService {
 	Integer totalregistros =0;
 	
 	
-	public MiddlewareDTO ejecutarEnvioListaContacto(String lineaNegocio,  Long idTareaLinea) throws Exception {
+	public MiddlewareCLDTO ejecutarEnvioListaContacto(String lineaNegocio,  Long idTareaLinea) throws Exception {
 		List<Map<String, Object>> datos = new ArrayList<Map<String, Object>>();
-		
+		List<String>  columnasNombreCorrecto = new ArrayList<String>();
 		List<String>  columnas = new ArrayList<String>();
 		
 		columnas = tareaLineaRepository.obtenerColumnasXidTarea(idTareaLinea);
@@ -61,9 +58,18 @@ public class EnvioLineaService {
 			throw new Exception("lista de columnas vacia no se puede enviar informacion");
 		}
 		
+		for(String columna : columnas ) {
+			if (!columna.contains("FC")) {
+				columna="TEP.FC"+columna;
+			}
+			
+			columnasNombreCorrecto.add(columna);
+			
+		}
+		
 		actualizarTarea(idTareaLinea, 2L);
 		
-		MiddlewareDTO middlewareDTO = new MiddlewareDTO();
+		MiddlewareCLDTO middlewareCLDTO = new MiddlewareCLDTO();
 		
 		RecordDataDTO recordDataDTO = new RecordDataDTO();
 		
@@ -71,7 +77,7 @@ public class EnvioLineaService {
 		
 		recordDataDTO.setFieldNames(columnas);
 		
-		datos= envioLineaDAO.obtenerDatosXColumnas(columnas);
+		datos= envioLineaDAO.obtenerDatosXColumnas(columnasNombreCorrecto);
 		
 		List<List<String>> resultado = new ArrayList<>();
 
@@ -85,10 +91,12 @@ public class EnvioLineaService {
 		    resultado.add(valores);
 		}
 		
+		
+		
 		recordDataDTO.setRecords(resultado);
 		totalregistros = resultado.size();
 		
-		middlewareDTO.setRecordData(recordDataDTO);
+		middlewareCLDTO.setRecordData(recordDataDTO);
 		
 		mergeRuleDTO.setHtmlValue("H");
 		mergeRuleDTO.setTextValue("T");
@@ -102,13 +110,17 @@ public class EnvioLineaService {
 		mergeRuleDTO.setRejectRecordIfChannelEmpty(null);
 		mergeRuleDTO.setDefaultPermissionStatus("OPTIN");
 		
-	//	middlewareDTO.setMergeRule(mergeRuleDTO);
+		middlewareCLDTO.setMergeRule(mergeRuleDTO);
 		
-		middlewareClient.llamadoAsyncUpdateCL(middlewareDTO, lineaNegocio);
+		middlewareClient.llamadoAsyncUpdateCL(middlewareCLDTO, lineaNegocio);
+		
+			List<Long> listaId = envioLineaDAO.obtenerids();
+		
+		registrarBitacora(listaId,idTareaLinea);
 		
 		actualizarTarea(idTareaLinea, 4L);
 		
-		return middlewareDTO;
+		return middlewareCLDTO;
 		
 	}
 	
@@ -124,11 +136,13 @@ public class EnvioLineaService {
 			tareaLineaEntity.setIdEstatusTarea(estatus);
 			
 			if (estatus==2) {
-				tareaLineaEntity.setFdFechaInicio(new Date());
+				tareaLineaEntity.setFdFechaInicio(FechaUtil.obtenerFechaActual());
 				}else {
-					tareaLineaEntity.setFdFechaFin(new Date());
+					tareaLineaEntity.setFdFechaFin(FechaUtil.obtenerFechaActual());
 					tareaLineaEntity.setFinProcesados(totalregistros);
 					tareaLineaEntity.setFinRegistros(totalregistros);
+					
+					
 				}
 			
 			tareaLineaEntity = tareaLineaRepository.save(tareaLineaEntity);
@@ -139,7 +153,7 @@ public class EnvioLineaService {
 			
 			bitacoraTareaLineaEntity.setIdTareaLinea(idTareaLinea);
 			bitacoraTareaLineaEntity.setIdEstatusTarea(estatus);
-			bitacoraTareaLineaEntity.setFechaCreacion(new Date());
+			bitacoraTareaLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 			
 			if (estatus==2) {
 			bitacoraTareaLineaEntity.setDetalle("EJECUCION DE ENVIO");
@@ -151,5 +165,13 @@ public class EnvioLineaService {
 		}
 		
 		
+	}
+	
+	public void registrarBitacora(List<Long> list, Long idTareaLinea) {
+		for(Long id : list) {
+			envioLineaDAO.insertarBitacoraListaContacto(id,idTareaLinea);
+			
+			
+		}
 	}
 }

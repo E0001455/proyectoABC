@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
+import mx.com.proyectohu.dto.MiddlewarePETDTO;
 import mx.com.proyectohu.service.MiddlewarePETService;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +21,9 @@ public class MiddlewarePETController {
 	public MiddlewarePETService middlewarePETService;
 	
 	@PostMapping("/pet/middleware/{lineaNegocio}")
-	public ResponseEntity<?> postMethodName(@PathVariable String lineaNegocio, @RequestBody MiddlewareDTO middlewareDTO) {
+	public ResponseEntity<?> postMethodName(@PathVariable String lineaNegocio, @RequestBody MiddlewarePETDTO middlewarePETDTO) {
 		
-		String response = middlewarePETService.llamarAsynUpdatePET(middlewareDTO,lineaNegocio);
+		String response = middlewarePETService.llamarAsynUpdatePET(middlewarePETDTO,lineaNegocio);
 		
 		return ResponseEntity.ok(response);
 	}

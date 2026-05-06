@@ -1,9 +1,8 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,10 +29,10 @@ public class TareaDTO {
 	private List<BitacoraTareaLineaDTO> bitacoraTareaLinea;
 	
 	@JsonProperty("fechaInicio")
-	private Date 	fdFechaInicio;
+	private Timestamp 	fdFechaInicio;
 	
 	@JsonProperty("fechaFin")
-	private Date 	fdFechaFin;
+	private Timestamp 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer finRegistros;
@@ -46,7 +45,7 @@ public class TareaDTO {
 	
 	
 	@JsonProperty("fechaCreacion")
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 	
 	
 	
@@ -150,10 +149,12 @@ public class TareaDTO {
 		this.horaDTO = horaDTO;
 	}
 
+	
+
 	/**
 	 * @return the fdFechaInicio
 	 */
-	public Date getFdFechaInicio() {
+	public Timestamp getFdFechaInicio() {
 		return fdFechaInicio;
 	}
 
@@ -161,7 +162,7 @@ public class TareaDTO {
 	/**
 	 * @param fdFechaInicio the fdFechaInicio to set
 	 */
-	public void setFdFechaInicio(Date fdFechaInicio) {
+	public void setFdFechaInicio(Timestamp fdFechaInicio) {
 		this.fdFechaInicio = fdFechaInicio;
 	}
 
@@ -169,7 +170,7 @@ public class TareaDTO {
 	/**
 	 * @return the fdFechaFin
 	 */
-	public Date getFdFechaFin() {
+	public Timestamp getFdFechaFin() {
 		return fdFechaFin;
 	}
 
@@ -177,7 +178,7 @@ public class TareaDTO {
 	/**
 	 * @param fdFechaFin the fdFechaFin to set
 	 */
-	public void setFdFechaFin(Date fdFechaFin) {
+	public void setFdFechaFin(Timestamp fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 
@@ -230,10 +231,16 @@ public class TareaDTO {
 	}
 
 
+	
+
+
+
+
+
 	/**
 	 * @return the fechaCreacion
 	 */
-	public Date getFechaCreacion() {
+	public Timestamp getFechaCreacion() {
 		return fechaCreacion;
 	}
 
@@ -241,9 +248,11 @@ public class TareaDTO {
 	/**
 	 * @param fechaCreacion the fechaCreacion to set
 	 */
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
+
+
 
 
 

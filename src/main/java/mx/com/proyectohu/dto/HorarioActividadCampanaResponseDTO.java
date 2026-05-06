@@ -1,6 +1,7 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,10 +22,10 @@ public class HorarioActividadCampanaResponseDTO {
 	private Boolean bolActivo;
 	
 	
-	private Date 	fechaCreacion;
+	private Timestamp 	fechaCreacion;
 	
 	@JsonProperty("fechaUltimaModificacion")	
-	private Date 	fechaUltModificacion;
+	private Timestamp 	fechaUltModificacion;
 
 
 
@@ -56,31 +57,33 @@ public class HorarioActividadCampanaResponseDTO {
 		this.bolActivo = bolActivo;
 	}
 
+	
+
 	/**
 	 * @return the fechaCreacion
 	 */
-	public Date getFechaCreacion() {
+	public Timestamp getFechaCreacion() {
 		return fechaCreacion;
 	}
 
 	/**
 	 * @param fechaCreacion the fechaCreacion to set
 	 */
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
 	/**
 	 * @return the fechaUltModificacion
 	 */
-	public Date getFechaUltModificacion() {
+	public Timestamp getFechaUltModificacion() {
 		return fechaUltModificacion;
 	}
 
 	/**
 	 * @param fechaUltModificacion the fechaUltModificacion to set
 	 */
-	public void setFechaUltModificacion(Date fechaUltModificacion) {
+	public void setFechaUltModificacion(Timestamp fechaUltModificacion) {
 		this.fechaUltModificacion = fechaUltModificacion;
 	}
 

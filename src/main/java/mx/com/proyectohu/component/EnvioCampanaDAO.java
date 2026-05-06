@@ -65,20 +65,22 @@ public class EnvioCampanaDAO {
 	}
 	
 	
-	public int insertarBitacoraExtensionPerfil(
-	        Long idExtensionPerfil
-	        ) {
+	public int insertarBitacoraExtensionPerfil(Long idExtensionPerfil,Long idTareaCampana) {
 
 	    String sql = "INSERT INTO TTABCTRA_BITACORA_EXTENSION_PERFIL " +
 	                 "(ID_BITACORA_EXTENSION_PERFIL, "
+	    		+" ID_TAREA_CAMPANA, "
 	                 + "ID_EXTENSION_PERFIL, "
 	                 + "ID_ESTATUS_ABC, "
 	                 + "FCDETALLE, "
 	                 + "FDFECHACREACION) " +
-	                 "VALUES (SEQ_TTABCTRA_BITACORA_EXTENSION_PERFIL.nextval, ?, 12, EMPTY_CLOB(), SYSDATE)";
+	                 "VALUES (SEQ_TTABCTRA_BITACORA_EXTENSION_PERFIL.nextval, "
+	                 + 
+	                 "?,?, (SELECT ID_ESTATUS_ABC FROM TCABCCAT_ESTATUS_ABC WHERE FCCODIGO= 'ENR'), EMPTY_CLOB(), SYSDATE)";
 
 	    return jdbcTemplate.update(
 	            sql,
+	            idTareaCampana,
 	            idExtensionPerfil
 	        
 	    );

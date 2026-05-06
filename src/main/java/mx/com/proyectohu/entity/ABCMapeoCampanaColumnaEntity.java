@@ -1,7 +1,8 @@
 package mx.com.proyectohu.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -57,13 +58,13 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 	private Long numDecimales;
 	
 	@Column(name = "FDFECHACREACION")
-	private Date fecCreacion;
+	private Timestamp fecCreacion;
 	
 	@Column(name = "FIIDUSUARIOULTMODIFICACION")
 	private Long idABCUsuarioUltModificacion;
 	
 	@Column(name = "FDFECHAULTMODIFICACION")
-	private Date fecUltModificacion;
+	private Timestamp fecUltModificacion;
 
 	/**
 	 * @return the llaveMapeoCampanaColumna
@@ -250,18 +251,26 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 		this.numDecimales = numDecimales;
 	}
 
+
 	/**
 	 * @return the fecCreacion
 	 */
-	public Date getFecCreacion() {
+	public Timestamp getFecCreacion() {
 		return fecCreacion;
 	}
 
 	/**
 	 * @param fecCreacion the fecCreacion to set
 	 */
-	public void setFecCreacion(Date fecCreacion) {
+	public void setFecCreacion(Timestamp fecCreacion) {
 		this.fecCreacion = fecCreacion;
+	}
+
+	/**
+	 * @param fecUltModificacion the fecUltModificacion to set
+	 */
+	public void setFecUltModificacion(Timestamp fecUltModificacion) {
+		this.fecUltModificacion = fecUltModificacion;
 	}
 
 	/**
@@ -279,17 +288,18 @@ public class ABCMapeoCampanaColumnaEntity implements Serializable {
 	}
 
 	/**
-	 * @return the fecUltModificacion
+	 * @return the serialversionuid
 	 */
-	public Date getFecUltModificacion() {
-		return fecUltModificacion;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
+	 * @return the fecUltModificacion
 	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
-		this.fecUltModificacion = fecUltModificacion;
+	public Timestamp getFecUltModificacion() {
+		return fecUltModificacion;
 	}
-	
+
 }
+	

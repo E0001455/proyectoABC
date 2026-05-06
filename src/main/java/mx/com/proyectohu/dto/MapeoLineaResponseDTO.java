@@ -1,6 +1,6 @@
 package mx.com.proyectohu.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +17,7 @@ public class MapeoLineaResponseDTO {
 	@JsonProperty("linea")
 	private CatLineaNegocio 	catLineaNegocio;
 	
+	@JsonProperty("activo")
 	private Boolean bolActivo;
 	
 	@JsonProperty("nombre")
@@ -26,12 +27,12 @@ public class MapeoLineaResponseDTO {
 	private String 	descripcion;
 	
 	@JsonProperty("fechaCreacion")
-	private Date 	fecCreacion;
+	private Timestamp 	fecCreacion;
 	
 	private Long 	idABCUsuarioUltModificacion;
 	
 	@JsonProperty("fechaUltimaModificacion")
-	private Date 	fecUltModificacion;
+	private Timestamp 	fecUltModificacion;
 	
 	@JsonProperty("columnas")
 	private Integer columnas;
@@ -112,18 +113,7 @@ public class MapeoLineaResponseDTO {
 		this.descripcion = descripcion;
 	}
 	
-	/**
-	 * @return the fecCreacion
-	 */
-	public Date getFecCreacion() {
-		return fecCreacion;
-	}
-	/**
-	 * @param fecCreacion the fecCreacion to set
-	 */
-	public void setFecCreacion(Date fecCreacion) {
-		this.fecCreacion = fecCreacion;
-	}
+	
 	/**
 	 * @return the idABCUsuarioUltModificacion
 	 */
@@ -136,16 +126,29 @@ public class MapeoLineaResponseDTO {
 	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
 		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
 	}
+
+	/**
+	 * @return the fecCreacion
+	 */
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+	/**
+	 * @param fecCreacion the fecCreacion to set
+	 */
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
 	/**
 	 * @return the fecUltModificacion
 	 */
-	public Date getFecUltModificacion() {
+	public Timestamp getFecUltModificacion() {
 		return fecUltModificacion;
 	}
 	/**
 	 * @param fecUltModificacion the fecUltModificacion to set
 	 */
-	public void setFecUltModificacion(Date fecUltModificacion) {
+	public void setFecUltModificacion(Timestamp fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
 	}
 	/**
@@ -215,7 +218,7 @@ public class MapeoLineaResponseDTO {
 
 
 
-
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	public static class CatLineaNegocio {
 
 		@JsonProperty("id")

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.com.proyectohu.dto.MiddlewareDTO;
+import mx.com.proyectohu.dto.MiddlewareCLDTO;
 import mx.com.proyectohu.service.MiddlewareCLService;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +20,7 @@ public class MiddlewareCLController {
 	public MiddlewareCLService middlewareService;
 	
 	@PostMapping("/cl/middleware/{lineaNegocio}")
-	public ResponseEntity<?> postMethodName(@PathVariable String lineaNegocio, @RequestBody MiddlewareDTO middlewareDTO) {
+	public ResponseEntity<?> postMethodName(@PathVariable String lineaNegocio, @RequestBody MiddlewareCLDTO middlewareDTO) {
 		
 		String response = middlewareService.llamarAsynUpdateCL(middlewareDTO,lineaNegocio);
 		
