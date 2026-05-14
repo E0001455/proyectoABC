@@ -12,7 +12,9 @@ import mx.com.proyectohu.repository.ListaContactoRepository;
 import mx.com.proyectohu.repository.TareaLineaRepository;
 import mx.com.proyectohu.component.ReporteIndividualCLDAO;
 import mx.com.proyectohu.dto.CLRequestDTO;
+import mx.com.proyectohu.dto.CLResponseCargaDTO;
 import mx.com.proyectohu.dto.CLResponseDTO;
+import mx.com.proyectohu.dto.CLResponseEnvioDTO;
 
 
 @Service
@@ -31,8 +33,8 @@ public class ReporteIndividualLineaService {
 	@Autowired
 	public ReporteIndividualCLDAO reporteIndividualDAO;
 
-	public List<CLResponseDTO> consultaCLCarga(CLRequestDTO clRequestDTO){
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
+	public List<CLResponseCargaDTO> consultaCLCarga(CLRequestDTO clRequestDTO){
+		List<CLResponseCargaDTO> clResponseDTOLista = new ArrayList<CLResponseCargaDTO>();
 		clRequestDTO.setTipoActividad("CRG");
 	
 		clResponseDTOLista = reporteIndividualDAO.consultarCLRegistroIndividualCarga(clRequestDTO);
@@ -52,8 +54,8 @@ public class ReporteIndividualLineaService {
 		return clResponseDTOLista;
 	}
 
-	public List<CLResponseDTO> consultaCLEnvio(CLRequestDTO clRequestDTO){
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
+	public List<CLResponseEnvioDTO> consultaCLEnvio(CLRequestDTO clRequestDTO){
+		List<CLResponseEnvioDTO> clResponseDTOLista = new ArrayList<CLResponseEnvioDTO>();
 		clRequestDTO.setTipoActividad("ENV");
 		
 

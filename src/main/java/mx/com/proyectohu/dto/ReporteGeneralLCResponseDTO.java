@@ -20,7 +20,7 @@ public class ReporteGeneralLCResponseDTO {
 	private String	nombreMapeo;
 	
 	@JsonProperty("fecha")
-	private Timestamp 	fdFechaFin;
+	private Long 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer  totalRegistros;
@@ -30,6 +30,9 @@ public class ReporteGeneralLCResponseDTO {
 	
 	@JsonProperty("rechazados")
 	private Integer  totalRegistrosRechazados;
+	
+
+	private Integer  actualizaciones;
 	
 	
 	private Long idTarea;
@@ -122,13 +125,35 @@ public class ReporteGeneralLCResponseDTO {
 		this.totalRegistrosRechazados = totalRegistrosRechazados;
 	}
 
-	public Timestamp getFdFechaFin() {
+	/**
+	 * @return the fdFechaFin
+	 */
+	public Long getFdFechaFin() {
 		return fdFechaFin;
 	}
 
-	public void setFdFechaFin(Timestamp fdFechaFin) {
+	/**
+	 * @param fdFechaFin the fdFechaFin to set
+	 */
+	public void setFdFechaFin(Long fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
+
+	/**
+	 * @return the actualizaciones
+	 */
+	public Integer getActualizaciones() {
+		return actualizaciones;
+	}
+
+	/**
+	 * @param actualizaciones the actualizaciones to set
+	 */
+	public void setActualizaciones(Integer actualizaciones) {
+		this.actualizaciones = actualizaciones;
+	}
+
+
 
 	
 	

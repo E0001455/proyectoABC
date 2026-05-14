@@ -31,7 +31,7 @@ public class MiddlewarePETClient {
 			    .bodyToMono(String.class)
 			    .block();
 
-		System.out.print(response);
+
 
 		return response;
 

@@ -145,8 +145,8 @@ public class MapeoCampanaColumnaService {
 
 					mapeoCampanaColumnaResponseDTO.setCatColumna(catColumna);
 					mapeoCampanaColumnaResponseDTO.setCatValorDTO(catValorDTO);
-					mapeoCampanaColumnaResponseDTO.setFecCreacion(abcMapeoCampanaColumnaEntity.getFecCreacion());
-					mapeoCampanaColumnaResponseDTO.setFecUltModificacion(abcMapeoCampanaColumnaEntity.getFecUltModificacion());
+					mapeoCampanaColumnaResponseDTO.setFecCreacion(abcMapeoCampanaColumnaEntity.getFecCreacion().getTime());
+					mapeoCampanaColumnaResponseDTO.setFecUltModificacion(abcMapeoCampanaColumnaEntity.getFecUltModificacion().getTime());
 					mapeoCampanaColumnaResponseDTO.setBolActivo(abcMapeoCampanaColumnaEntity.getBolActivo());
 					mapeoCampanaColumnaResponseDTO.setRegex(abcMapeoCampanaColumnaEntity.getRegex());
 					mapeoCampanaColumnaResponseDTO.setFinRequerido(abcMapeoCampanaColumnaEntity.getFiRequerido());
@@ -197,8 +197,8 @@ public class MapeoCampanaColumnaService {
 					catColumna.setIdABCCatColumna(abcMapeoCampanaColumnaEntity.getLlaveMapeoCampanaColumna().getIdABCCatColumna());
 					mapeoCampanaColumnaResponseDTO.setCatColumna(catColumna);
 					mapeoCampanaColumnaResponseDTO.setCatValorDTO(catValorDTO);
-					mapeoCampanaColumnaResponseDTO.setFecCreacion(abcMapeoCampanaColumnaEntity.getFecCreacion());
-					mapeoCampanaColumnaResponseDTO.setFecUltModificacion(abcMapeoCampanaColumnaEntity.getFecUltModificacion());
+					mapeoCampanaColumnaResponseDTO.setFecCreacion(abcMapeoCampanaColumnaEntity.getFecCreacion().getTime());
+					mapeoCampanaColumnaResponseDTO.setFecUltModificacion(abcMapeoCampanaColumnaEntity.getFecUltModificacion().getTime());
 					mapeoCampanaColumnaResponseDTO.setBolActivo(abcMapeoCampanaColumnaEntity.getBolActivo());
 					mapeoCampanaColumnaResponseDTO.setRegex(abcMapeoCampanaColumnaEntity.getRegex());
 					mapeoCampanaColumnaResponseDTO.setFinRequerido(abcMapeoCampanaColumnaEntity.getFiRequerido());

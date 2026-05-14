@@ -178,8 +178,8 @@ public class MapeoLineaColumnaService {
 
 					mapeoLineaColumnaResponseDTO.setCatColumna(catColumna);
 					mapeoLineaColumnaResponseDTO.setCatValorDTO(catValorDTO);
-					mapeoLineaColumnaResponseDTO.setFecCreacion(abcMapeoLineaColumnaEntity.getFecCreacion());
-					mapeoLineaColumnaResponseDTO.setFecUltModificacion(abcMapeoLineaColumnaEntity.getFecUltModificacion());
+					mapeoLineaColumnaResponseDTO.setFecCreacion(abcMapeoLineaColumnaEntity.getFecCreacion().getTime());
+					mapeoLineaColumnaResponseDTO.setFecUltModificacion(abcMapeoLineaColumnaEntity.getFecUltModificacion().getTime());
 					mapeoLineaColumnaResponseDTO.setBolActivo(abcMapeoLineaColumnaEntity.getBolActivo());
 					mapeoLineaColumnaResponseDTO.setRegex(abcMapeoLineaColumnaEntity.getRegex());
 					mapeoLineaColumnaResponseDTO.setFinRequerido(abcMapeoLineaColumnaEntity.getFiRequerido());
@@ -236,8 +236,8 @@ public class MapeoLineaColumnaService {
 
 
 					mapeoLineaColumnaResponseDTO.setCatColumna(catColumna);
-					mapeoLineaColumnaResponseDTO.setFecCreacion(abcMapeoLineaColumnaEntity.getFecCreacion());
-					mapeoLineaColumnaResponseDTO.setFecUltModificacion(abcMapeoLineaColumnaEntity.getFecUltModificacion());
+					mapeoLineaColumnaResponseDTO.setFecCreacion(abcMapeoLineaColumnaEntity.getFecCreacion().getTime());
+					mapeoLineaColumnaResponseDTO.setFecUltModificacion(abcMapeoLineaColumnaEntity.getFecUltModificacion().getTime());
 					mapeoLineaColumnaResponseDTO.setBolActivo(abcMapeoLineaColumnaEntity.getBolActivo());
 					mapeoLineaColumnaResponseDTO.setRegex(abcMapeoLineaColumnaEntity.getRegex());
 					mapeoLineaColumnaResponseDTO.setFinRequerido(abcMapeoLineaColumnaEntity.getFiRequerido());

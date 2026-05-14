@@ -12,6 +12,7 @@ import mx.com.proyectohu.repository.CampanaRepository;
 import mx.com.proyectohu.repository.TareaCampanaRepository;
 import mx.com.proyectohu.component.ReporteIndividualPETDAO;
 import mx.com.proyectohu.dto.PETRequestDTO;
+import mx.com.proyectohu.dto.PETResponseCargaDTO;
 import mx.com.proyectohu.dto.PETResponseDTO;
 
 @Service
@@ -26,8 +27,8 @@ public class ReporteIndividualCampanaService {
 	@Autowired
 	public ReporteIndividualPETDAO reporteIndividualPETDAO;
 	
-	public List<PETResponseDTO> consultaPETCarga(PETRequestDTO petRequestDTO){
-		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
+	public List<PETResponseCargaDTO> consultaPETCarga(PETRequestDTO petRequestDTO){
+		List<PETResponseCargaDTO> petResponseDTOLista = new ArrayList<PETResponseCargaDTO>();
 		petRequestDTO.setTipoActividad("CRG");
 		
 		petResponseDTOLista = reporteIndividualPETDAO.consultarPETRegistroIndividualCarga(petRequestDTO);

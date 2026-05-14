@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class CLRequestDTO {
 	
-	 private String customerID;
+		private Long idLineaNegocio;
+	 	private String customerID;
 	    private String nombre;
 	    private String apellidoPaterno;
 	    private String correo;
@@ -18,8 +19,24 @@ public class CLRequestDTO {
 	    private String curp;
 	    private String rfc;
 	    private String poliza;
+	    private Long idMapeoLinea;
+	    private String  riid; 
 
-	    @JsonFormat(pattern = "dd/MM/yyyy")
+	    /**
+		 * @return the idMapeoLinea
+		 */
+		public Long getIdMapeoLinea() {
+			return idMapeoLinea;
+		}
+
+		/**
+		 * @param idMapeoLinea the idMapeoLinea to set
+		 */
+		public void setIdMapeoLinea(Long idMapeoLinea) {
+			this.idMapeoLinea = idMapeoLinea;
+		}
+
+		@JsonFormat(pattern = "dd/MM/yyyy")
 	    private LocalDate fechaInicio;
 
 	    @JsonFormat(pattern = "dd/MM/yyyy")
@@ -146,6 +163,34 @@ public class CLRequestDTO {
 
 		public void setCustomerID(String customerID) {
 			this.customerID = customerID;
+		}
+
+		/**
+		 * @return the idLineaNegocio
+		 */
+		public Long getIdLineaNegocio() {
+			return idLineaNegocio;
+		}
+
+		/**
+		 * @param idLineaNegocio the idLineaNegocio to set
+		 */
+		public void setIdLineaNegocio(Long idLineaNegocio) {
+			this.idLineaNegocio = idLineaNegocio;
+		}
+
+		/**
+		 * @return the riid
+		 */
+		public String getRiid() {
+			return riid;
+		}
+
+		/**
+		 * @param riid the riid to set
+		 */
+		public void setRiid(String riid) {
+			this.riid = riid;
 		}
 
 	

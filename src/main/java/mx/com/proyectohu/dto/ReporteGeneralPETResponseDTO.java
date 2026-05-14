@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReporteGeneralPETResponseDTO {
+	
+	
+	private Long  idTarea;
 
 	@JsonProperty("lineaNegocio")
 	private String  nombreLineaNegocio;
@@ -23,8 +26,7 @@ public class ReporteGeneralPETResponseDTO {
 	private String	nombreMapeo;
 	
 	@JsonProperty("fecha")
-	
-	private Timestamp 	fdFechaFin;
+	private Long 	fdFechaFin;
 	
 	@JsonProperty("registros")
 	private Integer  totalRegistros;
@@ -68,11 +70,19 @@ public class ReporteGeneralPETResponseDTO {
 	}
 
 
-	public Timestamp getFdFechaFin() {
+	
+
+	/**
+	 * @return the fdFechaFin
+	 */
+	public Long getFdFechaFin() {
 		return fdFechaFin;
 	}
 
-	public void setFdFechaFin(Timestamp fdFechaFin) {
+	/**
+	 * @param fdFechaFin the fdFechaFin to set
+	 */
+	public void setFdFechaFin(Long fdFechaFin) {
 		this.fdFechaFin = fdFechaFin;
 	}
 
@@ -139,6 +149,22 @@ public class ReporteGeneralPETResponseDTO {
 	public void setPendientes(Integer pendientes) {
 		this.pendientes = pendientes;
 	}
+
+	/**
+	 * @return the idTarea
+	 */
+	public Long getIdTarea() {
+		return idTarea;
+	}
+
+	/**
+	 * @param idTarea the idTarea to set
+	 */
+	public void setIdTarea(Long idTarea) {
+		this.idTarea = idTarea;
+	}
+	
+	
 	
 	
 

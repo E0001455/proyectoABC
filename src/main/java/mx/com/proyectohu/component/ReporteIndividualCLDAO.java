@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.com.proyectohu.dto.CLRequestDTO;
+import mx.com.proyectohu.dto.CLResponseCargaDTO;
 import mx.com.proyectohu.dto.CLResponseDTO;
+import mx.com.proyectohu.dto.CLResponseEnvioDTO;
 
 @Component
 public class ReporteIndividualCLDAO {
@@ -20,12 +22,12 @@ public class ReporteIndividualCLDAO {
 	@Autowired
 	private DataSource dataSource;
 
-	public List<CLResponseDTO> consultarCLRegistroIndividualCarga(CLRequestDTO clRequestDTO) {
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>(); 
-		CLResponseDTO  clResponseDTO= null;
+	public List<CLResponseCargaDTO> consultarCLRegistroIndividualCarga(CLRequestDTO clRequestDTO) {
+		List<CLResponseCargaDTO> clResponseDTOLista = new ArrayList<CLResponseCargaDTO>(); 
+		CLResponseCargaDTO  clResponseDTO= new CLResponseCargaDTO();
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -42,14 +44,22 @@ public class ReporteIndividualCLDAO {
 				cs.setDate(12, java.sql.Date.valueOf(clRequestDTO.getFechaInicio()));
 				cs.setDate(13, java.sql.Date.valueOf(clRequestDTO.getFechaFin()));
 				cs.setString(14, clRequestDTO.getCustomerID());
-				cs.setString(15, clRequestDTO.getTipoActividad());                
+				cs.setString(15, clRequestDTO.getTipoActividad()); 
+				if (clRequestDTO.getIdMapeoLinea() != null) {
+					cs.setLong(16, clRequestDTO.getIdMapeoLinea());
+				} else {
+				    cs.setNull(16, java.sql.Types.NUMERIC);
+				}
+				   
 
 				cs.execute();
 
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
-					clResponseDTO= new CLResponseDTO();
-					clResponseDTO.setRiid(resultado.getString("FCRIID_"));
+					clResponseDTO= new CLResponseCargaDTO();
+					
+					clResponseDTO.setIdListaContacto(resultado.getLong("ID_LISTA_CONTACTO"));
+					clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombre(resultado.getString("FCNOMBRE"));
 					clResponseDTO.setApellidoPaterno(resultado.getString("FCAPELLIDO_PATERNO"));
 					clResponseDTO.setApellidoMaterno(resultado.getString("FCAPELLIDO_MATERNO"));
@@ -71,8 +81,10 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setPrueba(resultado.getString("FCUSUARIO_PRUEBA"));
 					clResponseDTO.setSuspension(resultado.getString("FCSUSPENSION_LOGICA"));
 					clResponseDTO.setLineaNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
-					clResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
-					clResponseDTO.setCustomerID(resultado.getString("FCCUSTOMER_ID_"));
+					clResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION").getTime());
+					clResponseDTO.setIdCliente(resultado.getString("FCCUSTOMER_ID_"));
+					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
+					
 					clResponseDTOLista.add(clResponseDTO);
 			
 				}
@@ -92,7 +104,7 @@ public class ReporteIndividualCLDAO {
 		CLResponseDTO  clResponseDTO= new CLResponseDTO();
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -109,14 +121,21 @@ public class ReporteIndividualCLDAO {
 				cs.setDate(12, java.sql.Date.valueOf(clRequestDTO.getFechaInicio()));
 				cs.setDate(13, java.sql.Date.valueOf(clRequestDTO.getFechaFin()));
 				cs.setString(14, clRequestDTO.getCustomerID());
-				cs.setString(15, clRequestDTO.getTipoActividad());                
+				cs.setString(15, clRequestDTO.getTipoActividad());      
+				if (clRequestDTO.getIdMapeoLinea() != null) {
+					cs.setLong(16, clRequestDTO.getIdMapeoLinea());
+				} else {
+				    cs.setNull(16, java.sql.Types.NUMERIC);
+				}
+				
 
 				cs.execute();
 
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
-					
-					clResponseDTO.setRiid(resultado.getString("FCRIID_"));
+					clResponseDTO= new CLResponseDTO();
+					clResponseDTO.setIdListaContacto(resultado.getLong("ID_LISTA_CONTACTO"));
+					clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombre(resultado.getString("FCNOMBRE"));
 					clResponseDTO.setApellidoPaterno(resultado.getString("FCAPELLIDO_PATERNO"));
 					clResponseDTO.setApellidoMaterno(resultado.getString("FCAPELLIDO_MATERNO"));
@@ -138,10 +157,11 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setPrueba(resultado.getString("FCUSUARIO_PRUEBA"));
 					clResponseDTO.setSuspension(resultado.getString("FCSUSPENSION_LOGICA"));
 					clResponseDTO.setLineaNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
-					clResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
+					clResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION").getTime());
 					clResponseDTO.setEstatus(resultado.getString("ESTATUS_ABC"));
 					clResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
-					clResponseDTO.setCustomerID(resultado.getString("FCCUSTOMER_ID_"));
+					clResponseDTO.setIdCliente(resultado.getString("FCCUSTOMER_ID_"));
+					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
 					
 					clResponseDTOLista.add(clResponseDTO);
 			
@@ -157,13 +177,14 @@ public class ReporteIndividualCLDAO {
 	}
 	
 	
-	public List<CLResponseDTO> consultarCLRegistroIndividualEnvio(CLRequestDTO clRequestDTO) {
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>(); 
-		CLResponseDTO  clResponseDTO= new CLResponseDTO();
+	public List<CLResponseEnvioDTO> consultarCLRegistroIndividualEnvio(CLRequestDTO clRequestDTO) {
+		List<CLResponseEnvioDTO> clResponseDTOLista = new ArrayList<CLResponseEnvioDTO>(); 
+		CLResponseEnvioDTO  clResponseDTO= new CLResponseEnvioDTO();
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
+				clResponseDTO= new CLResponseEnvioDTO();
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
 				cs.setString(2, clRequestDTO.getCustomerID());
@@ -179,13 +200,22 @@ public class ReporteIndividualCLDAO {
 				cs.setDate(12, java.sql.Date.valueOf(clRequestDTO.getFechaInicio()));
 				cs.setDate(13, java.sql.Date.valueOf(clRequestDTO.getFechaFin()));
 				cs.setString(14, clRequestDTO.getCustomerID());
-				cs.setString(15, clRequestDTO.getTipoActividad());                
+				cs.setString(15, clRequestDTO.getTipoActividad());     
+				if (clRequestDTO.getIdMapeoLinea() != null) {
+					cs.setLong(16, clRequestDTO.getIdMapeoLinea());
+				} else {
+				    cs.setNull(16, java.sql.Types.NUMERIC);
+				}
+				cs.setString(17, clRequestDTO.getRiid());  
 
 				cs.execute();
 
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
+					clResponseDTO= new CLResponseEnvioDTO();
 					
+					clResponseDTO.setIdListaContacto(resultado.getLong("ID_LISTA_CONTACTO"));
+					clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setRiid(resultado.getString("FCRIID_"));
 					clResponseDTO.setNombre(resultado.getString("FCNOMBRE"));
 					clResponseDTO.setApellidoPaterno(resultado.getString("FCAPELLIDO_PATERNO"));
@@ -208,10 +238,12 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setPrueba(resultado.getString("FCUSUARIO_PRUEBA"));
 					clResponseDTO.setSuspension(resultado.getString("FCSUSPENSION_LOGICA"));
 					clResponseDTO.setLineaNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
-					clResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
+					clResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION").getTime());
 					clResponseDTO.setEstatus(resultado.getString("ESTATUS_ABC"));
 					clResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
-					clResponseDTO.setCustomerID(resultado.getString("FCCUSTOMER_ID_"));
+					clResponseDTO.setIdCliente(resultado.getString("FCCUSTOMER_ID_"));
+					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
+					
 					clResponseDTOLista.add(clResponseDTO);
 			
 				}

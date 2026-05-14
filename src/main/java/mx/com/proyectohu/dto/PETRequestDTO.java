@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PETRequestDTO {
 	
+		private Long idLineaNegocio;
+		private Long idCampana;
 		private String noLote;
 	    private String idCliente;
 	    private String idAfore;
@@ -23,6 +25,8 @@ public class PETRequestDTO {
 	    private String telefono;
 	    private String tipoActividad;
 	    private String tipoConsulta;
+	    private Long idMapeoCampana;
+	    private String  riid; 
 	    
 	    
 	    public String getTipoActividad() {
@@ -166,6 +170,63 @@ public class PETRequestDTO {
 		public void setFechaFin(LocalDate fechaFin) {
 			this.fechaFin = fechaFin;
 		}
+
+		/**
+		 * @return the idLineaNegocio
+		 */
+		public Long getIdLineaNegocio() {
+			return idLineaNegocio;
+		}
+
+		/**
+		 * @param idLineaNegocio the idLineaNegocio to set
+		 */
+		public void setIdLineaNegocio(Long idLineaNegocio) {
+			this.idLineaNegocio = idLineaNegocio;
+		}
+
+		/**
+		 * @return the idCampana
+		 */
+		public Long getIdCampana() {
+			return idCampana;
+		}
+
+		/**
+		 * @param idCampana the idCampana to set
+		 */
+		public void setIdCampana(Long idCampana) {
+			this.idCampana = idCampana;
+		}
+
+		/**
+		 * @return the idMapeoCampana
+		 */
+		public Long getIdMapeoCampana() {
+			return idMapeoCampana;
+		}
+
+		/**
+		 * @param idMapeoCampana the idMapeoCampana to set
+		 */
+		public void setIdMapeoCampana(Long idMapeoCampana) {
+			this.idMapeoCampana = idMapeoCampana;
+		}
+
+		/**
+		 * @return the riid
+		 */
+		public String getRiid() {
+			return riid;
+		}
+
+		/**
+		 * @param riid the riid to set
+		 */
+		public void setRiid(String riid) {
+			this.riid = riid;
+		}
+		
 
 	   
 

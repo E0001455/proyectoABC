@@ -8,13 +8,13 @@ import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 
-public class CLResponseDTO {
+public class CLResponseCargaDTO {
 	
 	private Long idListaContacto;
 	private Long idTarea;
 	 private String idCliente;
 	   private String lineaNegocio;
-	
+	  
 	    private String nombre;
 	    private String apellidoPaterno;
 	    private String apellidoMaterno;
@@ -35,9 +35,8 @@ public class CLResponseDTO {
 	    private String genero;
 	    private String prueba;
 	    private String suspension;
-	    private String estatus;
-	    private String detalle;
-	    private String nombreMapeo;
+	  private String nombreMapeo;
+	    
 	   
 	    
 	    /**
@@ -66,8 +65,7 @@ public class CLResponseDTO {
 	        this.lineaNegocio = lineaNegocio;
 	    }
 
-	  
-
+	
 	    public String getNombre() {
 	        return nombre;
 	    }
@@ -227,31 +225,6 @@ public class CLResponseDTO {
 	    public void setSuspension(String suspension) {
 	        this.suspension = suspension;
 	    }
-
-
-	
-
-
-	
-
-		public String getEstatus() {
-			return estatus;
-		}
-
-		public void setEstatus(String estatus) {
-			this.estatus = estatus;
-		}
-
-		public String getDetalle() {
-			return detalle;
-		}
-
-		public void setDetalle(String detalle) {
-			this.detalle = detalle;
-		}
-
-		
-	
 
 		/**
 		 * @return the fecha

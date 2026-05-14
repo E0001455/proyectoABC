@@ -100,8 +100,8 @@ public class ActividadCampanaService {
 				actividadCampanaResponseDTO.setCatEjecucion(catEjecucion);
 
 				actividadCampanaResponseDTO.setBolActivo(actividadCampanaEntity.getBolActivo());
-				actividadCampanaResponseDTO.setFechaCreacion(actividadCampanaEntity.getFechaCreacion());
-				actividadCampanaResponseDTO.setFechaUltModificacion(actividadCampanaEntity.getFechaUltModificacion());
+				actividadCampanaResponseDTO.setFechaCreacion(actividadCampanaEntity.getFechaCreacion().getTime());
+				actividadCampanaResponseDTO.setFechaUltModificacion(actividadCampanaEntity.getFechaUltModificacion().getTime());
 				
 				ActividadMapeoCampanaEntity actividadMapeoCampanaEntity = new ActividadMapeoCampanaEntity();
 

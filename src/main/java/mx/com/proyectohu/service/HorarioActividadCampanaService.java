@@ -88,8 +88,8 @@ public class HorarioActividadCampanaService {
 
 				horarioActividadCampanaResponseDTO.setDia(dia);
 				horarioActividadCampanaResponseDTO.setBolActivo(horarioActividadCampanaEntity.getBolActivo());
-				horarioActividadCampanaResponseDTO.setFechaCreacion(horarioActividadCampanaEntity.getFechaCreacion());
-				horarioActividadCampanaResponseDTO.setFechaUltModificacion(horarioActividadCampanaEntity.getFechaUltModificacion());
+				horarioActividadCampanaResponseDTO.setFechaCreacion(horarioActividadCampanaEntity.getFechaCreacion().getTime());
+				horarioActividadCampanaResponseDTO.setFechaUltModificacion(horarioActividadCampanaEntity.getFechaUltModificacion().getTime());
 
 
 

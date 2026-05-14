@@ -19,12 +19,6 @@ public class ListaContactoEntity implements Serializable {
     @Column(name = "ID_LISTA_CONTACTO", nullable = false)
     private Long idListaContacto;
 
-    @Column(name = "ID_TAREA_LINEA", nullable = false)
-    private Long idTareaLinea;
-
-    @Column(name = "FIOPERATIVO")
-    private Boolean operativo;
-    
     @Column(name = "FCRIID_")
     private String riid;
 
@@ -91,7 +85,7 @@ public class ListaContactoEntity implements Serializable {
     @Column(name = "FCGENERO")
     private String genero;
     
-    @Column(name = "CUSTOMER_ID_")
+    @Column(name = "FCCUSTOMER_ID_")
     private String customerid;
     
     @OneToMany(mappedBy = "listaContacto", fetch = FetchType.LAZY)
@@ -105,14 +99,6 @@ public class ListaContactoEntity implements Serializable {
 
 	public void setIdListaContacto(Long idListaContacto) {
 		this.idListaContacto = idListaContacto;
-	}
-
-	public Long getIdTareaLinea() {
-		return idTareaLinea;
-	}
-
-	public void setIdTareaLinea(Long idTareaLinea) {
-		this.idTareaLinea = idTareaLinea;
 	}
 
 	public String getRiid() {
@@ -297,14 +283,6 @@ public class ListaContactoEntity implements Serializable {
 
 	public void setBitacoras(List<BitacoraListaContactoEntity> bitacoras) {
 		this.bitacoras = bitacoras;
-	}
-
-	public Boolean getOperativo() {
-		return operativo;
-	}
-
-	public void setOperativo(Boolean operativo) {
-		this.operativo = operativo;
 	}
 
 	public String getCustomerid() {

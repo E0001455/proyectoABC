@@ -70,8 +70,8 @@ public class HorarioActividadLineaService {
 
 				horarioActividadLineaResponseDTO.setDia(dia);
 				horarioActividadLineaResponseDTO.setBolActivo(horarioActividadLineaEntity.getBolActivo());
-				horarioActividadLineaResponseDTO.setFechaCreacion(horarioActividadLineaEntity.getFechaCreacion());
-				horarioActividadLineaResponseDTO.setFechaUltModificacion(horarioActividadLineaEntity.getFechaUltModificacion());
+				horarioActividadLineaResponseDTO.setFechaCreacion(horarioActividadLineaEntity.getFechaCreacion().getTime());
+				horarioActividadLineaResponseDTO.setFechaUltModificacion(horarioActividadLineaEntity.getFechaUltModificacion().getTime());
 
 				horarioActividadLineaResponseDTOLista.add(horarioActividadLineaResponseDTO);
 			}

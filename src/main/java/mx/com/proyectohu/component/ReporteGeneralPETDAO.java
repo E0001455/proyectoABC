@@ -53,7 +53,8 @@ public class ReporteGeneralPETDAO {
 				
 					petResponseDTO.setNombreLineaNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
 					petResponseDTO.setNombreCampana(resultado.getString("FCNOMBRE_CAMPANA"));
-					petResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					petResponseDTO.setNombreMapeo("");
+					petResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					petResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
 										
 					reporteGeneralpetResponseDTOlist.add(petResponseDTO);
@@ -94,10 +95,11 @@ public class ReporteGeneralPETDAO {
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					petResponseDTO= new ReporteGeneralPETResponseDTO();
+					petResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_CAMPANA"));
 					petResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					petResponseDTO.setNombreCampana(resultado.getString("NOMBRE_CAMPANA"));
 					petResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					petResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					petResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					petResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
 					petResponseDTO.setTotalRegistrosAprobados(resultado.getInt("FINOAPROBADOS"));	
 					petResponseDTO.setTotalRegistrosRechazados(resultado.getInt("FINORECHAZADOS"));
@@ -140,10 +142,11 @@ public class ReporteGeneralPETDAO {
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					petResponseDTO= new ReporteGeneralPETResponseDTO();
+					petResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_CAMPANA"));
 					petResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					petResponseDTO.setNombreCampana(resultado.getString("NOMBRE_CAMPANA"));
 					petResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					petResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					petResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					petResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
 					petResponseDTO.setTotalRegistrosAprobados(0);	
 					petResponseDTO.setTotalRegistrosRechazados(0);

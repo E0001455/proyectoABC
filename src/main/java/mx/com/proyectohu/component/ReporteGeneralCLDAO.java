@@ -51,9 +51,9 @@ public class ReporteGeneralCLDAO {
 					clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					clResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
-										
+					clResponseDTO.setActualizaciones(resultado.getInt("FINOACTUALIZACIONES"));		
 					reporteGeneralLCResponseDTOlist.add(clResponseDTO);
 			
 				}
@@ -95,7 +95,7 @@ public class ReporteGeneralCLDAO {
 					 clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					clResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
 					clResponseDTO.setTotalRegistrosAprobados(resultado.getInt("FINOAPROBADOS"));	
 					clResponseDTO.setTotalRegistrosRechazados(resultado.getInt("FINORECHAZADOS"));
@@ -143,7 +143,7 @@ public class ReporteGeneralCLDAO {
 					 clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombreLineaNegocio(resultado.getString("NOMBRE_LINEA_NEGOCIO"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN"));
+					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					clResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
 					clResponseDTO.setTotalRegistrosAprobados(0);	
 					clResponseDTO.setTotalRegistrosRechazados(0);

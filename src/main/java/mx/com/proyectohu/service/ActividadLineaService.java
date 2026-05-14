@@ -96,8 +96,8 @@ public class ActividadLineaService {
 				actividadLineaResponseDTO.setCatEjecucion(catEjecucion);
 
 				actividadLineaResponseDTO.setBolActivo(actividadLineaEntity.getBolActivo());
-				actividadLineaResponseDTO.setFechaCreacion(actividadLineaEntity.getFechaCreacion());
-				actividadLineaResponseDTO.setFechaUltModificacion(actividadLineaEntity.getFechaUltModificacion());
+				actividadLineaResponseDTO.setFechaCreacion(actividadLineaEntity.getFechaCreacion().getTime());
+				actividadLineaResponseDTO.setFechaUltModificacion(actividadLineaEntity.getFechaUltModificacion().getTime());
 				
 				ActividadMapeoLineaEntity actividadMapeoLineaEntity = new ActividadMapeoLineaEntity();
 

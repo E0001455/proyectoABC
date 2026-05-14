@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import mx.com.proyectohu.dto.CLRequestDTO;
 import mx.com.proyectohu.dto.CLResponseDTO;
 import mx.com.proyectohu.dto.PETRequestDTO;
+import mx.com.proyectohu.dto.PETResponseCargaDTO;
 import mx.com.proyectohu.dto.PETResponseDTO;
 
 @Component
@@ -25,12 +26,12 @@ public class ReporteIndividualPETDAO {
 	@Autowired
 	private DataSource dataSource;
 
-	public List<PETResponseDTO> consultarPETRegistroIndividualCarga(PETRequestDTO petRequestDTO) {
-		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>(); 
-		PETResponseDTO  petResponseDTO= null;
+	public List<PETResponseCargaDTO> consultarPETRegistroIndividualCarga(PETRequestDTO petRequestDTO) {
+		List<PETResponseCargaDTO> petResponseDTOLista = new ArrayList<PETResponseCargaDTO>(); 
+		PETResponseCargaDTO  petResponseDTO=  new PETResponseCargaDTO();;
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALPET(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALPET(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -52,15 +53,34 @@ public class ReporteIndividualPETDAO {
 				cs.setString(17, petRequestDTO.getTipoConsulta());
 				cs.setString(18, petRequestDTO.getTipoActividad());   
 				
+				if (petRequestDTO.getIdLineaNegocio() != null) {
+					cs.setLong(19, petRequestDTO.getIdLineaNegocio());
+				} else {
+				    cs.setNull(19, java.sql.Types.NUMERIC);
+				}
+				
+				if (petRequestDTO.getIdMapeoCampana() != null) {
+					cs.setLong(20, petRequestDTO.getIdLineaNegocio());
+				} else {
+				    cs.setNull(20, java.sql.Types.NUMERIC);
+				}
+				
+				cs.setString(21, petRequestDTO.getRiid());  
+				
+				if (petRequestDTO.getIdCampana() != null) {
+					cs.setLong(22, petRequestDTO.getIdCampana());
+				} else {
+				    cs.setNull(22, java.sql.Types.NUMERIC);
+				}
 
 
 				cs.execute();
 
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
-					petResponseDTO= new PETResponseDTO();
+					petResponseDTO= new PETResponseCargaDTO();
 					
-			
+					petResponseDTO.setIdExtensionPerfil(resultado.getLong("ID_EXTENSION_PERFIL"));
 					petResponseDTO.setLineaDeNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
 					petResponseDTO.setNumLote(resultado.getString("FCNUM_LOTE"));
 					petResponseDTO.setCustomerId(resultado.getString("FCCUSTOMER_ID_"));
@@ -124,7 +144,7 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setEstatusExp(resultado.getString("FCESTATUS_EXP"));
 					petResponseDTO.setSucursal(resultado.getString("FCSUCURSAL"));
 					petResponseDTO.setDomSucursal(resultado.getString("FCDOM_SUCURSAL"));
-					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
+					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION").getTime());
 					petResponseDTO.setCampana(resultado.getString("FCNOMBRE_CAMPANA"));
 					
 					petResponseDTOLista.add(petResponseDTO);
@@ -145,7 +165,7 @@ public class ReporteIndividualPETDAO {
 		PETResponseDTO  petResponseDTO= null;
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALPET(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALPET(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -165,8 +185,28 @@ public class ReporteIndividualPETDAO {
 				cs.setDate(15, java.sql.Date.valueOf(petRequestDTO.getFechaInicio()));
 				cs.setDate(16, java.sql.Date.valueOf(petRequestDTO.getFechaFin()));
 				cs.setString(17, petRequestDTO.getTipoConsulta());
-				cs.setString(18, petRequestDTO.getTipoActividad());   
+				cs.setString(18, petRequestDTO.getTipoActividad()); 
 				
+				if (petRequestDTO.getIdLineaNegocio() != null) {
+					cs.setLong(19, petRequestDTO.getIdLineaNegocio());
+				} else {
+				    cs.setNull(19, java.sql.Types.NUMERIC);
+				}
+				
+				if (petRequestDTO.getIdMapeoCampana() != null) {
+					cs.setLong(20, petRequestDTO.getIdLineaNegocio());
+				} else {
+				    cs.setNull(20, java.sql.Types.NUMERIC);
+				}
+				cs.setString(21, petRequestDTO.getRiid());  
+				
+				if (petRequestDTO.getIdCampana() != null) {
+					cs.setLong(22, petRequestDTO.getIdCampana());
+				} else {
+				    cs.setNull(22, java.sql.Types.NUMERIC);
+				}
+
+
 
 
 				cs.execute();
@@ -175,7 +215,8 @@ public class ReporteIndividualPETDAO {
 				while (resultado.next()) {
 					petResponseDTO= new PETResponseDTO();
 					
-				
+					petResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_CAMPANA"));
+					petResponseDTO.setIdExtensionPerfil(resultado.getLong("ID_EXTENSION_PERFIL"));
 					petResponseDTO.setLineaDeNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
 					petResponseDTO.setNumLote(resultado.getString("FCNUM_LOTE"));
 					petResponseDTO.setCustomerId(resultado.getString("FCCUSTOMER_ID_"));
@@ -239,11 +280,11 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setEstatusExp(resultado.getString("FCESTATUS_EXP"));
 					petResponseDTO.setSucursal(resultado.getString("FCSUCURSAL"));
 					petResponseDTO.setDomSucursal(resultado.getString("FCDOM_SUCURSAL"));
-					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
+					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION").getTime());
 				petResponseDTO.setEstatus(resultado.getString("ESTATUS_ABC"));
 				petResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
 				petResponseDTO.setCampana(resultado.getString("FCNOMBRE_CAMPANA"));
-					
+				petResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
 					
 					petResponseDTOLista.add(petResponseDTO);
 			
@@ -263,7 +304,7 @@ public class ReporteIndividualPETDAO {
 		PETResponseDTO  petResponseDTO= null;
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALPET(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALPET(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -284,7 +325,24 @@ public class ReporteIndividualPETDAO {
 				cs.setDate(16, java.sql.Date.valueOf(petRequestDTO.getFechaFin()));
 				cs.setString(17, petRequestDTO.getTipoConsulta());
 				cs.setString(18, petRequestDTO.getTipoActividad());   
+				if (petRequestDTO.getIdLineaNegocio() != null) {
+					cs.setLong(19, petRequestDTO.getIdLineaNegocio());
+				} else {
+				    cs.setNull(19, java.sql.Types.NUMERIC);
+				}
 				
+				if (petRequestDTO.getIdMapeoCampana() != null) {
+					cs.setLong(20, petRequestDTO.getIdLineaNegocio());
+				} else {
+				    cs.setNull(20, java.sql.Types.NUMERIC);
+				}
+				cs.setString(21, petRequestDTO.getRiid());  
+				
+				if (petRequestDTO.getIdCampana() != null) {
+					cs.setLong(22, petRequestDTO.getIdCampana());
+				} else {
+				    cs.setNull(22, java.sql.Types.NUMERIC);
+				}
 
 
 				cs.execute();
@@ -292,8 +350,8 @@ public class ReporteIndividualPETDAO {
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					petResponseDTO= new PETResponseDTO();
-					
-				
+					petResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_CAMPANA"));
+					petResponseDTO.setIdExtensionPerfil(resultado.getLong("ID_EXTENSION_PERFIL"));
 					petResponseDTO.setLineaDeNegocio(resultado.getString("FCLINEA_DE_NEGOCIO"));
 					petResponseDTO.setNumLote(resultado.getString("FCNUM_LOTE"));
 					petResponseDTO.setCustomerId(resultado.getString("FCCUSTOMER_ID_"));
@@ -357,10 +415,11 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setEstatusExp(resultado.getString("FCESTATUS_EXP"));
 					petResponseDTO.setSucursal(resultado.getString("FCSUCURSAL"));
 					petResponseDTO.setDomSucursal(resultado.getString("FCDOM_SUCURSAL"));
-					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION"));
+					petResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION").getTime());
 				petResponseDTO.setEstatus(resultado.getString("ESTATUS_ABC"));
 				petResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
 				petResponseDTO.setCampana(resultado.getString("FCNOMBRE_CAMPANA"));
+				petResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
 		
 					
 					petResponseDTOLista.add(petResponseDTO);

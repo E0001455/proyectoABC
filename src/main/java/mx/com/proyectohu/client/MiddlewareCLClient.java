@@ -37,7 +37,6 @@ public class MiddlewareCLClient {
 			    .bodyToMono(String.class)
 			    .block();
 
-		System.out.print(response);
 
 		return response;
 

@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
-public class PETResponseDTO implements Serializable {
+public class PETResponseCargaDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     
     private Long idExtensionPerfil;
-    private Long idTarea;
+   
     
 	@JsonProperty("lineaNegocio")
     private String lineaDeNegocio;
@@ -96,28 +96,16 @@ public class PETResponseDTO implements Serializable {
     private String sucursal;
     private String domSucursal;
     private String campana;
-    private String estatus;
-    private String detalle;
+   
+    
+ 
     private Long fecha;
-  private String nombreMapeo;
+  
    
   
 
  
-    /**
-	 * @return the idTarea
-	 */
-	public Long getIdTarea() {
-		return idTarea;
-	}
-
-	/**
-	 * @param idTarea the idTarea to set
-	 */
-	public void setIdTarea(Long idTarea) {
-		this.idTarea = idTarea;
-	}
-
+  
 	public String getIdAfore() {
         return idAfore;
     }
@@ -624,21 +612,7 @@ public class PETResponseDTO implements Serializable {
         this.domSucursal = domSucursal;
     }
 
-	public String getEstatus() {
-		return estatus;
-	}
 
-	public void setEstatus(String estatus) {
-		this.estatus = estatus;
-	}
-
-	public String getDetalle() {
-		return detalle;
-	}
-
-	public void setDetalle(String detalle) {
-		this.detalle = detalle;
-	}
 
 	/**
 	 * @return the fecha
@@ -674,20 +648,6 @@ public class PETResponseDTO implements Serializable {
 	 */
 	public void setIdExtensionPerfil(Long idExtensionPerfil) {
 		this.idExtensionPerfil = idExtensionPerfil;
-	}
-
-	/**
-	 * @return the nombreMapeo
-	 */
-	public String getNombreMapeo() {
-		return nombreMapeo;
-	}
-
-	/**
-	 * @param nombreMapeo the nombreMapeo to set
-	 */
-	public void setNombreMapeo(String nombreMapeo) {
-		this.nombreMapeo = nombreMapeo;
 	}
 
 	

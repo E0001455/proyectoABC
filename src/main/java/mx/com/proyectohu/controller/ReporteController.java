@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.proyectohu.dto.BitacoraUsuarioRequestDTO;
 import mx.com.proyectohu.dto.CLRequestDTO;
+import mx.com.proyectohu.dto.CLResponseCargaDTO;
 import mx.com.proyectohu.dto.CLResponseDTO;
+import mx.com.proyectohu.dto.CLResponseEnvioDTO;
 import mx.com.proyectohu.dto.PETRequestDTO;
+import mx.com.proyectohu.dto.PETResponseCargaDTO;
 import mx.com.proyectohu.dto.PETResponseDTO;
 import mx.com.proyectohu.dto.ReporteGeneralLCResponseDTO;
 import mx.com.proyectohu.dto.ReporteGeneralPETResponseDTO;
@@ -17,7 +20,9 @@ import mx.com.proyectohu.service.ReporteGeneralLineaService;
 import mx.com.proyectohu.service.ReporteIndividualCampanaService;
 import mx.com.proyectohu.service.ReporteIndividualLineaService;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +50,12 @@ public class ReporteController {
 
 	@Autowired
 	public ReporteGeneralLineaService reporteGeneralLineaService;
-	
+
 	@Autowired
 	public ReporteGeneralCampanaService reporteGeneralCampanaService;
 
 	@GetMapping("/cl/reporte/individual/carga")
-	public ResponseEntity<?> consultaCLCarga(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaCLCarga(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
 			@RequestParam(required = false) String apellidoPaterno,
@@ -61,8 +66,9 @@ public class ReporteController {
 			@RequestParam(required = false) String curp,
 			@RequestParam(required = false) String rfc,
 			@RequestParam(required = false) String poliza,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin,
+			@RequestParam(required = false) Long idMapeo
 			) {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
@@ -77,30 +83,33 @@ public class ReporteController {
 		clRequestDTO.setCurp(curp);
 		clRequestDTO.setRfc(rfc);
 		clRequestDTO.setPoliza(poliza);
+		clRequestDTO.setIdLineaNegocio(idLinea);
+		clRequestDTO.setIdMapeoLinea(idMapeo);
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			clRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			clRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 
 		}
 
 
 
 
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
+		List<CLResponseCargaDTO> clResponseDTOLista = new ArrayList<CLResponseCargaDTO>();
 
-		if (idLineaNegocio==null) {
-			clResponseDTOLista =reporteIndividualLineaService.consultaCLCarga(clRequestDTO);
 
-		}
+		clResponseDTOLista =reporteIndividualLineaService.consultaCLCarga(clRequestDTO);
+
+
+
 
 
 		return ResponseEntity.ok(clResponseDTOLista);
 	}
 
 	@GetMapping("/cl/reporte/individual/validacion")
-	public ResponseEntity<?> consultaCLValidacion(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaCLValidacion(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
 			@RequestParam(required = false) String apellidoPaterno,
@@ -111,8 +120,10 @@ public class ReporteController {
 			@RequestParam(required = false) String curp,
 			@RequestParam(required = false) String rfc,
 			@RequestParam(required = false) String poliza,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String  fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long  fechaFin,
+			@RequestParam(required = false) Long idMapeo
+		
 			) {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
@@ -127,12 +138,17 @@ public class ReporteController {
 		clRequestDTO.setCurp(curp);
 		clRequestDTO.setRfc(rfc);
 		clRequestDTO.setPoliza(poliza);
+		clRequestDTO.setIdLineaNegocio(idLinea);
+		clRequestDTO.setIdMapeoLinea(idMapeo);
+		
+		
 
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			clRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			clRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+
 		}
 
 
@@ -145,7 +161,7 @@ public class ReporteController {
 	}
 
 	@GetMapping("/cl/reporte/individual/envio")
-	public ResponseEntity<?> consultaCLEnvio(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaCLEnvio(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
 			@RequestParam(required = false) String apellidoPaterno,
@@ -156,8 +172,10 @@ public class ReporteController {
 			@RequestParam(required = false) String curp,
 			@RequestParam(required = false) String rfc,
 			@RequestParam(required = false) String poliza,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin,
+			@RequestParam(required = false) Long idMapeo,
+			@RequestParam(required = false) String riid
 			) {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
@@ -172,20 +190,23 @@ public class ReporteController {
 		clRequestDTO.setCurp(curp);
 		clRequestDTO.setRfc(rfc);
 		clRequestDTO.setPoliza(poliza);
+		clRequestDTO.setIdLineaNegocio(idLinea);
+		clRequestDTO.setIdMapeoLinea(idMapeo);
+		clRequestDTO.setRiid(riid);
 
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			clRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			clRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
-		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>();
-		
-			clResponseDTOLista =reporteIndividualLineaService.consultaCLEnvio(clRequestDTO);
+		List<CLResponseEnvioDTO> clResponseDTOLista = new ArrayList<CLResponseEnvioDTO>();
 
-		
+		clResponseDTOLista =reporteIndividualLineaService.consultaCLEnvio(clRequestDTO);
+
+
 
 
 
@@ -196,24 +217,24 @@ public class ReporteController {
 
 
 	@GetMapping("/cl/reporte/general/carga")
-	public ResponseEntity<?> consultaCLGeneralCarga(@RequestParam(required = false) Long idLineaNegocio,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+	public ResponseEntity<?> consultaCLGeneralCarga(@RequestParam(required = false) Long idLinea,
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin
 			) {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			clRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			clRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 
 		List<ReporteGeneralLCResponseDTO> clResponseDTOLista = new ArrayList<ReporteGeneralLCResponseDTO>();
 
-		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralCarga(idLineaNegocio,clRequestDTO);
+		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralCarga(idLinea,clRequestDTO);
 
 		return ResponseEntity.ok(clResponseDTOLista);
 	}
@@ -224,23 +245,23 @@ public class ReporteController {
 
 
 	@GetMapping("/cl/reporte/general/validacion")
-	public ResponseEntity<?> consultaCLGeneralValidacion(@RequestParam(required = false) Long idLineaNegocio,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String  fechaFin
+	public ResponseEntity<?> consultaCLGeneralValidacion(@RequestParam(required = false) Long idLinea,
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long  fechaFin
 			) {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			clRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			clRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 		List<ReporteGeneralLCResponseDTO> clResponseDTOLista = new ArrayList<ReporteGeneralLCResponseDTO>();
 
-		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralValidacion(idLineaNegocio,clRequestDTO);
+		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralValidacion(idLinea,clRequestDTO);
 
 
 		return ResponseEntity.ok(clResponseDTOLista);
@@ -248,23 +269,23 @@ public class ReporteController {
 	}
 
 	@GetMapping("/cl/reporte/general/envio")
-	public ResponseEntity<?> consultaCLGeneralEnvio(@RequestParam(required = false) Long idLineaNegocio,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String  fechaFin
+	public ResponseEntity<?> consultaCLGeneralEnvio(@RequestParam(required = false) Long idLinea,
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long  fechaFin
 			) {
 
 		CLRequestDTO clRequestDTO = new CLRequestDTO();
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			clRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			clRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			clRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			clRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 		List<ReporteGeneralLCResponseDTO> clResponseDTOLista = new ArrayList<ReporteGeneralLCResponseDTO>();
 
-		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralEnvio(idLineaNegocio,clRequestDTO);
+		clResponseDTOLista =reporteGeneralLineaService.consultaCLGeneralEnvio(idLinea,clRequestDTO);
 
 
 		return ResponseEntity.ok(clResponseDTOLista);
@@ -275,7 +296,8 @@ public class ReporteController {
 
 
 	@GetMapping("/pet/reporte/individual/carga")
-	public ResponseEntity<?> consultaPETCarga(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaPETCarga(@RequestParam(required = false) Long idLinea,
+			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String noLote,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String idAfore,
@@ -289,8 +311,8 @@ public class ReporteController {
 			@RequestParam(required = false) String apellido,
 			@RequestParam(required = false) String correo,
 			@RequestParam(required = false) String telefono,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin
 			) {
 
 
@@ -309,30 +331,33 @@ public class ReporteController {
 		petRequestDTO.setApellido(apellido);
 		petRequestDTO.setCorreo(correo);
 		petRequestDTO.setTelefono(telefono);
+		petRequestDTO.setIdLineaNegocio(idLinea);
+		petRequestDTO.setIdCampana(idCampana);
 
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			petRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			petRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
-		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
-		
-			petResponseDTOLista =reporteIndividualCampanaService.consultaPETCarga(petRequestDTO);
+		List<PETResponseCargaDTO> petResponseDTOLista = new ArrayList<PETResponseCargaDTO>();
 
-	
+		petResponseDTOLista =reporteIndividualCampanaService.consultaPETCarga(petRequestDTO);
+
+
 
 
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
-	
-	
-	
+
+
+
 
 	@GetMapping("/pet/reporte/individual/validacion")
-	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLinea,
+			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String noLote,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String idAfore,
@@ -346,8 +371,10 @@ public class ReporteController {
 			@RequestParam(required = false) String apellido,
 			@RequestParam(required = false) String correo,
 			@RequestParam(required = false) String telefono,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin,
+			@RequestParam(required = false) Long idMapeo
+			
 			) {
 
 
@@ -366,29 +393,31 @@ public class ReporteController {
 		petRequestDTO.setApellido(apellido);
 		petRequestDTO.setCorreo(correo);
 		petRequestDTO.setTelefono(telefono);
+		petRequestDTO.setIdLineaNegocio(idLinea);
+		petRequestDTO.setIdCampana(idCampana);
+		petRequestDTO.setIdMapeoCampana(idMapeo);
+		
 
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			petRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			petRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
 
-		if (idLineaNegocio==null) {
+		
 			petResponseDTOLista =reporteIndividualCampanaService.consultaPETValidacion(petRequestDTO);
-
-		}
-
 
 
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 
 	@GetMapping("/pet/reporte/individual/envio")
-	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLinea,
+			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String noLote,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String idAfore,
@@ -402,8 +431,10 @@ public class ReporteController {
 			@RequestParam(required = false) String apellido,
 			@RequestParam(required = false) String correo,
 			@RequestParam(required = false) String telefono,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin,
+			@RequestParam(required = false) Long idMapeo,
+			@RequestParam(required = false) String riid 
 			) {
 
 
@@ -422,33 +453,33 @@ public class ReporteController {
 		petRequestDTO.setApellido(apellido);
 		petRequestDTO.setCorreo(correo);
 		petRequestDTO.setTelefono(telefono);
+		petRequestDTO.setIdLineaNegocio(idLinea);
+		petRequestDTO.setIdCampana(idCampana);
+		petRequestDTO.setIdMapeoCampana(idMapeo);
+		petRequestDTO.setRiid(riid);
 
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			petRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			petRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 		List<PETResponseDTO> petResponseDTOLista = new ArrayList<PETResponseDTO>();
 
-		if (idLineaNegocio==null) {
+	
 			petResponseDTOLista =reporteIndividualCampanaService.consultaPETEnvio(petRequestDTO);
-
-		}
-
-
 
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 
 
 	@GetMapping("/pet/reporte/general/carga")
-	public ResponseEntity<?> consultaPETGeneralCarga(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaPETGeneralCarga(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin
 			) {
 
 
@@ -459,25 +490,25 @@ public class ReporteController {
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			petRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			petRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 		List<ReporteGeneralPETResponseDTO> petResponseDTOLista = new ArrayList<ReporteGeneralPETResponseDTO>();
 
 
-		petResponseDTOLista =reporteGeneralCampanaService.consultaPETCargaLineaNegocio(idLineaNegocio,idCampana, petRequestDTO);
+		petResponseDTOLista =reporteGeneralCampanaService.consultaPETCargaLineaNegocio(idLinea,idCampana, petRequestDTO);
 
 
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 
 	@GetMapping("/pet/reporte/general/validacion")
-	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin
 			) {
 
 
@@ -488,25 +519,25 @@ public class ReporteController {
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			petRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			petRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 		List<ReporteGeneralPETResponseDTO> petResponseDTOLista = new ArrayList<ReporteGeneralPETResponseDTO>();
 
 
-		petResponseDTOLista =reporteGeneralCampanaService.consultaPETGeneralValidacion(idLineaNegocio,idCampana,petRequestDTO);
+		petResponseDTOLista =reporteGeneralCampanaService.consultaPETGeneralValidacion(idLinea,idCampana,petRequestDTO);
 
 
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 
 	@GetMapping("/pet/reporte/general/envio")
-	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLineaNegocio,
+	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
-			@RequestParam(required = false) String fechaInicio,
-			@RequestParam(required = false) String fechaFin
+			@RequestParam(required = false) Long fechaInicio,
+			@RequestParam(required = false) Long fechaFin
 			) {
 
 
@@ -514,15 +545,15 @@ public class ReporteController {
 
 		if (fechaInicio!=null && fechaFin !=null) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			petRequestDTO.setFechaInicio(LocalDate.parse(fechaInicio,formatter));
-			petRequestDTO.setFechaFin(LocalDate.parse(fechaFin,formatter));
+			petRequestDTO.setFechaInicio(Instant.ofEpochMilli(fechaInicio).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
+			petRequestDTO.setFechaFin(Instant.ofEpochMilli(fechaFin).atZone(ZoneId.of("America/Mexico_City")).toLocalDate());
 		}
 
 
 		List<ReporteGeneralPETResponseDTO> petResponseDTOLista = new ArrayList<ReporteGeneralPETResponseDTO>();
 
 
-		petResponseDTOLista =reporteGeneralCampanaService.consultaPETEnvioLineaNegocio(idLineaNegocio,idCampana,petRequestDTO);
+		petResponseDTOLista =reporteGeneralCampanaService.consultaPETEnvioLineaNegocio(idLinea,idCampana,petRequestDTO);
 
 
 		return ResponseEntity.ok(petResponseDTOLista);

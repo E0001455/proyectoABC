@@ -14,9 +14,6 @@ public class ExtensionPerfilEntity implements Serializable {
     @Column(name = "ID_EXTENSION_PERFIL", nullable = false)
     private Long idExtensionPerfil;
 
-    @Column(name = "ID_TAREA_CAMPANA", nullable = false)
-    private Long idTareaCampana;
-
     @Column(name = "FCID_AFORE")
     private String idAfore;
 
@@ -206,11 +203,15 @@ public class ExtensionPerfilEntity implements Serializable {
     @Column(name = "FCDOM_SUCURSAL")
     private String domSucursal;
     
-    @Column(name = "EMAIL_ADDRESS_")
+    @Column(name = "FCEMAIL_ADDRESS_")
     private String correo;
     
-    @Column(name = "MOBILE_NUMBER_")
+    @Column(name = "FCMOBILE_NUMBER_")
     private String telefono;
+    
+    
+    @Column(name = "FCRIID_")
+    private String riid;
     
     public String getCorreo() {
 		return correo;
@@ -239,13 +240,7 @@ public class ExtensionPerfilEntity implements Serializable {
 		this.idExtensionPerfil = idExtensionPerfil;
 	}
 
-	public Long getIdTareaCampana() {
-		return idTareaCampana;
-	}
 
-	public void setIdTareaCampana(Long idTareaCampana) {
-		this.idTareaCampana = idTareaCampana;
-	}
 	
 	public String getIdAfore() {
 		return idAfore;
@@ -757,6 +752,20 @@ public class ExtensionPerfilEntity implements Serializable {
 
 	public void setBitacoras(List<BitacoraExtencionPerfilEntity> bitacoras) {
 		this.bitacoras = bitacoras;
+	}
+
+	/**
+	 * @return the riid
+	 */
+	public String getRiid() {
+		return riid;
+	}
+
+	/**
+	 * @param riid the riid to set
+	 */
+	public void setRiid(String riid) {
+		this.riid = riid;
 	}
     
     

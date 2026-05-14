@@ -30,12 +30,12 @@ public class MapeoCampanaResponseDTO {
 	private String 	descripcion;
 	
 	@JsonProperty("fechaCreacion")
-	private Timestamp 	fecCreacion;
+	private Long 	fecCreacion;
 	
 	private Long 	idABCUsuarioUltModificacion;
 	
 	@JsonProperty("fechaUltimaModificacion")
-	private Timestamp 	fecUltModificacion;
+	private Long 	fecUltModificacion;
 	
 	@JsonProperty("columnas")
 	private Integer columnas;
@@ -204,29 +204,27 @@ public class MapeoCampanaResponseDTO {
 	/**
 	 * @return the fecCreacion
 	 */
-	public Timestamp getFecCreacion() {
+	public Long getFecCreacion() {
 		return fecCreacion;
 	}
 	/**
 	 * @param fecCreacion the fecCreacion to set
 	 */
-	public void setFecCreacion(Timestamp fecCreacion) {
+	public void setFecCreacion(Long fecCreacion) {
 		this.fecCreacion = fecCreacion;
 	}
 	/**
 	 * @return the fecUltModificacion
 	 */
-	public Timestamp getFecUltModificacion() {
+	public Long getFecUltModificacion() {
 		return fecUltModificacion;
 	}
 	/**
 	 * @param fecUltModificacion the fecUltModificacion to set
 	 */
-	public void setFecUltModificacion(Timestamp fecUltModificacion) {
+	public void setFecUltModificacion(Long fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
 	}
-	
-
 	
 
 	

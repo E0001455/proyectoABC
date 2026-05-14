@@ -16,7 +16,7 @@ import mx.com.proyectohu.dto.MapeoLineaRequestDTO;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO.CatLineaNegocio;
 import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
-import mx.com.proyectohu.mapper.MapeoLineasMapper;
+
 
 @Service
 public class MapeoLineaService {
@@ -76,8 +76,8 @@ public class MapeoLineaService {
 				mapeoLineaResponseDTO.setBolActivo(mapeoLineaRecordDTO.bolActivo());
 				mapeoLineaResponseDTO.setNombre(mapeoLineaRecordDTO.nombre() );
 				mapeoLineaResponseDTO.setDescripcion(mapeoLineaRecordDTO.descripcion() );
-				mapeoLineaResponseDTO.setFecCreacion(mapeoLineaRecordDTO.fecCreacion() );
-				mapeoLineaResponseDTO.setFecUltModificacion( mapeoLineaRecordDTO.fecUltModificacion() );
+				mapeoLineaResponseDTO.setFecCreacion(mapeoLineaRecordDTO.fecCreacion().getTime());
+				mapeoLineaResponseDTO.setFecUltModificacion( mapeoLineaRecordDTO.fecUltModificacion().getTime());
 				mapeoLineaResponseDTO.setBolValidacion(mapeoLineaRecordDTO.bolValidacion());
 				mapeoLineaResponseDTO.setBolEnvio(mapeoLineaRecordDTO.bolEnvio());
 				mapeoLineaResponseDTO.setFiDictaminacion(mapeoLineaRecordDTO.fiDictaminacion());

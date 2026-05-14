@@ -30,10 +30,10 @@ public class ActividadCampanaResponseDTO {
 	private Boolean bolActivo;
 
 	@JsonProperty("fechaCreacion")
-	private Timestamp 	fechaCreacion;
+	private Long 	fechaCreacion;
 
 	@JsonProperty("fechaUltimaModificacion")
-	private Timestamp 	fechaUltModificacion;
+	private Long 	fechaUltModificacion;
 
 
 
@@ -149,32 +149,48 @@ public class ActividadCampanaResponseDTO {
 
 
 
-	
 
 
 
 
-	public Timestamp getFechaCreacion() {
+
+
+
+	/**
+	 * @return the fechaCreacion
+	 */
+	public Long getFechaCreacion() {
 		return fechaCreacion;
 	}
 
 
 
-	public void setFechaCreacion(Timestamp fechaCreacion) {
+	/**
+	 * @param fechaCreacion the fechaCreacion to set
+	 */
+	public void setFechaCreacion(Long fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
 
 
-	public Timestamp getFechaUltModificacion() {
+	/**
+	 * @return the fechaUltModificacion
+	 */
+	public Long getFechaUltModificacion() {
 		return fechaUltModificacion;
 	}
 
 
 
-	public void setFechaUltModificacion(Timestamp fechaUltModificacion) {
+	/**
+	 * @param fechaUltModificacion the fechaUltModificacion to set
+	 */
+	public void setFechaUltModificacion(Long fechaUltModificacion) {
 		this.fechaUltModificacion = fechaUltModificacion;
 	}
+
+
 
 
 

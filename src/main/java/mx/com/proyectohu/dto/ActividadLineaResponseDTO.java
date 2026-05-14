@@ -32,10 +32,10 @@ public class ActividadLineaResponseDTO {
 	private Boolean bolActivo;
 
 	@JsonProperty("fechaCreacion")
-	private Timestamp 	fechaCreacion;
+	private Long 	fechaCreacion;
 
 	@JsonProperty("fechaUltimaModificacion")
-	private Timestamp 	fechaUltModificacion;
+	private Long 	fechaUltModificacion;
 
 
 
@@ -144,18 +144,10 @@ public class ActividadLineaResponseDTO {
 		this.bolActivo = bolActivo;
 	}
 
-
-
-
-
-
-
-
-
 	/**
 	 * @return the fechaCreacion
 	 */
-	public Timestamp getFechaCreacion() {
+	public Long getFechaCreacion() {
 		return fechaCreacion;
 	}
 
@@ -164,7 +156,7 @@ public class ActividadLineaResponseDTO {
 	/**
 	 * @param fechaCreacion the fechaCreacion to set
 	 */
-	public void setFechaCreacion(Timestamp fechaCreacion) {
+	public void setFechaCreacion(Long fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
@@ -173,7 +165,7 @@ public class ActividadLineaResponseDTO {
 	/**
 	 * @return the fechaUltModificacion
 	 */
-	public Timestamp getFechaUltModificacion() {
+	public Long getFechaUltModificacion() {
 		return fechaUltModificacion;
 	}
 
@@ -182,10 +174,9 @@ public class ActividadLineaResponseDTO {
 	/**
 	 * @param fechaUltModificacion the fechaUltModificacion to set
 	 */
-	public void setFechaUltModificacion(Timestamp fechaUltModificacion) {
+	public void setFechaUltModificacion(Long fechaUltModificacion) {
 		this.fechaUltModificacion = fechaUltModificacion;
 	}
-
 
 
 

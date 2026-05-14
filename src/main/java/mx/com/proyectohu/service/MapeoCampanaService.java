@@ -80,8 +80,8 @@ public class MapeoCampanaService {
 				mapeoCampanaResponseDTO.setBolActivo(mapeoCampanaRecordDTO.bolActivo());
 				mapeoCampanaResponseDTO.setNombre(mapeoCampanaRecordDTO.nombre() );
 				mapeoCampanaResponseDTO.setDescripcion(mapeoCampanaRecordDTO.descripcion() );
-				mapeoCampanaResponseDTO.setFecCreacion(mapeoCampanaRecordDTO.fecCreacion() );	
-				mapeoCampanaResponseDTO.setFecUltModificacion(mapeoCampanaRecordDTO.fecUltModificacion() );
+				mapeoCampanaResponseDTO.setFecCreacion(mapeoCampanaRecordDTO.fecCreacion().getTime() );	
+				mapeoCampanaResponseDTO.setFecUltModificacion(mapeoCampanaRecordDTO.fecUltModificacion().getTime() );
 				mapeoCampanaResponseDTO.setColumnas(mapeoCampanaRecordDTO.columnas().intValue());
 				mapeoCampanaResponseDTO.setBolValidacion(mapeoCampanaRecordDTO.bolValidacion() );
 				mapeoCampanaResponseDTO.setBolEnvio(mapeoCampanaRecordDTO.bolEnvio() );
