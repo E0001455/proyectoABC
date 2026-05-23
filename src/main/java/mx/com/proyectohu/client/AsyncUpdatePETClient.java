@@ -2,12 +2,10 @@ package mx.com.proyectohu.client;
 
 import java.net.http.HttpClient;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import mx.com.proyectohu.component.EnvioLineaDAO;
 import mx.com.proyectohu.dto.MiddlewarePETDTO;
 
 @Service
@@ -20,9 +18,19 @@ public class AsyncUpdatePETClient {
 	@Value("${async.update.pet.afore.url}")
 	public String asyncUpdatePETAforeUrl;
 	
-	@Autowired
-	public EnvioLineaDAO envioLineaDAO;
+	
+	@Value("${async.update.pet.sofom.url}")
+	public String asyncUpdatePETSofomUrl;
+	
+	
+	@Value("${async.update.pet.pensiones.url}")
+	public String asyncUpdatePETPensionesUrl;
 
+	
+	@Value("${async.update.pet.prospectos.url}")
+	public String asyncUpdatePETProspectosUrl;
+	
+	
 
 	public AsyncUpdatePETClient() {
 		this.httpClient = HttpClient.newHttpClient();
@@ -39,8 +47,19 @@ public class AsyncUpdatePETClient {
 		if (lineaNegocio.equals("AFORE")) {
 			url = asyncUpdatePETAforeUrl;
 		}
+		if (lineaNegocio.equals("SOFOM")) {
+			url = asyncUpdatePETSofomUrl;
+		}
+		if (lineaNegocio.equals("PENSIONES")) {
+			url = asyncUpdatePETPensionesUrl;
+		}
+		if (lineaNegocio.equals("PROSPECTOS")) {
+			url = asyncUpdatePETProspectosUrl;
+		}
 
-			WebClient webClient = WebClient.create();
+		WebClient webClient = WebClient.builder()
+		        .defaultHeader("Connection", "close")
+		        .build();
 
 			 response = webClient.post()
 			        .uri(url)

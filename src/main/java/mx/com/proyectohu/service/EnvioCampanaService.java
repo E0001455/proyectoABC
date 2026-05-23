@@ -98,7 +98,7 @@ public class EnvioCampanaService {
 
 		recordDataDTO.setFieldNames(columnas);
 
-		datos= envioCampanaDAO.obtenerDatosXColumnas(columnasNombreCorrecto);
+		datos= envioCampanaDAO.obtenerDatosXColumnas(columnasNombreCorrecto,lineaNegocio);
 
 		List<List<Object>> resultado = new ArrayList<>();
 
@@ -157,7 +157,7 @@ public class EnvioCampanaService {
 
 		}
 
-		List<Long> listaId = envioCampanaDAO.obtenerids();
+		List<Long> listaId = envioCampanaDAO.obtenerids(lineaNegocio);
 
 		registrarBitacora(listaId,idTareaCampana);
 

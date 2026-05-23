@@ -420,7 +420,7 @@ public class ReporteIndividualPETDAO {
 				petResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
 				petResponseDTO.setCampana(resultado.getString("FCNOMBRE_CAMPANA"));
 				petResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-		
+				petResponseDTO.setRiid(resultado.getString("FCRIID_"));
 					
 					petResponseDTOLista.add(petResponseDTO);
 			

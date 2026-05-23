@@ -8,8 +8,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import mx.com.proyectohu.repository.CampanaRepository;
-import mx.com.proyectohu.repository.TareaCampanaRepository;
 import mx.com.proyectohu.component.ReporteIndividualPETDAO;
 import mx.com.proyectohu.dto.PETRequestDTO;
 import mx.com.proyectohu.dto.PETResponseCargaDTO;
@@ -17,12 +15,6 @@ import mx.com.proyectohu.dto.PETResponseDTO;
 
 @Service
 public class ReporteIndividualCampanaService {
-	
-	@Autowired
-	public TareaCampanaRepository tareaCampanaRepository;
-	
-	@Autowired
-	public CampanaRepository campanaRepository;
 	
 	@Autowired
 	public ReporteIndividualPETDAO reporteIndividualPETDAO;

@@ -93,7 +93,7 @@ public class EnvioLineaService {
 
 		recordDataDTO.setFieldNames(columnas);
 
-		datos= envioLineaDAO.obtenerDatosXColumnas(columnasNombreCorrecto);
+		datos= envioLineaDAO.obtenerDatosXColumnas(columnasNombreCorrecto,lineaNegocio);
 
 		List<List<Object>> resultado = new ArrayList<>();
 
@@ -158,7 +158,7 @@ public class EnvioLineaService {
 
 		}
 
-		List<Long> listaId = envioLineaDAO.obtenerids();
+		List<Long> listaId = envioLineaDAO.obtenerids(lineaNegocio);
 
 		registrarBitacora(listaId,idTareaLinea);
 

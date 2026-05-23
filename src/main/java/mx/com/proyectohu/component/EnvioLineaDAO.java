@@ -25,16 +25,16 @@ public class EnvioLineaDAO {
 	}
 
 
-	public List<Map<String, Object>>  obtenerDatosXColumnas(List<String> columnas) {
+	public List<Map<String, Object>>  obtenerDatosXColumnas(List<String> columnas,String lineaNegocio) {
 		List<Map<String, Object>> tabla = null;
 
 		String sql = "SELECT TEP.ID_LISTA_CONTACTO , " + String.join(", ", columnas) + " FROM TTABCTRA_LISTA_CONTACTO TEP "
 				+"INNER JOIN TTABCTRA_BITACORA_LISTA_CONTACTO TBEP ON TEP.ID_LISTA_CONTACTO = TBEP.ID_LISTA_CONTACTO INNER JOIN TCABCCAT_ESTATUS_ABC E_APA "
-				+"	    ON TBEP.ID_ESTATUS_ABC = E_APA.ID_ESTATUS_ABC WHERE E_APA.FCCODIGO = 'APA' 	AND NOT EXISTS ( "
+				+"	    ON TBEP.ID_ESTATUS_ABC = E_APA.ID_ESTATUS_ABC WHERE E_APA.FCCODIGO = 'APA'   AND FCLINEA_DE_NEGOCIO='"+lineaNegocio+"' AND NOT EXISTS ( "
 				+ "   SELECT 1 FROM TTABCTRA_BITACORA_LISTA_CONTACTO TBEP2 INNER JOIN TCABCCAT_ESTATUS_ABC E_ENV "
 				+     "  ON TBEP2.ID_ESTATUS_ABC = E_ENV.ID_ESTATUS_ABC  "
 				+ " WHERE TBEP2.ID_LISTA_CONTACTO = TEP.ID_LISTA_CONTACTO "
-				+ "  AND E_ENV.FCCODIGO IN ('ENR','REA')"
+				+ "  AND E_ENV.FCCODIGO IN ('ENR','REA','APR','RCR')"
 				+"	) ORDER BY TEP.ID_LISTA_CONTACTO" ;
 		tabla= jdbcTemplate.queryForList(sql);
 
@@ -44,16 +44,16 @@ public class EnvioLineaDAO {
 	}
 
 
-	public List<Long>  obtenerids() {
+	public List<Long>  obtenerids(String lineaNegocio) {
 		List<Long> tabla = null;
 
 		String sql = "SELECT TEP.ID_LISTA_CONTACTO" + " FROM TTABCTRA_LISTA_CONTACTO TEP "
 				+"INNER JOIN TTABCTRA_BITACORA_LISTA_CONTACTO TBEP ON TEP.ID_LISTA_CONTACTO = TBEP.ID_LISTA_CONTACTO INNER JOIN TCABCCAT_ESTATUS_ABC E_APA "
-				+"	    ON TBEP.ID_ESTATUS_ABC = E_APA.ID_ESTATUS_ABC WHERE E_APA.FCCODIGO = 'APA' 	AND NOT EXISTS ( "
+				+"	    ON TBEP.ID_ESTATUS_ABC = E_APA.ID_ESTATUS_ABC WHERE E_APA.FCCODIGO = 'APA'   AND FCLINEA_DE_NEGOCIO='"+lineaNegocio+"'  	AND NOT EXISTS ( "
 				+ "   SELECT 1 FROM TTABCTRA_BITACORA_LISTA_CONTACTO TBEP2 INNER JOIN TCABCCAT_ESTATUS_ABC E_ENV "
 				+     "  ON TBEP2.ID_ESTATUS_ABC = E_ENV.ID_ESTATUS_ABC  "
 				+ " WHERE TBEP2.ID_LISTA_CONTACTO = TEP.ID_LISTA_CONTACTO "
-				+ "  AND E_ENV.FCCODIGO IN ('ENR','REA')"
+				+ "  AND E_ENV.FCCODIGO IN ('ENR','REA','APR','RCR')"
 				+"	) ORDER BY TEP.ID_LISTA_CONTACTO" ;
 
 		tabla= jdbcTemplate.queryForList(sql,Long.class);

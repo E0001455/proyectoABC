@@ -20,6 +20,14 @@ public class TokenClient {
 	@Value("${token.url}")
 	public String tokenUrl;
 
+	@Value("${token.auth_type}")
+	public String tokenauth_type;
+	
+	@Value("${token.user_name}")
+	public String tokenuser_name;
+	
+	@Value("${token.password}")
+	public String tokenpassword;
 
 	public TokenClient() {
 		this.httpClient = HttpClient.newHttpClient();
@@ -36,9 +44,9 @@ public class TokenClient {
 		try {
 			
 			
-			String form = "auth_type=password"
-			        + "&user_name=CapgemTest.Integration"
-			        + "&password=Oracle123#";
+			String form = "auth_type="+tokenauth_type
+			        + "&user_name="+tokenuser_name
+			        + "&password="+tokenpassword;
 
 			HttpRequest request = HttpRequest.newBuilder()
 			        .uri(URI.create(tokenUrl))

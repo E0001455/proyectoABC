@@ -85,6 +85,10 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setIdCliente(resultado.getString("FCCUSTOMER_ID_"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
 					
+					if (clResponseDTO.getIdTarea()==0) {
+						clResponseDTO.setIdTarea(null);
+					}
+					
 					clResponseDTOLista.add(clResponseDTO);
 			
 				}

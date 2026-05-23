@@ -2,12 +2,10 @@ package mx.com.proyectohu.client;
 
 import java.net.http.HttpClient;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import mx.com.proyectohu.component.EnvioLineaDAO;
 import mx.com.proyectohu.dto.MiddlewareCLDTO;
 
 @Service
@@ -19,10 +17,12 @@ public class AsyncUpdateCLClient {
 
 	@Value("${async.update.cl.afore.url}")
 	public String asyncUpdateCLAforeUrl;
-	
-	@Autowired
-	public EnvioLineaDAO envioLineaDAO;
 
+	@Value("${async.update.cl.sofom.url}")
+	public String asyncUpdateCLSofomUrl;
+	
+	@Value("${async.update.cl.pensiones.url}")
+	public String asyncUpdateCLPensionesUrl;
 
 	public AsyncUpdateCLClient() {
 		this.httpClient = HttpClient.newHttpClient();
@@ -39,12 +39,17 @@ public class AsyncUpdateCLClient {
 		if (lineaNegocio.equals("AFORE")) {
 			url = asyncUpdateCLAforeUrl;
 		}
+		if (lineaNegocio.equals("SOFOM")) {
+			url = asyncUpdateCLSofomUrl;
+		}
+		if (lineaNegocio.equals("PENSIONES")) {
+			url = asyncUpdateCLPensionesUrl;
+		}
 
 
-
-				
-
-			WebClient webClient = WebClient.create();
+		WebClient webClient = WebClient.builder()
+		        .defaultHeader("Connection", "close")
+		        .build();
 
 			 response = webClient.post()
 			        .uri(url)

@@ -33,10 +33,10 @@ public class EnvioCampanaController {
 	public ResponseEntity<?> envioExtensionPerfil(@RequestBody Map<String, Object> body) {
 
 		String lineaNegocio = (String) body.get("lineaNegocio");
-		Long idTareaLinea = Long.parseLong(body.get("idTareaLinea").toString());
+		Long idTareaCampana = Long.parseLong(body.get("idTareaCampana").toString());
 		
 		try {
-			envioCampanaService.ejecutarEnvioExtensionPerfil(lineaNegocio,idTareaLinea);
+			envioCampanaService.ejecutarEnvioExtensionPerfil(lineaNegocio,idTareaCampana);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

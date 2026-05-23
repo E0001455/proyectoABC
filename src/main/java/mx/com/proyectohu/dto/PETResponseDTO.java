@@ -100,6 +100,8 @@ public class PETResponseDTO implements Serializable {
     private String detalle;
     private Long fecha;
   private String nombreMapeo;
+  private String riid;
+  
    
   
 
@@ -689,6 +691,15 @@ public class PETResponseDTO implements Serializable {
 	public void setNombreMapeo(String nombreMapeo) {
 		this.nombreMapeo = nombreMapeo;
 	}
+
+	public String getRiid() {
+		return riid;
+	}
+
+	public void setRiid(String riid) {
+		this.riid = riid;
+	}
+	
 
 	
 

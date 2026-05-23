@@ -16,10 +16,22 @@ public interface  RespuestaTareaLineaRepository extends JpaRepository<RespuestaT
 		public 	List<Object[]> findRequestId();
 	
 
-		@Query(value ="SELECT ID_LISTA_CONTACTO FROM TTABCTRA_RESPUESTA_TAREA_LINEA TRTL\r\n"
-				+ "INNER JOIN TTABCTRA_LISTA_CONTACTO_RESPUESTA TLCR \r\n"
-				+ "ON TRTL.ID_RESPUESTA_TAREA_LINEA = TLCR.ID_RESPUESTA_TAREA_LINEA\r\n"
-				+ "WHERE TRTL.ID_RESPUESTA_TAREA_LINEA =:id ORDER BY ID_LISTA_CONTACTO ", nativeQuery = true)
+		@Query(value ="SELECT TLCR.ID_LISTA_CONTACTO FROM TTABCTRA_RESPUESTA_TAREA_LINEA TRTL "
+				+ "				INNER JOIN TTABCTRA_LISTA_CONTACTO_RESPUESTA TLCR  "
+				+ "				ON TRTL.ID_RESPUESTA_TAREA_LINEA = TLCR.ID_RESPUESTA_TAREA_LINEA "
+				+ "                  INNER JOIN TTABCTRA_BITACORA_LISTA_CONTACTO TBLC "
+				+ "                  ON TBLC.ID_LISTA_CONTACTO = TLCR.ID_LISTA_CONTACTO "
+				+ "                 INNER JOIN TCABCCAT_ESTATUS_ABC TEA "
+				+ "                ON TBLC.ID_ESTATUS_ABC = TEA.ID_ESTATUS_ABC  "
+				+ "				WHERE TRTL.ID_RESPUESTA_TAREA_LINEA =:id  "
+				+ "               AND  TEA.FCCODIGO = 'ENR' "
+				+ "                AND NOT EXISTS (  "
+				+ "				  SELECT 1 FROM TTABCTRA_BITACORA_LISTA_CONTACTO TBEP2 INNER JOIN TCABCCAT_ESTATUS_ABC E_ENV  "
+				+ "     ON TBEP2.ID_ESTATUS_ABC = E_ENV.ID_ESTATUS_ABC   "
+				+ "				WHERE TBEP2.ID_LISTA_CONTACTO = TLCR.ID_LISTA_CONTACTO  "
+				+ "				  AND E_ENV.FCCODIGO IN ('APR','RCR') "
+				+ "					) "
+				+ "                ORDER BY TLCR.ID_LISTA_CONTACTO ", nativeQuery = true)
 		public 	List<Long> findIdListaContactos(@Param("id") Long idRespuestaLinea);
 		
 }
