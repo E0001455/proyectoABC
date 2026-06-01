@@ -16,6 +16,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mx.com.proyectohu.client.EnvioCampanaClient;
+import mx.com.proyectohu.client.RespuestaCampanaClient;
+import mx.com.proyectohu.client.RespuestaLineaClient;
 import mx.com.proyectohu.client.ValidarCampanaClient;
 import mx.com.proyectohu.component.TareaCampanaDAO;
 import mx.com.proyectohu.entity.ABCCatActividad;
@@ -47,6 +49,8 @@ public class MonitoreoCampanaCronService {
 	@Autowired
 	public EnvioCampanaClient envioCampanaClient;
 	
+	@Autowired
+	public RespuestaCampanaClient respuestaCampanaClient;
 	
 	@Value("${hora.cron.monitoreo}")
 	public String codigoHoraAPP;
@@ -101,6 +105,14 @@ public class MonitoreoCampanaCronService {
 											envioCampanaClient.llamarEnvioCampana(lineaNegocio,idTareaCampana);
 											
 										}
+										if(codigoActividad.equals("RES")) {
+
+											respuestaCampanaClient.llamarRespuestaCampana(lineaNegocio, idTareaCampana);
+
+
+
+										}
+
 										
 								}
 							}

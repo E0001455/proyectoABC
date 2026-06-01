@@ -50,6 +50,7 @@ public class MapeoCampanaService {
 		abcConfigMapeoCampanaEntity.setBolEnvio(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolEnvio());
 		abcConfigMapeoCampanaEntity.setFiDictaminacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiDictaminacion());
 		abcConfigMapeoCampanaEntity.setFiPorcentajeError(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiPorcentajeError());
+		abcConfigMapeoCampanaEntity.setRespuesta(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getRespuesta());
 		idMapeoCampana=abcConfigMapeoCampanaRepository.save(abcConfigMapeoCampanaEntity).getIdABCConfigMapeoCampana();
 
 
@@ -87,6 +88,7 @@ public class MapeoCampanaService {
 				mapeoCampanaResponseDTO.setBolEnvio(mapeoCampanaRecordDTO.bolEnvio() );
 				mapeoCampanaResponseDTO.setFiDictaminacion(mapeoCampanaRecordDTO.fiDictaminacion());
 				mapeoCampanaResponseDTO.setFiPorcentajeError(mapeoCampanaRecordDTO.fiPorcentajeError());
+				mapeoCampanaResponseDTO.setRespuesta(mapeoCampanaRecordDTO.respuesta());
 				mapeoCampanaResponseDTOlista.add(mapeoCampanaResponseDTO);
 			}
 
@@ -110,7 +112,7 @@ public class MapeoCampanaService {
 			abcConfigMapeoCampanaEntity.setBolEnvio(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getBolEnvio());
 			abcConfigMapeoCampanaEntity.setFiDictaminacion(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiDictaminacion());
 			abcConfigMapeoCampanaEntity.setFiPorcentajeError(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getFiPorcentajeError());
-			
+			abcConfigMapeoCampanaEntity.setRespuesta(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getRespuesta());
 			abcConfigMapeoCampanaEntity = abcConfigMapeoCampanaRepository.save(abcConfigMapeoCampanaEntity);
 			mapeoCampanaResponseDTO.setIdABCConfigMapeoCampana(abcConfigMapeoCampanaEntity.getIdABCConfigMapeoCampana());
 			

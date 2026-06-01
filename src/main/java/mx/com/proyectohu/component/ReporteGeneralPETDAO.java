@@ -148,8 +148,8 @@ public class ReporteGeneralPETDAO {
 					petResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
 					petResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					petResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
-					petResponseDTO.setTotalRegistrosAprobados(0);	
-					petResponseDTO.setTotalRegistrosRechazados(0);
+					petResponseDTO.setTotalRegistrosAprobados(resultado.getInt("FINOAPROBADOS"));	
+					petResponseDTO.setTotalRegistrosRechazados(resultado.getInt("FINORECHAZADOS"));
 					
 					
 					

@@ -27,7 +27,8 @@ public interface  ABCConfigMapeoLineaRepository extends JpaRepository<ABCConfigM
 			ACMP.bolEnvio,
 			ACMP.fiDictaminacion,
 			ACMP.fiPorcentajeError,
-			COUNT(AMLC.llaveMapeoLineaColumna.idABCConfigMapeoLinea) 
+			COUNT(AMLC.llaveMapeoLineaColumna.idABCConfigMapeoLinea),
+			ACMP.respuesta 
 			)
 			FROM  
 			ABCConfigMapeoLineaEntity ACMP LEFT JOIN  
@@ -44,7 +45,8 @@ public interface  ABCConfigMapeoLineaRepository extends JpaRepository<ABCConfigM
 			ACMP.bolValidacion,
 			ACMP.bolEnvio,
 			ACMP.fiDictaminacion,
-			ACMP.fiPorcentajeError
+			ACMP.fiPorcentajeError,
+			ACMP.respuesta
 			""" )
 	public List<MapeoLineaRecordDTO> consultarMapeoLineasColumnas();
 

@@ -31,7 +31,8 @@ public interface  ABCConfigMapeoCampanaRepository extends JpaRepository<ABCConfi
 			ACMP.bolEnvio,
 			ACMP.fiDictaminacion,
 			ACMP.fiPorcentajeError,
-			COUNT(AMLC.llaveMapeoCampanaColumna.idABCConfigMapeoCampana) 
+			COUNT(AMLC.llaveMapeoCampanaColumna.idABCConfigMapeoCampana),
+			ACMP.respuesta
 			)
 			FROM  
 			ABCConfigMapeoCampanaEntity ACMP LEFT JOIN  
@@ -49,7 +50,8 @@ public interface  ABCConfigMapeoCampanaRepository extends JpaRepository<ABCConfi
 			ACMP.bolValidacion,
 			ACMP.bolEnvio,
 			ACMP.fiDictaminacion,
-			ACMP.fiPorcentajeError
+			ACMP.fiPorcentajeError,
+			ACMP.respuesta
 			""" )
 	public List<MapeoCampanaRecordDTO> consultarMapeoCampanasColumnas();
 

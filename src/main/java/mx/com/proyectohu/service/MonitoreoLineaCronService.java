@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mx.com.proyectohu.client.CargarLineaClient;
 import mx.com.proyectohu.client.EnvioLineaClient;
 import mx.com.proyectohu.client.EnvioLineaClientFeign;
+import mx.com.proyectohu.client.RespuestaLineaClient;
 import mx.com.proyectohu.client.ValidarLineaClient;
 import mx.com.proyectohu.component.TareaCampanaDAO;
 import mx.com.proyectohu.component.TareaLineaDAO;
@@ -43,24 +44,26 @@ public class MonitoreoLineaCronService {
 
 	@Autowired
 	public ActividadRepository actividadRepository;
-	
+
 	@Autowired
 	public CargarLineaClient cargarLineaClient;
-	
+
 	@Autowired
 	public ValidarLineaClient validarLineaClient;
-	
+
 	@Autowired
 	public LineaNegocioRepository lineaNegocioRepository;
-	
+
 	@Autowired
 	public EnvioLineaClient envioLineaClient;
-	
 
-	
+	@Autowired
+	public RespuestaLineaClient respuestaLineaClient;
+
+
 	@Value("${hora.cron.monitoreo}")
 	public String codigoHoraAPP;
-	
+
 
 	@Scheduled(cron= "${cron.monitoreo.configuracion}")
 	public void checarHorarios() {
@@ -76,7 +79,7 @@ public class MonitoreoLineaCronService {
 				if (horaBase.getHour() == horaReal.getHour() && horaBase.getMinute() == horaReal.getMinute()) {
 					String codigoHora = codigoHoraAPP;
 					String codigoEstatus = "PLN"; 
-					
+
 					String json = tareaLineaDAO.consultarTareasHoraEstatus(codigoHora, codigoEstatus);
 
 
@@ -94,34 +97,40 @@ public class MonitoreoLineaCronService {
 								for (JsonNode tarea : tareas) {
 									Long idActividad = tarea.path("actividad").path("id").asLong();
 									Long idTareaLinea = tarea.path("id").asLong();
-									
-										Optional<ABCCatActividad> abcCatActividad = actividadRepository.findById(idActividad);
-										
-										String codigoActividad = abcCatActividad.get().getCodigo();
-										
-										String lineaNegocio = lineaNegocioRepository.findById(idLineaNegocio).get().getNombre();
-										
-									
-										
-										if(codigoActividad.equals("CAG")) {
-											
-											
-											cargarLineaClient.llamarCargaLinea(lineaNegocio,idTareaLinea);
-										}
-										
-										if(codigoActividad.equals("VLD")) {
-										
-											validarLineaClient.llamarValidarLinea(lineaNegocio,idTareaLinea);
-											
-										}
-										if(codigoActividad.equals("ENV")) {
-											
-											envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
-											
-											
-											
-										}
-										
+
+									Optional<ABCCatActividad> abcCatActividad = actividadRepository.findById(idActividad);
+
+									String codigoActividad = abcCatActividad.get().getCodigo();
+
+									String lineaNegocio = lineaNegocioRepository.findById(idLineaNegocio).get().getNombre();
+
+
+
+									if(codigoActividad.equals("CAG")) {
+
+
+										cargarLineaClient.llamarCargaLinea(lineaNegocio,idTareaLinea);
+									}
+
+									if(codigoActividad.equals("VLD")) {
+
+										validarLineaClient.llamarValidarLinea(lineaNegocio,idTareaLinea);
+
+									}
+									if(codigoActividad.equals("ENV")) {
+
+										envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
+
+									}
+
+									if(codigoActividad.equals("RES")) {
+
+										respuestaLineaClient.llamarRespuestaLinea(lineaNegocio, idTareaLinea);
+
+
+
+									}
+
 								}
 							}
 						}

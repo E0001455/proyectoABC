@@ -145,8 +145,8 @@ public class ReporteGeneralCLDAO {
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
 					clResponseDTO.setFdFechaFin(resultado.getTimestamp("FDFECHAFIN").getTime());
 					clResponseDTO.setTotalRegistros(resultado.getInt("FINOREGISTROS"));
-					clResponseDTO.setTotalRegistrosAprobados(0);	
-					clResponseDTO.setTotalRegistrosRechazados(0);
+					clResponseDTO.setTotalRegistrosAprobados(resultado.getInt("FINOAPROBADOS"));	
+					clResponseDTO.setTotalRegistrosRechazados(resultado.getInt("FINORECHAZADOS"));
 				
 					
 					

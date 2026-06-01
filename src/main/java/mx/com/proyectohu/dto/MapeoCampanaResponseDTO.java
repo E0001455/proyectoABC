@@ -52,6 +52,10 @@ public class MapeoCampanaResponseDTO {
 	@JsonProperty("porcentajeError")	
 	private Integer fiPorcentajeError;
 	
+	@JsonProperty("respuesta")	
+	private Boolean respuesta;
+	
+	
 	
 	/**
 	 * @return the idABCConfigMapeoCampana
@@ -225,6 +229,14 @@ public class MapeoCampanaResponseDTO {
 	public void setFecUltModificacion(Long fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
 	}
+	
+	public Boolean getRespuesta() {
+		return respuesta;
+	}
+	public void setRespuesta(Boolean respuesta) {
+		this.respuesta = respuesta;
+	}
+	
 	
 
 	

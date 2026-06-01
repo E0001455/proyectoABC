@@ -65,6 +65,8 @@ public class ABCConfigMapeoCampanaEntity implements Serializable {
 	@Column(name = "FDFECHAULTMODIFICACION")
 	private Timestamp 	fecUltModificacion;
 	
+	@Column(name = "RESPUESTA")
+	private Boolean respuesta;
 	
 	
 
@@ -268,5 +270,14 @@ public class ABCConfigMapeoCampanaEntity implements Serializable {
 	public void setFecUltModificacion(Timestamp fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
 	}
+
+	public Boolean getRespuesta() {
+		return respuesta;
+	}
+
+	public void setRespuesta(Boolean respuesta) {
+		this.respuesta = respuesta;
+	}
+	
 
 }

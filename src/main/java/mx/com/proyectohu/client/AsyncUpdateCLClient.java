@@ -14,6 +14,12 @@ public class AsyncUpdateCLClient {
 
 
 	private final HttpClient httpClient;
+	
+	@Value("${responsys.url.base}")
+	public String responsysBase;
+	
+	@Value("${responsys.url.api}")
+	public String responsysUrlApi;
 
 	@Value("${async.update.cl.afore.url}")
 	public String asyncUpdateCLAforeUrl;
@@ -23,6 +29,11 @@ public class AsyncUpdateCLClient {
 	
 	@Value("${async.update.cl.pensiones.url}")
 	public String asyncUpdateCLPensionesUrl;
+	
+	@Value("${async.update.cl.prospectos.url}")
+	public String asyncUpdateCLProspectosUrl;
+	
+	
 
 	public AsyncUpdateCLClient() {
 		this.httpClient = HttpClient.newHttpClient();
@@ -33,17 +44,20 @@ public class AsyncUpdateCLClient {
 	public String llamadoAsyncUpdateCL (String token,  MiddlewareCLDTO middlewareDTO, String lineaNegocio){
 		Integer statusCode=null;
 		String body=null;
-		String url= null;
+		String url= responsysBase+responsysUrlApi;
 		String response=null;
 		
 		if (lineaNegocio.equals("AFORE")) {
-			url = asyncUpdateCLAforeUrl;
+			url = url + asyncUpdateCLAforeUrl;
 		}
 		if (lineaNegocio.equals("SOFOM")) {
-			url = asyncUpdateCLSofomUrl;
+			url = url + asyncUpdateCLSofomUrl;
 		}
 		if (lineaNegocio.equals("PENSIONES")) {
-			url = asyncUpdateCLPensionesUrl;
+			url = url + asyncUpdateCLPensionesUrl;
+		}
+		if (lineaNegocio.equals("PROSPECTOS")) {
+			url = url + asyncUpdateCLPensionesUrl;
 		}
 
 

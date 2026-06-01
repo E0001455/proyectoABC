@@ -63,6 +63,42 @@ public class EnvioCampanaDAO {
 
 
 	}
+	
+	public List<Long>  obtenerTareaRespuesta(String lista) {
+		List<Long> tabla = null;
+
+		String sql = "SELECT ID_TAREA_CAMPANA FROM TTABCTRA_RESPUESTA_TAREA_CAMPANA TRTL\r\n"
+				+ "INNER JOIN TTABCTRA_EXTENSION_PERFIL_RESPUESTA TLCR\r\n"
+				+ "ON TRTL.ID_RESPUESTA_TAREA_CAMPANA= TLCR.ID_RESPUESTA_TAREA_CAMPANA\r\n"
+				+ "WHERE TLCR.ID_EXTENSION_PERFIL IN ("+ lista +") GROUP BY ID_TAREA_CAMPANA \r\n"
+				+ "" ;
+
+		tabla= jdbcTemplate.queryForList(sql,Long.class);
+
+		return tabla;
+
+
+	}
+	
+	
+	public List<Long>  obteneridsRespuesta(String lineaNegocio) {
+		List<Long> tabla = null;
+
+		String sql = "SELECT TEP.ID_EXTENSION_PERFIL" + " FROM TTABCTRA_EXTENSION_PERFIL TEP "
+				+"INNER JOIN TTABCTRA_BITACORA_EXTENSION_PERFIL TBEP ON TEP.ID_EXTENSION_PERFIL = TBEP.ID_EXTENSION_PERFIL INNER JOIN TCABCCAT_ESTATUS_ABC E_APA"
+				+"	    ON TBEP.ID_ESTATUS_ABC = E_APA.ID_ESTATUS_ABC WHERE E_APA.FCCODIGO = 'ENR' AND FCLINEA_DE_NEGOCIO='"+lineaNegocio+"' 	AND NOT EXISTS ("
+				+ "  SELECT 1 FROM TTABCTRA_BITACORA_EXTENSION_PERFIL TBEP2 INNER JOIN TCABCCAT_ESTATUS_ABC E_ENV"
+				+     " ON TBEP2.ID_ESTATUS_ABC = E_ENV.ID_ESTATUS_ABC "
+				+ "WHERE TBEP2.ID_EXTENSION_PERFIL = TEP.ID_EXTENSION_PERFIL"
+				+ " AND E_ENV.FCCODIGO IN ('REA','APR')"
+				+"	)  ORDER BY TEP.ID_EXTENSION_PERFIL"  ;
+
+		tabla= jdbcTemplate.queryForList(sql,Long.class);
+
+		return tabla;
+
+
+	}
 
 
 	public int insertarBitacoraExtensionPerfil(Long idExtensionPerfil,Long idTareaCampana) {

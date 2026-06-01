@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.dto.MapeoLineaRecordDTO;
@@ -46,7 +45,7 @@ public class MapeoLineaService {
 		abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
 		abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
 		abcConfigMapeoLineaEntity.setFiPorcentajeError(mapeoLineaRequestDTO.getMapeoDTO().getFiPorcentajeError());
-
+		abcConfigMapeoLineaEntity.setRespuesta(mapeoLineaRequestDTO.getMapeoDTO().getRespuesta());
 
 		idMapeoLineaNegocio=abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity).getIdABCConfigMapeoLinea();
 
@@ -83,7 +82,7 @@ public class MapeoLineaService {
 				mapeoLineaResponseDTO.setFiDictaminacion(mapeoLineaRecordDTO.fiDictaminacion());
 				mapeoLineaResponseDTO.setFiPorcentajeError(mapeoLineaRecordDTO.fiPorcentajeError());
 				mapeoLineaResponseDTO.setColumnas(mapeoLineaRecordDTO.columnas().intValue());
-				
+				mapeoLineaResponseDTO.setRespuesta(mapeoLineaRecordDTO.respuesta());
 				mapeoLineaResponseDTOLista.add(mapeoLineaResponseDTO);
 
 
@@ -115,6 +114,7 @@ public class MapeoLineaService {
 			abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
 			abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
 			abcConfigMapeoLineaEntity.setFiPorcentajeError(mapeoLineaRequestDTO.getMapeoDTO().getFiPorcentajeError());
+			abcConfigMapeoLineaEntity.setRespuesta(mapeoLineaRequestDTO.getMapeoDTO().getRespuesta());
 			
 			abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
 			mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());

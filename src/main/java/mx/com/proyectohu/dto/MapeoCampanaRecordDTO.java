@@ -19,7 +19,8 @@ public record MapeoCampanaRecordDTO(
 		Boolean bolEnvio,
 		Boolean fiDictaminacion,
 		Integer fiPorcentajeError,
-		Long 	columnas
+		Long 	columnas,
+		Boolean respuesta
 		) {
 
 

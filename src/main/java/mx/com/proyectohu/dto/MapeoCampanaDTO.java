@@ -27,6 +27,11 @@ public class MapeoCampanaDTO {
 	@JsonProperty("porcentajeError")	
 	private Integer fiPorcentajeError;
 	
+	
+	@JsonProperty("respuesta")	
+	private Boolean respuesta;
+	
+
 	/**
 	 * @return the idABCConfigMapeoCampana
 	 */
@@ -110,6 +115,13 @@ public class MapeoCampanaDTO {
 	 */
 	public void setFiPorcentajeError(Integer fiPorcentajeError) {
 		this.fiPorcentajeError = fiPorcentajeError;
+	}
+	
+	public Boolean getRespuesta() {
+		return respuesta;
+	}
+	public void setRespuesta(Boolean respuesta) {
+		this.respuesta = respuesta;
 	}
 	
 	

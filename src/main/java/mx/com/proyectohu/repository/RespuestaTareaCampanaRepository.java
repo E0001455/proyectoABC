@@ -16,13 +16,29 @@ public interface  RespuestaTareaCampanaRepository extends JpaRepository<Respuest
 	
 	@Query(value ="SELECT ID_RESPUESTA_TAREA_CAMPANA, FCREQUESTID  FROM TTABCTRA_RESPUESTA_TAREA_CAMPANA TRTC WHERE TRUNC(TRTC.FDFECHACREACION) = TRUNC(SYSDATE) ORDER BY ID_RESPUESTA_TAREA_CAMPANA ", nativeQuery = true)
 	public 	List<Object[]> findRequestId();
+	
+	@Query(value ="SELECT ID_RESPUESTA_TAREA_CAMPANA, FCREQUESTID  FROM TTABCTRA_RESPUESTA_TAREA_CAMPANA TRTC WHERE ID_TAREA_CAMPANA = :idTarea ORDER BY ID_RESPUESTA_TAREA_CAMPANA ", nativeQuery = true)
+	public 	List<Object[]> findRequestIdById(Long idTarea);
 
 
-	@Query(value ="SELECT ID_EXTENSION_PERFIL FROM TTABCTRA_RESPUESTA_TAREA_CAMPANA TRTL\r\n"
-			+ "INNER JOIN TTABCTRA_EXTENSION_PERFIL_RESPUESTA TLCR \r\n"
-			+ "ON TRTL.ID_RESPUESTA_TAREA_CAMPANA = TLCR.ID_RESPUESTA_TAREA_CAMPANA\r\n"
-			+ "WHERE TRTL.ID_RESPUESTA_TAREA_CAMPANA =:id ORDER BY ID_EXTENSION_PERFIL ", nativeQuery = true)
-	public 	List<Long> findIdListaContactos(@Param("id") Long idRespuestaCampana);
+
+	@Query(value ="SELECT TLCR.ID_EXTENSION_PERFIL FROM TTABCTRA_RESPUESTA_TAREA_CAMPANA TRTL "
+			+ "								INNER JOIN TTABCTRA_EXTENSION_PERFIL_RESPUESTA TLCR  "
+			+ "            		ON TRTL.ID_RESPUESTA_TAREA_CAMPANA = TLCR.ID_RESPUESTA_TAREA_CAMPANA "
+			+ "			                  INNER JOIN TTABCTRA_BITACORA_EXTENSION_PERFIL TBLC "
+			+ "				                  ON TBLC.ID_EXTENSION_PERFIL = TLCR.ID_EXTENSION_PERFIL "
+			+ "				                 INNER JOIN TCABCCAT_ESTATUS_ABC TEA "
+			+ "				                ON TBLC.ID_ESTATUS_ABC = TEA.ID_ESTATUS_ABC  "
+			+ "								WHERE TRTL.ID_RESPUESTA_TAREA_CAMPANA =:id  "
+			+ "				              AND  TEA.FCCODIGO = 'ENR' "
+			+ "				                AND NOT EXISTS (  "
+			+ "								  SELECT 1 FROM TTABCTRA_BITACORA_EXTENSION_PERFIL TBEP2 INNER JOIN TCABCCAT_ESTATUS_ABC E_ENV  "
+			+ "				     ON TBEP2.ID_ESTATUS_ABC = E_ENV.ID_ESTATUS_ABC   "
+			+ "								WHERE TBEP2.ID_EXTENSION_PERFIL = TLCR.ID_EXTENSION_PERFIL  "
+			+ "								  AND E_ENV.FCCODIGO IN ('APR','RCR') "
+			+ "									) "
+			+ "				                ORDER BY TLCR.ID_EXTENSION_PERFIL ", nativeQuery = true)
+	public 	List<Long> findIdExtensionPerfil(@Param("id") Long idRespuestaCampana);
 
 	
 	

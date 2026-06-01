@@ -19,13 +19,16 @@ import mx.com.proyectohu.dto.MiddlewareCLDTO;
 @Service
 public class PollingStatusClient {
 
+	@Value("${responsys.url.base}")
+	public String responsysUrlBase;
+
 	@Value("${polling.status.url}")
 	public String pollingStatuseUrl;
 
 
-
 	public String llamadoPollingStatus(String token,  String respuesta){
 
+		String url =responsysUrlBase + pollingStatuseUrl;
 		String response=null;
 
 

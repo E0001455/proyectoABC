@@ -17,7 +17,8 @@ public record MapeoLineaRecordDTO(
 		Boolean bolEnvio,
 		Boolean fiDictaminacion,
 		Integer fiPorcentajeError,
-		Long columnas
+		Long columnas,
+		Boolean respuesta
 		) {
 
 

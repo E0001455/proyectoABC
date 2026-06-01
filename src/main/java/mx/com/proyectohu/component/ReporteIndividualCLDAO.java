@@ -26,10 +26,10 @@ public class ReporteIndividualCLDAO {
 		List<CLResponseCargaDTO> clResponseDTOLista = new ArrayList<CLResponseCargaDTO>(); 
 		CLResponseCargaDTO  clResponseDTO= new CLResponseCargaDTO();
 		try (Connection conn = dataSource.getConnection()) {
-		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
-				
+
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
 				cs.setString(2, clRequestDTO.getCustomerID());
 				cs.setString(3, clRequestDTO.getNombre());
@@ -48,16 +48,22 @@ public class ReporteIndividualCLDAO {
 				if (clRequestDTO.getIdMapeoLinea() != null) {
 					cs.setLong(16, clRequestDTO.getIdMapeoLinea());
 				} else {
-				    cs.setNull(16, java.sql.Types.NUMERIC);
+					cs.setNull(16, java.sql.Types.NUMERIC);
 				}
-				   
+				cs.setString(17, clRequestDTO.getRiid());  
+				if (clRequestDTO.getIdLineaNegocio() != null) {
+					cs.setLong(18, clRequestDTO.getIdLineaNegocio());
+				} else {
+					cs.setNull(18, java.sql.Types.NUMERIC);
+				}
+
 
 				cs.execute();
 
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					clResponseDTO= new CLResponseCargaDTO();
-					
+
 					clResponseDTO.setIdListaContacto(resultado.getLong("ID_LISTA_CONTACTO"));
 					clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setNombre(resultado.getString("FCNOMBRE"));
@@ -84,13 +90,13 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setFecha(resultado.getTimestamp("FECHA_CREACION").getTime());
 					clResponseDTO.setIdCliente(resultado.getString("FCCUSTOMER_ID_"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					
+
 					if (clResponseDTO.getIdTarea()==0) {
 						clResponseDTO.setIdTarea(null);
 					}
-					
+
 					clResponseDTOLista.add(clResponseDTO);
-			
+
 				}
 
 			}
@@ -102,15 +108,15 @@ public class ReporteIndividualCLDAO {
 		return clResponseDTOLista;
 	}
 
-	
+
 	public List<CLResponseDTO> consultarCLRegistroIndividualValidacion(CLRequestDTO clRequestDTO) {
 		List<CLResponseDTO> clResponseDTOLista = new ArrayList<CLResponseDTO>(); 
 		CLResponseDTO  clResponseDTO= new CLResponseDTO();
 		try (Connection conn = dataSource.getConnection()) {
-		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
-				
+
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
 				cs.setString(2, clRequestDTO.getCustomerID());
 				cs.setString(3, clRequestDTO.getNombre());
@@ -129,9 +135,16 @@ public class ReporteIndividualCLDAO {
 				if (clRequestDTO.getIdMapeoLinea() != null) {
 					cs.setLong(16, clRequestDTO.getIdMapeoLinea());
 				} else {
-				    cs.setNull(16, java.sql.Types.NUMERIC);
+					cs.setNull(16, java.sql.Types.NUMERIC);
 				}
-				
+				cs.setString(17, clRequestDTO.getRiid());  
+				if (clRequestDTO.getIdLineaNegocio() != null) {
+					cs.setLong(18, clRequestDTO.getIdLineaNegocio());
+				} else {
+					cs.setNull(18, java.sql.Types.NUMERIC);
+				}
+
+
 
 				cs.execute();
 
@@ -166,9 +179,9 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
 					clResponseDTO.setIdCliente(resultado.getString("FCCUSTOMER_ID_"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					
+
 					clResponseDTOLista.add(clResponseDTO);
-			
+
 				}
 
 			}
@@ -179,17 +192,17 @@ public class ReporteIndividualCLDAO {
 
 		return clResponseDTOLista;
 	}
-	
-	
+
+
 	public List<CLResponseEnvioDTO> consultarCLRegistroIndividualEnvio(CLRequestDTO clRequestDTO) {
 		List<CLResponseEnvioDTO> clResponseDTOLista = new ArrayList<CLResponseEnvioDTO>(); 
 		CLResponseEnvioDTO  clResponseDTO= new CLResponseEnvioDTO();
 		try (Connection conn = dataSource.getConnection()) {
-		
-			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+
+			String sql = "{call SPCONSULTARREPORTEINDIVIDUALCL(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				clResponseDTO= new CLResponseEnvioDTO();
-				
+
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
 				cs.setString(2, clRequestDTO.getCustomerID());
 				cs.setString(3, clRequestDTO.getNombre());
@@ -208,16 +221,21 @@ public class ReporteIndividualCLDAO {
 				if (clRequestDTO.getIdMapeoLinea() != null) {
 					cs.setLong(16, clRequestDTO.getIdMapeoLinea());
 				} else {
-				    cs.setNull(16, java.sql.Types.NUMERIC);
+					cs.setNull(16, java.sql.Types.NUMERIC);
 				}
 				cs.setString(17, clRequestDTO.getRiid());  
+				if (clRequestDTO.getIdLineaNegocio() != null) {
+					cs.setLong(18, clRequestDTO.getIdLineaNegocio());
+				} else {
+					cs.setNull(18, java.sql.Types.NUMERIC);
+				}
 
 				cs.execute();
 
 				ResultSet  resultado= (ResultSet) cs.getObject(1);  
 				while (resultado.next()) {
 					clResponseDTO= new CLResponseEnvioDTO();
-					
+
 					clResponseDTO.setIdListaContacto(resultado.getLong("ID_LISTA_CONTACTO"));
 					clResponseDTO.setIdTarea(resultado.getLong("ID_TAREA_LINEA"));
 					clResponseDTO.setRiid(resultado.getString("FCRIID_"));
@@ -247,9 +265,9 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setDetalle(resultado.getString("FCDETALLE"));
 					clResponseDTO.setIdCliente(resultado.getString("FCCUSTOMER_ID_"));
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
-					
+
 					clResponseDTOLista.add(clResponseDTO);
-			
+
 				}
 
 			}
@@ -260,9 +278,9 @@ public class ReporteIndividualCLDAO {
 
 		return clResponseDTOLista;
 	}	
-	
-	
-	
+
+
+
 
 }
 
