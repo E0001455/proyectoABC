@@ -18,48 +18,6 @@ import mx.com.proyectohu.entity.TareaCampanaEntity;
 @Repository
 public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntity, Long> {
 
-/*	@Query(value = """
-
-
-			SELECT 
-			new mx.com.proyectohu.dto.ReporteGeneralCampanaRecordDTO(
-			tep.idTareaCampana,
-			tep.idCampana,
-			tep.lineaDeNegocio,
-			tep.nombreCampana,
-			COUNT(DISTINCT tep.idExtensionPerfil),
-			MAX(tbep.fechaCreacion) 
-			)
-			FROM 
-			ExtensionPerfilEntity tep INNER JOIN 
-			BitacoraExtencionPerfilEntity tbep ON 
-			tep.idExtensionPerfil = tbep.extensionPerfilEntity.idExtensionPerfil
-			WHERE tbep.estatus.id = (
-			SELECT e.id 
-			FROM EstatusABCEntity e 
-			WHERE e.codigo = 'CRB'
-			)
-			AND(:idCampana IS NULL OR tep.idCampana = :idCampana)
-			AND(:idLineaNegocio IS NULL OR tep.lineaDeNegocio = :idLineaNegocio)
-			AND tbep.fechaCreacion BETWEEN 
-			:fechaInicio AND 
-			:fechaFin
-			GROUP BY 
-			tep.idTareaCampana,
-			tep.idCampana,
-			tep.lineaDeNegocio,
-			tep.nombreCampana 
-
-
-			""")
-	public 		List<ReporteGeneralCampanaRecordDTO> obtenerTareasCargaXFechas(
-			@Param("idLineaNegocio") String idlineaNegocio,	
-			@Param("idCampana") Long idCampana,	
-			@Param("fechaInicio") LocalDateTime fechaInicio,
-			@Param("fechaFin") LocalDateTime fechaFin
-			);
-*/
-
 	@Query(value = """
 			SELECT 
 			T
