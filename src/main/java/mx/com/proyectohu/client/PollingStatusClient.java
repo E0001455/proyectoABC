@@ -35,7 +35,7 @@ public class PollingStatusClient {
 		WebClient webClient = WebClient.create();
 
 		response = webClient.get()
-				.uri(pollingStatuseUrl+ "/{respuesta}", respuesta)
+				.uri(url+ "/{respuesta}", respuesta)
 				.header("Authorization", token)
 				.retrieve()
 				.bodyToMono(String.class)

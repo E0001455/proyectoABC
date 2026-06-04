@@ -29,6 +29,7 @@ import mx.com.proyectohu.entity.ABCCatHora;
 import mx.com.proyectohu.entity.ActividadLineaEntity;
 import mx.com.proyectohu.repository.ActividadLineaRepository;
 import mx.com.proyectohu.repository.ActividadRepository;
+import mx.com.proyectohu.repository.EjecucionRepository;
 import mx.com.proyectohu.repository.HorarioRepository;
 import mx.com.proyectohu.repository.LineaNegocioRepository;
 
@@ -59,6 +60,9 @@ public class MonitoreoLineaCronService {
 
 	@Autowired
 	public RespuestaLineaClient respuestaLineaClient;
+
+	@Autowired
+	public EjecucionRepository ejecucionRepository;
 
 
 	@Value("${hora.cron.monitoreo}")
@@ -97,38 +101,39 @@ public class MonitoreoLineaCronService {
 								for (JsonNode tarea : tareas) {
 									Long idActividad = tarea.path("actividad").path("id").asLong();
 									Long idTareaLinea = tarea.path("id").asLong();
-
+									Long idEjecucion = tarea.path("ejecucion").asLong();
 									Optional<ABCCatActividad> abcCatActividad = actividadRepository.findById(idActividad);
 
 									String codigoActividad = abcCatActividad.get().getCodigo();
-
 									String lineaNegocio = lineaNegocioRepository.findById(idLineaNegocio).get().getNombre();
+									String CodigoEjecucion = ejecucionRepository.findById(idEjecucion).get().getCodigo();
+
+									if (CodigoEjecucion.equals("HBD")||CodigoEjecucion.equals("ATM")) {
+
+										if(codigoActividad.equals("CAG")) {
+
+
+											cargarLineaClient.llamarCargaLinea(lineaNegocio,idTareaLinea);
+										}
+
+										if(codigoActividad.equals("VLD")) {
+
+											validarLineaClient.llamarValidarLinea(lineaNegocio,idTareaLinea);
+
+										}
+										if(codigoActividad.equals("ENV")) {
+
+											envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
+
+										}
+
+										if(codigoActividad.equals("RES")) {
+
+											respuestaLineaClient.llamarRespuestaLinea(lineaNegocio, idTareaLinea);
 
 
 
-									if(codigoActividad.equals("CAG")) {
-
-
-										cargarLineaClient.llamarCargaLinea(lineaNegocio,idTareaLinea);
-									}
-
-									if(codigoActividad.equals("VLD")) {
-
-										validarLineaClient.llamarValidarLinea(lineaNegocio,idTareaLinea);
-
-									}
-									if(codigoActividad.equals("ENV")) {
-
-										envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
-
-									}
-
-									if(codigoActividad.equals("RES")) {
-
-										respuestaLineaClient.llamarRespuestaLinea(lineaNegocio, idTareaLinea);
-
-
-
+										}
 									}
 
 								}

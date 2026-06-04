@@ -49,12 +49,6 @@ public class CLRespuestaCronService {
 	@Autowired
 	public BitacoraTareaLineaRepository  bitacoraTareaLineaRepository;
 
-
-	@Value("${numero.registros.enviados.linea}")
-	public Integer numeroRegistrosEnviados;
-
-	Integer totalRegistrosEnviados = 0;
-
 	Integer totalregistros =0;
 	
 	

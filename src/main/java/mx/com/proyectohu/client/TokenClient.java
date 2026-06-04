@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TokenClient {
 
-
+   
 
 	private final HttpClient httpClient;
 	
@@ -52,7 +52,7 @@ public class TokenClient {
 			        + "&password="+tokenpassword;
 
 			HttpRequest request = HttpRequest.newBuilder()
-			        .uri(URI.create(tokenUrl))
+			        .uri(URI.create(url))
 			        .header("Content-Type", "application/x-www-form-urlencoded")
 			        .POST(HttpRequest.BodyPublishers.ofString(form))
 			        .build();

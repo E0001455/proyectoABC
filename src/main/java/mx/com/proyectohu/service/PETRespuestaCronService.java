@@ -107,9 +107,9 @@ public class PETRespuestaCronService {
 				respuestaTareaCampanaEntity= respuestaTareaCampanaRepository.findById(idRespuestaCampana).get();
 
 				List<Long> listaIdExtensionPerfil = respuestaTareaCampanaRepository.findIdExtensionPerfil(idRespuestaCampana);
-				totalregistros=	listaIdExtensionPerfil.size();
-				if (listaIdExtensionPerfil.size()== totalRespuestas.get(i).size() -1 ) {
 
+				if (listaIdExtensionPerfil.size()== totalRespuestas.get(i).size() -1 ) {
+					totalregistros=	listaIdExtensionPerfil.size();
 					for (int j = 1; j <totalRespuestas.get(i).size(); j++) {
 
 						envioCampanaDAO.insertarBitacoraExtensionPerfilEnviado(listaIdExtensionPerfil.get(j-1), totalRespuestas.get(i).get(j), respuestaTareaCampanaEntity.getIdTareaCampana());
