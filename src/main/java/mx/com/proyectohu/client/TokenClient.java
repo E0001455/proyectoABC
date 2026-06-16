@@ -17,9 +17,6 @@ public class TokenClient {
 
 	private final HttpClient httpClient;
 	
-	@Value("${responsys.url.base}")
-	public String responsysUrlBase;
-	
 	@Value("${token.url}")
 	public String tokenUrl;
 
@@ -41,7 +38,7 @@ public class TokenClient {
 	public String conseguirToken(){
 		Integer statusCode=null;
 		String body=null;
-		String url= responsysUrlBase+tokenUrl;
+		String url= tokenUrl;
 		String token="";
 		
 		try {

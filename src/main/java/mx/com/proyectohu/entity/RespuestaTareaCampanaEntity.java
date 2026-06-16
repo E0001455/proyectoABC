@@ -3,7 +3,7 @@ package mx.com.proyectohu.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import org.json.JSONObject;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

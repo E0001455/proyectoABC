@@ -46,7 +46,7 @@ public class RespuestaCampanaClient {
 		
 
 		json.put("lineaNegocio", lineaNegocio);
-		json.put("idTareaLinea", idTareaLinea);
+		json.put("idTareaCampana", idTareaLinea);
 		
 		
 	/*	Map<String, Object>  body= new HashMap<String, Object>(); 

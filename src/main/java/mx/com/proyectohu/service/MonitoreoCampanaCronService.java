@@ -22,9 +22,15 @@ import mx.com.proyectohu.client.ValidarCampanaClient;
 import mx.com.proyectohu.component.TareaCampanaDAO;
 import mx.com.proyectohu.entity.ABCCatActividad;
 import mx.com.proyectohu.entity.ABCCatHora;
+import mx.com.proyectohu.entity.BitacoraTareaCampanaEntity;
+import mx.com.proyectohu.entity.TareaCampanaEntity;
 import mx.com.proyectohu.repository.ActividadRepository;
+import mx.com.proyectohu.repository.BitacoraTareaCampanaRepository;
+import mx.com.proyectohu.repository.EjecucionRepository;
 import mx.com.proyectohu.repository.HorarioRepository;
 import mx.com.proyectohu.repository.LineaNegocioRepository;
+import mx.com.proyectohu.repository.TareaCampanaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 
 
 
@@ -36,25 +42,35 @@ public class MonitoreoCampanaCronService {
 
 	@Autowired
 	public TareaCampanaDAO tareaCampanaDAO;
-	
+
 	@Autowired
 	public ActividadRepository actividadRepository;
-	
+
 	@Autowired
 	public LineaNegocioRepository lineaNegocioRepository;
-	
+
 	@Autowired
 	public ValidarCampanaClient validarCampanaClient;
-	
+
 	@Autowired
 	public EnvioCampanaClient envioCampanaClient;
-	
+
 	@Autowired
 	public RespuestaCampanaClient respuestaCampanaClient;
+
+	@Autowired
+	public EjecucionRepository ejecucionRepository;
 	
+	@Autowired
+	public TareaCampanaRepository  tareaCampanaRepository;
+	
+	@Autowired
+	public BitacoraTareaCampanaRepository bitacoraTareaCampanaRepository;
+
+
 	@Value("${hora.cron.monitoreo}")
 	public String codigoHoraAPP;
-	
+
 	@Scheduled(cron= "${cron.monitoreo.configuracion}")
 	public void checarHorarios() {
 		try {
@@ -70,7 +86,7 @@ public class MonitoreoCampanaCronService {
 				if (horaBase.getHour() == horaReal.getHour() && horaBase.getMinute() == horaReal.getMinute()) {
 					String codigoHora = codigoHoraAPP;
 					String codigoEstatus = "PLN"; 
-					
+
 					String json = tareaCampanaDAO.consultarTareasHoraEstatus(codigoHora, codigoEstatus);
 
 
@@ -88,22 +104,36 @@ public class MonitoreoCampanaCronService {
 								for (JsonNode tarea : tareas) {
 									Long idActividad = tarea.path("actividad").path("id").asLong();
 									Long idTareaCampana = tarea.path("id").asLong();
-									
-										Optional<ABCCatActividad> abcCatActividad = actividadRepository.findById(idActividad);
-										
-										String codigoActividad = abcCatActividad.get().getCodigo();
-										
-										String lineaNegocio = lineaNegocioRepository.findById(idLineaNegocio).get().getNombre();
-										
+									Long idEjecucion = tarea.path("ejecucion").path("id").asLong();
+									Boolean dictaminado = tarea.path("dictaminado").asBoolean();
+									String CodigoEjecucion = ejecucionRepository.findById(idEjecucion).get().getCodigo();
+									Boolean dictaminar = tarea.path("dictaminar").asBoolean();
+
+									Optional<ABCCatActividad> abcCatActividad = actividadRepository.findById(idActividad);
+
+									String codigoActividad = abcCatActividad.get().getCodigo();
+
+									String lineaNegocio = lineaNegocioRepository.findById(idLineaNegocio).get().getNombre();
+
+									if (CodigoEjecucion.equals("HBD")||CodigoEjecucion.equals("ATM")) {
+
 										if(codigoActividad.equals("VLD")) {
-										
+
 											validarCampanaClient.llamarValidarCampana(lineaNegocio,idTareaCampana);
-											
+
 										}
 										if(codigoActividad.equals("ENV")) {
-											
+											if (dictaminar&&!dictaminado) {
+												Long tareal =	idTareaCampana;
+												for(int i=0;i<2;i++) {	
+													actualizarTarea(tareal,7L);
+													tareal=idTareaCampana+1;
+												}
+
+											}else {
+
 											envioCampanaClient.llamarEnvioCampana(lineaNegocio,idTareaCampana);
-											
+											}
 										}
 										if(codigoActividad.equals("RES")) {
 
@@ -112,18 +142,13 @@ public class MonitoreoCampanaCronService {
 
 
 										}
+									}
 
-										
 								}
 							}
 						}
 					}
 				}	
-
-
-
-
-
 			}
 
 		} catch (JsonMappingException e) {
@@ -134,5 +159,29 @@ public class MonitoreoCampanaCronService {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void actualizarTarea(Long idTareaCampana,Long estatus) {
+
+		Optional<TareaCampanaEntity> tareaCampanaEntityOptional =  tareaCampanaRepository.findById(idTareaCampana);
+
+		if (tareaCampanaEntityOptional.isPresent()) {
+			TareaCampanaEntity tareaCampanaEntity = tareaCampanaEntityOptional.get();
+
+			tareaCampanaEntity.setIdEstatusTarea(estatus);
+
+			tareaCampanaEntity = tareaCampanaRepository.save(tareaCampanaEntity);
+
+			BitacoraTareaCampanaEntity bitacoraTareaCampanaEntity = new  BitacoraTareaCampanaEntity();
+
+			bitacoraTareaCampanaEntity.setIdTareaCampana(idTareaCampana);
+			bitacoraTareaCampanaEntity.setIdEstatusTarea(estatus);
+			bitacoraTareaCampanaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
+			
+				bitacoraTareaCampanaEntity.setDetalle("CANCELADA");
+			
+
+			bitacoraTareaCampanaEntity= bitacoraTareaCampanaRepository.save(bitacoraTareaCampanaEntity);
+		}
 	}
 }

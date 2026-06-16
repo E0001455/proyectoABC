@@ -1,17 +1,10 @@
 package mx.com.proyectohu.component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import mx.com.proyectohu.dto.CatalogosResponseDTO;
-import mx.com.proyectohu.dto.RegistrosCatalogosDTO;
-
-
 
 
 @Component
@@ -90,7 +83,7 @@ public class EnvioCampanaDAO {
 				+ "  SELECT 1 FROM TTABCTRA_BITACORA_EXTENSION_PERFIL TBEP2 INNER JOIN TCABCCAT_ESTATUS_ABC E_ENV"
 				+     " ON TBEP2.ID_ESTATUS_ABC = E_ENV.ID_ESTATUS_ABC "
 				+ "WHERE TBEP2.ID_EXTENSION_PERFIL = TEP.ID_EXTENSION_PERFIL"
-				+ " AND E_ENV.FCCODIGO IN ('REA','APR')"
+				+ " AND E_ENV.FCCODIGO IN ('RCR','APR')"
 				+"	)  ORDER BY TEP.ID_EXTENSION_PERFIL"  ;
 
 		tabla= jdbcTemplate.queryForList(sql,Long.class);

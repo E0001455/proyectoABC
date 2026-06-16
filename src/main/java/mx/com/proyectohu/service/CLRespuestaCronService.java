@@ -38,46 +38,55 @@ public class CLRespuestaCronService {
 
 	@Autowired
 	public EnvioLineaDAO envioLineaDAO;
-	
+
 	@Autowired
 	public TareaLineaRepository  tareaLineaRepository;
 
 
 	@Autowired
 	public ListaContactoRepository listaContactoRepository;
-	
+
 	@Autowired
 	public BitacoraTareaLineaRepository  bitacoraTareaLineaRepository;
 
 	Integer totalregistros =0;
-	
-	
+
+
 	Integer aprobados =0;
-	
+
 
 
 	public void ejecutarVerificacionRespuesta(String lineaNegocio, Long idTareaLinea) {
 		List<Object[]> listaRespuesta= null;
-		
+
 		totalregistros =0;
 		aprobados =0;
-		
+
 		actualizarTarea(idTareaLinea, 2L);
 
 
-		List<Long> listaId = envioLineaDAO.obteneridsRespuesta(lineaNegocio);
+		//	List<Long> listaId = envioLineaDAO.obteneridsRespuesta(lineaNegocio);
+
+		//	if (!listaId.isEmpty()) {
+
+		//		List<List<Long>> listaDividida = new ArrayList<>();
+		//			for(int d=0;d<listaId.size();d+=1000) {
+		//				listaDividida.add(listaId.subList(d, Math.min(d+1000,listaId.size())));
+		//			}
+
+		//			for(List<Long> listaReducida : listaDividida ) {		
+		//				String listaIds = listaReducida.stream()
+		//						.map(String::valueOf)
+		//						.collect(Collectors.joining(","));
+
+		//		List<Long> listaIdTarea = envioLineaDAO.obtenerTareaRespuesta(listaIds);
 
 
-		String placeholders = listaId.stream()
-		        .map(String::valueOf)
-		        .collect(Collectors.joining(","));
+		//		for(Long idTarea: listaIdTarea) {
 
-		List<Long> listaIdTarea = envioLineaDAO.obtenerTareaRespuesta(placeholders);
+		listaRespuesta = respuestaTareaLineaRepository.findRequestIdById(lineaNegocio);
 
-
-		for(Long idTarea: listaIdTarea) {
-
-			listaRespuesta = respuestaTareaLineaRepository.findRequestIdById(idTarea);
+		if (!listaRespuesta.isEmpty()) {
 
 			List<List<String>> totalRespuestas = new ArrayList<List<String>>();
 			List<String> result =null;
@@ -116,22 +125,24 @@ public class CLRespuestaCronService {
 				respuestaTareaLineaEntity= respuestaTareaLineaRepository.findById(idRespuestaLinea).get();
 
 				List<Long> listaIdContactos = respuestaTareaLineaRepository.findIdListaContactos(idRespuestaLinea);
-				totalregistros=	listaIdContactos.size();
-				if (listaIdContactos.size()== totalRespuestas.get(i).size() -1 ) {
 
+				if (listaIdContactos.size()== totalRespuestas.get(i).size() -1 ) {
+					totalregistros= totalregistros	+listaIdContactos.size();
 					for (int j = 1; j <totalRespuestas.get(i).size(); j++) {
 
 						envioLineaDAO.insertarBitacoraListaContactoEnviado(listaIdContactos.get(j-1), totalRespuestas.get(i).get(j),respuestaTareaLineaEntity.getIdTareaLinea());
 						if (!totalRespuestas.get(i).get(j).contains("MERGEFAILED")) {
 							actualizarRIIDListaContacto(listaIdContactos.get(j-1), totalRespuestas.get(i).get(j));
 							aprobados++;
-							
+
 						}
 					}
 				}
+				//	}
+				//	}
+				//}
 			}
 		}
-		
 		actualizarTarea(idTareaLinea, 4L);
 	}
 
@@ -147,8 +158,8 @@ public class CLRespuestaCronService {
 		listaContactoRepository.save(listaContactoEntity);
 
 	}
-	
-	
+
+
 	public void actualizarTarea(Long idTareaLinea,Long estatus) {
 
 		Optional<TareaLineaEntity> tareaLineaEntityOptional =  tareaLineaRepository.findById(idTareaLinea);
@@ -177,7 +188,7 @@ public class CLRespuestaCronService {
 			bitacoraTareaLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 
 			if (estatus==2) {
-				bitacoraTareaLineaEntity.setDetalle("EJECUCION DE ENVIO");
+				bitacoraTareaLineaEntity.setDetalle("EJECUCION DE RESPUESTA");
 			}else {
 				bitacoraTareaLineaEntity.setDetalle("COMPLETADA");
 			}

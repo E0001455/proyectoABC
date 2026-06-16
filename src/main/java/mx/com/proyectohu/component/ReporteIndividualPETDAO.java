@@ -94,8 +94,8 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setIdPersona(resultado.getString("FCIDPERSONA"));
 					petResponseDTO.setFirstName(resultado.getString("FCFIRST_NAME"));
 					petResponseDTO.setLastName(resultado.getString("FCLAST_NAME"));
-					//petResponseDTO.setCorreo(resultado.getString("EMAIL_ADDRESS_"));
-					//petResponseDTO.setTelefono(resultado.getString("MOBILE_NUMBER_"));
+					petResponseDTO.setCorreo(resultado.getString("FCEMAIL_ADDRESS_"));
+					petResponseDTO.setTelefono(resultado.getString("FCMOBILE_NUMBER_"));
 					petResponseDTO.setSiefore(resultado.getString("FCSIEFORE"));
 					petResponseDTO.setSegmento(resultado.getString("FCSEGMENTO"));
 					petResponseDTO.setRegimen(resultado.getString("FCREGIMEN"));
@@ -194,7 +194,7 @@ public class ReporteIndividualPETDAO {
 				}
 				
 				if (petRequestDTO.getIdMapeoCampana() != null) {
-					cs.setLong(20, petRequestDTO.getIdLineaNegocio());
+					cs.setLong(20, petRequestDTO.getIdMapeoCampana());
 				} else {
 				    cs.setNull(20, java.sql.Types.NUMERIC);
 				}
@@ -230,8 +230,8 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setIdPersona(resultado.getString("FCIDPERSONA"));
 					petResponseDTO.setFirstName(resultado.getString("FCFIRST_NAME"));
 					petResponseDTO.setLastName(resultado.getString("FCLAST_NAME"));
-					//petResponseDTO.setCorreo(resultado.getString("EMAIL_ADDRESS_"));
-					//petResponseDTO.setTelefono(resultado.getString("MOBILE_NUMBER_"));
+					petResponseDTO.setCorreo(resultado.getString("FCEMAIL_ADDRESS_"));
+					petResponseDTO.setTelefono(resultado.getString("FCMOBILE_NUMBER_"));
 					petResponseDTO.setSiefore(resultado.getString("FCSIEFORE"));
 					petResponseDTO.setSegmento(resultado.getString("FCSEGMENTO"));
 					petResponseDTO.setRegimen(resultado.getString("FCREGIMEN"));
@@ -332,7 +332,7 @@ public class ReporteIndividualPETDAO {
 				}
 				
 				if (petRequestDTO.getIdMapeoCampana() != null) {
-					cs.setLong(20, petRequestDTO.getIdLineaNegocio());
+					cs.setLong(20, petRequestDTO.getIdMapeoCampana());
 				} else {
 				    cs.setNull(20, java.sql.Types.NUMERIC);
 				}
@@ -365,8 +365,8 @@ public class ReporteIndividualPETDAO {
 					petResponseDTO.setIdPersona(resultado.getString("FCIDPERSONA"));
 					petResponseDTO.setFirstName(resultado.getString("FCFIRST_NAME"));
 					petResponseDTO.setLastName(resultado.getString("FCLAST_NAME"));
-					//petResponseDTO.setCorreo(resultado.getString("EMAIL_ADDRESS_"));
-					//petResponseDTO.setTelefono(resultado.getString("MOBILE_NUMBER_"));
+					petResponseDTO.setCorreo(resultado.getString("FCEMAIL_ADDRESS_"));
+					petResponseDTO.setTelefono(resultado.getString("FCMOBILE_NUMBER_"));
 					petResponseDTO.setSiefore(resultado.getString("FCSIEFORE"));
 					petResponseDTO.setSegmento(resultado.getString("FCSEGMENTO"));
 					petResponseDTO.setRegimen(resultado.getString("FCREGIMEN"));

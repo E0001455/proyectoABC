@@ -15,12 +15,6 @@ public class AsyncUpdateCLClient {
 
 	private final HttpClient httpClient;
 	
-	@Value("${responsys.url.base}")
-	public String responsysBase;
-	
-	@Value("${responsys.url.api}")
-	public String responsysUrlApi;
-
 	@Value("${async.update.cl.afore.url}")
 	public String asyncUpdateCLAforeUrl;
 
@@ -44,7 +38,7 @@ public class AsyncUpdateCLClient {
 	public String llamadoAsyncUpdateCL (String token,  MiddlewareCLDTO middlewareDTO, String lineaNegocio){
 		Integer statusCode=null;
 		String body=null;
-		String url= responsysBase+responsysUrlApi;
+		String url= "";
 		String response=null;
 		
 		if (lineaNegocio.equals("AFORE")) {

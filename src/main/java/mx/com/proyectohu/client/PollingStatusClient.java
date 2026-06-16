@@ -7,7 +7,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,6 @@ import mx.com.proyectohu.dto.MiddlewareCLDTO;
 @Service
 public class PollingStatusClient {
 
-	@Value("${responsys.url.base}")
-	public String responsysUrlBase;
 
 	@Value("${polling.status.url}")
 	public String pollingStatuseUrl;
@@ -28,7 +25,7 @@ public class PollingStatusClient {
 
 	public String llamadoPollingStatus(String token,  String respuesta){
 
-		String url =responsysUrlBase + pollingStatuseUrl;
+		String url = pollingStatuseUrl;
 		String response=null;
 
 

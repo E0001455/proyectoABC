@@ -1,20 +1,20 @@
 package mx.com.proyectohu.client;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import mx.com.proyectohu.feign.CargaLineaClientFeign;
 
 @Service
 public class CargarLineaClient {
 
 
-
+/*
 	private final HttpClient httpClient;
 	
 	@Value("${carga.linea.url}")
@@ -72,7 +72,22 @@ public class CargarLineaClient {
 
 	}
 
-
-
+*/
+	
+	@Autowired
+    public CargaLineaClientFeign cargaLineaClientFeign;
+	
+	public String llamarCargaLinea(String lineaNegocio, Long idTareaLinea){
+	
+	Map<String, Object>  body= new HashMap<String, Object>(); 
+		
+		body.put("lineaNegocio", lineaNegocio);
+		body.put("idTareaLinea", idTareaLinea);
+		
+		ResponseEntity<?> respuesta =cargaLineaClientFeign.cargaListaContacto(body);
+		
+		
+		return respuesta.toString();
+	}
 
 }

@@ -47,30 +47,39 @@ public class PETRespuestaCronService {
 	public BitacoraTareaCampanaRepository bitacoraTareaCampanaRepository;
 
 	Integer totalregistros =0;
-	
+
 	Integer aprobados =0;
 
 	public void ejecutarVerificacionRespuesta(String lineaNegocio,Long idTareaCampana) {
 		List<Object[]> listaRespuesta = null;
 		totalregistros =0;
 		aprobados =0;
-		
+
 		actualizarTarea(idTareaCampana, 2L);
 
-		List<Long> listaId = envioCampanaDAO.obteneridsRespuesta(lineaNegocio);
+		//		List<Long> listaId = envioCampanaDAO.obteneridsRespuesta(lineaNegocio);
+		//
+		//		if (!listaId.isEmpty()) {
+		//
+		//
+		//			List<List<Long>> listaDividida = new ArrayList<>();
+		//			for(int d=0;d<listaId.size();d+=1000) {
+		//				listaDividida.add(listaId.subList(d, Math.min(d+1000,listaId.size())));
+		//			}
+		//
+		//			for(List<Long> listaReducida : listaDividida ) {	
+		//				String placeholders = listaReducida.stream()
+		//						.map(String::valueOf)
+		//						.collect(Collectors.joining(","));
+		//
+		//				List<Long> listaIdTarea = envioCampanaDAO.obtenerTareaRespuesta(placeholders);	
+		//
+		//				for(Long idTarea: listaIdTarea) {
 
-
-		String placeholders = listaId.stream()
-				.map(String::valueOf)
-				.collect(Collectors.joining(","));
-
-		List<Long> listaIdTarea = envioCampanaDAO.obtenerTareaRespuesta(placeholders);	
-
-		for(Long idTarea: listaIdTarea) {
-
-			listaRespuesta = respuestaTareaCampanaRepository.findRequestIdById(idTarea);	
-
-
+		listaRespuesta = respuestaTareaCampanaRepository.findRequestIdById(lineaNegocio);
+		
+		if (!listaRespuesta.isEmpty()) {
+			
 			List<List<String>> totalRespuestas = new ArrayList<List<String>>();
 			List<String> result =null;
 
@@ -109,7 +118,7 @@ public class PETRespuestaCronService {
 				List<Long> listaIdExtensionPerfil = respuestaTareaCampanaRepository.findIdExtensionPerfil(idRespuestaCampana);
 
 				if (listaIdExtensionPerfil.size()== totalRespuestas.get(i).size() -1 ) {
-					totalregistros=	listaIdExtensionPerfil.size();
+					totalregistros= totalregistros+	listaIdExtensionPerfil.size();
 					for (int j = 1; j <totalRespuestas.get(i).size(); j++) {
 
 						envioCampanaDAO.insertarBitacoraExtensionPerfilEnviado(listaIdExtensionPerfil.get(j-1), totalRespuestas.get(i).get(j), respuestaTareaCampanaEntity.getIdTareaCampana());
@@ -120,6 +129,9 @@ public class PETRespuestaCronService {
 					}
 				}
 			}
+			//}
+			//}
+			//}
 		}
 		actualizarTarea(idTareaCampana, 4L);
 	}
@@ -134,7 +146,7 @@ public class PETRespuestaCronService {
 		extensionPerfilEntity.setRiid(RIID);
 
 		extencionPerfilRepository.save(extensionPerfilEntity);
- 
+
 	}
 	public void actualizarTarea(Long idTareaCampana,Long estatus) {
 
@@ -164,7 +176,7 @@ public class PETRespuestaCronService {
 			bitacoraTareaCampanaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 
 			if (estatus==2) {
-				bitacoraTareaCampanaEntity.setDetalle("EJECUCION DE ENVIO");
+				bitacoraTareaCampanaEntity.setDetalle("EJECUCION DE RESPUESTA");
 			}else {
 				bitacoraTareaCampanaEntity.setDetalle("COMPLETADA");
 			}

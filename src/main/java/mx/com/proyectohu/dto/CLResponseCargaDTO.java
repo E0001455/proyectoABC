@@ -9,283 +9,292 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 
 public class CLResponseCargaDTO {
-	
+
 	private Long idListaContacto;
 	private Long idTarea;
-	 private String idCliente;
-	   private String lineaNegocio;
-	  
-	    private String nombre;
-	    private String apellidoPaterno;
-	    private String apellidoMaterno;
-	    private String correo;
-	    private String telefono1;
-	    private String telefono2;
-	    private String noCuenta;
-	    private String nss;
-	    private String curp;
-	    private String rfc;
-	    private String poliza;
-	    private String fechaNacimiento;
-	    private String cp;
-	    private String calle1;
-	    private String calle2;
-	    private String ciudad;
-	    private String estado;
-	    private String genero;
-	    private String prueba;
-	    private String suspension;
-	  private String nombreMapeo;
-	    
-	   
-	    
-	    /**
-		 * @return the idListaContacto
-		 */
-		public Long getIdListaContacto() {
-			return idListaContacto;
-		}
+	private String idCliente;
+	private String lineaNegocio;
 
-		/**
-		 * @param idListaContacto the idListaContacto to set
-		 */
-		public void setIdListaContacto(Long idListaContacto) {
-			this.idListaContacto = idListaContacto;
-		}
+	private String nombre;
+	private String apellidoPaterno;
+	private String apellidoMaterno;
+	private String correo;
+	private String telefono1;
+	private String telefono2;
+	private String noCuenta;
+	private String nss;
+	private String curp;
+	private String rfc;
+	private String poliza;
+	private String fechaNacimiento;
+	private String cp;
+	private String calle1;
+	private String calle2;
+	private String ciudad;
+	private String estado;
+	private String genero;
+	private String prueba;
+	private String suspension;
+	private String nombreMapeo;
+	private Long idExtencionPerfil;
 
-		private Long fecha;
-	 
-	   
 
-	    public String getLineaNegocio() {
-	        return lineaNegocio;
-	    }
 
-	    public void setLineaNegocio(String lineaNegocio) {
-	        this.lineaNegocio = lineaNegocio;
-	    }
+	/**
+	 * @return the idListaContacto
+	 */
+	 public Long getIdListaContacto() {
+		return idListaContacto;
+	 }
 
-	
-	    public String getNombre() {
-	        return nombre;
-	    }
+	 /**
+	  * @param idListaContacto the idListaContacto to set
+	  */
+	 public void setIdListaContacto(Long idListaContacto) {
+		 this.idListaContacto = idListaContacto;
+	 }
 
-	    public void setNombre(String nombre) {
-	        this.nombre = nombre;
-	    }
+	 private Long fecha;
 
-	    public String getApellidoPaterno() {
-	        return apellidoPaterno;
-	    }
 
-	    public void setApellidoPaterno(String apellidoPaterno) {
-	        this.apellidoPaterno = apellidoPaterno;
-	    }
 
-	    public String getApellidoMaterno() {
-	        return apellidoMaterno;
-	    }
+	 public String getLineaNegocio() {
+		 return lineaNegocio;
+	 }
 
-	    public void setApellidoMaterno(String apellidoMaterno) {
-	        this.apellidoMaterno = apellidoMaterno;
-	    }
+	 public void setLineaNegocio(String lineaNegocio) {
+		 this.lineaNegocio = lineaNegocio;
+	 }
 
-	    public String getCorreo() {
-	        return correo;
-	    }
 
-	    public void setCorreo(String correo) {
-	        this.correo = correo;
-	    }
+	 public String getNombre() {
+		 return nombre;
+	 }
 
-	    public String getTelefono1() {
-	        return telefono1;
-	    }
+	 public void setNombre(String nombre) {
+		 this.nombre = nombre;
+	 }
 
-	    public void setTelefono1(String telefono1) {
-	        this.telefono1 = telefono1;
-	    }
+	 public String getApellidoPaterno() {
+		 return apellidoPaterno;
+	 }
 
-	    public String getTelefono2() {
-	        return telefono2;
-	    }
+	 public void setApellidoPaterno(String apellidoPaterno) {
+		 this.apellidoPaterno = apellidoPaterno;
+	 }
 
-	    public void setTelefono2(String telefono2) {
-	        this.telefono2 = telefono2;
-	    }
+	 public String getApellidoMaterno() {
+		 return apellidoMaterno;
+	 }
 
-	    public String getNoCuenta() {
-	        return noCuenta;
-	    }
+	 public void setApellidoMaterno(String apellidoMaterno) {
+		 this.apellidoMaterno = apellidoMaterno;
+	 }
 
-	    public void setNoCuenta(String noCuenta) {
-	        this.noCuenta = noCuenta;
-	    }
+	 public String getCorreo() {
+		 return correo;
+	 }
 
-	    public String getNss() {
-	        return nss;
-	    }
+	 public void setCorreo(String correo) {
+		 this.correo = correo;
+	 }
 
-	    public void setNss(String nss) {
-	        this.nss = nss;
-	    }
+	 public String getTelefono1() {
+		 return telefono1;
+	 }
 
-	    public String getCurp() {
-	        return curp;
-	    }
+	 public void setTelefono1(String telefono1) {
+		 this.telefono1 = telefono1;
+	 }
 
-	    public void setCurp(String curp) {
-	        this.curp = curp;
-	    }
+	 public String getTelefono2() {
+		 return telefono2;
+	 }
 
-	    public String getRfc() {
-	        return rfc;
-	    }
+	 public void setTelefono2(String telefono2) {
+		 this.telefono2 = telefono2;
+	 }
 
-	    public void setRfc(String rfc) {
-	        this.rfc = rfc;
-	    }
+	 public String getNoCuenta() {
+		 return noCuenta;
+	 }
 
-	    public String getPoliza() {
-	        return poliza;
-	    }
+	 public void setNoCuenta(String noCuenta) {
+		 this.noCuenta = noCuenta;
+	 }
 
-	    public void setPoliza(String poliza) {
-	        this.poliza = poliza;
-	    }
+	 public String getNss() {
+		 return nss;
+	 }
 
-	    public String getFechaNacimiento() {
-	        return fechaNacimiento;
-	    }
+	 public void setNss(String nss) {
+		 this.nss = nss;
+	 }
 
-	    public void setFechaNacimiento(String fechaNacimiento) {
-	        this.fechaNacimiento = fechaNacimiento;
-	    }
+	 public String getCurp() {
+		 return curp;
+	 }
 
-	    public String getCp() {
-	        return cp;
-	    }
+	 public void setCurp(String curp) {
+		 this.curp = curp;
+	 }
 
-	    public void setCp(String cp) {
-	        this.cp = cp;
-	    }
+	 public String getRfc() {
+		 return rfc;
+	 }
 
-	    public String getCalle1() {
-	        return calle1;
-	    }
+	 public void setRfc(String rfc) {
+		 this.rfc = rfc;
+	 }
 
-	    public void setCalle1(String calle1) {
-	        this.calle1 = calle1;
-	    }
+	 public String getPoliza() {
+		 return poliza;
+	 }
 
-	    public String getCalle2() {
-	        return calle2;
-	    }
+	 public void setPoliza(String poliza) {
+		 this.poliza = poliza;
+	 }
 
-	    public void setCalle2(String calle2) {
-	        this.calle2 = calle2;
-	    }
+	 public String getFechaNacimiento() {
+		 return fechaNacimiento;
+	 }
 
-	    public String getCiudad() {
-	        return ciudad;
-	    }
+	 public void setFechaNacimiento(String fechaNacimiento) {
+		 this.fechaNacimiento = fechaNacimiento;
+	 }
 
-	    public void setCiudad(String ciudad) {
-	        this.ciudad = ciudad;
-	    }
+	 public String getCp() {
+		 return cp;
+	 }
 
-	    public String getEstado() {
-	        return estado;
-	    }
+	 public void setCp(String cp) {
+		 this.cp = cp;
+	 }
 
-	    public void setEstado(String estado) {
-	        this.estado = estado;
-	    }
+	 public String getCalle1() {
+		 return calle1;
+	 }
 
-	    public String getGenero() {
-	        return genero;
-	    }
+	 public void setCalle1(String calle1) {
+		 this.calle1 = calle1;
+	 }
 
-	    public void setGenero(String genero) {
-	        this.genero = genero;
-	    }
+	 public String getCalle2() {
+		 return calle2;
+	 }
 
-	    public String getPrueba() {
-	        return prueba;
-	    }
+	 public void setCalle2(String calle2) {
+		 this.calle2 = calle2;
+	 }
 
-	    public void setPrueba(String prueba) {
-	        this.prueba = prueba;
-	    }
+	 public String getCiudad() {
+		 return ciudad;
+	 }
 
-	    public String getSuspension() {
-	        return suspension;
-	    }
+	 public void setCiudad(String ciudad) {
+		 this.ciudad = ciudad;
+	 }
 
-	    public void setSuspension(String suspension) {
-	        this.suspension = suspension;
-	    }
+	 public String getEstado() {
+		 return estado;
+	 }
 
-		/**
-		 * @return the fecha
-		 */
-		public Long getFecha() {
-			return fecha;
-		}
+	 public void setEstado(String estado) {
+		 this.estado = estado;
+	 }
 
-		/**
-		 * @param fecha the fecha to set
-		 */
-		public void setFecha(Long fecha) {
-			this.fecha = fecha;
-		}
+	 public String getGenero() {
+		 return genero;
+	 }
 
-		/**
-		 * @return the idCliente
-		 */
-		public String getIdCliente() {
-			return idCliente;
-		}
+	 public void setGenero(String genero) {
+		 this.genero = genero;
+	 }
 
-		/**
-		 * @param idCliente the idCliente to set
-		 */
-		public void setIdCliente(String idCliente) {
-			this.idCliente = idCliente;
-		}
+	 public String getPrueba() {
+		 return prueba;
+	 }
 
-		/**
-		 * @return the idTarea
-		 */
-		public Long getIdTarea() {
-			return idTarea;
-		}
+	 public void setPrueba(String prueba) {
+		 this.prueba = prueba;
+	 }
 
-		/**
-		 * @param idTarea the idTarea to set
-		 */
-		public void setIdTarea(Long idTarea) {
-			this.idTarea = idTarea;
-		}
+	 public String getSuspension() {
+		 return suspension;
+	 }
 
-		/**
-		 * @return the nombreMapeo
-		 */
-		public String getNombreMapeo() {
-			return nombreMapeo;
-		}
+	 public void setSuspension(String suspension) {
+		 this.suspension = suspension;
+	 }
 
-		/**
-		 * @param nombreMapeo the nombreMapeo to set
-		 */
-		public void setNombreMapeo(String nombreMapeo) {
-			this.nombreMapeo = nombreMapeo;
-		}
+	 /**
+	  * @return the fecha
+	  */
+	 public Long getFecha() {
+		 return fecha;
+	 }
 
-		
+	 /**
+	  * @param fecha the fecha to set
+	  */
+	 public void setFecha(Long fecha) {
+		 this.fecha = fecha;
+	 }
 
-	
-		
-	    
-	    
-	}
+	 /**
+	  * @return the idCliente
+	  */
+	 public String getIdCliente() {
+		 return idCliente;
+	 }
+
+	 /**
+	  * @param idCliente the idCliente to set
+	  */
+	 public void setIdCliente(String idCliente) {
+		 this.idCliente = idCliente;
+	 }
+
+	 /**
+	  * @return the idTarea
+	  */
+	 public Long getIdTarea() {
+		 return idTarea;
+	 }
+
+	 /**
+	  * @param idTarea the idTarea to set
+	  */
+	 public void setIdTarea(Long idTarea) {
+		 this.idTarea = idTarea;
+	 }
+
+	 /**
+	  * @return the nombreMapeo
+	  */
+	 public String getNombreMapeo() {
+		 return nombreMapeo;
+	 }
+
+	 /**
+	  * @param nombreMapeo the nombreMapeo to set
+	  */
+	 public void setNombreMapeo(String nombreMapeo) {
+		 this.nombreMapeo = nombreMapeo;
+	 }
+
+	 public Long getIdExtencionPerfil() {
+		 return idExtencionPerfil;
+	 }
+
+	 public void setIdExtencionPerfil(Long idExtencionPerfil) {
+		 this.idExtencionPerfil = idExtencionPerfil;
+	 }
+
+
+
+
+
+
+
+}

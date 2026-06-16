@@ -62,7 +62,7 @@ public class TareaLineaEntity implements Serializable {
 	@Column(name = "FINOPROCESADOS")
 	private Integer finProcesados;
 	
-	@Column(name = "FIDICTAMINACION")
+	@Column(name = "FIDICTAMINAR")
 	private Boolean	fiDictaminacion;
 	
 	@Column(name = "FIPORCENTAJEERROR")
@@ -76,6 +76,12 @@ public class TareaLineaEntity implements Serializable {
 	
 	@Column(name = "FINOACTUALIZACIONES")
 	private Integer finoActualizaciones;
+	
+	@Column(name = "FIDICTAMINADO")
+	private Boolean	fiDictaminado;
+	
+	@Column(name = "FDFECHADICTAMINADO")
+	private Timestamp 	fdFechaDictaminado;
 	
 	
 	/**
@@ -316,6 +322,22 @@ public class TareaLineaEntity implements Serializable {
 	 */
 	public void setFinoActualizaciones(Integer finoActualizaciones) {
 		this.finoActualizaciones = finoActualizaciones;
+	}
+
+	public Boolean getFiDictaminado() {
+		return fiDictaminado;
+	}
+
+	public void setFiDictaminado(Boolean fiDictaminado) {
+		this.fiDictaminado = fiDictaminado;
+	}
+
+	public Timestamp getFdFechaDictaminado() {
+		return fdFechaDictaminado;
+	}
+
+	public void setFdFechaDictaminado(Timestamp fdFechaDictaminado) {
+		this.fdFechaDictaminado = fdFechaDictaminado;
 	}
 
 

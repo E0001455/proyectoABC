@@ -64,7 +64,7 @@ public class TareaCampanaEntity implements Serializable {
 	@Column(name = "FINOPROCESADOS")
 	private Integer finProcesados;
 	
-	@Column(name = "FIDICTAMINACION")
+	@Column(name = "FIDICTAMINAR")
 	private Boolean	fiDictaminacion;
 	
 	@Column(name = "FIPORCENTAJEERROR")
@@ -75,6 +75,13 @@ public class TareaCampanaEntity implements Serializable {
 	
 	@Column(name = "FINORECHAZADOS")
 	private Integer registrosRechazados;
+	
+	@Column(name = "FIDICTAMINADO")
+	private Boolean	fiDictaminado;
+	
+	@Column(name = "FDFECHADICTAMINADO")
+	private Timestamp 	fdFechaDictaminado;
+	
 
 	/**
 	 * @return the idTareaCampana
@@ -303,6 +310,24 @@ public class TareaCampanaEntity implements Serializable {
 		this.registrosRechazados = registrosRechazados;
 	}
 
+	public Boolean getFiDictaminado() {
+		return fiDictaminado;
+	}
+
+	public void setFiDictaminado(Boolean fiDictaminado) {
+		this.fiDictaminado = fiDictaminado;
+	}
+
+	public Timestamp getFdFechaDictaminado() {
+		return fdFechaDictaminado;
+	}
+
+	public void setFdFechaDictaminado(Timestamp fdFechaDictaminado) {
+		this.fdFechaDictaminado = fdFechaDictaminado;
+	}
+
+	
+	
 	
 	
 }

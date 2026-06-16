@@ -15,13 +15,6 @@ public class AsyncUpdatePETClient {
 
 	private final HttpClient httpClient;
 	
-	
-	@Value("${responsys.url.base}")
-	public String responsysBase;
-	
-	@Value("${responsys.url.api}")
-	public String responsysUrlApi;
-
 	@Value("${async.update.pet.afore.url}")
 	public String asyncUpdatePETAforeUrl;
 	
@@ -48,7 +41,7 @@ public class AsyncUpdatePETClient {
 	public String llamadoAsyncUpdatePET(String token,  MiddlewarePETDTO middlewarePETDTO, String lineaNegocio){
 		Integer statusCode=null;
 		String body=null;
-		String url= responsysBase+responsysUrlApi;
+		String url= "";
 		String response=null;
 		
 		if (lineaNegocio.equals("AFORE")) {

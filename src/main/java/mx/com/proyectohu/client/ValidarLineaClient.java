@@ -1,19 +1,18 @@
 package mx.com.proyectohu.client;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import mx.com.proyectohu.feign.ValidaLineaClientFeign;
 
 @Service
 public class ValidarLineaClient {
 
-
+/*
 
 	private final HttpClient httpClient;
 	
@@ -71,8 +70,22 @@ public class ValidarLineaClient {
 		
 
 	}
-
-
-
+	*/
+	
+	@Autowired
+    public ValidaLineaClientFeign validaLineaClientFeign;
+	
+	public String llamarValidarLinea(String lineaNegocio, Long idTareaLinea){
+	
+	Map<String, Object>  body= new HashMap<String, Object>(); 
+		
+		body.put("lineaNegocio", lineaNegocio);
+		body.put("idTareaLinea", idTareaLinea);
+		
+		ResponseEntity<?> respuesta =validaLineaClientFeign.validaListaContacto(body);
+		
+		
+		return respuesta.toString();
+	}
 
 }

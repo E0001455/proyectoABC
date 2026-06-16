@@ -62,7 +62,7 @@ public class ABCConfigMapeoLineaEntity implements Serializable {
 	@Column(name = "FDFECHAULTMODIFICACION")
 	private Timestamp 	fecUltModificacion;
 	
-	@Column(name = "RESPUESTA")
+	@Column(name = "FIRESPUESTA")
 	private Boolean respuesta;
 	
 

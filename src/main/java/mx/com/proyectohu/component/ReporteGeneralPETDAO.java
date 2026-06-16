@@ -1,11 +1,8 @@
 package mx.com.proyectohu.component;
 
 import java.sql.CallableStatement;
-import java.sql.Clob;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,24 +11,21 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mx.com.proyectohu.dto.CLRequestDTO;
-import mx.com.proyectohu.dto.CLResponseDTO;
 import mx.com.proyectohu.dto.PETRequestDTO;
-import mx.com.proyectohu.dto.ReporteGeneralLCResponseDTO;
 import mx.com.proyectohu.dto.ReporteGeneralPETResponseDTO;
 
 @Component
 public class ReporteGeneralPETDAO {
-
+ 
 	@Autowired
 	private DataSource dataSource;
 
-	public List<ReporteGeneralPETResponseDTO> consultarCLRegistroGeneralCarga(Long idLineaNegocio, PETRequestDTO petRequestDTO) {
+	public List<ReporteGeneralPETResponseDTO> consultarCLRegistroGeneralCarga(Long idLineaNegocio, Long idCampana,  PETRequestDTO petRequestDTO) {
 		List<ReporteGeneralPETResponseDTO> reporteGeneralpetResponseDTOlist = new ArrayList<ReporteGeneralPETResponseDTO>();
 		ReporteGeneralPETResponseDTO  petResponseDTO= null;
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEGENERAL(?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEGENERAL(?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -43,7 +37,13 @@ public class ReporteGeneralPETDAO {
 				cs.setDate(3, java.sql.Date.valueOf(petRequestDTO.getFechaInicio()));
 				cs.setDate(4, java.sql.Date.valueOf(petRequestDTO.getFechaFin()));
 				cs.setString(5, petRequestDTO.getTipoConsulta());
-				cs.setString(6, petRequestDTO.getTipoActividad());                
+				cs.setString(6, petRequestDTO.getTipoActividad());  
+				
+				if (idCampana != null) {
+				    cs.setLong(7, idCampana);
+				} else {
+				    cs.setNull(7, java.sql.Types.NUMERIC);
+				}
 
 				cs.execute();
 
@@ -71,12 +71,12 @@ public class ReporteGeneralPETDAO {
 	}
 
 	
-	public List<ReporteGeneralPETResponseDTO> consultarPETRegistroGeneralValidacion(Long idLineaNegocio, PETRequestDTO petRequestDTO) {
+	public List<ReporteGeneralPETResponseDTO> consultarPETRegistroGeneralValidacion(Long idLineaNegocio, Long idCampana,   PETRequestDTO petRequestDTO) {
 		List<ReporteGeneralPETResponseDTO> reporteGeneralPETResponseDTOlist = new ArrayList<ReporteGeneralPETResponseDTO>();
 		ReporteGeneralPETResponseDTO  petResponseDTO= null;
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEGENERAL(?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEGENERAL(?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -88,7 +88,13 @@ public class ReporteGeneralPETDAO {
 				cs.setDate(3, java.sql.Date.valueOf(petRequestDTO.getFechaInicio()));
 				cs.setDate(4, java.sql.Date.valueOf(petRequestDTO.getFechaFin()));
 				cs.setString(5, petRequestDTO.getTipoConsulta());
-				cs.setString(6, petRequestDTO.getTipoActividad());                
+				cs.setString(6, petRequestDTO.getTipoActividad());  
+
+				if (idCampana != null) {
+				    cs.setLong(7, idCampana);
+				} else {
+				    cs.setNull(7, java.sql.Types.NUMERIC);
+				}
 
 				cs.execute();
 
@@ -118,12 +124,12 @@ public class ReporteGeneralPETDAO {
 	}
 	
 	
-	public List<ReporteGeneralPETResponseDTO> consultarPETRegistroGeneralEnvio(Long idLineaNegocio, PETRequestDTO petRequestDTO) {
+	public List<ReporteGeneralPETResponseDTO> consultarPETRegistroGeneralEnvio(Long idLineaNegocio, Long idCampana,PETRequestDTO petRequestDTO) {
 		List<ReporteGeneralPETResponseDTO> reporteGeneralPETResponseDTOlist = new ArrayList<ReporteGeneralPETResponseDTO>();
 		ReporteGeneralPETResponseDTO  petResponseDTO= null;
 		try (Connection conn = dataSource.getConnection()) {
 		
-			String sql = "{call SPCONSULTARREPORTEGENERAL(?,?,?,?,?,?)}";
+			String sql = "{call SPCONSULTARREPORTEGENERAL(?,?,?,?,?,?,?)}";
 			try (CallableStatement cs = conn.prepareCall(sql)) {
 				
 				cs.registerOutParameter(1, java.sql.Types.REF_CURSOR);
@@ -135,7 +141,12 @@ public class ReporteGeneralPETDAO {
 				cs.setDate(3, java.sql.Date.valueOf(petRequestDTO.getFechaInicio()));
 				cs.setDate(4, java.sql.Date.valueOf(petRequestDTO.getFechaFin()));
 				cs.setString(5, petRequestDTO.getTipoConsulta());
-				cs.setString(6, petRequestDTO.getTipoActividad());                
+				cs.setString(6, petRequestDTO.getTipoActividad());  
+				if (idCampana != null) {
+				    cs.setLong(7, idCampana);
+				} else {
+				    cs.setNull(7, java.sql.Types.NUMERIC);
+				}
 
 				cs.execute();
 

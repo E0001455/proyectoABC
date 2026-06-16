@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mx.com.proyectohu.ProyectoApplication;
+import mx.com.proyectohu.feign.EnvioLineaClientFeign;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,11 +26,11 @@ public class EnvioLineaClient {
 
 	private final HttpClient httpClient;
 	
-	@Value("${envio.linea.url}")
-	public String envioListaContactoURL;
+//	@Value("${envio.linea.url}")
+//	public String envioListaContactoURL;
 	
-//	@Autowired
-//	public EnvioLineaClientFeign envioLineaClientFeign;
+	@Autowired
+    public EnvioLineaClientFeign envioLineaClientFeign;
 
 
 	public EnvioLineaClient(ProyectoApplication proyectoApplication) {
@@ -39,16 +41,16 @@ public class EnvioLineaClient {
 
 
 	public String llamarEnvioLinea(String lineaNegocio, Long idTareaLinea){
-		Integer statusCode=null;
+	/*	Integer statusCode=null;
 		String body=null;
 		String url= envioListaContactoURL;
 		JSONObject json = new JSONObject();
 		
 		json.put("lineaNegocio", lineaNegocio);
 		json.put("idTareaLinea", idTareaLinea);
+	*/	
 		
-		
-	/*	Map<String, Object>  body= new HashMap<String, Object>(); 
+		Map<String, Object>  body= new HashMap<String, Object>(); 
 		
 		body.put("lineaNegocio", lineaNegocio);
 		body.put("idTareaLinea", idTareaLinea);
@@ -56,8 +58,8 @@ public class EnvioLineaClient {
 		ResponseEntity<?> respuesta =envioLineaClientFeign.envioListaContacto(body);
 		
 		
-		*/
-		try {
+		
+/*		try {
 			
 			HttpRequest request = HttpRequest.newBuilder()
 					.uri(URI.create(url))
@@ -80,13 +82,13 @@ public class EnvioLineaClient {
 			e.printStackTrace();
 		}
 
-		if (statusCode == 200) {
+		if (respuesta.toString() == 200) {
 			return body;
 		} else {
 			throw new RuntimeException("Error en la llamada: " + statusCode);
 		}
-		
-
+	*/	
+return respuesta.toString();
 	}
 
 

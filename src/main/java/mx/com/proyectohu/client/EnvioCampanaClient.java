@@ -27,14 +27,14 @@ public class EnvioCampanaClient {
 
 
 
-	public String llamarEnvioCampana(String lineaNegocio, Long idTareaLinea){
+	public String llamarEnvioCampana(String lineaNegocio, Long idTareaCampana){
 		Integer statusCode=null;
 		String body=null;
 		String url= envioExtensionPerfilURL;
 		JSONObject json = new JSONObject();
 		
 		json.put("lineaNegocio", lineaNegocio);
-		json.put("idTareaLinea", idTareaLinea);
+		json.put("idTareaCampana", idTareaCampana);
 		
 		try {
 			HttpRequest request = HttpRequest.newBuilder()

@@ -6,32 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import mx.com.proyectohu.repository.CampanaRepository;
-import mx.com.proyectohu.repository.ExtencionPerfilRepository;
-import mx.com.proyectohu.repository.LineaNegocioRepository;
-import mx.com.proyectohu.repository.TareaCampanaRepository;
 import mx.com.proyectohu.component.ReporteGeneralPETDAO;
-import mx.com.proyectohu.component.ReporteIndividualPETDAO;
 import mx.com.proyectohu.dto.PETRequestDTO;
 import mx.com.proyectohu.dto.ReporteGeneralPETResponseDTO;
 
 @Service
 public class ReporteGeneralCampanaService {
 
-	@Autowired
-	public ExtencionPerfilRepository extencionPerfilRepository;
-	
-	@Autowired
-	public LineaNegocioRepository lineaNegocioRepository;
-	
-	@Autowired
-	public TareaCampanaRepository tareaCampanaRepository;
-	
-	@Autowired
-	public CampanaRepository campanaRepository;
-	
-	@Autowired
-	public ReporteIndividualPETDAO reporteIndividualPETDAO;
 	
 	@Autowired
 	public ReporteGeneralPETDAO  reporteGeneralPETDAO;
@@ -43,7 +24,7 @@ public class ReporteGeneralCampanaService {
 		petRequestDTO.setTipoActividad("CRG");
 		petRequestDTO.setTipoConsulta("PET");
 		
-		reporteGeneralPETResponseDTOList = reporteGeneralPETDAO.consultarCLRegistroGeneralCarga(idLineaNegocio, petRequestDTO);
+		reporteGeneralPETResponseDTOList = reporteGeneralPETDAO.consultarCLRegistroGeneralCarga(idLineaNegocio,idCampana, petRequestDTO);
 		
 		return reporteGeneralPETResponseDTOList;
 	}
@@ -54,7 +35,7 @@ public class ReporteGeneralCampanaService {
 		petRequestDTO.setTipoActividad("VLD");
 		petRequestDTO.setTipoConsulta("PET");
 		
-		reporteGeneralPETResponseDTOList = reporteGeneralPETDAO.consultarPETRegistroGeneralValidacion(idLineaNegocio, petRequestDTO);
+		reporteGeneralPETResponseDTOList = reporteGeneralPETDAO.consultarPETRegistroGeneralValidacion(idLineaNegocio,idCampana,  petRequestDTO);
 		
 		return reporteGeneralPETResponseDTOList;
 	}
@@ -66,7 +47,7 @@ public class ReporteGeneralCampanaService {
 		
 		petRequestDTO.setTipoActividad("ENV");
 		petRequestDTO.setTipoConsulta("PET");
-		reporteGeneralPETResponseDTOList = reporteGeneralPETDAO.consultarPETRegistroGeneralEnvio(idLineaNegocio, petRequestDTO);
+		reporteGeneralPETResponseDTOList = reporteGeneralPETDAO.consultarPETRegistroGeneralEnvio(idLineaNegocio, idCampana,petRequestDTO);
 	
 		
 		return reporteGeneralPETResponseDTOList;

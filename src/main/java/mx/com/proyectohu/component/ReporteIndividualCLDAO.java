@@ -92,9 +92,14 @@ public class ReporteIndividualCLDAO {
 					clResponseDTO.setNombreMapeo(resultado.getString("NOMBRE_MAPEO"));
 
 					if (clResponseDTO.getIdTarea()==0) {
-						clResponseDTO.setIdTarea(null);
+ 						clResponseDTO.setIdTarea(null);
 					}
-
+					clResponseDTO.setIdExtencionPerfil(resultado.getLong("ID_EXTENSION_PERFIL"));
+					
+					if (clResponseDTO.getIdExtencionPerfil()==0) {
+						clResponseDTO.setIdExtencionPerfil(null);
+					}
+					
 					clResponseDTOLista.add(clResponseDTO);
 
 				}

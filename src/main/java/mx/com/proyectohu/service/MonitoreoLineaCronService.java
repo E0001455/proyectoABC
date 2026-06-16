@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mx.com.proyectohu.client.CargarLineaClient;
 import mx.com.proyectohu.client.EnvioLineaClient;
-import mx.com.proyectohu.client.EnvioLineaClientFeign;
 import mx.com.proyectohu.client.RespuestaLineaClient;
 import mx.com.proyectohu.client.ValidarLineaClient;
 import mx.com.proyectohu.component.TareaCampanaDAO;
@@ -27,11 +24,18 @@ import mx.com.proyectohu.component.TareaLineaDAO;
 import mx.com.proyectohu.entity.ABCCatActividad;
 import mx.com.proyectohu.entity.ABCCatHora;
 import mx.com.proyectohu.entity.ActividadLineaEntity;
+import mx.com.proyectohu.entity.BitacoraTareaLineaEntity;
+import mx.com.proyectohu.entity.TareaLineaEntity;
+import mx.com.proyectohu.feign.EnvioLineaClientFeign;
+import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.ActividadLineaRepository;
 import mx.com.proyectohu.repository.ActividadRepository;
+import mx.com.proyectohu.repository.BitacoraTareaLineaRepository;
 import mx.com.proyectohu.repository.EjecucionRepository;
 import mx.com.proyectohu.repository.HorarioRepository;
 import mx.com.proyectohu.repository.LineaNegocioRepository;
+import mx.com.proyectohu.repository.TareaLineaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 
 
 @Service
@@ -39,6 +43,12 @@ public class MonitoreoLineaCronService {
 
 	@Autowired
 	public HorarioRepository horarioRepository;
+
+	@Autowired
+	public BitacoraTareaLineaRepository  bitacoraTareaLineaRepository;
+
+	@Autowired
+	public TareaLineaRepository  tareaLineaRepository;
 
 	@Autowired
 	public TareaLineaDAO tareaLineaDAO;
@@ -63,6 +73,9 @@ public class MonitoreoLineaCronService {
 
 	@Autowired
 	public EjecucionRepository ejecucionRepository;
+
+	@Autowired
+	public ABCConfigMapeoLineaRepository abcConfigMapeoLineaRepository;
 
 
 	@Value("${hora.cron.monitoreo}")
@@ -96,17 +109,22 @@ public class MonitoreoLineaCronService {
 					if (rootArray.isArray()) {
 						for (JsonNode item : rootArray) {
 							Long idLineaNegocio = item.path("linea").path("id").asLong();
+							Long idMapeo = item.path("mapeo").path("id").asLong();
 							JsonNode tareas = item.path("tareas");
 							if (tareas.isArray()) {
 								for (JsonNode tarea : tareas) {
 									Long idActividad = tarea.path("actividad").path("id").asLong();
 									Long idTareaLinea = tarea.path("id").asLong();
-									Long idEjecucion = tarea.path("ejecucion").asLong();
+									Long idEjecucion = tarea.path("ejecucion").path("id").asLong();
+									Boolean dictaminado = tarea.path("dictaminado").asBoolean();
+									String CodigoEjecucion = ejecucionRepository.findById(idEjecucion).get().getCodigo();
+									Boolean dictaminar = tarea.path("dictaminar").asBoolean();
+
 									Optional<ABCCatActividad> abcCatActividad = actividadRepository.findById(idActividad);
 
 									String codigoActividad = abcCatActividad.get().getCodigo();
+									
 									String lineaNegocio = lineaNegocioRepository.findById(idLineaNegocio).get().getNombre();
-									String CodigoEjecucion = ejecucionRepository.findById(idEjecucion).get().getCodigo();
 
 									if (CodigoEjecucion.equals("HBD")||CodigoEjecucion.equals("ATM")) {
 
@@ -122,9 +140,17 @@ public class MonitoreoLineaCronService {
 
 										}
 										if(codigoActividad.equals("ENV")) {
+											if (dictaminar&&!dictaminado) {
+												Long tareal =	idTareaLinea;
+												for(int i=0;i<2;i++) {	
+													actualizarTarea(tareal,7L);
+													tareal=idTareaLinea+1;
+												}
 
-											envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
+											}else {
 
+												envioLineaClient.llamarEnvioLinea(lineaNegocio, idTareaLinea);
+											}
 										}
 
 										if(codigoActividad.equals("RES")) {
@@ -159,6 +185,30 @@ public class MonitoreoLineaCronService {
 
 
 
+	}
+
+	public void actualizarTarea(Long idTareaLinea,Long estatus) {
+
+		Optional<TareaLineaEntity> tareaLineaEntityOptional =  tareaLineaRepository.findById(idTareaLinea);
+
+		if (tareaLineaEntityOptional.isPresent()) {
+			TareaLineaEntity tareaLineaEntity = tareaLineaEntityOptional.get();
+
+			tareaLineaEntity.setIdEstatusTarea(estatus);
+
+			tareaLineaEntity = tareaLineaRepository.save(tareaLineaEntity);
+
+			BitacoraTareaLineaEntity bitacoraTareaLineaEntity = new  BitacoraTareaLineaEntity();
+
+			bitacoraTareaLineaEntity.setIdTareaLinea(idTareaLinea);
+			bitacoraTareaLineaEntity.setIdEstatusTarea(estatus);
+			bitacoraTareaLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
+
+
+			bitacoraTareaLineaEntity.setDetalle("CANCELADA");
+
+			bitacoraTareaLineaEntity= bitacoraTareaLineaRepository.save(bitacoraTareaLineaEntity);
+		}
 	}
 
 }
