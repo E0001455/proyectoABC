@@ -39,7 +39,7 @@ public class ActividadCampanaController {
 
 
 
-	@PostMapping("lineas/{idLinea}/campanas/{idCampana}/actividades")
+	@PostMapping("/lineas/{idLinea}/campanas/{idCampana}/actividades")
 	public ResponseEntity<?> registrarNuevaActividadCampana(@PathVariable Long idLinea,@PathVariable Long idCampana, @RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO ) {
 
 	
@@ -52,7 +52,7 @@ public class ActividadCampanaController {
 	}
 
 
-	@GetMapping("/lineas/campanas/actividades")
+	@GetMapping("/campanas/actividades")
 	public ResponseEntity<?> consultarActividadesCampanas() {
 
 
@@ -65,7 +65,7 @@ public class ActividadCampanaController {
 
 	}
 
-	@PutMapping("/lineas/campanas/actividades")
+	@PutMapping("/campanas/actividades")
 	public ResponseEntity<?> actualizarActividadCampana(@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
 
 		ActividadCampanaResponseDTO actividadCampanaResponseDTO= actividadCampanaService.actualizarActividadCampana(actividadCampanaRequestDTO);
@@ -80,7 +80,7 @@ public class ActividadCampanaController {
 	}
 
 
-	@PatchMapping("/lineas/campanas/actividades/activar")
+	@PatchMapping("/campanas/actividades/activar")
 	public ResponseEntity<?> activar(@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
 		ActividadCampanaResponseDTO actividadCampanaResponseDTO = new ActividadCampanaResponseDTO();
 		actividadCampanaResponseDTO = actividadCampanaService.activar(actividadCampanaRequestDTO);
@@ -96,7 +96,7 @@ public class ActividadCampanaController {
 
 
 
-	@PatchMapping("/lineas/campanas/actividades/desactivar")
+	@PatchMapping("/campanas/actividades/desactivar")
 	public ResponseEntity<?> desactivar(@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO){
 		ActividadCampanaResponseDTO actividadCampanaResponseDTO = new ActividadCampanaResponseDTO();
 		actividadCampanaResponseDTO = actividadCampanaService.desactivar(actividadCampanaRequestDTO);

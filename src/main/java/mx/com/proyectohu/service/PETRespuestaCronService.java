@@ -19,6 +19,7 @@ import mx.com.proyectohu.entity.RespuestaTareaCampanaEntity;
 import mx.com.proyectohu.entity.TareaCampanaEntity;
 import mx.com.proyectohu.repository.BitacoraTareaCampanaRepository;
 import mx.com.proyectohu.repository.ExtencionPerfilRepository;
+import mx.com.proyectohu.repository.LineaNegocioRepository;
 import mx.com.proyectohu.repository.RespuestaTareaCampanaRepository;
 import mx.com.proyectohu.repository.TareaCampanaRepository;
 import mx.com.proyectohu.util.FechaUtil;
@@ -46,14 +47,24 @@ public class PETRespuestaCronService {
 	@Autowired
 	public BitacoraTareaCampanaRepository bitacoraTareaCampanaRepository;
 
+	@Autowired
+	public LineaNegocioRepository lineaNegocioRepository;
+
 	Integer totalregistros =0;
 
 	Integer aprobados =0;
 
-	public void ejecutarVerificacionRespuesta(String lineaNegocio,Long idTareaCampana) {
+	public void ejecutarVerificacionRespuesta(Long idTareaCampana) {
 		List<Object[]> listaRespuesta = null;
 		totalregistros =0;
 		aprobados =0;
+
+		TareaCampanaEntity tareaCampanaEntity = new TareaCampanaEntity(); 
+
+		tareaCampanaEntity = tareaCampanaRepository.findById(idTareaCampana).get();
+
+		String lineaNegocio = lineaNegocioRepository.findById(tareaCampanaEntity.getMapeoCampana().getIdABCCatLineaNegocio()).get().getNombre();
+
 
 		actualizarTarea(idTareaCampana, 2L);
 
@@ -77,9 +88,9 @@ public class PETRespuestaCronService {
 		//				for(Long idTarea: listaIdTarea) {
 
 		listaRespuesta = respuestaTareaCampanaRepository.findRequestIdById(lineaNegocio);
-		
+
 		if (!listaRespuesta.isEmpty()) {
-			
+
 			List<List<String>> totalRespuestas = new ArrayList<List<String>>();
 			List<String> result =null;
 

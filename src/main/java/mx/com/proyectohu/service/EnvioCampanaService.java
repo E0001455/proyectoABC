@@ -34,6 +34,7 @@ import mx.com.proyectohu.entity.TareaCampanaEntity;
 import mx.com.proyectohu.repository.BitacoraExtencionPerfilRepository;
 import mx.com.proyectohu.repository.BitacoraTareaCampanaRepository;
 import mx.com.proyectohu.repository.ExtensionPerfilRespuestaRepository;
+import mx.com.proyectohu.repository.LineaNegocioRepository;
 import mx.com.proyectohu.repository.RespuestaTareaCampanaRepository;
 import mx.com.proyectohu.repository.TareaCampanaRepository;
 import mx.com.proyectohu.util.FechaUtil;
@@ -67,10 +68,22 @@ public class EnvioCampanaService {
 	
 	Integer totalRegistrosEnviados = 0;
 	
-	public MiddlewarePETDTO ejecutarEnvioExtensionPerfil(String lineaNegocio,  Long idTareaCampana) throws Exception {
+	@Autowired
+	public LineaNegocioRepository lineaNegocioRepository;
+	
+	public MiddlewarePETDTO ejecutarEnvioExtensionPerfil(Long idTareaCampana) throws Exception {
 		List<Map<String, Object>> datos = new ArrayList<Map<String, Object>>();
 		List<String>  columnasNombreCorrecto = new ArrayList<String>();
 		List<String>  columnas = new ArrayList<String>();
+		
+		TareaCampanaEntity tareaCampanaEntity = new TareaCampanaEntity(); 
+
+		tareaCampanaEntity = tareaCampanaRepository.findById(idTareaCampana).get();
+
+		String lineaNegocio = lineaNegocioRepository.findById(tareaCampanaEntity.getMapeoCampana().getIdABCCatLineaNegocio()).get().getNombre();
+
+		
+		
 
 		columnas = tareaCampanaRepository.obtenerColumnasXidTarea(idTareaCampana);
 

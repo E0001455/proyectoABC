@@ -14,6 +14,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,15 +30,12 @@ public class RespuestaLineaController {
 	public CLRespuestaCronService clRespuestaCronService;
 	
 
-	@PostMapping("/respuesta/lista/contacto")
-	public ResponseEntity<?> respuestaListaContacto(@RequestBody Map<String, Object> body) {
-
+	@PostMapping("/cl/tareas/{idTarea}/respuestas/ejecutar")
+	public ResponseEntity<?> respuestaListaContacto(@PathVariable Long idTarea) {
 		
-		Long idTareaLinea = Long.parseLong(body.get("idTareaLinea").toString());
-		String lineaNegocio = (String) body.get("lineaNegocio");
 		
 		try {
-			clRespuestaCronService.ejecutarVerificacionRespuesta(lineaNegocio,idTareaLinea);
+			clRespuestaCronService.ejecutarVerificacionRespuesta(idTarea);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -84,7 +84,7 @@ public class CargarLineaClient {
 		body.put("lineaNegocio", lineaNegocio);
 		body.put("idTareaLinea", idTareaLinea);
 		
-		ResponseEntity<?> respuesta =cargaLineaClientFeign.cargaListaContacto(body);
+		String respuesta =cargaLineaClientFeign.cargaListaContacto(idTareaLinea);
 		
 		
 		return respuesta.toString();

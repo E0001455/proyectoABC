@@ -19,6 +19,7 @@ import mx.com.proyectohu.entity.ListaContactoEntity;
 import mx.com.proyectohu.entity.RespuestaTareaLineaEntity;
 import mx.com.proyectohu.entity.TareaLineaEntity;
 import mx.com.proyectohu.repository.BitacoraTareaLineaRepository;
+import mx.com.proyectohu.repository.LineaNegocioRepository;
 import mx.com.proyectohu.repository.ListaContactoRepository;
 import mx.com.proyectohu.repository.RespuestaTareaLineaRepository;
 import mx.com.proyectohu.repository.TareaCronRepository;
@@ -42,6 +43,8 @@ public class CLRespuestaCronService {
 	@Autowired
 	public TareaLineaRepository  tareaLineaRepository;
 
+	@Autowired
+	public LineaNegocioRepository lineaNegocioRepository;
 
 	@Autowired
 	public ListaContactoRepository listaContactoRepository;
@@ -56,7 +59,14 @@ public class CLRespuestaCronService {
 
 
 
-	public void ejecutarVerificacionRespuesta(String lineaNegocio, Long idTareaLinea) {
+	public void ejecutarVerificacionRespuesta(Long idTareaLinea) {
+
+		TareaLineaEntity tareaLineaEntity = new TareaLineaEntity(); 
+
+		tareaLineaEntity = tareaLineaRepository.findById(idTareaLinea).get();
+
+		String lineaNegocio = lineaNegocioRepository.findById(tareaLineaEntity.getMapeoLinea().getIdABCCatLineaNegocio()).get().getNombre();
+
 		List<Object[]> listaRespuesta= null;
 
 		totalregistros =0;

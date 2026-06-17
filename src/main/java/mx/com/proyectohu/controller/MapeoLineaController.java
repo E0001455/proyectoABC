@@ -35,8 +35,8 @@ public class MapeoLineaController {
 
 
 
-	@PostMapping("/lineas/{id}/mapeos")
-	public ResponseEntity<?> registrarNuevaLinea(@PathVariable Long id, @RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO ) {
+	@PostMapping("/lineas/{idLinea}/mapeos")
+	public ResponseEntity<?> registrarNuevaLinea(@PathVariable Long idLinea, @RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO ) {
 
 		if (mapeoLineaRequestDTO.getMapeoDTO().getNombre().length() < 3 
 				||mapeoLineaRequestDTO.getMapeoDTO().getNombre().length() > 30) {
@@ -46,7 +46,7 @@ public class MapeoLineaController {
 		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
 
 
-		mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(mapeoLineaService.registrarLineaNegocio(id,mapeoLineaRequestDTO));
+		mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(mapeoLineaService.registrarLineaNegocio(idLinea,mapeoLineaRequestDTO));
 
 		return ResponseEntity.ok(mapeoLineaResponseDTO);
 	}

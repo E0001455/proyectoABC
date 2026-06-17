@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -28,13 +29,11 @@ public class ValidarCampanaController {
 	public ValidarCampanaService validarCampanaService;
 	
 
-	@PostMapping("/valida/extencion/perfil")
-	public ResponseEntity<?> consultarTareasCampanas(@RequestBody Map<String, Object> body) {
+	@PostMapping("/pet/tareas/{idTarea}/validaciones/ejecutar")
+	public ResponseEntity<?> validarExtensionPerfil(@PathVariable Long idTarea) {
 
-		String lineaNegocio = (String) body.get("lineaNegocio");
-		Long idTareaLinea = Long.parseLong(body.get("idTareaCampana").toString());
 		
-		validarCampanaService.ejecutarValidarExtencionPerfil(lineaNegocio,idTareaLinea);
+		validarCampanaService.ejecutarValidarExtencionPerfil(idTarea);
 		
 			return ResponseEntity.ok("ejecucion correcta");
 		

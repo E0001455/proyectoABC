@@ -51,8 +51,8 @@ public class MapeoCampanaResponseDTO {
 	
 	@JsonProperty("porcentajeError")	
 	private Integer fiPorcentajeError;
-	
-	@JsonProperty("respuesta")	
+	   
+	@JsonProperty("recibir")	
 	private Boolean respuesta;
 	
 	

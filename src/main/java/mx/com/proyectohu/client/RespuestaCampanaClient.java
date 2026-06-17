@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mx.com.proyectohu.ProyectoApplication;
+import mx.com.proyectohu.feign.RespuestaCampanaClientFeign;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RespuestaCampanaClient {
+	
+	/*
 
     private final ProyectoApplication proyectoApplication;
 
@@ -57,7 +61,7 @@ public class RespuestaCampanaClient {
 		ResponseEntity<?> respuesta =envioLineaClientFeign.envioListaContacto(body);
 		
 		
-		*/
+	
 		try {
 			
 			HttpRequest request = HttpRequest.newBuilder()
@@ -89,7 +93,21 @@ public class RespuestaCampanaClient {
 		
 
 	}
+*/
+	@Autowired
+	public RespuestaCampanaClientFeign respuestaCampanaClientFeign;
+	
+	public String llamarRespuestaCampana(String lineaNegocio, Long idTareaCampana){
+		Map<String, Object>  body= new HashMap<String, Object>(); 
 
+		body.put("lineaNegocio", lineaNegocio);
+		body.put("idTareaCampana", idTareaCampana);
+
+		String respuesta =respuestaCampanaClientFeign.respuestaExtensionPerfil(idTareaCampana);
+
+
+		return respuesta.toString();
+	}
 
 
 

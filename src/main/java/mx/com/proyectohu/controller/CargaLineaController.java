@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -26,13 +27,12 @@ public class CargaLineaController {
 
 
 		
-	@PostMapping("/carga/lista/contacto")
-	public ResponseEntity<?> cargarListaContacto(@RequestBody Map<String, Object> body) {
+	@PostMapping("/cl/tareas/{idTarea}/cargas/ejecutar")
+	public ResponseEntity<?> cargarListaContacto(@PathVariable Long idTarea) {
 		
-		String lineaNegocio = (String) body.get("lineaNegocio");
-		Long idTareaLinea = Long.parseLong(body.get("idTareaLinea").toString());
+		
 
-		cargaLineaService.ejecutarCargaListaContacto(lineaNegocio,idTareaLinea);
+		cargaLineaService.ejecutarCargaListaContacto(idTarea);
 		
 			return ResponseEntity.ok("ejecucion correcta");
 		

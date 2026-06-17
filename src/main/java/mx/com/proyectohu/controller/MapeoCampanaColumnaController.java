@@ -37,12 +37,12 @@ public class MapeoCampanaColumnaController {
 
 
 
-	@PostMapping("/campanas/mapeos/{id}/columnas")
-	public ResponseEntity<?> registrarNuevaCampana(@PathVariable Long id,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
+	@PostMapping("/campanas/mapeos/{idMapeo}/columnas")
+	public ResponseEntity<?> registrarNuevaCampana(@PathVariable Long idMapeo,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
 
 
 		Long idMapeoCampanaColumna;
-		idMapeoCampanaColumna = mapeoCampanaColumnaService.registrarMapeoCampanaColumna(id,mapeoCampanaColumnaRequestDTO);
+		idMapeoCampanaColumna = mapeoCampanaColumnaService.registrarMapeoCampanaColumna(idMapeo,mapeoCampanaColumnaRequestDTO);
 
 		if(idMapeoCampanaColumna==null) {
 			return ResponseEntity.notFound().build();
@@ -53,32 +53,24 @@ public class MapeoCampanaColumnaController {
 		return ResponseEntity.ok(Map.of("id",idMapeoCampanaColumna));
 	}
 
-	@GetMapping("/campanas/mapeos/{id}/columnas")
-	public ResponseEntity<?> consultarMapeosCampana(@PathVariable Long id, MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
+	@GetMapping("/campanas/mapeos/{idMapeo}/columnas")
+	public ResponseEntity<?> consultarMapeosCampana(@PathVariable Long idMapeo, MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
 		Long IdABCCatColumna = null;
-		if(id > 0 && IdABCCatColumna!=null) {
-			MapeoCampanaColumnaResponseDTO mapeoCampanaColumnaResponseDTO = new MapeoCampanaColumnaResponseDTO();
-			mapeoCampanaColumnaResponseDTO = mapeoCampanaColumnaService.consultarMapeoCampanaColumna(id,IdABCCatColumna);
-			if (mapeoCampanaColumnaResponseDTO==null) {
-				return ResponseEntity.notFound().build();
-			}
-			return ResponseEntity.ok(mapeoCampanaColumnaResponseDTO);
-
-		}else {
+	
 			List<MapeoCampanaColumnaResponseDTO> mapeoCampanaColumnaResponseDTOLista = new ArrayList<MapeoCampanaColumnaResponseDTO>();
 
-			mapeoCampanaColumnaResponseDTOLista = mapeoCampanaColumnaService.consultarMapeosCampanaColumna(id,IdABCCatColumna);
+			mapeoCampanaColumnaResponseDTOLista = mapeoCampanaColumnaService.consultarMapeosCampanaColumna(idMapeo,IdABCCatColumna);
 
 			return ResponseEntity.ok(mapeoCampanaColumnaResponseDTOLista);
-		}
+		
 
 	}
 
-	@PutMapping("/campanas/mapeos/{id}/columnas")
-	public ResponseEntity<?> actualizarMapeoCampana(@PathVariable Long id,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
+	@PutMapping("/campanas/mapeos/{idMapeo}/columnas")
+	public ResponseEntity<?> actualizarMapeoCampana(@PathVariable Long idMapeo,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
 
 
-		mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().setIdABCConfigMapeoCampana(id);
+		mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().setIdABCConfigMapeoCampana(idMapeo);
 
 		Long idMapeoCampana;
 
@@ -95,13 +87,13 @@ public class MapeoCampanaColumnaController {
 		return ResponseEntity.ok("operacion exitosa");
 	}
 
-	@PatchMapping("/campanas/mapeos/{id}/columnas/activar")
-	public ResponseEntity<?> activar(@PathVariable Long id,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
-		mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().setIdABCConfigMapeoCampana(id);
+	@PatchMapping("/campanas/mapeos/{idMapeo}/columnas/activar")
+	public ResponseEntity<?> activar(@PathVariable Long idMapeo,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO) {
+		mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().setIdABCConfigMapeoCampana(idMapeo);
 		Boolean activado = mapeoCampanaColumnaService.activar(mapeoCampanaColumnaRequestDTO);
 
 		if (activado) {
-			return ResponseEntity.ok(Map.of("id",id));
+			return ResponseEntity.ok(Map.of("id",idMapeo));
 		}else {
 			return ResponseEntity.notFound().build();
 		}
@@ -111,13 +103,13 @@ public class MapeoCampanaColumnaController {
 
 
 
-	@PatchMapping("/campanas/mapeos/{id}/columnas/desactivar")
-	public ResponseEntity<?> desactivar(@PathVariable Long id,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO){
-		mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().setIdABCConfigMapeoCampana(id);
+	@PatchMapping("/campanas/mapeos/{idMapeo}/columnas/desactivar")
+	public ResponseEntity<?> desactivar(@PathVariable Long idMapeo,@RequestBody MapeoCampanaColumnaRequestDTO mapeoCampanaColumnaRequestDTO){
+		mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().setIdABCConfigMapeoCampana(idMapeo);
 		Boolean desactivado = mapeoCampanaColumnaService.desactivar(mapeoCampanaColumnaRequestDTO);
 
 		if (desactivado) {
-			return ResponseEntity.ok(Map.of("id",id));
+			return ResponseEntity.ok(Map.of("id",idMapeo));
 		}else {
 			return ResponseEntity.notFound().build();
 		}

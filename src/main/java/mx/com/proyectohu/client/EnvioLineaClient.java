@@ -55,7 +55,7 @@ public class EnvioLineaClient {
 		body.put("lineaNegocio", lineaNegocio);
 		body.put("idTareaLinea", idTareaLinea);
 		
-		ResponseEntity<?> respuesta =envioLineaClientFeign.envioListaContacto(body);
+		String respuesta =envioLineaClientFeign.envioListaContacto(idTareaLinea);
 		
 		
 		

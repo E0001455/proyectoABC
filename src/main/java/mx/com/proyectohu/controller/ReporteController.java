@@ -54,7 +54,7 @@ public class ReporteController {
 	@Autowired
 	public ReporteGeneralCampanaService reporteGeneralCampanaService;
 
-	@GetMapping("/cl/reporte/individual/carga")
+	@GetMapping("/cl/reportes/individuales/cargas")
 	public ResponseEntity<?> consultaCLCarga(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
@@ -108,7 +108,7 @@ public class ReporteController {
 		return ResponseEntity.ok(clResponseDTOLista);
 	}
 
-	@GetMapping("/cl/reporte/individual/validacion")
+	@GetMapping("/cl/reportes/individuales/validaciones")
 	public ResponseEntity<?> consultaCLValidacion(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
@@ -160,7 +160,7 @@ public class ReporteController {
 
 	}
 
-	@GetMapping("/cl/reporte/individual/envio")
+	@GetMapping("/cl/reportes/individuales/sincronizaciones")
 	public ResponseEntity<?> consultaCLEnvio(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) String idCliente,
 			@RequestParam(required = false) String nombre,
@@ -216,7 +216,7 @@ public class ReporteController {
 
 
 
-	@GetMapping("/cl/reporte/general/carga")
+	@GetMapping("/cl/reportes/generales/cargas")
 	public ResponseEntity<?> consultaCLGeneralCarga(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long fechaInicio,
 			@RequestParam(required = false) Long fechaFin
@@ -244,7 +244,7 @@ public class ReporteController {
 
 
 
-	@GetMapping("/cl/reporte/general/validacion")
+	@GetMapping("/cl/reportes/generales/validaciones")
 	public ResponseEntity<?> consultaCLGeneralValidacion(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long fechaInicio,
 			@RequestParam(required = false) Long  fechaFin
@@ -268,7 +268,7 @@ public class ReporteController {
 
 	}
 
-	@GetMapping("/cl/reporte/general/envio")
+	@GetMapping("/cl/reportes/generales/sincronizaciones")
 	public ResponseEntity<?> consultaCLGeneralEnvio(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long fechaInicio,
 			@RequestParam(required = false) Long  fechaFin
@@ -295,7 +295,7 @@ public class ReporteController {
 
 
 
-	@GetMapping("/pet/reporte/individual/carga")
+	@GetMapping("/pet/reportes/individuales/cargas")
 	public ResponseEntity<?> consultaPETCarga(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String noLote,
@@ -355,7 +355,7 @@ public class ReporteController {
 
 
 
-	@GetMapping("/pet/reporte/individual/validacion")
+	@GetMapping("/pet/reportes/individuales/validaciones")
 	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String noLote,
@@ -415,7 +415,7 @@ public class ReporteController {
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 
-	@GetMapping("/pet/reporte/individual/envio")
+	@GetMapping("/pet/reportes/individuales/sincronizaciones")
 	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) String noLote,
@@ -475,7 +475,7 @@ public class ReporteController {
 	}
 
 
-	@GetMapping("/pet/reporte/general/carga")
+	@GetMapping("/pet/reportes/generales/cargas")
 	public ResponseEntity<?> consultaPETGeneralCarga(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) Long fechaInicio,
@@ -504,7 +504,7 @@ public class ReporteController {
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 
-	@GetMapping("/pet/reporte/general/validacion")
+	@GetMapping("/pet/reportes/generales/validaciones")
 	public ResponseEntity<?> consultaPETValidacion(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) Long fechaInicio,
@@ -533,7 +533,7 @@ public class ReporteController {
 		return ResponseEntity.ok(petResponseDTOLista);
 	}
 
-	@GetMapping("/pet/reporte/general/envio")
+	@GetMapping("/pet/reportes/generales/envio")
 	public ResponseEntity<?> consultaPETEnvio(@RequestParam(required = false) Long idLinea,
 			@RequestParam(required = false) Long idCampana,
 			@RequestParam(required = false) Long fechaInicio,

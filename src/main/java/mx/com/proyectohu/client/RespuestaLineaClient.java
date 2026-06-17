@@ -105,7 +105,7 @@ public class RespuestaLineaClient {
 				body.put("lineaNegocio", lineaNegocio);
 				body.put("idTareaLinea", idTareaLinea);
 				
-				ResponseEntity<?> respuesta =respuestaLineaClientFeign.respuestaListaContacto(body);
+				String respuesta =respuestaLineaClientFeign.respuestaListaContacto(idTareaLinea);
 				
 				
 				return respuesta.toString();

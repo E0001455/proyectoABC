@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -28,14 +29,13 @@ public class EnvioLineaController {
 	public EnvioLineaService envioLineaService;
 	
 
-	@PostMapping("/envio/lista/contacto")
-	public ResponseEntity<?> envioListaContacto(@RequestBody Map<String, Object> body) {
+	@PostMapping("/cl/tareas/{idTarea}/envios/ejecutar")
+	public ResponseEntity<?> envioListaContacto(@PathVariable Long idTarea) {
 
-		String lineaNegocio = (String) body.get("lineaNegocio");
-		Long idTareaLinea = Long.parseLong(body.get("idTareaLinea").toString());
+	
 		
 		try {
-			envioLineaService.ejecutarEnvioListaContacto(lineaNegocio,idTareaLinea);
+			envioLineaService.ejecutarEnvioListaContacto(idTarea);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -35,12 +35,12 @@ public class MapeoLineaColumnaController {
 
 
 
-	@PostMapping("/lineas/mapeos/{id}/columnas")
-	public ResponseEntity<?> registrarNuevaLinea(@PathVariable Long id,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
+	@PostMapping("/lineas/mapeos/{idMapeo}/columnas")
+	public ResponseEntity<?> registrarNuevaLinea(@PathVariable Long idMapeo,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
 
 
 		Long idMapeoLineaNegocio;
-		idMapeoLineaNegocio = mapeoLineaColumnaService.registrarMapeoLineaColumna(id,mapeoLineaColumnaRequestDTO);
+		idMapeoLineaNegocio = mapeoLineaColumnaService.registrarMapeoLineaColumna(idMapeo,mapeoLineaColumnaRequestDTO);
 
 		if (idMapeoLineaNegocio==null) {
 			return ResponseEntity.notFound().build();
@@ -51,32 +51,24 @@ public class MapeoLineaColumnaController {
 	}
 
 
-	@GetMapping("/lineas/mapeos/{id}/columnas")
-	public ResponseEntity<?> consultarMapeosLinea(@PathVariable Long id, MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
+	@GetMapping("/lineas/mapeos/{idMapeo}/columnas")
+	public ResponseEntity<?> consultarMapeosLinea(@PathVariable Long idMapeo, MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
 		Long IdABCCatColumna = null;
-		if(id > 0 && IdABCCatColumna!=null) {
-			MapeoLineaColumnaResponseDTO mapeoLineaColumnaResponseDTO = new MapeoLineaColumnaResponseDTO();
-			mapeoLineaColumnaResponseDTO = mapeoLineaColumnaService.consultarMapeoLineaColumna(id,IdABCCatColumna);
-			if (mapeoLineaColumnaResponseDTO==null) {
-				return ResponseEntity.notFound().build();
-			}
-			return ResponseEntity.ok(mapeoLineaColumnaResponseDTO);
-
-		}else {
+		
 			List<MapeoLineaColumnaResponseDTO> mapeoLineaColumnaResponseDTOLista = new ArrayList<MapeoLineaColumnaResponseDTO>();
 
-			mapeoLineaColumnaResponseDTOLista = mapeoLineaColumnaService.consultarMapeosLineaColumna(id,IdABCCatColumna);
+			mapeoLineaColumnaResponseDTOLista = mapeoLineaColumnaService.consultarMapeosLineaColumna(idMapeo,IdABCCatColumna);
 
 			return ResponseEntity.ok(mapeoLineaColumnaResponseDTOLista);
-		}
+		
 
 	}
 
-	@PutMapping("/lineas/mapeos/{id}/columnas")
-	public ResponseEntity<?> actualizarMapeoLinea(@PathVariable Long id,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
+	@PutMapping("/lineas/mapeos/{idMapeo}/columnas")
+	public ResponseEntity<?> actualizarMapeoLinea(@PathVariable Long idMapeo,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
 
 
-		mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().setIdABCConfigMapeoLinea(id);
+		mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().setIdABCConfigMapeoLinea(idMapeo);
 
 		Long idMapeoLineaNegocio;
 
@@ -93,14 +85,14 @@ public class MapeoLineaColumnaController {
 	}
 
 
-	@PatchMapping("/lineas/mapeos/{id}/columnas/activar")
-	public ResponseEntity<?> activar(@PathVariable Long id,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
-		mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().setIdABCConfigMapeoLinea(id);
+	@PatchMapping("/lineas/mapeos/{idMapeo}/columnas/activar")
+	public ResponseEntity<?> activar(@PathVariable Long idMapeo,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO) {
+		mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().setIdABCConfigMapeoLinea(idMapeo);
 
 		Boolean activado = mapeoLineaColumnaService.activar(mapeoLineaColumnaRequestDTO);
 
 		if (activado) {
-			return ResponseEntity.ok(Map.of("id",id));
+			return ResponseEntity.ok(Map.of("id",idMapeo));
 		}else {
 			return ResponseEntity.notFound().build();
 		}
@@ -110,14 +102,14 @@ public class MapeoLineaColumnaController {
 
 
 
-	@PatchMapping("/lineas/mapeos/{id}/columnas/desactivar")
-	public ResponseEntity<?> desactivar(@PathVariable Long id,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO){
-		mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().setIdABCConfigMapeoLinea(id);
+	@PatchMapping("/lineas/mapeos/{idMapeo}/columnas/desactivar")
+	public ResponseEntity<?> desactivar(@PathVariable Long idMapeo,@RequestBody MapeoLineaColumnaRequestDTO mapeoLineaColumnaRequestDTO){
+		mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().setIdABCConfigMapeoLinea(idMapeo);
 	
 		Boolean desactivado = mapeoLineaColumnaService.desactivar(mapeoLineaColumnaRequestDTO);
 
 		if (desactivado) {
-			return ResponseEntity.ok(Map.of("id",id));
+			return ResponseEntity.ok(Map.of("id",idMapeo));
 		}else {
 			return ResponseEntity.notFound().build();
 		}

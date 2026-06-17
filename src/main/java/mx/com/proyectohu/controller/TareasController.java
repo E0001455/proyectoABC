@@ -66,7 +66,7 @@ public class TareasController {
 
 	}
 
-	@GetMapping(value="/lineas/campanas/tareas", produces = "application/json" )
+	@GetMapping(value="/campanas/tareas", produces = "application/json" )
 	public ResponseEntity<?> consultarTareasCampanas() {
 		/*
 

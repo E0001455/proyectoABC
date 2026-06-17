@@ -241,6 +241,7 @@ public class MapeoCampanaColumnaService {
 			abcMapeoCampanaColumnaEntity.setNumEnteros(mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getNumEnteros());
 			abcMapeoCampanaColumnaEntity.setNumDecimales(mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getNumDecimales());
 			abcMapeoCampanaColumnaEntity.setRegex(mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().getRegex());
+			abcMapeoCampanaColumnaEntity.setFiRequerido(mapeoCampanaColumnaRequestDTO.getCampanaColumnaDTO().getFinRequerido());
 
 			abcMapeoCampanaColumnaEntity = abcMapeoCampanaColumnaRepository.save(abcMapeoCampanaColumnaEntity);
 

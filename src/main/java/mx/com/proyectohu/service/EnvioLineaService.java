@@ -27,6 +27,7 @@ import mx.com.proyectohu.entity.LlaveListaContactoRespuesta;
 import mx.com.proyectohu.entity.RespuestaTareaLineaEntity;
 import mx.com.proyectohu.entity.TareaLineaEntity;
 import mx.com.proyectohu.repository.BitacoraTareaLineaRepository;
+import mx.com.proyectohu.repository.LineaNegocioRepository;
 import mx.com.proyectohu.repository.ListaContactoRespuestaRepository;
 import mx.com.proyectohu.repository.RespuestaTareaLineaRepository;
 import mx.com.proyectohu.repository.TareaLineaRepository;
@@ -53,6 +54,9 @@ public class EnvioLineaService {
 
 	@Autowired
 	public  ListaContactoRespuestaRepository listaContactoRespuestaRepository;
+	
+	@Autowired
+	public LineaNegocioRepository lineaNegocioRepository;
 
 	@Value("${numero.registros.enviados.linea}")
 	public Integer numeroRegistrosEnviados;
@@ -61,7 +65,15 @@ public class EnvioLineaService {
 	
 	Integer totalRegistrosEnviados = 0;
 
-	public MiddlewareCLDTO ejecutarEnvioListaContacto(String lineaNegocio,  Long idTareaLinea) throws Exception {
+	public MiddlewareCLDTO ejecutarEnvioListaContacto(Long idTareaLinea) throws Exception {
+		
+		TareaLineaEntity tareaLineaEntity = new TareaLineaEntity(); 
+		
+		tareaLineaEntity = tareaLineaRepository.findById(idTareaLinea).get();
+		
+		String lineaNegocio = lineaNegocioRepository.findById(tareaLineaEntity.getMapeoLinea().getIdABCCatLineaNegocio()).get().getNombre();
+		
+		
 		List<Map<String, Object>> datos = new ArrayList<Map<String, Object>>();
 		List<String>  columnasNombreCorrecto = new ArrayList<String>();
 		List<String>  columnas = new ArrayList<String>();

@@ -14,6 +14,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,14 +30,13 @@ public class EnvioCampanaController {
 	public EnvioCampanaService envioCampanaService;
 	
 
-	@PostMapping("/envio/extencion/perfil")
-	public ResponseEntity<?> envioExtensionPerfil(@RequestBody Map<String, Object> body) {
+	@PostMapping("/pet/tareas/{idTarea}/envios/ejecutar")
+	public ResponseEntity<?> envioExtensionPerfil(@PathVariable Long idTarea) {
 
-		String lineaNegocio = (String) body.get("lineaNegocio");
-		Long idTareaCampana = Long.parseLong(body.get("idTareaCampana").toString());
+	
 		
 		try {
-			envioCampanaService.ejecutarEnvioExtensionPerfil(lineaNegocio,idTareaCampana);
+			envioCampanaService.ejecutarEnvioExtensionPerfil(idTarea);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

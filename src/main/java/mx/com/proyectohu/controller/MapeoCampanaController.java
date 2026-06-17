@@ -42,7 +42,7 @@ public class MapeoCampanaController {
 	}
 	
 
-	@GetMapping("/lineas/campanas/mapeos")
+	@GetMapping("/campanas/mapeos")
 	public ResponseEntity<?> consultarMapeosCampana() {
 		
 		
@@ -59,7 +59,7 @@ public class MapeoCampanaController {
 		
 
 	
-	@PutMapping("/lineas/campanas/mapeos")
+	@PutMapping("/campanas/mapeos")
 	public ResponseEntity<MapeoCampanaResponseDTO> actualizarMapeoLinea(@RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 		
 		MapeoCampanaResponseDTO mapeoCampanaResponseDTO= mapeoCampanaService.actualizarMapeoCampana(mapeoCampanaRequestDTO);
@@ -72,7 +72,7 @@ public class MapeoCampanaController {
 		return ResponseEntity.ok(mapeoCampanaResponseDTO);
 	}
 	
- @PatchMapping("/lineas/campanas/mapeos/activar")
+ @PatchMapping("/campanas/mapeos/activar")
 	public ResponseEntity<?> activar(@RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 	 MapeoCampanaResponseDTO mapeoCampanaResponseDTO = new MapeoCampanaResponseDTO();
 	 mapeoCampanaResponseDTO = mapeoCampanaService.activar(mapeoCampanaRequestDTO);
@@ -88,7 +88,7 @@ public class MapeoCampanaController {
 	
 	
 	
-	@PatchMapping("/lineas/campanas/mapeos/desactivar")
+	@PatchMapping("/campanas/mapeos/desactivar")
 	public ResponseEntity<?> desactivar(@RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO){
 		 MapeoCampanaResponseDTO mapeoCampanaResponseDTO = new MapeoCampanaResponseDTO();
 		 mapeoCampanaResponseDTO = mapeoCampanaService.desactivar(mapeoCampanaRequestDTO);

@@ -38,14 +38,14 @@ public class ActividadLineaController {
 	public ActividadLineaService actividadLineaService;
 
 
-	@PostMapping("/lineas/{id}/actividades")
-	public ResponseEntity<?> registrarNuevaActividadLinea(@PathVariable Long id, @RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO ) {
+	@PostMapping("/lineas/{idLinea}/actividades")
+	public ResponseEntity<?> registrarNuevaActividadLinea(@PathVariable Long idLinea, @RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO ) {
 
 	
 		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
 
 
-		actividadLineaResponseDTO.setIdActividadLinea(actividadLineaService.registrarActividadLinea(id,actividadLineaRequestDTO));
+		actividadLineaResponseDTO.setIdActividadLinea(actividadLineaService.registrarActividadLinea(idLinea,actividadLineaRequestDTO));
 
 		return ResponseEntity.ok(actividadLineaResponseDTO);
 	}

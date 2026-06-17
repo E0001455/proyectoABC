@@ -5,18 +5,24 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import mx.com.proyectohu.feign.ValidaCampanaClientFeign;
 
 @Service
 public class ValidarCampanaClient {
 
 
-
+	/*
 	private final HttpClient httpClient;
-	
+
 	@Value("${validacion.campana.url}")
 	public String validaCampanaURL;
 
@@ -26,16 +32,16 @@ public class ValidarCampanaClient {
 	}
 
 
-	
+
 	public String llamarValidarCampana(String lineaNegocio, Long idTareaCampana){
 		Integer statusCode=null;
 		String body=null;
 		String url= validaCampanaURL;
 		JSONObject json = new JSONObject();
-		
+
 		json.put("lineaNegocio", lineaNegocio);
 		json.put("idTareaCampana", idTareaCampana);
-		
+
 		try {
 			HttpRequest request = HttpRequest.newBuilder()
 					.uri(URI.create(url))
@@ -48,11 +54,11 @@ public class ValidarCampanaClient {
 			response = httpClient.send(request,	HttpResponse.BodyHandlers.ofString());
 
 
-			
+
 			statusCode = response.statusCode();
 			body = response.body();
 
-			
+
 
 
 		} catch (IOException e) {
@@ -62,17 +68,33 @@ public class ValidarCampanaClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		if (statusCode == 200) {
 			return body;
 		} else {
 			throw new RuntimeException("Error en la llamada: " + statusCode);
 		}
-		
+
 
 	}
+	 */
+
+	@Autowired
+	public ValidaCampanaClientFeign validaCampanaClientFeign;
+
+	public String llamarValidarCampana(String lineaNegocio, Long idTareaCampana){
+
+		Map<String, Object>  body= new HashMap<String, Object>(); 
+
+		body.put("lineaNegocio", lineaNegocio);
+		body.put("idTareaCampana", idTareaCampana);
+
+		String respuesta =validaCampanaClientFeign.validarExtensionPerfil(idTareaCampana);
 
 
+		return respuesta.toString();
+
+	}
 
 
 }

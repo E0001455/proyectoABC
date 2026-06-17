@@ -82,7 +82,7 @@ public class ValidarLineaClient {
 		body.put("lineaNegocio", lineaNegocio);
 		body.put("idTareaLinea", idTareaLinea);
 		
-		ResponseEntity<?> respuesta =validaLineaClientFeign.validaListaContacto(body);
+		String respuesta =validaLineaClientFeign.validaListaContacto(idTareaLinea);
 		
 		
 		return respuesta.toString();
