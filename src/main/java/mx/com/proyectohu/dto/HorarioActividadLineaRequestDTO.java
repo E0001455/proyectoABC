@@ -17,6 +17,7 @@ public class HorarioActividadLineaRequestDTO {
 
 	
 	
+	
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
@@ -32,8 +33,8 @@ public class HorarioActividadLineaRequestDTO {
 	public void setHorarioLineaDTO(List<HorarioLineaDTO> horarioLineaDTO) {
 		HorarioLineaDTO = horarioLineaDTO;
 	}
-	
 
+	
 	
 	
 	

@@ -6,17 +6,30 @@ import java.sql.Timestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="TTABCCFG_ACTIVIDAD_MAPEO_CAMPANA")
+@SequenceGenerator(name = "SEQ_ACTIVIDAD_CAMPANA_MAPEO_GEN",sequenceName = "SEQ_TTABCCFG_ACTIVIDAD_MAPEO_CAMPANA",allocationSize = 1)
 public class ActividadMapeoCampanaEntity implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private LlaveActividadMapeoCampana llaveActividadMapeoCampana;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACTIVIDAD_CAMPANA_MAPEO_GEN")
+	@Column(name = "ID_ACTIVIDAD_MAPEO_CAMPANA")
+	private Long 	idActividadMapeoCampana;
+	
+	@Column(name = "ID_MAPEO_CAMPANA")
+	private Long 	idMapeoCampana;
+	
+	@Column(name = "ID_USUARIO")
+	private Long 	idUsuario;
 	
 	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
@@ -33,18 +46,49 @@ public class ActividadMapeoCampanaEntity implements Serializable {
 
 
 	
+	
+	
+
 	/**
-	 * @return the llaveActividadMapeoCampana
+	 * @return the idActividadMapeoCampana
 	 */
-	public LlaveActividadMapeoCampana getLlaveActividadMapeoCampana() {
-		return llaveActividadMapeoCampana;
+	public Long getIdActividadMapeoCampana() {
+		return idActividadMapeoCampana;
 	}
 
 	/**
-	 * @param llaveActividadMapeoCampana the llaveActividadMapeoCampana to set
+	 * @param idActividadMapeoCampana the idActividadMapeoCampana to set
 	 */
-	public void setLlaveActividadMapeoCampana(LlaveActividadMapeoCampana llaveActividadMapeoCampana) {
-		this.llaveActividadMapeoCampana = llaveActividadMapeoCampana;
+	public void setIdActividadMapeoCampana(Long idActividadMapeoCampana) {
+		this.idActividadMapeoCampana = idActividadMapeoCampana;
+	}
+
+	/**
+	 * @return the idMapeoCampana
+	 */
+	public Long getIdMapeoCampana() {
+		return idMapeoCampana;
+	}
+
+	/**
+	 * @param idMapeoCampana the idMapeoCampana to set
+	 */
+	public void setIdMapeoCampana(Long idMapeoCampana) {
+		this.idMapeoCampana = idMapeoCampana;
+	}
+
+	/**
+	 * @return the idUsuario
+	 */
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	/**
+	 * @param idUsuario the idUsuario to set
+	 */
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	/**

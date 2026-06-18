@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,32 +15,21 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="TTABCCFG_ACTIVIDAD_CAMPANA" )
-@SequenceGenerator(name = "SEQ_ACTIVIDAD_CAMPANA_GEN",sequenceName = "SEQ_TTABCCFG_ACTIVIDAD_CAMPANA",allocationSize = 1)
 public class ActividadCampanaEntity implements Serializable {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACTIVIDAD_CAMPANA_GEN")
-	@Column(name = "ID_ACTIVIDAD_CAMPANA")
-	private Long 	idActividadCampana;
 	
-	@Column(name = "ID_USUARIO")
-	private Long 	idUsuario;
-	
-	@Column(name = "ID_LINEA_NEGOCIO")
-	private Long 	idLineaNegocio;
-	
-	@Column(name = "ID_CAMPANA")
-	private Long 	idCampana;
-	
-	@Column(name = "ID_ACTIVIDAD")
-	private Long 	idActividad;
+	@EmbeddedId
+	private LlaveActividadCampana llaveActividadCampana;
 	
 	@Column(name = "ID_EJECUCION")
 	private Long 	idEjecucion;
+	
+	@Column(name = "ID_USUARIO")
+	private Long 	idUsuario;
 	
 	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
@@ -54,18 +44,19 @@ public class ActividadCampanaEntity implements Serializable {
 	private Timestamp 	fechaUltModificacion;
 	
 
+
 	/**
-	 * @return the idActividadCampana
+	 * @return the llaveActividadCampana
 	 */
-	public Long getIdActividadCampana() {
-		return idActividadCampana;
+	public LlaveActividadCampana getLlaveActividadCampana() {
+		return llaveActividadCampana;
 	}
 
 	/**
-	 * @param idActividadCampana the idActividadCampana to set
+	 * @param llaveActividadCampana the llaveActividadCampana to set
 	 */
-	public void setIdActividadCampana(Long idActividadCampana) {
-		this.idActividadCampana = idActividadCampana;
+	public void setLlaveActividadCampana(LlaveActividadCampana llaveActividadCampana) {
+		this.llaveActividadCampana = llaveActividadCampana;
 	}
 
 	/**
@@ -80,48 +71,6 @@ public class ActividadCampanaEntity implements Serializable {
 	 */
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
-	}
-
-	/**
-	 * @return the idLineaNegocio
-	 */
-	public Long getIdLineaNegocio() {
-		return idLineaNegocio;
-	}
-
-	/**
-	 * @param idLineaNegocio the idLineaNegocio to set
-	 */
-	public void setIdLineaNegocio(Long idLineaNegocio) {
-		this.idLineaNegocio = idLineaNegocio;
-	}
-
-	/**
-	 * @return the idCampana
-	 */
-	public Long getIdCampana() {
-		return idCampana;
-	}
-
-	/**
-	 * @param idCampana the idCampana to set
-	 */
-	public void setIdCampana(Long idCampana) {
-		this.idCampana = idCampana;
-	}
-
-	/**
-	 * @return the idActividad
-	 */
-	public Long getIdActividad() {
-		return idActividad;
-	}
-
-	/**
-	 * @param idActividad the idActividad to set
-	 */
-	public void setIdActividad(Long idActividad) {
-		this.idActividad = idActividad;
 	}
 
 	/**

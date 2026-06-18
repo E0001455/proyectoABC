@@ -3,33 +3,15 @@ package mx.com.proyectohu.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.com.proyectohu.dto.MapeoLineaRequestDTO;
-import mx.com.proyectohu.dto.MapeoLineaResponseDTO;
 import mx.com.proyectohu.dto.HorarioActividadLineaRequestDTO;
-import mx.com.proyectohu.dto.HorarioActividadLineaResponseDTO;
-import mx.com.proyectohu.dto.ActividadLineaRequestDTO;
-import mx.com.proyectohu.dto.ActividadLineaResponseDTO;
-import mx.com.proyectohu.service.MapeoLineaService;
 import mx.com.proyectohu.service.HorarioActividadLineaService;
-import mx.com.proyectohu.service.ActividadLineaService;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import org.springframework.web.bind.annotation.PutMapping;
-
-
 
 
 @RestController
@@ -42,15 +24,15 @@ public class HorarioActividadLineaController {
 
 
 
-	@PostMapping("/lineas/actividades/{idActividad}/horarios")
-	public ResponseEntity<?> registrarNuevoHorarioActividadLinea(@PathVariable Long idActividad, @RequestBody HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
+	@PostMapping("/lineas/actividades/{idActividadMapeo}/horarios")
+	public ResponseEntity<?> registrarNuevoHorarioActividadLinea(@PathVariable Long idActividadMapeo, @RequestBody HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
 
-		horarioActividadLineaService.registrarHorarioActividadLinea(idActividad,horarioActividadLineaRequestDTO);
+		horarioActividadLineaService.registrarHorarioActividadLinea(idActividadMapeo,horarioActividadLineaRequestDTO);
 
 		return ResponseEntity.ok("creado");
 	}
 
-
+/*
 	@GetMapping("/lineas/actividades/{idActividad}/horarios")
 	public ResponseEntity<?> consultarHorariosActividadesLinea(@PathVariable Long idActividad) {
 
@@ -88,7 +70,7 @@ public class HorarioActividadLineaController {
 		}
 	}
 
-
+*/
 
 
 

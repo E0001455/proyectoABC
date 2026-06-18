@@ -24,6 +24,7 @@ import mx.com.proyectohu.entity.LlaveActividadMapeoCampana;
 import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
 import mx.com.proyectohu.entity.ActividadCampanaEntity;
 import mx.com.proyectohu.entity.ActividadMapeoCampanaEntity;
+import mx.com.proyectohu.entity.LlaveActividadCampana;
 
 @Service
 public class ActividadCampanaService {
@@ -40,33 +41,38 @@ public class ActividadCampanaService {
 
 
 	public Long  registrarActividadCampana(Long idLinea, Long idCampana,ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
+		
+		Long idActividad = actividadCampanaRequestDTO.getActividadDTO().getActividad().getIdActividad();
+		
+		Long idActividadMapeoCampana = registrarMapeoActividad(idActividad,actividadCampanaRequestDTO.getActividadDTO().getMapeoDTO().getIdABCConfigMapeoLinea(),actividadCampanaRequestDTO.getIdUsuario()); 
 
 
 		ActividadCampanaEntity actividadCampanaEntity = new ActividadCampanaEntity();
-		Long idTareaCampana = 0L;
+		
+		LlaveActividadCampana llaveActividadCampana = new LlaveActividadCampana();
+		llaveActividadCampana.setIdActividadMapeoCampana(idActividadMapeoCampana);
+		llaveActividadCampana.setIdActividad(idActividad);
+		actividadCampanaEntity.setLlaveActividadCampana(llaveActividadCampana);
 
 		actividadCampanaEntity.setIdUsuario(actividadCampanaRequestDTO.getIdUsuario());
-		actividadCampanaEntity.setIdLineaNegocio(idLinea);
-		actividadCampanaEntity.setIdCampana(idCampana);
-		actividadCampanaEntity.setIdActividad(actividadCampanaRequestDTO.getActividadDTO().getActividad().getIdActividad());
 		actividadCampanaEntity.setIdEjecucion(actividadCampanaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
 		actividadCampanaEntity.setBolActivo(true);
-		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		actividadCampanaEntity.setFechaCreacion(fechaActual);
+		
+		actividadCampanaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 		actividadCampanaEntity.setIdUsuarioUltModificacion(actividadCampanaRequestDTO.getIdUsuario());
-		actividadCampanaEntity.setFechaUltModificacion(fechaActual);
+		actividadCampanaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 
 
-		idTareaCampana=actividadCampanaRepository.save(actividadCampanaEntity).getIdActividadCampana();
+		idActividadMapeoCampana=actividadCampanaRepository.save(actividadCampanaEntity).getIdUsuarioUltModificacion();
 
-		registrarMapeoActividad(idTareaCampana,actividadCampanaRequestDTO.getActividadDTO().getMapeoDTO().getIdABCConfigMapeoLinea(),actividadCampanaRequestDTO.getIdUsuario()); 
+		
 
 
-		return	idTareaCampana;	
+		return	idActividadMapeoCampana;	
 
 	}
 
-
+	/*
 	public List<ActividadCampanaResponseDTO>  consultarActividadesCampana(){
 		List<ActividadCampanaResponseDTO> actividadCampanaResponseDTOLista = new ArrayList<ActividadCampanaResponseDTO>();
 		List<ActividadCampanaEntity>  actividadCampanaEntityLista= new ArrayList<ActividadCampanaEntity>();
@@ -211,22 +217,19 @@ public class ActividadCampanaService {
 
 		return actividadCampanaResponseDTO;
 	}
-
-	public void registrarMapeoActividad(Long idTareaCampana, Long idMapeoCampana,Long idUsuario) {
+*/
+	public Long  registrarMapeoActividad(Long idTareaCampana, Long idMapeoCampana,Long idUsuario) {
 		
 		ActividadMapeoCampanaEntity actividadMapeoCampanaEntity = new  ActividadMapeoCampanaEntity();
-		LlaveActividadMapeoCampana llaveActividadMapeoCampana = new LlaveActividadMapeoCampana();
 		
-		llaveActividadMapeoCampana.setIdABCConfigMapeoCampana(idMapeoCampana);
-		llaveActividadMapeoCampana.setIdActividadCampana(idTareaCampana);
-		
-		actividadMapeoCampanaEntity.setLlaveActividadMapeoCampana(llaveActividadMapeoCampana);
+		actividadMapeoCampanaEntity.setIdMapeoCampana(idMapeoCampana);
+		actividadMapeoCampanaEntity.setIdUsuario(idUsuario);
 		actividadMapeoCampanaEntity.setBolActivo(true);
 		actividadMapeoCampanaEntity.setIdABCUsuarioUltModificacion(idUsuario);
 		actividadMapeoCampanaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
 		actividadMapeoCampanaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 		
-		mapeoActividadCampanaRepository.save(actividadMapeoCampanaEntity);
+		return mapeoActividadCampanaRepository.save(actividadMapeoCampanaEntity).getIdActividadMapeoCampana();
 		
 		
 		

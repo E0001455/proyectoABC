@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.repository.HorarioActividadLineaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.dto.HorarioLineaDTO;
 import mx.com.proyectohu.dto.HorarioActividadLineaRequestDTO;
 import mx.com.proyectohu.dto.HorarioActividadLineaResponseDTO;
@@ -24,7 +25,7 @@ public class HorarioActividadLineaService {
 	public HorarioActividadLineaRepository horarioActividadLineaRepository;
 
 
-	public void  registrarHorarioActividadLinea(Long idTareaLinea,HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
+	public void  registrarHorarioActividadLinea(Long idActividadMapeoLinea,HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
 
 		HorarioActividadLineaEntity horarioActividadLineaEntity = new HorarioActividadLineaEntity();
 
@@ -33,7 +34,8 @@ public class HorarioActividadLineaService {
 
 			LlaveHorarioActividadLinea llaveHorarioActividadLinea = new LlaveHorarioActividadLinea();
 
-			llaveHorarioActividadLinea.setIdActividadLinea(idTareaLinea);
+			llaveHorarioActividadLinea.setIdActividadMapeoLinea(idActividadMapeoLinea);
+			llaveHorarioActividadLinea.setIdActividad(horarioLineaDTO.getIdActividad());
 			llaveHorarioActividadLinea.setIdDia(horarioLineaDTO.getDia().getIdDia());
 			llaveHorarioActividadLinea.setIdHora(horarioLineaDTO.getDia().getHora().getIdHora());
 
@@ -41,16 +43,15 @@ public class HorarioActividadLineaService {
 			horarioActividadLineaEntity.setIdUsuario(horarioActividadLineaRequestDTO.getIdUsuario());
 			horarioActividadLineaEntity.setIdUsuarioUltModificacion(horarioActividadLineaRequestDTO.getIdUsuario());
 			horarioActividadLineaEntity.setBolActivo(true);
-			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-			horarioActividadLineaEntity.setFechaCreacion(fechaActual);
-			horarioActividadLineaEntity.setFechaUltModificacion(fechaActual);
+			horarioActividadLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
+			horarioActividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 			horarioActividadLineaRepository.save(horarioActividadLineaEntity);
 
 		}
 
 	}
 
-
+/*
 	public List<HorarioActividadLineaResponseDTO>  consultarHorariosActividadesLinea(Long idTareaLinea){
 		List<HorarioActividadLineaResponseDTO> horarioActividadLineaResponseDTOLista = new ArrayList<HorarioActividadLineaResponseDTO>();
 		List<HorarioActividadLineaEntity>  horarioActividadLineaEntityLista= new ArrayList<HorarioActividadLineaEntity>();
@@ -149,7 +150,7 @@ public class HorarioActividadLineaService {
 		return horarioActividadLineaResponseDTO;
 	}
 
-
+*/
 
 
 }

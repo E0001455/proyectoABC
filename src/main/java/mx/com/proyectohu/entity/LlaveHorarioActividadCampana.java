@@ -12,9 +12,13 @@ public class LlaveHorarioActividadCampana implements Serializable {
 
 	  
 	private static final long serialVersionUID = 1L;
+	
+	
+		@Column(name = "ID_ACTIVIDAD_MAPEO_CAMPANA")
+		private Long 	idActividadMapeoCampana;
 
-		@Column(name = "ID_ACTIVIDAD_CAMPANA")
-	    private Long idActividadCampana;
+		@Column(name = "ID_ACTIVIDAD")
+	    private Long idActividad;
 
 	    @Column(name = "ID_DIA")
 	    private Long idDia;
@@ -24,24 +28,41 @@ public class LlaveHorarioActividadCampana implements Serializable {
 
 	    public LlaveHorarioActividadCampana() {}
 
-	    public LlaveHorarioActividadCampana(Long idActividadCampana, Long idDia, Long idHora) {
-	        this.idActividadCampana = idActividadCampana;
+	    public LlaveHorarioActividadCampana(Long idActividadMapeoCampana,Long idActividad, Long idDia, Long idHora) {
+	    	 this.idActividadMapeoCampana = idActividadMapeoCampana;
+	    	this.idActividad = idActividad;
 	        this.idDia = idDia;
 	        this.idHora = idHora;
 	    }
 
+	    
+		
 		/**
-		 * @return the idActividadCampana
+		 * @return the idActividadMapeoCampana
 		 */
-		public Long getIdActividadCampana() {
-			return idActividadCampana;
+		public Long getIdActividadMapeoCampana() {
+			return idActividadMapeoCampana;
 		}
 
 		/**
-		 * @param idActividadCampana the idActividadCampana to set
+		 * @param idActividadMapeoCampana the idActividadMapeoCampana to set
 		 */
-		public void setIdActividadCampana(Long idActividadCampana) {
-			this.idActividadCampana = idActividadCampana;
+		public void setIdActividadMapeoCampana(Long idActividadMapeoCampana) {
+			this.idActividadMapeoCampana = idActividadMapeoCampana;
+		}
+
+		/**
+		 * @return the idActividad
+		 */
+		public Long getIdActividad() {
+			return idActividad;
+		}
+
+		/**
+		 * @param idActividad the idActividad to set
+		 */
+		public void setIdActividad(Long idActividad) {
+			this.idActividad = idActividad;
 		}
 
 		public Long getIdDia() {
@@ -65,14 +86,15 @@ public class LlaveHorarioActividadCampana implements Serializable {
 	        if (this == o) return true;
 	        if (!(o instanceof LlaveHorarioActividadCampana)) return false;
 	        LlaveHorarioActividadCampana that = (LlaveHorarioActividadCampana) o;
-	        return Objects.equals(idActividadCampana, that.idActividadCampana)
+	        return Objects.equals(idActividadMapeoCampana, that.idActividadMapeoCampana)
+	        	&& Objects.equals(idActividad, that.idActividad)
 	            && Objects.equals(idDia, that.idDia)
 	            && Objects.equals(idHora, that.idHora);
 	    }
 
 	    @Override
 	    public int hashCode() {
-	        return Objects.hash(idActividadCampana, idDia,idHora);
+	        return Objects.hash(idActividadMapeoCampana,idActividad, idDia,idHora);
 	    }
 	}
 

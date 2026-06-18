@@ -1,9 +1,5 @@
 package mx.com.proyectohu.service;
 
-
-
-
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +31,7 @@ public class HorarioActividadCampanaService {
 	public HorarioActividadCampanaRepository horarioActividadCampanaRepository;
 
 
-	public void  registrarHorarioActividadCampana(Long idTareaCampana,HorarioActividadCampanaRequestDTO horarioActividadCampanaRequestDTO) {
+	public void  registrarHorarioActividadCampana(Long idActividadMapeoCampana,HorarioActividadCampanaRequestDTO horarioActividadCampanaRequestDTO) {
 
 
 		HorarioActividadCampanaEntity horarioActividadCampanaEntity = new HorarioActividadCampanaEntity();
@@ -45,7 +41,8 @@ public class HorarioActividadCampanaService {
 
 			LlaveHorarioActividadCampana llaveHorarioActividadCampana = new LlaveHorarioActividadCampana();
 
-			llaveHorarioActividadCampana.setIdActividadCampana(idTareaCampana);
+			llaveHorarioActividadCampana.setIdActividadMapeoCampana(idActividadMapeoCampana);
+			llaveHorarioActividadCampana.setIdActividad(horarioCampanaDTO.getIdActividad());
 			llaveHorarioActividadCampana.setIdDia(horarioCampanaDTO.getDia().getIdDia());
 			llaveHorarioActividadCampana.setIdHora(horarioCampanaDTO.getDia().getHora().getIdHora());
 
@@ -65,7 +62,7 @@ public class HorarioActividadCampanaService {
 
 
 	}
-
+/*
 
 	public List<HorarioActividadCampanaResponseDTO>  consultarHorariosActividadCampanas(Long idTareaCampana){
 		List<HorarioActividadCampanaResponseDTO> horarioActividadCampanaResponseDTOLista = new ArrayList<HorarioActividadCampanaResponseDTO>();
@@ -174,7 +171,7 @@ public class HorarioActividadCampanaService {
 		return horarioActividadCampanaResponseDTO;
 	}
 
-
+*/
 
 
 }

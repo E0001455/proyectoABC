@@ -10,6 +10,8 @@ public class HorarioLineaDTO {
 
 	private Dia 	dia;
 	
+	private Long idActividad;
+	
 	
 
 
@@ -25,6 +27,15 @@ public class HorarioLineaDTO {
 	 */
 	public void setIdActividadLineaCampana(Long idActividadLineaCampana) {
 		this.idActividadLineaCampana = idActividadLineaCampana;
+	}
+	
+
+	public Long getIdActividad() {
+		return idActividad;
+	}
+
+	public void setIdActividad(Long idActividad) {
+		this.idActividad = idActividad;
 	}
 
 	public Dia getDia() {

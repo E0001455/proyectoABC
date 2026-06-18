@@ -7,10 +7,10 @@ import mx.com.proyectohu.entity.LlaveActividadMapeoCampana;
 import mx.com.proyectohu.entity.ActividadMapeoCampanaEntity;
 
 @Repository
-public interface  MapeoActividadCampanaRepository extends JpaRepository<ActividadMapeoCampanaEntity, LlaveActividadMapeoCampana> {
+public interface  MapeoActividadCampanaRepository extends JpaRepository<ActividadMapeoCampanaEntity, Long> {
 
 
-	public  ActividadMapeoCampanaEntity findByLlaveActividadMapeoCampana_idActividadCampana(Long idActividadCampana);
+//	public  ActividadMapeoCampanaEntity findByLlaveActividadMapeoCampana_idActividadCampana(Long idActividadCampana);
 
 
 

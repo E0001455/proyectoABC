@@ -4,19 +4,31 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="TTABCCFG_ACTIVIDAD_MAPEO_LINEA")
+@SequenceGenerator(name = "SEQ_ACTIVIDAD_LINEA_MAPEO_GEN",sequenceName = "SEQ_TTABCCFG_ACTIVIDAD_MAPEO_LINEA",allocationSize = 1)
 public class ActividadMapeoLineaEntity implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private LlaveActividadMapeoLinea llaveActividadMapeoLinea;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACTIVIDAD_LINEA_MAPEO_GEN")
+	@Column(name = "ID_ACTIVIDAD_MAPEO_LINEA")
+	private Long 	idActividadMapeoLinea;
+	
+	@Column(name = "ID_MAPEO_LINEA")
+	private Long 	idMapeoLinea;
+	
+	@Column(name = "ID_USUARIO")
+	private Long 	idUsuario;
 	
 	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
@@ -30,83 +42,61 @@ public class ActividadMapeoLineaEntity implements Serializable {
 	@Column(name = "FDFECHAULTMODIFICACION")
 	private Timestamp fecUltModificacion;
 
-	
-
-	/**
-	 * @return the llaveActividadMapeoLinea
-	 */
-	public LlaveActividadMapeoLinea getLlaveActividadMapeoLinea() {
-		return llaveActividadMapeoLinea;
+	public Long getIdActividadMapeoLinea() {
+		return idActividadMapeoLinea;
 	}
 
-	/**
-	 * @param llaveActividadMapeoLinea the llaveActividadMapeoLinea to set
-	 */
-	public void setLlaveActividadMapeoLinea(LlaveActividadMapeoLinea llaveActividadMapeoLinea) {
-		this.llaveActividadMapeoLinea = llaveActividadMapeoLinea;
+	public void setIdActividadMapeoLinea(Long idActividadMapeoLinea) {
+		this.idActividadMapeoLinea = idActividadMapeoLinea;
 	}
 
-	/**
-	 * @return the bolActivo
-	 */
+	public Long getIdMapeoLinea() {
+		return idMapeoLinea;
+	}
+
+	public void setIdMapeoLinea(Long idMapeoLinea) {
+		this.idMapeoLinea = idMapeoLinea;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	public Boolean getBolActivo() {
 		return bolActivo;
 	}
 
-	/**
-	 * @param bolActivo the bolActivo to set
-	 */
 	public void setBolActivo(Boolean bolActivo) {
 		this.bolActivo = bolActivo;
 	}
 
-	
-	/**
-	 * @return the idABCUsuarioUltModificacion
-	 */
-	public Long getIdABCUsuarioUltModificacion() {
-		return idABCUsuarioUltModificacion;
-	}
-
-	/**
-	 * @param idABCUsuarioUltModificacion the idABCUsuarioUltModificacion to set
-	 */
-	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
-		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
-	}
-
-	/**
-	 * @return the fecCreacion
-	 */
 	public Timestamp getFecCreacion() {
 		return fecCreacion;
 	}
 
-	/**
-	 * @param fecCreacion the fecCreacion to set
-	 */
 	public void setFecCreacion(Timestamp fecCreacion) {
 		this.fecCreacion = fecCreacion;
 	}
 
-	/**
-	 * @return the fecUltModificacion
-	 */
+	public Long getIdABCUsuarioUltModificacion() {
+		return idABCUsuarioUltModificacion;
+	}
+
+	public void setIdABCUsuarioUltModificacion(Long idABCUsuarioUltModificacion) {
+		this.idABCUsuarioUltModificacion = idABCUsuarioUltModificacion;
+	}
+
 	public Timestamp getFecUltModificacion() {
 		return fecUltModificacion;
 	}
 
-	/**
-	 * @param fecUltModificacion the fecUltModificacion to set
-	 */
 	public void setFecUltModificacion(Timestamp fecUltModificacion) {
 		this.fecUltModificacion = fecUltModificacion;
 	}
 
-	
-
-
-	
-	
 	
 }

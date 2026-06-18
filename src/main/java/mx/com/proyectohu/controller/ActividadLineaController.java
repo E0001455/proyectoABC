@@ -50,7 +50,7 @@ public class ActividadLineaController {
 		return ResponseEntity.ok(actividadLineaResponseDTO);
 	}
 
-
+/*
 	@GetMapping("/lineas/actividades")
 	public ResponseEntity<?> consultarActividadesLineas() {
 
@@ -109,7 +109,7 @@ public class ActividadLineaController {
 	}
 
 
-
+*/
 
 
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,29 +15,21 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="TTABCCFG_ACTIVIDAD_LINEA" )
-@SequenceGenerator(name = "SEQ_ACTIVIDAD_LINEA_GEN",sequenceName = "SEQ_TTABCCFG_ACTIVIDAD_LINEA",allocationSize = 1)
 public class ActividadLineaEntity implements Serializable {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACTIVIDAD_LINEA_GEN")
-	@Column(name = "ID_ACTIVIDAD_LINEA")
-	private Long 	idActividadLinea;
 	
-	@Column(name = "ID_USUARIO")
-	private Long 	idUsuario;
-	
-	@Column(name = "ID_LINEA_NEGOCIO")
-	private Long 	idLineaNegocio;
-	
-	@Column(name = "ID_ACTIVIDAD")
-	private Long 	idActividad;
+	@EmbeddedId
+	private LlaveActividadLinea llaveActividadLinea;
 	
 	@Column(name = "ID_EJECUCION")
 	private Long 	idEjecucion;
+	
+	@Column(name = "ID_USUARIO")
+	private Long 	idUsuario;
 	
 	@Column(name = "FIACTIVO")
 	private Boolean bolActivo;
@@ -51,20 +44,14 @@ public class ActividadLineaEntity implements Serializable {
 	private Timestamp 	fechaUltModificacion;
 
 	
+	
 
-
-	/**
-	 * @return the idActividadLinea
-	 */
-	public Long getIdActividadLinea() {
-		return idActividadLinea;
+	public LlaveActividadLinea getLlaveActividadLinea() {
+		return llaveActividadLinea;
 	}
 
-	/**
-	 * @param idActividadLinea the idActividadLinea to set
-	 */
-	public void setIdActividadLinea(Long idActividadLinea) {
-		this.idActividadLinea = idActividadLinea;
+	public void setLlaveActividadLinea(LlaveActividadLinea llaveActividadLinea) {
+		this.llaveActividadLinea = llaveActividadLinea;
 	}
 
 	/**
@@ -81,33 +68,8 @@ public class ActividadLineaEntity implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	/**
-	 * @return the idLineaNegocio
-	 */
-	public Long getIdLineaNegocio() {
-		return idLineaNegocio;
-	}
 
-	/**
-	 * @param idLineaNegocio the idLineaNegocio to set
-	 */
-	public void setIdLineaNegocio(Long idLineaNegocio) {
-		this.idLineaNegocio = idLineaNegocio;
-	}
 
-	/**
-	 * @return the idActividad
-	 */
-	public Long getIdActividad() {
-		return idActividad;
-	}
-
-	/**
-	 * @param idActividad the idActividad to set
-	 */
-	public void setIdActividad(Long idActividad) {
-		this.idActividad = idActividad;
-	}
 
 	/**
 	 * @return the idEjecucion

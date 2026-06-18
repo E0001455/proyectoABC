@@ -51,7 +51,7 @@ public class ActividadCampanaController {
 		return ResponseEntity.ok(actividadCampanaResponseDTO);
 	}
 
-
+/*
 	@GetMapping("/campanas/actividades")
 	public ResponseEntity<?> consultarActividadesCampanas() {
 
@@ -108,7 +108,7 @@ public class ActividadCampanaController {
 		}
 
 	}
-
+*/
 
 
 

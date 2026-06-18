@@ -10,7 +10,21 @@ public class HorarioCampanaDTO {
 
 	private Dia 	dia;
 	
-	
+	private Long idActividad;
+
+	/**
+	 * @return the idActividad
+	 */
+	public Long getIdActividad() {
+		return idActividad;
+	}
+
+	/**
+	 * @param idActividad the idActividad to set
+	 */
+	public void setIdActividad(Long idActividad) {
+		this.idActividad = idActividad;
+	}
 
 	/**
 	 * @return the idActividadCampana

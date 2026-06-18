@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Embeddable
 
-public class LlaveHorarioActividadLinea implements Serializable {
+public class LlaveActividadLinea implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
@@ -17,25 +17,26 @@ public class LlaveHorarioActividadLinea implements Serializable {
 	private Long 	idActividadMapeoLinea;
 
 	@Column(name = "ID_ACTIVIDAD")
-	private Long idActividad;
+	private Long 	idActividad;
 
-	@Column(name = "ID_DIA")
-	private Long idDia;
+	
+	
+	
+	
+	
 
-	@Column(name = "ID_HORA")
-	private Long idHora;
+	public LlaveActividadLinea() {}
 
-	public LlaveHorarioActividadLinea() {}
-
-	public LlaveHorarioActividadLinea(Long idActividadMapeoLinea, Long idActividad, Long idDia, Long idHora) {
+	public LlaveActividadLinea(Long idActividadMapeoLinea, Long idActividad) {
 		this.idActividadMapeoLinea = idActividadMapeoLinea;
 		this.idActividad = idActividad;
-		this.idDia = idDia;
-		this.idHora = idHora;
 	}
+	
+	
 
 
 	
+
 	public Long getIdActividadMapeoLinea() {
 		return idActividadMapeoLinea;
 	}
@@ -52,36 +53,18 @@ public class LlaveHorarioActividadLinea implements Serializable {
 		this.idActividad = idActividad;
 	}
 
-	public Long getIdDia() {
-		return idDia;
-	}
-
-	public void setIdDia(Long idDia) {
-		this.idDia = idDia;
-	}
-
-	public Long getIdHora() {
-		return idHora;
-	}
-
-	public void setIdHora(Long idHora) {
-		this.idHora = idHora;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof LlaveHorarioActividadLinea)) return false;
-		LlaveHorarioActividadLinea that = (LlaveHorarioActividadLinea) o;
+		if (!(o instanceof LlaveActividadLinea)) return false;
+		LlaveActividadLinea that = (LlaveActividadLinea) o;
 		return Objects.equals(idActividadMapeoLinea, that.idActividadMapeoLinea)
-				&& Objects.equals(idActividad, that.idActividad)
-				&& Objects.equals(idDia, that.idDia)
-				&& Objects.equals(idHora, that.idHora);
+				&& Objects.equals(idActividad, that.idActividad);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(idActividadMapeoLinea,idActividad, idDia,idHora);
+		return Objects.hash(idActividadMapeoLinea, idActividad);
 	}
 }
 

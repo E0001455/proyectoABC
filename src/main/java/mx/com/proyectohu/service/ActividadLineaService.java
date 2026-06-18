@@ -15,16 +15,10 @@ import mx.com.proyectohu.repository.MapeoActividadLineaRepository;
 import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.ActividadLineaRepository;
-import mx.com.proyectohu.dto.MapeoDTO;
 import mx.com.proyectohu.dto.ActividadLineaRequestDTO;
-import mx.com.proyectohu.dto.ActividadLineaResponseDTO;
-import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatActividad;
-import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatEjecucion;
-import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatLineaNegocio;
-import mx.com.proyectohu.entity.LlaveActividadMapeoLinea;
-import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
 import mx.com.proyectohu.entity.ActividadLineaEntity;
 import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
+import mx.com.proyectohu.entity.LlaveActividadLinea;
 
 @Service
 public class ActividadLineaService {
@@ -40,13 +34,17 @@ public class ActividadLineaService {
 
 	public Long  registrarActividadLinea(Long idLineaNegocio,ActividadLineaRequestDTO actividadLineaRequestDTO) {
 
+		Long idActividad = actividadLineaRequestDTO.getActividadDTO().getActividad().getIdActividad();
+		Long idActividadMapeoLinea = registrarMapeoActividad(idActividad,actividadLineaRequestDTO.getActividadDTO().getMapeoDTO().getIdABCConfigMapeoLinea(),actividadLineaRequestDTO.getIdUsuario()); 
 
 		ActividadLineaEntity actividadLineaEntity = new ActividadLineaEntity();
-		Long idTareaLinea = 0L;
+		
+		LlaveActividadLinea llaveActividadLinea = new LlaveActividadLinea();
+		llaveActividadLinea.setIdActividadMapeoLinea(idActividadMapeoLinea);
+		llaveActividadLinea.setIdActividad(idActividad);
+		actividadLineaEntity.setLlaveActividadLinea(llaveActividadLinea);
 
 		actividadLineaEntity.setIdUsuario(actividadLineaRequestDTO.getIdUsuario());
-		actividadLineaEntity.setIdLineaNegocio(idLineaNegocio);
-		actividadLineaEntity.setIdActividad(actividadLineaRequestDTO.getActividadDTO().getActividad().getIdActividad());
 		actividadLineaEntity.setIdEjecucion(actividadLineaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
 		actividadLineaEntity.setBolActivo(true);
 		actividadLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
@@ -54,19 +52,13 @@ public class ActividadLineaService {
 		actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 
 
-		idTareaLinea=actividadLineaRepository.save(actividadLineaEntity).getIdActividadLinea();
-		
-		
-		
-		registrarMapeoActividad(idTareaLinea,actividadLineaRequestDTO.getActividadDTO().getMapeoDTO().getIdABCConfigMapeoLinea(),actividadLineaRequestDTO.getIdUsuario()); 
-		
+		idActividadMapeoLinea = actividadLineaRepository.save(actividadLineaEntity).getIdUsuarioUltModificacion();
 
 
-
-		return	idTareaLinea;	
+		return	idActividadMapeoLinea;	
 
 	}
-
+/*
 
 	public List<ActividadLineaResponseDTO>  consultarActividadesLinea(){
 		List<ActividadLineaResponseDTO> actividadLineaResponseDTOLista = new ArrayList<ActividadLineaResponseDTO>();
@@ -199,29 +191,22 @@ public class ActividadLineaService {
 		return actividadLineaResponseDTO;
 	}
 	
-	
-	public void registrarMapeoActividad(Long idTareaLinea, Long idMapeoLinea,Long idUsuario) {
+		
+*/
+	public Long  registrarMapeoActividad(Long idTareaLinea, Long idMapeoLinea,Long idUsuario) {
 		
 		ActividadMapeoLineaEntity actividadMapeoLineaEntity = new  ActividadMapeoLineaEntity();
-		LlaveActividadMapeoLinea llaveActividadMapeoLinea = new LlaveActividadMapeoLinea();
-		
-		llaveActividadMapeoLinea.setIdABCConfigMapeoLinea(idMapeoLinea);
-		llaveActividadMapeoLinea.setIdActividadLinea(idTareaLinea);
-		
-		actividadMapeoLineaEntity.setLlaveActividadMapeoLinea(llaveActividadMapeoLinea);
+		actividadMapeoLineaEntity.setIdMapeoLinea(idMapeoLinea);
+		actividadMapeoLineaEntity.setIdUsuario(idUsuario);
 		actividadMapeoLineaEntity.setBolActivo(true);
 		actividadMapeoLineaEntity.setIdABCUsuarioUltModificacion(idUsuario);
 		actividadMapeoLineaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
 		actividadMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 		
-		mapeoActividadLineaRepository.save(actividadMapeoLineaEntity);
-		
-		
-		
+		return mapeoActividadLineaRepository.save(actividadMapeoLineaEntity).getIdActividadMapeoLinea();
 		
 		
 	}
-	
 	
 
 

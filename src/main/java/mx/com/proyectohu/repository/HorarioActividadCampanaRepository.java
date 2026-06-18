@@ -17,7 +17,7 @@ import mx.com.proyectohu.entity.ActividadCampanaEntity;
 public interface  HorarioActividadCampanaRepository extends JpaRepository<HorarioActividadCampanaEntity, LlaveHorarioActividadCampana> {
 
 	
-	public  List<HorarioActividadCampanaEntity> findByLlaveHorarioActividadCampana_idActividadCampana(Long idActividadCampana);
+	//public  List<HorarioActividadCampanaEntity> findByLlaveHorarioActividadCampana_idActividadCampana(Long idActividadCampana);
 
 	
 

@@ -85,7 +85,7 @@ public class CatalogosDAO {
 	public void  actualizarCatalogo(String nombreTabla,String codigo, String nombre,String idNombreColumna,Long id) {
 		
 		
-		 String sql = "UPDATE "+ nombreTabla +" SET FIACTIVO='" +codigo+"', FCNOMBRE='"+nombre+"', FDFECHACREACION=SYSDATE, FDFECHAULTMODIFICACION=SYSDATE"
+		 String sql = "UPDATE "+ nombreTabla +" SET FCCODIGO='" +codigo+"', FCNOMBRE='"+nombre+"', FDFECHACREACION=SYSDATE, FDFECHAULTMODIFICACION=SYSDATE"
 		 		+ " WHERE "+idNombreColumna+" = "+id;
 		
 		 jdbcTemplate.update(sql);
