@@ -5,44 +5,63 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ActividadDTO {
 	
-	@JsonAlias("id")
-	private Long 	idActividadLineaCampana;
-
+	
 	private Ejecucion 	ejecucion;
 	
-	@JsonAlias("tipo")
+	@JsonProperty("tipo")
 	private Actividad actividad;
 	
-	@JsonAlias("mapeo")
-	private MapeoDTO	mapeoDTO;
+	
+	
+	private Boolean activo;
+	
+	
+	private Long fechaCreacion;
+	
+	
+	private Long  fechaUltimaModificacion;
 	
 	
 	
-	/**
-	 * @return the mapeoDTO
-	 */
-	public MapeoDTO getMapeoDTO() {
-		return mapeoDTO;
-	}
-	/**
-	 * @param mapeoDTO the mapeoDTO to set
-	 */
-	public void setMapeoDTO(MapeoDTO mapeoDTO) {
-		this.mapeoDTO = mapeoDTO;
-	}
+	
 
 	/**
-	 * @return the idActividadLineaCampana
+	 * @return the activo
 	 */
-	public Long getIdActividadLineaCampana() {
-		return idActividadLineaCampana;
+	public Boolean getActivo() {
+		return activo;
 	}
 	/**
-	 * @param idActividadLineaCampana the idActividadLineaCampana to set
+	 * @param activo the activo to set
 	 */
-	public void setIdActividadLineaCampana(Long idActividadLineaCampana) {
-		this.idActividadLineaCampana = idActividadLineaCampana;
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
 	}
+	/**
+	 * @return the fechaCreacion
+	 */
+	public Long getFechaCreacion() {
+		return fechaCreacion;
+	}
+	/**
+	 * @param fechaCreacion the fechaCreacion to set
+	 */
+	public void setFechaCreacion(Long fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+	/**
+	 * @return the fechaUltimaModificacion
+	 */
+	public Long getFechaUltimaModificacion() {
+		return fechaUltimaModificacion;
+	}
+	/**
+	 * @param fechaUltimaModificacion the fechaUltimaModificacion to set
+	 */
+	public void setFechaUltimaModificacion(Long fechaUltimaModificacion) {
+		this.fechaUltimaModificacion = fechaUltimaModificacion;
+	}
+	
 	/**
 	 * @param actividad the actividad to set
 	 */

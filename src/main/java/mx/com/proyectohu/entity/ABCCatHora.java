@@ -15,8 +15,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 @CatalogoNotacion
 @Entity
-@Table(name="TCABCCAT_HORA")
-@SequenceGenerator(name = "SEQ_HORA_GEN",sequenceName = "SEQ_TCABCCAT_HORA",allocationSize = 1)
+@Table(name="SYNONMID_TCABCCAT_HORA")
+@SequenceGenerator(name = "SEQ_HORA_GEN",sequenceName = "SYNONMID_SEQ_TCABCCAT_HORA",allocationSize = 1)
 public class ABCCatHora implements Serializable,CatalogoInterface {
 	
 	/**

@@ -1,29 +1,22 @@
 package mx.com.proyectohu.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ActividadLineaRequestDTO {
 	
-	@JsonProperty("actividad")
-	private ActividadDTO	actividadDTO;
+	@JsonProperty("mapeo")
+	private MapeoDTO	mapeoDTO;
+	
+	@JsonProperty("actividades")
+	private List<ActividadDTO>	actividadDTOlista;
 	
 	private Long 		idUsuario;
 
 	
 
-	/**
-	 * @return the actividadDTO
-	 */
-	public ActividadDTO getActividadDTO() {
-		return actividadDTO;
-	}
-
-	/**
-	 * @param actividadDTO the actividadDTO to set
-	 */
-	public void setActividadDTO(ActividadDTO actividadDTO) {
-		this.actividadDTO = actividadDTO;
-	}
+	
 
 	/**
 	 * @return the idUsuario
@@ -39,5 +32,34 @@ public class ActividadLineaRequestDTO {
 		this.idUsuario = idUsuario;
 	}
 
+	/**
+	 * @return the mapeoDTO
+	 */
+	public MapeoDTO getMapeoDTO() {
+		return mapeoDTO;
+	}
+	/**
+	 * @param mapeoDTO the mapeoDTO to set
+	 */
+	public void setMapeoDTO(MapeoDTO mapeoDTO) {
+		this.mapeoDTO = mapeoDTO;
+	}
+
+	/**
+	 * @return the actividadDTOlista
+	 */
+	public List<ActividadDTO> getActividadDTOlista() {
+		return actividadDTOlista;
+	}
+
+	/**
+	 * @param actividadDTOlista the actividadDTOlista to set
+	 */
+	public void setActividadDTOlista(List<ActividadDTO> actividadDTOlista) {
+		this.actividadDTOlista = actividadDTOlista;
+	}
+	
+	
+	
 	
 }

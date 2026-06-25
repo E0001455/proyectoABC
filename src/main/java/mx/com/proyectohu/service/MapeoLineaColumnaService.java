@@ -280,8 +280,8 @@ public class MapeoLineaColumnaService {
 			abcMapeoLineaColumnaEntity.setNumDecimales(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getCatValorDTO().getCatNumeroDTO().getNumDecimales());
 			abcMapeoLineaColumnaEntity.setRegex(mapeoLineaColumnaRequestDTO.getLineaColumnaDTO().getRegex());
 			abcMapeoLineaColumnaEntity.setIdABCUsuarioUltModificacion(mapeoLineaColumnaRequestDTO.getIdUsuario());
-			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-			abcMapeoLineaColumnaEntity.setFecUltModificacion(fechaActual);
+			
+			abcMapeoLineaColumnaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 
 			abcMapeoLineaColumnaEntity = abcMapeoLineaColumnaRepository.save(abcMapeoLineaColumnaEntity);
 

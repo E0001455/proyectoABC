@@ -15,8 +15,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 
 @Entity
-@Table(name="TCABCCAT_ESTATUS_ABC")
-@SequenceGenerator(name = "SEQ_ESTATUS_ABC_GEN",sequenceName = "SEQ_TCABCCAT_ESTATUS_ABC",allocationSize = 1)
+@Table(name="SYNONMID_TCABCCAT_ESTATUS_ABC")
+@SequenceGenerator(name = "SEQ_ESTATUS_ABC_GEN",sequenceName = "SYNONMID_SEQ_TCABCCAT_ESTATUS_ABC",allocationSize = 1)
 public class EstatusABCEntity implements Serializable,CatalogoInterface {
 	
 	/**

@@ -18,50 +18,17 @@ import mx.com.proyectohu.entity.TareaCampanaEntity;
 @Repository
 public interface  TareaCampanaRepository extends JpaRepository<TareaCampanaEntity, Long> {
 
-	@Query(value = """
-			SELECT 
-			T
-			FROM TareaCampanaEntity T
-			WHERE 1=1
-			AND T.idActividad= (SELECT A.id FROM ABCCatActividad A WHERE codigo='VLD')
-			AND(:idLineaNegocio IS NULL OR T.MapeoCampana.idABCCatLineaNegocio = :idLineaNegocio)
-			AND(:idCampana IS NULL OR T.MapeoCampana.idABCCatCampana = :idCampana)
-			AND (:fechaInicio IS NULL OR T.fdFechaFin >= :fechaInicio)
-			   AND (:fechaFin IS NULL OR T.fdFechaFin <= :fechaFin)
 
-			""")
-	public 	List<TareaCampanaEntity> obtenerTareasValidacionXFechas(
-			@Param("idLineaNegocio") Long idlineaNegocio,	
-			@Param("idCampana") Long idCampana,	
-			@Param("fechaInicio") LocalDateTime fechaInicio,
-			@Param("fechaFin") LocalDateTime fechaFin
-			);
 
-	@Query(value = """
-			SELECT 
-			T
-			FROM TareaCampanaEntity T
-			WHERE 1=1
-			AND T.idActividad= (SELECT A.id FROM ABCCatActividad A WHERE codigo='ENV')
-			AND(:idLineaNegocio IS NULL OR T.MapeoCampana.idABCCatLineaNegocio = :idLineaNegocio)
-			AND(:idCampana IS NULL OR T.MapeoCampana.idABCCatCampana = :idCampana)
-			AND (:fechaInicio IS NULL OR T.fdFechaFin >= :fechaInicio)
-			   AND (:fechaFin IS NULL OR T.fdFechaFin <= :fechaFin)
-
-			""")
-	public 	List<TareaCampanaEntity> obtenerTareasEnvioXFechas(
-			@Param("idLineaNegocio") Long idlineaNegocio,	
-			@Param("idCampana") Long idCampana,	
-			@Param("fechaInicio") LocalDateTime fechaInicio,
-			@Param("fechaFin") LocalDateTime fechaFin
-			);
 
 	@Query(value = """
 			SELECT 
 			TCATCL.nombre
 			FROM TareaCampanaEntity TTL
+			INNER JOIN ActividadMapeoCampanaEntity AMC
+			ON AMC.idActividadMapeoCampana = TTL.idActividadMapeoCampana
 			INNER JOIN ABCMapeoCampanaColumnaEntity TCL
-			ON TTL.MapeoCampana.idABCConfigMapeoCampana = TCL.llaveMapeoCampanaColumna.idABCConfigMapeoCampana
+			ON AMC.idMapeoCampana = TCL.llaveMapeoCampanaColumna.idABCConfigMapeoCampana
 			INNER JOIN ABCCatColumnaCampanaEntity TCATCL
 			ON TCATCL.id = TCL.llaveMapeoCampanaColumna.idABCCatColumna
 			WHERE TTL.idTareaCampana =:idTareaCampana

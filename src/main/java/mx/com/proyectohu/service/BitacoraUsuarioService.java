@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import mx.com.proyectohu.repository.BitacoraUsarioRepository;
+import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.dto.BitacoraUsuarioRequestDTO;
 import mx.com.proyectohu.entity.BitacoraUsuarioEntity;
 
@@ -35,8 +36,8 @@ public class BitacoraUsuarioService {
 		bitacoraUsuarioEntity.setDetalle(bitacoraUsuarioRequestDTO.getBitacoraDTO().getDetalle());
 		bitacoraUsuarioEntity.setIp(bitacoraUsuarioRequestDTO.getBitacoraDTO().getIp());
 		bitacoraUsuarioEntity.setNavegador(bitacoraUsuarioRequestDTO.getBitacoraDTO().getNavegador());
-		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		bitacoraUsuarioEntity.setFecCreacion(fechaActual);
+	
+		bitacoraUsuarioEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
 
 
 		idBitacoraUsuario=bitacoraUsarioRepository.save(bitacoraUsuarioEntity).getIdABCBitacoraUsuario();

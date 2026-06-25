@@ -2,6 +2,8 @@ package mx.com.proyectohu.dto;
 
 
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,25 +18,22 @@ public class ActividadLineaResponseDTO {
 	@JsonProperty("mapeo")
 	private MapeoDTO	mapeoDTO;
 	
-	@JsonProperty("linea")
-	private CatLineaNegocio catLineaNegocio;
-	
-	@JsonProperty("tipo")
-	private CatActividad catActividad;
-	
-	@JsonProperty("ejecucion")
-	private CatEjecucion catEjecucion; 
-
 	@JsonProperty("activo")
 	private Boolean bolActivo;
+	
+	@JsonProperty("linea")
+	private CatLineaNegocio catLineaNegocio;
 
+	
 	@JsonProperty("fechaCreacion")
 	private Long 	fechaCreacion;
 
 	@JsonProperty("fechaUltimaModificacion")
 	private Long 	fechaUltModificacion;
-
-
+	
+	@JsonProperty("actividades")
+	private List<ActividadDTO> actividadDTOLista;
+	
 
 	/**
 	 * @return the mapeoDTO
@@ -90,42 +89,6 @@ public class ActividadLineaResponseDTO {
 
 
 	/**
-	 * @return the catActividad
-	 */
-	public CatActividad getCatActividad() {
-		return catActividad;
-	}
-
-
-
-	/**
-	 * @param catActividad the catActividad to set
-	 */
-	public void setCatActividad(CatActividad catActividad) {
-		this.catActividad = catActividad;
-	}
-
-
-
-	/**
-	 * @return the catEjecucion
-	 */
-	public CatEjecucion getCatEjecucion() {
-		return catEjecucion;
-	}
-
-
-
-	/**
-	 * @param catEjecucion the catEjecucion to set
-	 */
-	public void setCatEjecucion(CatEjecucion catEjecucion) {
-		this.catEjecucion = catEjecucion;
-	}
-
-
-
-	/**
 	 * @return the bolActivo
 	 */
 	public Boolean getBolActivo() {
@@ -174,6 +137,25 @@ public class ActividadLineaResponseDTO {
 	public void setFechaUltModificacion(Long fechaUltModificacion) {
 		this.fechaUltModificacion = fechaUltModificacion;
 	}
+
+	
+	/**
+	 * @return the actividadDTOLista
+	 */
+	public List<ActividadDTO> getActividadDTOLista() {
+		return actividadDTOLista;
+	}
+
+
+
+	/**
+	 * @param actividadDTOLista the actividadDTOLista to set
+	 */
+	public void setActividadDTOLista(List<ActividadDTO> actividadDTOLista) {
+		this.actividadDTOLista = actividadDTOLista;
+	}
+
+
 
 
 
@@ -265,6 +247,7 @@ public class ActividadLineaResponseDTO {
 
 
 	}
+	
 
 
 

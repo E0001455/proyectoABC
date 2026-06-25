@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TCABCCAT_CATALOGO" )
-@SequenceGenerator(name = "SEQ_CATALOGO_GEN",sequenceName = "SEQ_TCABCCAT_CATALOGO",allocationSize = 1)
+@Table(name="SYNONMID_TCABCCAT_CATALOGO" )
+@SequenceGenerator(name = "SEQ_CATALOGO_GEN",sequenceName = "SYNONMID_SEQ_TCABCCAT_CATALOGO",allocationSize = 1)
 public class CatalogosEntity implements Serializable {
 	
 	/**

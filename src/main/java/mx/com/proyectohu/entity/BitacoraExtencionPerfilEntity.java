@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TTABCTRA_BITACORA_EXTENSION_PERFIL")
+@Table(name = "SYNONMID_TTABCTRA_BITACORA_EXTENSION_PERFIL")
 public class BitacoraExtencionPerfilEntity {
 
     @Id

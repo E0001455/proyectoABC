@@ -18,6 +18,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import mx.com.proyectohu.repository.CatalogosRepository;
+import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.component.CatalogosDAO;
 import mx.com.proyectohu.component.CatalogosMapComponent;
 import mx.com.proyectohu.dto.CatalogosRequestDTO;
@@ -193,9 +194,9 @@ public class CatalogosService {
 				catalogoInterface.setBolActivo(false);
 				catalogoInterface.setCodigo(catalogosRequestDTO.getRegistroDTO().getCodigo());
 				catalogoInterface.setNombre(catalogosRequestDTO.getRegistroDTO().getNombre());
-				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-				catalogoInterface.setFecCreacion(fechaActual);
-				catalogoInterface.setFecUltModificacion(fechaActual);
+			
+				catalogoInterface.setFecCreacion(FechaUtil.obtenerFechaActual());
+				catalogoInterface.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 
 
 

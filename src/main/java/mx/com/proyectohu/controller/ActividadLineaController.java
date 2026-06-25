@@ -7,6 +7,7 @@ import mx.com.proyectohu.dto.MapeoLineaRequestDTO;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO;
 import mx.com.proyectohu.dto.ActividadLineaRequestDTO;
 import mx.com.proyectohu.dto.ActividadLineaResponseDTO;
+import mx.com.proyectohu.dto.ActividadesRequestDTO;
 import mx.com.proyectohu.service.MapeoLineaService;
 import mx.com.proyectohu.service.ActividadLineaService;
 
@@ -38,19 +39,19 @@ public class ActividadLineaController {
 	public ActividadLineaService actividadLineaService;
 
 
-	@PostMapping("/lineas/{idLinea}/actividades")
-	public ResponseEntity<?> registrarNuevaActividadLinea(@PathVariable Long idLinea, @RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO ) {
+	@PostMapping("/lineas/actividades")
+	public ResponseEntity<?> registrarNuevaActividadLinea(@RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO ) {
 
 	
 		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
 
 
-		actividadLineaResponseDTO.setIdActividadLinea(actividadLineaService.registrarActividadLinea(idLinea,actividadLineaRequestDTO));
+		actividadLineaResponseDTO.setIdActividadLinea(actividadLineaService.registrarActividadLinea(actividadLineaRequestDTO));
 
 		return ResponseEntity.ok(actividadLineaResponseDTO);
 	}
 
-/*
+	
 	@GetMapping("/lineas/actividades")
 	public ResponseEntity<?> consultarActividadesLineas() {
 
@@ -63,11 +64,11 @@ public class ActividadLineaController {
 		
 
 	}
+	
+	@PutMapping("/lineas/actividades/{idActividad}")
+	public ResponseEntity<?> actualizarActividadLinea(@PathVariable Long idActividad, @RequestBody ActividadesRequestDTO actividadesRequestDTO) {
 
-	@PutMapping("/lineas/actividades")
-	public ResponseEntity<?> actualizarActividadLinea(@RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO) {
-
-		ActividadLineaResponseDTO actividadLineaResponseDTO= actividadLineaService.actualizarActividadLinea(actividadLineaRequestDTO);
+		ActividadLineaResponseDTO actividadLineaResponseDTO= actividadLineaService.actualizarActividadLinea(idActividad,actividadesRequestDTO);
 
 		
 		if (actividadLineaResponseDTO==null) {
@@ -78,11 +79,10 @@ public class ActividadLineaController {
 		return ResponseEntity.ok(Map.of("id",actividadLineaResponseDTO.getIdActividadLinea()));
 	}
 
-
-	@PatchMapping("/lineas/actividades/activar")
-	public ResponseEntity<?> activar(@RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO) {
+	@PatchMapping("/lineas/actividades/{idActividad}/activar")
+	public ResponseEntity<?> activarActividadMapeo(@PathVariable Long idActividad,@RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO) {
 		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
-		actividadLineaResponseDTO = actividadLineaService.activar(actividadLineaRequestDTO);
+		actividadLineaResponseDTO = actividadLineaService.activarActividadMapeo(idActividad,actividadLineaRequestDTO);
 
 		if (actividadLineaResponseDTO.getIdActividadLinea() !=null) {
 			return ResponseEntity.ok(actividadLineaResponseDTO);
@@ -95,10 +95,39 @@ public class ActividadLineaController {
 
 
 
-	@PatchMapping("/lineas/actividades/desactivar")
-	public ResponseEntity<?> desactivar(@RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO){
+	@PatchMapping("/lineas/actividades/{idActividad}/desactivar")
+	public ResponseEntity<?> desactivarActividadMapeo(@PathVariable Long idActividad, @RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO){
 		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
-		actividadLineaResponseDTO = actividadLineaService.desactivar(actividadLineaRequestDTO);
+		actividadLineaResponseDTO = actividadLineaService.desactivarActividadMapeo(idActividad,actividadLineaRequestDTO);
+
+		if (actividadLineaResponseDTO.getIdActividadLinea() !=null) {
+			return ResponseEntity.ok(actividadLineaResponseDTO);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+
+	}
+
+	@PatchMapping("/lineas/actividades/{idActividad}/tipos/{idTipo}/activar")
+	public ResponseEntity<?> activar(@PathVariable Long idActividad,@PathVariable Long idTipo, @RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO) {
+		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
+		actividadLineaResponseDTO = actividadLineaService.activar(idActividad,idTipo,actividadLineaRequestDTO);
+
+		if (actividadLineaResponseDTO.getIdActividadLinea() !=null) {
+			return ResponseEntity.ok(actividadLineaResponseDTO);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+
+
+	}
+
+
+
+	@PatchMapping("/lineas/actividades/{idActividad}/tipos/{idTipo}/desactivar")
+	public ResponseEntity<?> desactivar(@PathVariable Long idActividad, @PathVariable Long idTipo,@RequestBody ActividadLineaRequestDTO actividadLineaRequestDTO){
+		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
+		actividadLineaResponseDTO = actividadLineaService.desactivar(idActividad,idTipo,actividadLineaRequestDTO);
 
 		if (actividadLineaResponseDTO.getIdActividadLinea() !=null) {
 			return ResponseEntity.ok(actividadLineaResponseDTO);
@@ -109,7 +138,6 @@ public class ActividadLineaController {
 	}
 
 
-*/
 
 
 

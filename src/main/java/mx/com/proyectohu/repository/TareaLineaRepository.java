@@ -14,34 +14,16 @@ import mx.com.proyectohu.entity.TareaLineaEntity;
 @Repository
 public interface  TareaLineaRepository extends JpaRepository<TareaLineaEntity, Long> {
 
-
-
-
-
-	@Query(value = """
-			SELECT 
-			T
-			FROM TareaLineaEntity T
-			WHERE 1=1
-			AND T.idActividad= (SELECT A.id FROM ABCCatActividad A WHERE codigo='VLD' )
-			AND(:idLineaNegocio IS NULL OR T.MapeoLinea.idABCCatLineaNegocio = :idLineaNegocio)
-			AND (:fechaInicio IS NULL OR T.fdFechaFin >= :fechaInicio)
-			   AND (:fechaFin IS NULL OR T.fdFechaFin <= :fechaFin)
-
-			""")
-	List<TareaLineaEntity> obtenerTareasValidacionXFechas(
-			@Param("idLineaNegocio") Long idlineaNegocio,		
-			@Param("fechaInicio") LocalDateTime fechaInicio,
-			@Param("fechaFin") LocalDateTime fechaFin
-			);
-
+	
 
 	@Query(value = """
 			SELECT 
 			TCATCL.nombre
 			FROM TareaLineaEntity TTL
+			INNER JOIN ActividadMapeoLineaEntity AML
+			ON AML.idActividadMapeoLinea = TTL.idActividadMapeoLinea
 			INNER JOIN ABCMapeoLineaColumnaEntity TCL
-			ON TTL.MapeoLinea.idABCConfigMapeoLinea = TCL.llaveMapeoLineaColumna.idABCConfigMapeoLinea
+			ON AML.idMapeoLinea = TCL.llaveMapeoLineaColumna.idABCConfigMapeoLinea
 			INNER JOIN ABCCatColumnaLineaEntity TCATCL
 			ON TCATCL.id = TCL.llaveMapeoLineaColumna.idABCCatColumna
 			WHERE TTL.idTareaLinea =:idTareaLinea
@@ -51,24 +33,6 @@ public interface  TareaLineaRepository extends JpaRepository<TareaLineaEntity, L
 			@Param("idTareaLinea") Long idTareaLinea
 			);
 
-
-
-	@Query(value = """
-			SELECT 
-			T
-			FROM TareaLineaEntity T
-			WHERE 1=1
-			AND T.idActividad= (SELECT A.id FROM ABCCatActividad A WHERE codigo='ENV' )
-			AND(:idLineaNegocio IS NULL OR T.MapeoLinea.idABCCatLineaNegocio = :idLineaNegocio)
-			AND (:fechaInicio IS NULL OR T.fdFechaFin >= :fechaInicio)
-			   AND (:fechaFin IS NULL OR T.fdFechaFin <= :fechaFin)
-
-			""")
-	List<TareaLineaEntity> obtenerTareasEnvioXFechas(
-			@Param("idLineaNegocio") Long idlineaNegocio,		
-			@Param("fechaInicio") LocalDateTime fechaInicio,
-			@Param("fechaFin") LocalDateTime fechaFin
-			);
 
 
 

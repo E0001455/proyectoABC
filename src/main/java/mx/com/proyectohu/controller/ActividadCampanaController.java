@@ -7,6 +7,9 @@ import mx.com.proyectohu.dto.MapeoCampanaRequestDTO;
 import mx.com.proyectohu.dto.MapeoCampanaResponseDTO;
 import mx.com.proyectohu.dto.ActividadCampanaRequestDTO;
 import mx.com.proyectohu.dto.ActividadCampanaResponseDTO;
+import mx.com.proyectohu.dto.ActividadesRequestDTO;
+import mx.com.proyectohu.dto.ActividadCampanaRequestDTO;
+import mx.com.proyectohu.dto.ActividadCampanaResponseDTO;
 import mx.com.proyectohu.service.MapeoCampanaService;
 import mx.com.proyectohu.service.ActividadCampanaService;
 
@@ -39,19 +42,19 @@ public class ActividadCampanaController {
 
 
 
-	@PostMapping("/lineas/{idLinea}/campanas/{idCampana}/actividades")
-	public ResponseEntity<?> registrarNuevaActividadCampana(@PathVariable Long idLinea,@PathVariable Long idCampana, @RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO ) {
+	@PostMapping("/campanas/actividades")
+	public ResponseEntity<?> registrarNuevaActividadCampana(@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO ) {
 
 	
 		ActividadCampanaResponseDTO actividadCampanaResponseDTO = new ActividadCampanaResponseDTO();
 
 
-		actividadCampanaResponseDTO.setIdActividadCampana(actividadCampanaService.registrarActividadCampana(idLinea,idCampana,actividadCampanaRequestDTO));
+		actividadCampanaResponseDTO.setIdActividadCampana(actividadCampanaService.registrarActividadCampana(actividadCampanaRequestDTO));
 
 		return ResponseEntity.ok(actividadCampanaResponseDTO);
 	}
 
-/*
+
 	@GetMapping("/campanas/actividades")
 	public ResponseEntity<?> consultarActividadesCampanas() {
 
@@ -64,11 +67,41 @@ public class ActividadCampanaController {
 		
 
 	}
+	
+	
+	@PatchMapping("/Campanas/actividades/{idActividad}/activar")
+	public ResponseEntity<?> activarActividadMapeo(@PathVariable Long idActividad,@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
+		ActividadCampanaResponseDTO actividadCampanaResponseDTO = new ActividadCampanaResponseDTO();
+		actividadCampanaResponseDTO = actividadCampanaService.activarActividadMapeo(idActividad,actividadCampanaRequestDTO);
 
-	@PutMapping("/campanas/actividades")
-	public ResponseEntity<?> actualizarActividadCampana(@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
+		if (actividadCampanaResponseDTO.getIdActividadCampana() !=null) {
+			return ResponseEntity.ok(actividadCampanaResponseDTO);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
 
-		ActividadCampanaResponseDTO actividadCampanaResponseDTO= actividadCampanaService.actualizarActividadCampana(actividadCampanaRequestDTO);
+
+	}
+
+
+
+	@PatchMapping("/Campanas/actividades/{idActividad}/desactivar")
+	public ResponseEntity<?> desactivarActividadMapeo(@PathVariable Long idActividad, @RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO){
+		ActividadCampanaResponseDTO actividadCampanaResponseDTO = new ActividadCampanaResponseDTO();
+		actividadCampanaResponseDTO = actividadCampanaService.desactivarActividadMapeo(idActividad,actividadCampanaRequestDTO);
+
+		if (actividadCampanaResponseDTO.getIdActividadCampana() !=null) {
+			return ResponseEntity.ok(actividadCampanaResponseDTO);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+
+	}
+	 
+	@PutMapping("/campanas/actividades/{idActividad}")
+	public ResponseEntity<?> actualizarActividadCampana(@PathVariable Long idActividad, @RequestBody ActividadesRequestDTO actividadesRequestDTO) {
+
+		ActividadCampanaResponseDTO actividadCampanaResponseDTO= actividadCampanaService.actualizarActividadCampana(idActividad,actividadesRequestDTO);
 
 		
 		if (actividadCampanaResponseDTO==null) {
@@ -80,10 +113,10 @@ public class ActividadCampanaController {
 	}
 
 
-	@PatchMapping("/campanas/actividades/activar")
-	public ResponseEntity<?> activar(@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
+	@PatchMapping("/campanas/actividades/{idActividad}/tipos/{idTipo}/activar")
+	public ResponseEntity<?> activar(@PathVariable Long idActividad,@PathVariable Long idTipo,@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO) {
 		ActividadCampanaResponseDTO actividadCampanaResponseDTO = new ActividadCampanaResponseDTO();
-		actividadCampanaResponseDTO = actividadCampanaService.activar(actividadCampanaRequestDTO);
+		actividadCampanaResponseDTO = actividadCampanaService.activar(idActividad,idTipo,actividadCampanaRequestDTO);
 
 		if (actividadCampanaResponseDTO.getIdActividadCampana() !=null) {
 			return ResponseEntity.ok(actividadCampanaResponseDTO);
@@ -96,10 +129,10 @@ public class ActividadCampanaController {
 
 
 
-	@PatchMapping("/campanas/actividades/desactivar")
-	public ResponseEntity<?> desactivar(@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO){
+	@PatchMapping("/campanas/actividades/{idActividad}/tipos/{idTipo}/desactivar")
+	public ResponseEntity<?> desactivar(@PathVariable Long idActividad,@PathVariable Long idTipo,@RequestBody ActividadCampanaRequestDTO actividadCampanaRequestDTO){
 		ActividadCampanaResponseDTO actividadCampanaResponseDTO = new ActividadCampanaResponseDTO();
-		actividadCampanaResponseDTO = actividadCampanaService.desactivar(actividadCampanaRequestDTO);
+		actividadCampanaResponseDTO = actividadCampanaService.desactivar(idActividad,idTipo,actividadCampanaRequestDTO);
 
 		if (actividadCampanaResponseDTO.getIdActividadCampana() !=null) {
 			return ResponseEntity.ok(actividadCampanaResponseDTO);
@@ -108,7 +141,7 @@ public class ActividadCampanaController {
 		}
 
 	}
-*/
+
 
 
 

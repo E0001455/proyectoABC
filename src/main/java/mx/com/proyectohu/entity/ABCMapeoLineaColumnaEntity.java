@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TTABCCFG_COLUMNA_LINEA")
+@Table(name="SYNONMID_TTABCCFG_COLUMNA_LINEA")
 public class ABCMapeoLineaColumnaEntity implements Serializable {
 
 

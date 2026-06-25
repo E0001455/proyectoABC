@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TTABCTRA_EXTENSION_PERFIL_RESPUESTA" )
+@Table(name="SYNONMID_TTABCTRA_EXTENSION_PERFIL_RESPUESTA" )
 public class ExtensionPerfilRespuestaEntity implements Serializable {
 	
 	/**

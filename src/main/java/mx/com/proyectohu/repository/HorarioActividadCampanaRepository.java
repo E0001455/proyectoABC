@@ -11,13 +11,14 @@ import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
 import mx.com.proyectohu.entity.ABCMapeoCampanaColumnaEntity;
 import mx.com.proyectohu.entity.LlaveHorarioActividadCampana;
 import mx.com.proyectohu.entity.HorarioActividadCampanaEntity;
+import mx.com.proyectohu.entity.HorarioActividadLineaEntity;
 import mx.com.proyectohu.entity.ActividadCampanaEntity;
 
 @Repository
 public interface  HorarioActividadCampanaRepository extends JpaRepository<HorarioActividadCampanaEntity, LlaveHorarioActividadCampana> {
 
 	
-	//public  List<HorarioActividadCampanaEntity> findByLlaveHorarioActividadCampana_idActividadCampana(Long idActividadCampana);
+	public  List<HorarioActividadCampanaEntity> findByLlaveHorarioActividadCampana_IdActividadMapeoCampanaAndLlaveHorarioActividadCampana_IdActividad(Long idActividadMapeo,Long idActividad);
 
 	
 

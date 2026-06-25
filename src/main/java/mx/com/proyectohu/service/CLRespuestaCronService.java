@@ -14,13 +14,17 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.component.EnvioLineaDAO;
+import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
+import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
 import mx.com.proyectohu.entity.BitacoraTareaLineaEntity;
 import mx.com.proyectohu.entity.ListaContactoEntity;
 import mx.com.proyectohu.entity.RespuestaTareaLineaEntity;
 import mx.com.proyectohu.entity.TareaLineaEntity;
+import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.BitacoraTareaLineaRepository;
 import mx.com.proyectohu.repository.LineaNegocioRepository;
 import mx.com.proyectohu.repository.ListaContactoRepository;
+import mx.com.proyectohu.repository.MapeoActividadLineaRepository;
 import mx.com.proyectohu.repository.RespuestaTareaLineaRepository;
 import mx.com.proyectohu.repository.TareaCronRepository;
 import mx.com.proyectohu.repository.TareaLineaRepository;
@@ -52,6 +56,13 @@ public class CLRespuestaCronService {
 	@Autowired
 	public BitacoraTareaLineaRepository  bitacoraTareaLineaRepository;
 
+	@Autowired
+	public MapeoActividadLineaRepository mapeoActividadLineaRepository;
+
+	@Autowired
+	public ABCConfigMapeoLineaRepository abcConfigMapeoLineaRepository;
+
+
 	Integer totalregistros =0;
 
 
@@ -65,7 +76,13 @@ public class CLRespuestaCronService {
 
 		tareaLineaEntity = tareaLineaRepository.findById(idTareaLinea).get();
 
-		String lineaNegocio = lineaNegocioRepository.findById(tareaLineaEntity.getMapeoLinea().getIdABCCatLineaNegocio()).get().getNombre();
+
+		ActividadMapeoLineaEntity actividadMapeoLineaEntity=mapeoActividadLineaRepository.findById(tareaLineaEntity.getIdActividadMapeoLinea()).get();
+
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(actividadMapeoLineaEntity.getIdMapeoLinea());
+
+		String lineaNegocio = lineaNegocioRepository.findById(abcConfigMapeoLineaEntityOptional.get().getIdABCCatLineaNegocio()).get().getNombre();
+
 
 		List<Object[]> listaRespuesta= null;
 

@@ -9,6 +9,7 @@ import mx.com.proyectohu.service.MapeoLineaService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +49,7 @@ public class MapeoLineaController {
 
 		mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(mapeoLineaService.registrarLineaNegocio(idLinea,mapeoLineaRequestDTO));
 
-		return ResponseEntity.ok(mapeoLineaResponseDTO);
+		return ResponseEntity.ok(Map.of("id",  mapeoLineaResponseDTO.getIdABCConfigMapeoLinea()));
 	}
 
 
@@ -65,10 +66,10 @@ public class MapeoLineaController {
 
 	}
 
-	@PutMapping("/lineas/mapeos")
-	public ResponseEntity<?> actualizarMapeoLinea(@RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO) {
+	@PutMapping("/lineas/mapeos/{idMapeo}")
+	public ResponseEntity<?> actualizarMapeoLinea(@PathVariable Long idMapeo,@RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO) {
 
-		MapeoLineaResponseDTO mapeoLineaResponseDTO= mapeoLineaService.actualizarMapeoLinea(mapeoLineaRequestDTO);
+		MapeoLineaResponseDTO mapeoLineaResponseDTO= mapeoLineaService.actualizarMapeoLinea(idMapeo,mapeoLineaRequestDTO);
 
 		if (mapeoLineaRequestDTO.getMapeoDTO().getNombre().length() < 3 
 				||mapeoLineaRequestDTO.getMapeoDTO().getNombre().length() > 30) {
@@ -80,14 +81,14 @@ public class MapeoLineaController {
 
 		}
 
-		return ResponseEntity.ok(mapeoLineaResponseDTO);
+		return ResponseEntity.ok(Map.of("id",  mapeoLineaResponseDTO.getIdABCConfigMapeoLinea()));
 	}
 
 
-	@PatchMapping("/lineas/mapeos/activar")
-	public ResponseEntity<?> activar(@RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO) {
+	@PatchMapping("/lineas/mapeos/{idMapeo}/activar")
+	public ResponseEntity<?> activar(@PathVariable Long idMapeo, @RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO) {
 		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
-		mapeoLineaResponseDTO = mapeoLineaService.activar(mapeoLineaRequestDTO);
+		mapeoLineaResponseDTO = mapeoLineaService.activar(idMapeo,mapeoLineaRequestDTO);
 
 		if (mapeoLineaResponseDTO.getIdABCConfigMapeoLinea() !=null) {
 			return ResponseEntity.ok(mapeoLineaResponseDTO);
@@ -100,10 +101,10 @@ public class MapeoLineaController {
 
 
 
-	@PatchMapping("/lineas/mapeos/desactivar")
-	public ResponseEntity<?> desactivar(@RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO){
+	@PatchMapping("/lineas/mapeos/{idMapeo}/desactivar")
+	public ResponseEntity<?> desactivar(@PathVariable Long idMapeo, @RequestBody MapeoLineaRequestDTO mapeoLineaRequestDTO){
 		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
-		mapeoLineaResponseDTO = mapeoLineaService.desactivar(mapeoLineaRequestDTO);
+		mapeoLineaResponseDTO = mapeoLineaService.desactivar(idMapeo,mapeoLineaRequestDTO);
 
 		if (mapeoLineaResponseDTO.getIdABCConfigMapeoLinea() !=null) {
 			return ResponseEntity.ok(mapeoLineaResponseDTO);

@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TTABCCFG_MAPEO_LINEA" )
-@SequenceGenerator(name = "SEQ_MAPEO_LINE_GEN",sequenceName = "SEQ_TTABCCFG_MAPEO_LINEA",allocationSize = 1)
+@Table(name="SYNONMID_TTABCCFG_MAPEO_LINEA" )
+@SequenceGenerator(name = "SEQ_MAPEO_LINE_GEN",sequenceName = "SYNONMID_SEQ_TTABCCFG_MAPEO_LINEA",allocationSize = 1)
 public class ABCConfigMapeoLineaEntity implements Serializable {
 	
 	/**

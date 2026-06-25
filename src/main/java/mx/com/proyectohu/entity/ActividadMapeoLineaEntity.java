@@ -12,8 +12,8 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TTABCCFG_ACTIVIDAD_MAPEO_LINEA")
-@SequenceGenerator(name = "SEQ_ACTIVIDAD_LINEA_MAPEO_GEN",sequenceName = "SEQ_TTABCCFG_ACTIVIDAD_MAPEO_LINEA",allocationSize = 1)
+@Table(name="SYNONMID_TTABCCFG_ACTIVIDAD_MAPEO_LINEA")
+@SequenceGenerator(name = "SEQ_ACTIVIDAD_LINEA_MAPEO_GEN",sequenceName = "SYNONMID_SEQ_TTABCCFG_ACTIVIDAD_MAPEO_LINEA",allocationSize = 1)
 public class ActividadMapeoLineaEntity implements Serializable {
 
 

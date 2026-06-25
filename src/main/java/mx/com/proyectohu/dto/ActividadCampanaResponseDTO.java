@@ -2,6 +2,7 @@
 
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +16,7 @@ public class ActividadCampanaResponseDTO {
 	private Long 	idActividadCampana;
 	
 	@JsonProperty("mapeo")
-	private MapeoDTO	mapeoDTO;
+	private MapeoCampanaDTO	mapeoCampanaDTO;
 	
 	@JsonProperty("linea")
 	private CatLineaNegocio catLineaNegocio;
@@ -35,25 +36,31 @@ public class ActividadCampanaResponseDTO {
 	@JsonProperty("fechaUltimaModificacion")
 	private Long 	fechaUltModificacion;
 
+	
+	@JsonProperty("actividades")
+	private List<ActividadDTO> actividadDTOLista;
 
+
+	
+
+
+	
 
 	/**
-	 * @return the mapeoDTO
+	 * @return the mapeoCampanaDTO
 	 */
-	public MapeoDTO getMapeoDTO() {
-		return mapeoDTO;
+	public MapeoCampanaDTO getMapeoCampanaDTO() {
+		return mapeoCampanaDTO;
 	}
 
 
 
 	/**
-	 * @param mapeoDTO the mapeoDTO to set
+	 * @param mapeoCampanaDTO the mapeoCampanaDTO to set
 	 */
-	public void setMapeoDTO(MapeoDTO mapeoDTO) {
-		this.mapeoDTO = mapeoDTO;
+	public void setMapeoCampanaDTO(MapeoCampanaDTO mapeoCampanaDTO) {
+		this.mapeoCampanaDTO = mapeoCampanaDTO;
 	}
-
-
 
 
 
@@ -146,13 +153,21 @@ public class ActividadCampanaResponseDTO {
 	}
 
 
+	/**
+	 * @return the actividadDTOLista
+	 */
+	public List<ActividadDTO> getActividadDTOLista() {
+		return actividadDTOLista;
+	}
 
 
 
-
-
-
-
+	/**
+	 * @param actividadDTOLista the actividadDTOLista to set
+	 */
+	public void setActividadDTOLista(List<ActividadDTO> actividadDTOLista) {
+		this.actividadDTOLista = actividadDTOLista;
+	}
 
 
 

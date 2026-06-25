@@ -13,13 +13,17 @@ import org.springframework.stereotype.Service;
 
 import mx.com.proyectohu.component.EnvioCampanaDAO;
 import mx.com.proyectohu.component.EnvioLineaDAO;
+import mx.com.proyectohu.entity.ABCConfigMapeoCampanaEntity;
+import mx.com.proyectohu.entity.ActividadMapeoCampanaEntity;
 import mx.com.proyectohu.entity.BitacoraTareaCampanaEntity;
 import mx.com.proyectohu.entity.ExtensionPerfilEntity;
 import mx.com.proyectohu.entity.RespuestaTareaCampanaEntity;
 import mx.com.proyectohu.entity.TareaCampanaEntity;
+import mx.com.proyectohu.repository.ABCConfigMapeoCampanaRepository;
 import mx.com.proyectohu.repository.BitacoraTareaCampanaRepository;
 import mx.com.proyectohu.repository.ExtencionPerfilRepository;
 import mx.com.proyectohu.repository.LineaNegocioRepository;
+import mx.com.proyectohu.repository.MapeoActividadCampanaRepository;
 import mx.com.proyectohu.repository.RespuestaTareaCampanaRepository;
 import mx.com.proyectohu.repository.TareaCampanaRepository;
 import mx.com.proyectohu.util.FechaUtil;
@@ -53,6 +57,14 @@ public class PETRespuestaCronService {
 	Integer totalregistros =0;
 
 	Integer aprobados =0;
+	
+	@Autowired
+	public MapeoActividadCampanaRepository mapeoActividadCampanaRepository;
+	
+	
+	@Autowired
+	public ABCConfigMapeoCampanaRepository abcConfigMapeoCampanaRepository;
+
 
 	public void ejecutarVerificacionRespuesta(Long idTareaCampana) {
 		List<Object[]> listaRespuesta = null;
@@ -63,7 +75,12 @@ public class PETRespuestaCronService {
 
 		tareaCampanaEntity = tareaCampanaRepository.findById(idTareaCampana).get();
 
-		String lineaNegocio = lineaNegocioRepository.findById(tareaCampanaEntity.getMapeoCampana().getIdABCCatLineaNegocio()).get().getNombre();
+		ActividadMapeoCampanaEntity actividadMapeoCampanaEntity=mapeoActividadCampanaRepository.findById(tareaCampanaEntity.getIdActividadMapeoCampana()).get();
+
+		Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(actividadMapeoCampanaEntity.getIdMapeoCampana());
+
+		String lineaNegocio = lineaNegocioRepository.findById(abcConfigMapeoCampanaEntityOptional.get().getIdABCCatLineaNegocio()).get().getNombre();
+
 
 
 		actualizarTarea(idTareaCampana, 2L);

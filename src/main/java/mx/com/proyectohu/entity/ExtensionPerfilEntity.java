@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "TTABCTRA_EXTENSION_PERFIL")
+@Table(name = "SYNONMID_TTABCTRA_EXTENSION_PERFIL")
 
 public class ExtensionPerfilEntity implements Serializable {
 

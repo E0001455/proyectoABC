@@ -59,10 +59,10 @@ public class MapeoCampanaController {
 		
 
 	
-	@PutMapping("/campanas/mapeos")
-	public ResponseEntity<MapeoCampanaResponseDTO> actualizarMapeoLinea(@RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
+	@PutMapping("/campanas/mapeos/{idMapeo}")
+	public ResponseEntity<MapeoCampanaResponseDTO> actualizarMapeoLinea(@PathVariable Long idMapeo, @RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 		
-		MapeoCampanaResponseDTO mapeoCampanaResponseDTO= mapeoCampanaService.actualizarMapeoCampana(mapeoCampanaRequestDTO);
+		MapeoCampanaResponseDTO mapeoCampanaResponseDTO= mapeoCampanaService.actualizarMapeoCampana(idMapeo,mapeoCampanaRequestDTO);
 		
 		if (mapeoCampanaResponseDTO==null) {
 			return ResponseEntity.notFound().build();
@@ -72,10 +72,10 @@ public class MapeoCampanaController {
 		return ResponseEntity.ok(mapeoCampanaResponseDTO);
 	}
 	
- @PatchMapping("/campanas/mapeos/activar")
-	public ResponseEntity<?> activar(@RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
+ @PatchMapping("/campanas/mapeos/{idMapeo}/activar")
+	public ResponseEntity<?> activar(@PathVariable Long idMapeo, @RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 	 MapeoCampanaResponseDTO mapeoCampanaResponseDTO = new MapeoCampanaResponseDTO();
-	 mapeoCampanaResponseDTO = mapeoCampanaService.activar(mapeoCampanaRequestDTO);
+	 mapeoCampanaResponseDTO = mapeoCampanaService.activar(idMapeo, mapeoCampanaRequestDTO);
 		
 		if (mapeoCampanaResponseDTO.getIdABCConfigMapeoCampana()!=null) {
 			return ResponseEntity.ok(mapeoCampanaResponseDTO);
@@ -88,10 +88,10 @@ public class MapeoCampanaController {
 	
 	
 	
-	@PatchMapping("/campanas/mapeos/desactivar")
-	public ResponseEntity<?> desactivar(@RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO){
+	@PatchMapping("/campanas/mapeos/{idMapeo}/desactivar")
+	public ResponseEntity<?> desactivar(@PathVariable Long idMapeo, @RequestBody MapeoCampanaRequestDTO mapeoCampanaRequestDTO){
 		 MapeoCampanaResponseDTO mapeoCampanaResponseDTO = new MapeoCampanaResponseDTO();
-		 mapeoCampanaResponseDTO = mapeoCampanaService.desactivar(mapeoCampanaRequestDTO);
+		 mapeoCampanaResponseDTO = mapeoCampanaService.desactivar(idMapeo, mapeoCampanaRequestDTO);
 		 
 		if (mapeoCampanaResponseDTO.getIdABCConfigMapeoCampana()!=null) {
 			return ResponseEntity.ok(mapeoCampanaResponseDTO);

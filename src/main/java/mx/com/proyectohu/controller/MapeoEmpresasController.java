@@ -56,8 +56,8 @@ public class MapeoEmpresasController {
 			mapeoEmpresaResponseDTOLista = mapeoEmpresaService.consultarMapeosEmpresas();
 
 			return ResponseEntity.ok(mapeoEmpresaResponseDTOLista);
-		
-
+		 
+ 
 	}
 	
 

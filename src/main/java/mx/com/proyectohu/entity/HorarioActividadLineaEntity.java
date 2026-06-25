@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TTABCCFG_HORARIO_LINEA" )
+@Table(name="SYNONMID_TTABCCFG_HORARIO_LINEA" )
 public class HorarioActividadLineaEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

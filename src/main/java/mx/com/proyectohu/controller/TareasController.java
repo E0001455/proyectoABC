@@ -37,29 +37,11 @@ public class TareasController {
 	public TareaCampanaService tareaCampanaService;
 
 
-	/*	@PostMapping("/lineas/tareas")
-	public ResponseEntity<?> registrarNuevaTareaLinea(@PathVariable Long idLinea, @RequestBody TareaLineaRequestDTO tareaLineaRequestDTO ) {
 
-
-		TareaLineaResponseDTO tareaLineaResponseDTO = new TareaLineaResponseDTO();
-
-
-		tareaLineaResponseDTO.setIdTareaLinea(tareaLineaService.registrarTareaLinea(idLinea,tareaLineaRequestDTO));
-
-		return ResponseEntity.ok(tareaLineaResponseDTO);
-	}
-
-	 */
+	 
 	@GetMapping(value="/lineas/tareas", produces = "application/json")
 	public ResponseEntity<?> consultarTareasLineas() {
-		/*
-
-			List<TareaLineaResponseDTO> tareaLineaResponseDTOLista = new ArrayList<TareaLineaResponseDTO>();
-
-			tareaLineaResponseDTOLista = tareaLineaService.consultarTareasLinea();
-
-			return ResponseEntity.ok(tareaLineaResponseDTOLista);
-		 */
+	
 		String json = tareaLineaService.consultarTareaslinea();
 
 		return ResponseEntity.ok(json);
@@ -68,14 +50,7 @@ public class TareasController {
 
 	@GetMapping(value="/campanas/tareas", produces = "application/json" )
 	public ResponseEntity<?> consultarTareasCampanas() {
-		/*
-
-			List<TareaCampanaResponseDTO> tareaCampanaResponseDTOLista = new ArrayList<TareaCampanaResponseDTO>();
-
-			tareaCampanaResponseDTOLista = tareaCampanaService.consultarTareasCampanas();
-
-			return ResponseEntity.ok(tareaCampanaResponseDTOLista);
-		 */
+	
 
 		String json = tareaCampanaService.consultarTareasCampana();
 
@@ -83,5 +58,6 @@ public class TareasController {
 
 
 	}
+	
 
 }

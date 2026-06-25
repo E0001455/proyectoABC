@@ -2,27 +2,35 @@ package mx.com.proyectohu.dto;
 
 
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ActividadCampanaRequestDTO {
 	
-	@JsonAlias("actividad")
-	private ActividadDTO	actividadDTO;
+	@JsonProperty("mapeo")
+	private MapeoCampanaDTO	mapeoCampanaDTO;
+	
+	@JsonAlias("actividades")
+	private List<ActividadDTO>	actividadDTOLista;
+	
 	private Long 		idUsuario;
 	
 
 
+
 	/**
-	 * @return the actividadDTO
+	 * @return the actividadDTOLista
 	 */
-	public ActividadDTO getActividadDTO() {
-		return actividadDTO;
+	public List<ActividadDTO> getActividadDTOLista() {
+		return actividadDTOLista;
 	}
 	/**
-	 * @param actividadDTO the actividadDTO to set
+	 * @param actividadDTOLista the actividadDTOLista to set
 	 */
-	public void setActividadDTO(ActividadDTO actividadDTO) {
-		this.actividadDTO = actividadDTO;
+	public void setActividadDTOLista(List<ActividadDTO> actividadDTOLista) {
+		this.actividadDTOLista = actividadDTOLista;
 	}
 	/**
 	 * @return the idUsuario
@@ -36,6 +44,19 @@ public class ActividadCampanaRequestDTO {
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+	/**
+	 * @return the mapeoCampanaDTO
+	 */
+	public MapeoCampanaDTO getMapeoCampanaDTO() {
+		return mapeoCampanaDTO;
+	}
+	/**
+	 * @param mapeoCampanaDTO the mapeoCampanaDTO to set
+	 */
+	public void setMapeoCampanaDTO(MapeoCampanaDTO mapeoCampanaDTO) {
+		this.mapeoCampanaDTO = mapeoCampanaDTO;
+	}
+	
 	
 	
 

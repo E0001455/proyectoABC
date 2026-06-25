@@ -39,7 +39,7 @@ public class CatalogosDAO {
 	public  List<RegistrosCatalogosDTO>  obtenerCatalogoRegistro(String idNombreColumna, String nombreTabla) {
 		 List<RegistrosCatalogosDTO>  catalogosResponseDTOLista= new ArrayList<RegistrosCatalogosDTO>();
 		 
-		 if(nombreTabla.equals("TCABCCAT_COLUMNA_LINEA") ||nombreTabla.equals("TCABCCAT_COLUMNA_CAMPANA") ) {
+		 if(nombreTabla.equals("SYNONMID_TCABCCAT_COLUMNA_LINEA") ||nombreTabla.equals("SYNONMID_TCABCCAT_COLUMNA_CAMPANA") ) {
 			 
 			 String sql = "SELECT " +idNombreColumna+" AS ID ,FCCODIGO,FCNOMBRE, FIREQUERIDO FROM "
 					 + nombreTabla+ " WHERE FIACTIVO = 1";

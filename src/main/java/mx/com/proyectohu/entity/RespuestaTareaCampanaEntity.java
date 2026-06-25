@@ -15,8 +15,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TTABCTRA_RESPUESTA_TAREA_CAMPANA" )
-@SequenceGenerator(name = "SEQ_RESPUESTA_TAREA_CAMPANA_GEN",sequenceName = "SEQ_TTABCTRA_RESPUESTA_TAREA_CAMPANA",allocationSize = 1)
+@Table(name="SYNONMID_TTABCTRA_RESPUESTA_TAREA_CAMPANA" )
+@SequenceGenerator(name = "SEQ_RESPUESTA_TAREA_CAMPANA_GEN",sequenceName = "SYNONMID_SEQ_TTABCTRA_RESPUESTA_TAREA_CAMPANA",allocationSize = 1)
 public class RespuestaTareaCampanaEntity implements Serializable {
 	
 	/**

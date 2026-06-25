@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.proyectohu.dto.MapeoEmpresaColumnaResponseDTO;
 import mx.com.proyectohu.dto.MapeoEmpresaRequestDTO;
 import mx.com.proyectohu.dto.MapeoEmpresaResponseDTO;
 import mx.com.proyectohu.entity.MapeoEmpresaEntity;
@@ -24,7 +25,11 @@ public class MapeoEmpresaService {
 	@Autowired
 	public MapeoEmpresaRepository mapeoEmpresaRepository;
 
-	
+	@Autowired
+	public MapeoEmpresaColumnaService mapeoEmpresaColumnaService;
+
+
+
 
 
 	public Long  registrarEmpresa(MapeoEmpresaRequestDTO mapeoEmpresaRequestDTO) {
@@ -40,7 +45,7 @@ public class MapeoEmpresaService {
 		mapeoEmpresaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
 		mapeoEmpresaEntity.setIdUsuarioUltModificacion(mapeoEmpresaRequestDTO.getIdUsuario());
 		mapeoEmpresaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
-		
+
 		idMapeoEmpresa=mapeoEmpresaRepository.save(mapeoEmpresaEntity).getIdMapeoEmpresa();
 
 
@@ -61,14 +66,20 @@ public class MapeoEmpresaService {
 
 			for(MapeoEmpresaEntity mapeoEmpresaEntity: mapeoEmpresaEntityLista) {
 				MapeoEmpresaResponseDTO mapeoEmpresaResponseDTO = new MapeoEmpresaResponseDTO();
-				
+
 				mapeoEmpresaResponseDTO.setIdMapeoEmpresa(mapeoEmpresaEntity.getIdMapeoEmpresa());
 				mapeoEmpresaResponseDTO.setBolActivo(mapeoEmpresaEntity.getBolActivo());
 				mapeoEmpresaResponseDTO.setNombre(mapeoEmpresaEntity.getNombre() );
 				mapeoEmpresaResponseDTO.setDescripcion(mapeoEmpresaEntity.getDescripcion() );
 				mapeoEmpresaResponseDTO.setFecCreacion(mapeoEmpresaEntity.getFecCreacion().getTime());
-				mapeoEmpresaResponseDTO.setFecUltModificacion( mapeoEmpresaEntity.getFecUltModificacion().getTime());
-			
+				mapeoEmpresaResponseDTO.setFecUltModificacion(mapeoEmpresaEntity.getFecUltModificacion().getTime());
+
+				List<MapeoEmpresaColumnaResponseDTO> empresaColumnaResponseDTOLista = mapeoEmpresaColumnaService.consultarMapeoEmpresaColumna(mapeoEmpresaEntity.getIdMapeoEmpresa());
+				if (!empresaColumnaResponseDTOLista.isEmpty()) {
+					mapeoEmpresaResponseDTO.setColumnas(empresaColumnaResponseDTOLista.size());
+				}else {
+					mapeoEmpresaResponseDTO.setColumnas(0);
+				}
 				mapeoEmpresaResponseDTOLista.add(mapeoEmpresaResponseDTO);
 
 
@@ -91,14 +102,14 @@ public class MapeoEmpresaService {
 		if (mapeoEmpresaEntityOptional.isPresent()) {
 
 			MapeoEmpresaEntity mapeoEmpresaEntity = mapeoEmpresaEntityOptional.get();
-			
-			
+
+
 			mapeoEmpresaEntity.setNombre(mapeoEmpresaRequestDTO.getMapeoEmpresaDTO().getNombre());
 			mapeoEmpresaEntity.setDescripcion(mapeoEmpresaRequestDTO.getMapeoEmpresaDTO().getDescripcion());
 			mapeoEmpresaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 			mapeoEmpresaEntity.setIdUsuarioUltModificacion(mapeoEmpresaRequestDTO.getIdUsuario());
-			
-			
+
+
 			mapeoEmpresaEntity = mapeoEmpresaRepository.save(mapeoEmpresaEntity);
 			mapeoEmpresaResponseDTO.setIdMapeoEmpresa(mapeoEmpresaEntity.getIdMapeoEmpresa());
 
@@ -113,7 +124,7 @@ public class MapeoEmpresaService {
 
 	}
 
-	
+
 	public MapeoEmpresaResponseDTO activar(Long idMapeoEmpresa) {
 		MapeoEmpresaResponseDTO mapeoEmpresaResponseDTO = new MapeoEmpresaResponseDTO();
 

@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TTABCTRA_LISTA_CONTACTO")
+@Table(name = "SYNONMID_TTABCTRA_LISTA_CONTACTO")
 
 public class ListaContactoEntity implements Serializable {
 

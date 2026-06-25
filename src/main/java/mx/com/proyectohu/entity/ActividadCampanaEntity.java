@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TTABCCFG_ACTIVIDAD_CAMPANA" )
+@Table(name="SYNONMID_TTABCCFG_ACTIVIDAD_CAMPANA" )
 public class ActividadCampanaEntity implements Serializable {
 	
 	/**

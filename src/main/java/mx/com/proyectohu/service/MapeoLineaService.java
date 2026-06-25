@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
+import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.dto.MapeoLineaRecordDTO;
 import mx.com.proyectohu.dto.MapeoLineaRequestDTO;
 import mx.com.proyectohu.dto.MapeoLineaResponseDTO;
@@ -37,10 +38,9 @@ public class MapeoLineaService {
 		abcConfigMapeoLineaEntity.setBolActivo(true);
 		abcConfigMapeoLineaEntity.setNombre(mapeoLineaRequestDTO.getMapeoDTO().getNombre());
 		abcConfigMapeoLineaEntity.setDescripcion(mapeoLineaRequestDTO.getMapeoDTO().getDescripcion());
-		Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-		abcConfigMapeoLineaEntity.setFecCreacion(fechaActual);
+		abcConfigMapeoLineaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
 		abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
-		abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
+		abcConfigMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 		abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
 		abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
 		abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
@@ -97,10 +97,10 @@ public class MapeoLineaService {
 
 
 
-	public MapeoLineaResponseDTO actualizarMapeoLinea(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
+	public MapeoLineaResponseDTO actualizarMapeoLinea(Long idMapeoLinea, MapeoLineaRequestDTO mapeoLineaRequestDTO) {
 
 		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
-		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(idMapeoLinea);
 
 		if (abcConfigMapeoLineaEntityOptional.isPresent()) {
 
@@ -108,8 +108,7 @@ public class MapeoLineaService {
 			abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
 			abcConfigMapeoLineaEntity.setNombre(mapeoLineaRequestDTO.getMapeoDTO().getNombre());
 			abcConfigMapeoLineaEntity.setDescripcion(mapeoLineaRequestDTO.getMapeoDTO().getDescripcion());
-			Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-			abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
+			abcConfigMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 			abcConfigMapeoLineaEntity.setBolValidacion(mapeoLineaRequestDTO.getMapeoDTO().getBolValidacion());
 			abcConfigMapeoLineaEntity.setBolEnvio(mapeoLineaRequestDTO.getMapeoDTO().getBolEnvio());
 			abcConfigMapeoLineaEntity.setFiDictaminacion(mapeoLineaRequestDTO.getMapeoDTO().getFiDictaminacion());
@@ -131,11 +130,11 @@ public class MapeoLineaService {
 	}
 
 
-	public MapeoLineaResponseDTO activar(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
+	public MapeoLineaResponseDTO activar(Long idMapeoLinea, MapeoLineaRequestDTO mapeoLineaRequestDTO) {
 		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
 
 
-		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(idMapeoLinea);
 
 		if (abcConfigMapeoLineaEntityOptional.isPresent()) {
 
@@ -144,8 +143,7 @@ public class MapeoLineaService {
 			if (!abcConfigMapeoLineaEntity.getBolActivo()) {
 				abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
 				abcConfigMapeoLineaEntity.setBolActivo(true);
-				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-				abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
+				abcConfigMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 				abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
 				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
 			}
@@ -154,11 +152,11 @@ public class MapeoLineaService {
 		return mapeoLineaResponseDTO;
 	}
 
-	public MapeoLineaResponseDTO desactivar(MapeoLineaRequestDTO mapeoLineaRequestDTO) {
+	public MapeoLineaResponseDTO desactivar(Long idMapeoLinea, MapeoLineaRequestDTO mapeoLineaRequestDTO) {
 		MapeoLineaResponseDTO mapeoLineaResponseDTO = new MapeoLineaResponseDTO();
 
 
-		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea());
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(idMapeoLinea);
 
 		if (abcConfigMapeoLineaEntityOptional.isPresent()) {
 
@@ -167,8 +165,7 @@ public class MapeoLineaService {
 			if (abcConfigMapeoLineaEntity.getBolActivo()) {
 				abcConfigMapeoLineaEntity.setIdABCUsuarioUltModificacion(mapeoLineaRequestDTO.getIdUsuario());
 				abcConfigMapeoLineaEntity.setBolActivo(false);
-				Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
-				abcConfigMapeoLineaEntity.setFecUltModificacion(fechaActual);
+				abcConfigMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
 				abcConfigMapeoLineaEntity = abcConfigMapeoLineaRepository.save(abcConfigMapeoLineaEntity);
 				mapeoLineaResponseDTO.setIdABCConfigMapeoLinea(abcConfigMapeoLineaEntity.getIdABCConfigMapeoLinea());
 			}

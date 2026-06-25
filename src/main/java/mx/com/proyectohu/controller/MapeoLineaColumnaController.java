@@ -47,7 +47,7 @@ public class MapeoLineaColumnaController {
 		}
 
 
-		return ResponseEntity.ok(Map.of("id",idMapeoLineaNegocio));
+		return ResponseEntity.ok("creado");
 	}
 
 

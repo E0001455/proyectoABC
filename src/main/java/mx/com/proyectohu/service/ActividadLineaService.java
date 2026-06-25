@@ -15,7 +15,16 @@ import mx.com.proyectohu.repository.MapeoActividadLineaRepository;
 import mx.com.proyectohu.util.FechaUtil;
 import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.ActividadLineaRepository;
+import mx.com.proyectohu.dto.ActividadDTO;
+import mx.com.proyectohu.dto.ActividadDTO.Actividad;
+import mx.com.proyectohu.dto.ActividadDTO.Ejecucion;
 import mx.com.proyectohu.dto.ActividadLineaRequestDTO;
+import mx.com.proyectohu.dto.ActividadLineaResponseDTO;
+import mx.com.proyectohu.dto.ActividadesRequestDTO;
+import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatActividad;
+import mx.com.proyectohu.dto.ActividadLineaResponseDTO.CatLineaNegocio;
+import mx.com.proyectohu.dto.MapeoDTO;
+import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
 import mx.com.proyectohu.entity.ActividadLineaEntity;
 import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
 import mx.com.proyectohu.entity.LlaveActividadLinea;
@@ -25,133 +34,221 @@ public class ActividadLineaService {
 
 	@Autowired
 	public ActividadLineaRepository actividadLineaRepository;
-	
+
 	@Autowired
 	public MapeoActividadLineaRepository mapeoActividadLineaRepository;
 
 	@Autowired
 	public ABCConfigMapeoLineaRepository abcConfigMapeoLineaRepository;
 
-	public Long  registrarActividadLinea(Long idLineaNegocio,ActividadLineaRequestDTO actividadLineaRequestDTO) {
-
-		Long idActividad = actividadLineaRequestDTO.getActividadDTO().getActividad().getIdActividad();
-		Long idActividadMapeoLinea = registrarMapeoActividad(idActividad,actividadLineaRequestDTO.getActividadDTO().getMapeoDTO().getIdABCConfigMapeoLinea(),actividadLineaRequestDTO.getIdUsuario()); 
-
-		ActividadLineaEntity actividadLineaEntity = new ActividadLineaEntity();
+	public Long  registrarActividadLinea(ActividadLineaRequestDTO actividadLineaRequestDTO) {
 		
+		
+		ActividadLineaEntity actividadLineaEntity =null;
+		
+		
+	
+		Long idActividadMapeoLinea = registrarMapeoActividad(actividadLineaRequestDTO.getMapeoDTO().getIdABCConfigMapeoLinea(),actividadLineaRequestDTO.getIdUsuario()); 
+
+		for(ActividadDTO actividadDTO: actividadLineaRequestDTO.getActividadDTOlista() ) {
+		
+		 actividadLineaEntity = new ActividadLineaEntity();
+
 		LlaveActividadLinea llaveActividadLinea = new LlaveActividadLinea();
 		llaveActividadLinea.setIdActividadMapeoLinea(idActividadMapeoLinea);
-		llaveActividadLinea.setIdActividad(idActividad);
+		llaveActividadLinea.setIdActividad(actividadDTO.getActividad().getIdActividad());
 		actividadLineaEntity.setLlaveActividadLinea(llaveActividadLinea);
 
 		actividadLineaEntity.setIdUsuario(actividadLineaRequestDTO.getIdUsuario());
-		actividadLineaEntity.setIdEjecucion(actividadLineaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
+		actividadLineaEntity.setIdEjecucion(actividadDTO.getEjecucion().getIdEjecucion());
 		actividadLineaEntity.setBolActivo(true);
 		actividadLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 		actividadLineaEntity.setIdUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
 		actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 
-
-		idActividadMapeoLinea = actividadLineaRepository.save(actividadLineaEntity).getIdUsuarioUltModificacion();
-
+		actividadLineaRepository.save(actividadLineaEntity).getIdUsuarioUltModificacion();
+		}
 
 		return	idActividadMapeoLinea;	
 
 	}
-/*
+
 
 	public List<ActividadLineaResponseDTO>  consultarActividadesLinea(){
+
 		List<ActividadLineaResponseDTO> actividadLineaResponseDTOLista = new ArrayList<ActividadLineaResponseDTO>();
-		List<ActividadLineaEntity>  actividadLineaEntityLista= new ArrayList<ActividadLineaEntity>();
+		List<ActividadMapeoLineaEntity>   actividadMapeoLineaEntityList = new ArrayList<ActividadMapeoLineaEntity>();
 
-		actividadLineaEntityLista = actividadLineaRepository.findAll();
+		ActividadLineaResponseDTO actividadLineaResponseDTO=null;
+		MapeoDTO mapeoDTO=null;
+		List<ActividadDTO> actividadDTOLista= null;
+		ActividadDTO actividadDTO=null;
+		Actividad actividad =null;
+		Ejecucion catEjecucion =null;
+		List<ActividadLineaEntity> actividadLineaEntitylista =null;
+		actividadMapeoLineaEntityList = mapeoActividadLineaRepository.findAllByOrderByIdMapeoLinea();
+		Long mapeolinea=0L;
 
+		for(ActividadMapeoLineaEntity actividadMapeoLineaEntity :actividadMapeoLineaEntityList) {
+			
+			
+		
+			actividadLineaResponseDTO = new ActividadLineaResponseDTO();
+			mapeoDTO = new MapeoDTO();
+			mapeoDTO.setIdABCConfigMapeoLinea(actividadMapeoLineaEntity.getIdMapeoLinea());
+			Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoDTO.getIdABCConfigMapeoLinea());
+			mapeoDTO.setNombre(abcConfigMapeoLineaEntityOptional.get().getNombre());
+			actividadLineaResponseDTO.setIdActividadLinea(actividadMapeoLineaEntity.getIdActividadMapeoLinea());
+			actividadLineaResponseDTO.setMapeoDTO(mapeoDTO);
+			actividadLineaResponseDTO.setBolActivo(actividadMapeoLineaEntity.getBolActivo());
+			CatLineaNegocio catLineaNegocio = new CatLineaNegocio();
+			catLineaNegocio.setIdLineaNegocio(abcConfigMapeoLineaEntityOptional.get().getIdABCCatLineaNegocio());
+			actividadLineaResponseDTO.setCatLineaNegocio(catLineaNegocio);
+			actividadLineaResponseDTO.setFechaCreacion(actividadMapeoLineaEntity.getFecCreacion().getTime());
+			actividadLineaResponseDTO.setFechaUltModificacion(actividadMapeoLineaEntity.getFecUltModificacion().getTime());
+			actividadLineaResponseDTOLista.add(actividadLineaResponseDTO);
+			
+			
+			
+			actividadLineaEntitylista = actividadLineaRepository.findByLlaveActividadLinea_IdActividadMapeoLinea(actividadMapeoLineaEntity.getIdActividadMapeoLinea());
 
-		if(!actividadLineaEntityLista.isEmpty()) {
-
-
-			for(ActividadLineaEntity actividadLineaEntity: actividadLineaEntityLista) {
-				ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
-				CatLineaNegocio catLineaNegocio = new CatLineaNegocio();
-				CatActividad catActividad = new CatActividad();
-				CatEjecucion catEjecucion = new CatEjecucion();
-
-				actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getIdActividadLinea());
-
-				catLineaNegocio.setIdLineaNegocio(actividadLineaEntity.getIdLineaNegocio());
-				actividadLineaResponseDTO.setCatLineaNegocio(catLineaNegocio);
-
-				catActividad.setIdActividad(actividadLineaEntity.getIdActividad());
-				actividadLineaResponseDTO.setCatActividad(catActividad);
-
-				catEjecucion.setIdEjecucion(actividadLineaEntity.getIdEjecucion());
-				actividadLineaResponseDTO.setCatEjecucion(catEjecucion);
-
-				actividadLineaResponseDTO.setBolActivo(actividadLineaEntity.getBolActivo());
-				actividadLineaResponseDTO.setFechaCreacion(actividadLineaEntity.getFechaCreacion().getTime());
-				actividadLineaResponseDTO.setFechaUltModificacion(actividadLineaEntity.getFechaUltModificacion().getTime());
+			if (!actividadLineaEntitylista.isEmpty()) {
+				actividadDTOLista= new ArrayList<ActividadDTO>();
 				
-				ActividadMapeoLineaEntity actividadMapeoLineaEntity = new ActividadMapeoLineaEntity();
-
-				actividadMapeoLineaEntity = mapeoActividadLineaRepository.findByLlaveActividadMapeoLinea_idActividadLinea(actividadLineaEntity.getIdActividadLinea());
+				for(ActividadLineaEntity actividadLineaEntity: actividadLineaEntitylista) {
 				
-				if(actividadMapeoLineaEntity== null) {
-					continue;
+					 actividadDTO = new ActividadDTO();
+					 actividad = new Actividad();
+					 catEjecucion=	 new Ejecucion();
+					
+					 catEjecucion.setIdEjecucion(actividadLineaEntity.getIdEjecucion());
+					 actividadDTO.setEjecucion(catEjecucion);
+					 
+					actividad.setIdActividad(actividadLineaEntity.getLlaveActividadLinea().getIdActividad());
+					actividadDTO.setActividad(actividad);
+					actividadDTO.setActivo(actividadLineaEntity.getBolActivo());
+					actividadDTO.setFechaCreacion(actividadLineaEntity.getFechaCreacion().getTime());
+					actividadDTO.setFechaUltimaModificacion(actividadLineaEntity.getFechaUltModificacion().getTime());
+					actividadDTOLista.add(actividadDTO);
+					
 				}
 				
-				MapeoDTO mapeoDTO = new MapeoDTO();
-				mapeoDTO.setIdABCConfigMapeoLinea(actividadMapeoLineaEntity.getLlaveActividadMapeoLinea().getIdABCConfigMapeoLinea());
-				Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(mapeoDTO.getIdABCConfigMapeoLinea());
-				mapeoDTO.setNombre(abcConfigMapeoLineaEntityOptional.get().getNombre());
-				actividadLineaResponseDTO.setMapeoDTO(mapeoDTO);
-
-				actividadLineaResponseDTOLista.add(actividadLineaResponseDTO);
-
+				
 
 			}
-
-		}
-
+			
+			actividadLineaResponseDTO.setActividadDTOLista(actividadDTOLista);
+			
+		}		
+		
+			
+			
+			
+		
 
 		return actividadLineaResponseDTOLista;
 
 	}
 
 
-
-	public ActividadLineaResponseDTO actualizarActividadLinea(ActividadLineaRequestDTO actividadLineaRequestDTO) {
+	
+	public ActividadLineaResponseDTO actualizarActividadLinea(Long idActividadMapeo, ActividadesRequestDTO  actividadesRequestDTO) {
 
 		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
-		Optional<ActividadLineaEntity> actividadLineaEntityOptional = actividadLineaRepository.findById(actividadLineaRequestDTO.getActividadDTO().getIdActividadLineaCampana());
+		LlaveActividadLinea llaveActividadLinea = new LlaveActividadLinea();
+		
+		
+		for (ActividadDTO actividadDTO :    actividadesRequestDTO.getActividadDTOList()) {
+		
+		llaveActividadLinea.setIdActividadMapeoLinea(idActividadMapeo);
+		llaveActividadLinea.setIdActividad(actividadDTO.getActividad().getIdActividad());
+		
+		
+		Optional<ActividadLineaEntity> actividadLineaEntityOptional = actividadLineaRepository.findById(llaveActividadLinea);
 
 		if (actividadLineaEntityOptional.isPresent()) {
 
 			ActividadLineaEntity actividadLineaEntity = actividadLineaEntityOptional.get();
-			actividadLineaEntity.setIdUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
-			actividadLineaEntity.setIdActividad(actividadLineaRequestDTO.getActividadDTO().getActividad().getIdActividad());
-			actividadLineaEntity.setIdEjecucion(actividadLineaRequestDTO.getActividadDTO().getEjecucion().getIdEjecucion());
+			actividadLineaEntity.setIdUsuarioUltModificacion(actividadesRequestDTO.getIdUsuario());
+			llaveActividadLinea.setIdActividad(actividadDTO.getActividad().getIdActividad());
+			actividadLineaEntity.setLlaveActividadLinea(llaveActividadLinea);
+			actividadLineaEntity.setIdEjecucion(actividadDTO.getEjecucion().getIdEjecucion());
 			actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 
 			actividadLineaEntity = actividadLineaRepository.save(actividadLineaEntity);
-			actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getIdActividadLinea());
+			actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getLlaveActividadLinea().getIdActividadMapeoLinea());
 
 
-		}else {
-			actividadLineaResponseDTO=null;
 		}
 
-
-		return actividadLineaResponseDTO;
-
-
 	}
+		return actividadLineaResponseDTO;
+	}
+	
+	
+	
 
-
-	public ActividadLineaResponseDTO activar(ActividadLineaRequestDTO actividadLineaRequestDTO) {
+	
+	public ActividadLineaResponseDTO activarActividadMapeo(Long idActividadMapeo, ActividadLineaRequestDTO actividadLineaRequestDTO) {
 		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
 
 
-		Optional<ActividadLineaEntity> actividadLineaEntityOptional = actividadLineaRepository.findById(actividadLineaRequestDTO.getActividadDTO().getIdActividadLineaCampana());
+		Optional<ActividadMapeoLineaEntity> actividadMapeoLineaEntityOptional= mapeoActividadLineaRepository.findById(idActividadMapeo);
+
+		if (actividadMapeoLineaEntityOptional.isPresent()) {
+
+			ActividadMapeoLineaEntity actividadMapeoLineaEntity = actividadMapeoLineaEntityOptional.get();
+
+			if (!actividadMapeoLineaEntity.getBolActivo()) {
+				actividadMapeoLineaEntity.setIdABCUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
+				actividadMapeoLineaEntity.setBolActivo(true);
+				actividadMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
+				actividadMapeoLineaEntity = mapeoActividadLineaRepository.save(actividadMapeoLineaEntity);
+				actividadLineaResponseDTO.setIdActividadLinea(actividadMapeoLineaEntity.getIdActividadMapeoLinea());
+			}
+		}
+
+		return actividadLineaResponseDTO;
+	}
+	
+	
+	
+	public ActividadLineaResponseDTO desactivarActividadMapeo(Long idActividadMapeo, ActividadLineaRequestDTO actividadLineaRequestDTO) {
+		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
+
+
+		Optional<ActividadMapeoLineaEntity> actividadMapeoLineaEntityOptional= mapeoActividadLineaRepository.findById(idActividadMapeo);
+
+		if (actividadMapeoLineaEntityOptional.isPresent()) {
+
+			ActividadMapeoLineaEntity actividadMapeoLineaEntity = actividadMapeoLineaEntityOptional.get();
+
+			if (actividadMapeoLineaEntity.getBolActivo()) {
+				actividadMapeoLineaEntity.setIdABCUsuarioUltModificacion(actividadLineaRequestDTO.getIdUsuario());
+				actividadMapeoLineaEntity.setBolActivo(false);
+				actividadMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
+				actividadMapeoLineaEntity = mapeoActividadLineaRepository.save(actividadMapeoLineaEntity);
+				actividadLineaResponseDTO.setIdActividadLinea(actividadMapeoLineaEntity.getIdActividadMapeoLinea());
+			}
+		}
+
+		return actividadLineaResponseDTO;
+	}
+
+
+	public ActividadLineaResponseDTO activar(Long idActividadMapeo,Long idTipo, ActividadLineaRequestDTO actividadLineaRequestDTO) {
+		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
+		
+	LlaveActividadLinea llaveActividadLinea = new LlaveActividadLinea();
+		
+		
+	
+		llaveActividadLinea.setIdActividadMapeoLinea(idActividadMapeo);
+		llaveActividadLinea.setIdActividad(idTipo);
+		
+
+
+		Optional<ActividadLineaEntity> actividadLineaEntityOptional = actividadLineaRepository.findById(llaveActividadLinea);
 
 		if (actividadLineaEntityOptional.isPresent()) {
 
@@ -162,18 +259,26 @@ public class ActividadLineaService {
 				actividadLineaEntity.setBolActivo(true);
 				actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 				actividadLineaEntity = actividadLineaRepository.save(actividadLineaEntity);
-				actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getIdActividadLinea());
+				actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getLlaveActividadLinea().getIdActividadMapeoLinea());
 			}
 		}
 
 		return actividadLineaResponseDTO;
 	}
 
-	public ActividadLineaResponseDTO desactivar(ActividadLineaRequestDTO actividadLineaRequestDTO) {
+	public ActividadLineaResponseDTO desactivar(Long idActividadMapeo, Long idTipo, ActividadLineaRequestDTO actividadLineaRequestDTO) {
 		ActividadLineaResponseDTO actividadLineaResponseDTO = new ActividadLineaResponseDTO();
+		LlaveActividadLinea llaveActividadLinea = new LlaveActividadLinea();
+		
+		
+		
+		llaveActividadLinea.setIdActividadMapeoLinea(idActividadMapeo);
+		llaveActividadLinea.setIdActividad(idTipo);
+		
 
 
-		Optional<ActividadLineaEntity> actividadLineaEntityOptional = actividadLineaRepository.findById(actividadLineaRequestDTO.getActividadDTO().getIdActividadLineaCampana());
+		Optional<ActividadLineaEntity> actividadLineaEntityOptional = actividadLineaRepository.findById(llaveActividadLinea);
+
 
 		if (actividadLineaEntityOptional.isPresent()) {
 
@@ -184,17 +289,17 @@ public class ActividadLineaService {
 				actividadLineaEntity.setBolActivo(false);
 				actividadLineaEntity.setFechaUltModificacion(FechaUtil.obtenerFechaActual());
 				actividadLineaEntity = actividadLineaRepository.save(actividadLineaEntity);
-				actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getIdActividadLinea());
+				actividadLineaResponseDTO.setIdActividadLinea(actividadLineaEntity.getLlaveActividadLinea().getIdActividadMapeoLinea());
 			}
 		}
 
 		return actividadLineaResponseDTO;
 	}
-	
-		
-*/
-	public Long  registrarMapeoActividad(Long idTareaLinea, Long idMapeoLinea,Long idUsuario) {
-		
+
+
+	 
+	public Long  registrarMapeoActividad(Long idMapeoLinea,Long idUsuario) {
+
 		ActividadMapeoLineaEntity actividadMapeoLineaEntity = new  ActividadMapeoLineaEntity();
 		actividadMapeoLineaEntity.setIdMapeoLinea(idMapeoLinea);
 		actividadMapeoLineaEntity.setIdUsuario(idUsuario);
@@ -202,12 +307,12 @@ public class ActividadLineaService {
 		actividadMapeoLineaEntity.setIdABCUsuarioUltModificacion(idUsuario);
 		actividadMapeoLineaEntity.setFecCreacion(FechaUtil.obtenerFechaActual());
 		actividadMapeoLineaEntity.setFecUltModificacion(FechaUtil.obtenerFechaActual());
-		
+
 		return mapeoActividadLineaRepository.save(actividadMapeoLineaEntity).getIdActividadMapeoLinea();
-		
-		
+
+
 	}
-	
+
 
 
 

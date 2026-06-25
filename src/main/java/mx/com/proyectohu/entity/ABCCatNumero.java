@@ -15,8 +15,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 @CatalogoNotacion
 @Entity
-@Table(name="TCABCCAT_NUMERO" )
-@SequenceGenerator(name = "SEQ_NUMERO_GEN",sequenceName = "SEQ_TCABCCAT_NUMERO",allocationSize = 1)
+@Table(name="SYNONMID_TCABCCAT_NUMERO" )
+@SequenceGenerator(name = "SEQ_NUMERO_GEN",sequenceName = "SYNONMID_SEQ_TCABCCAT_NUMERO",allocationSize = 1)
 public class ABCCatNumero implements Serializable,CatalogoInterface {
 	
 	/**

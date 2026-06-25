@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TTABCCFG_COLUMNA_CAMPANA")
+@Table(name="SYNONMID_TTABCCFG_COLUMNA_CAMPANA")
 public class ABCMapeoCampanaColumnaEntity implements Serializable {
 
 

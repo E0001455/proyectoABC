@@ -21,14 +21,18 @@ import mx.com.proyectohu.controller.CargaLineaController;
 import mx.com.proyectohu.dto.MergeRuleDTO;
 import mx.com.proyectohu.dto.MiddlewareCLDTO;
 import mx.com.proyectohu.dto.RecordDataDTO;
+import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
+import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
 import mx.com.proyectohu.entity.BitacoraTareaLineaEntity;
 import mx.com.proyectohu.entity.ListaContactoRespuestaEntity;
 import mx.com.proyectohu.entity.LlaveListaContactoRespuesta;
 import mx.com.proyectohu.entity.RespuestaTareaLineaEntity;
 import mx.com.proyectohu.entity.TareaLineaEntity;
+import mx.com.proyectohu.repository.ABCConfigMapeoLineaRepository;
 import mx.com.proyectohu.repository.BitacoraTareaLineaRepository;
 import mx.com.proyectohu.repository.LineaNegocioRepository;
 import mx.com.proyectohu.repository.ListaContactoRespuestaRepository;
+import mx.com.proyectohu.repository.MapeoActividadLineaRepository;
 import mx.com.proyectohu.repository.RespuestaTareaLineaRepository;
 import mx.com.proyectohu.repository.TareaLineaRepository;
 import mx.com.proyectohu.util.FechaUtil;
@@ -54,26 +58,37 @@ public class EnvioLineaService {
 
 	@Autowired
 	public  ListaContactoRespuestaRepository listaContactoRespuestaRepository;
-	
+
 	@Autowired
 	public LineaNegocioRepository lineaNegocioRepository;
+	
+	@Autowired
+	public MapeoActividadLineaRepository mapeoActividadLineaRepository;
+	
+	@Autowired
+	public ABCConfigMapeoLineaRepository abcConfigMapeoLineaRepository;
+
 
 	@Value("${numero.registros.enviados.linea}")
 	public Integer numeroRegistrosEnviados;
 
 	Integer totalregistros =0;
-	
+
 	Integer totalRegistrosEnviados = 0;
 
 	public MiddlewareCLDTO ejecutarEnvioListaContacto(Long idTareaLinea) throws Exception {
-		
+
 		TareaLineaEntity tareaLineaEntity = new TareaLineaEntity(); 
-		
+
 		tareaLineaEntity = tareaLineaRepository.findById(idTareaLinea).get();
 		
-		String lineaNegocio = lineaNegocioRepository.findById(tareaLineaEntity.getMapeoLinea().getIdABCCatLineaNegocio()).get().getNombre();
-		
-		
+		ActividadMapeoLineaEntity actividadMapeoLineaEntity=mapeoActividadLineaRepository.findById(tareaLineaEntity.getIdActividadMapeoLinea()).get();
+
+		Optional<ABCConfigMapeoLineaEntity> abcConfigMapeoLineaEntityOptional = abcConfigMapeoLineaRepository.findById(actividadMapeoLineaEntity.getIdMapeoLinea());
+
+		String lineaNegocio = lineaNegocioRepository.findById(abcConfigMapeoLineaEntityOptional.get().getIdABCCatLineaNegocio()).get().getNombre();
+
+
 		List<Map<String, Object>> datos = new ArrayList<Map<String, Object>>();
 		List<String>  columnasNombreCorrecto = new ArrayList<String>();
 		List<String>  columnas = new ArrayList<String>();
@@ -232,7 +247,7 @@ public class EnvioLineaService {
 		respuestaTareaLineaEntity.setRequestId(resquestId);
 		respuestaTareaLineaEntity.setFechaCreacion(FechaUtil.obtenerFechaActual());
 		respuestaTareaLineaEntity.setTotalRegistros(totalRegistrosEnviados);
-		
+
 		return respuestaTareaLineaRepository.save(respuestaTareaLineaEntity).getIdRespuestaTareaLinea();
 	}
 

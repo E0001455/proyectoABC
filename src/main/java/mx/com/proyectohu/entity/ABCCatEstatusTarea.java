@@ -15,8 +15,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 @CatalogoNotacion
 @Entity
-@Table(name="TCABCCAT_ESTATUS_TAREA")
-@SequenceGenerator(name = "SEQ_ESTATUS_TAREA_GEN",sequenceName = "SEQ_TCABCCAT_ESTATUS_TAREA",allocationSize = 1)
+@Table(name="SYNONMID_TCABCCAT_ESTATUS_ABC")
+@SequenceGenerator(name = "SEQ_ESTATUS_TAREA_GEN",sequenceName = "SYNONMID_SEQ_TCABCCAT_ESTATUS_TAREA",allocationSize = 1)
 public class ABCCatEstatusTarea implements Serializable,CatalogoInterface {
 	
 	/**

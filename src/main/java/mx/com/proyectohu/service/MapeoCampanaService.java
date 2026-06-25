@@ -96,10 +96,10 @@ public class MapeoCampanaService {
 
 	}
 
-	public MapeoCampanaResponseDTO actualizarMapeoCampana(MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
+	public MapeoCampanaResponseDTO actualizarMapeoCampana(Long idMapeoCampana, MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 
 
-		Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getIdABCConfigMapeoCampana());
+		Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(idMapeoCampana);
 		MapeoCampanaResponseDTO mapeoCampanaResponseDTO= new MapeoCampanaResponseDTO();
 		if (abcConfigMapeoCampanaEntityOptional.isPresent()) {
 
@@ -128,11 +128,11 @@ public class MapeoCampanaService {
 	}
 
 
-	public MapeoCampanaResponseDTO activar(MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
+	public MapeoCampanaResponseDTO activar(Long idMapeoCampana, MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 		MapeoCampanaResponseDTO mapeoCampanaResponseDTO= new MapeoCampanaResponseDTO();
 
 
-		Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getIdABCConfigMapeoCampana());
+		Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(idMapeoCampana);
 
 		if (abcConfigMapeoCampanaEntityOptional.isPresent()) {
 
@@ -150,11 +150,11 @@ public class MapeoCampanaService {
 		return mapeoCampanaResponseDTO;
 	}
 
-	public MapeoCampanaResponseDTO desactivar(MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
+	public MapeoCampanaResponseDTO desactivar(Long idMapeoCampana, MapeoCampanaRequestDTO mapeoCampanaRequestDTO) {
 		MapeoCampanaResponseDTO mapeoCampanaResponseDTO= new MapeoCampanaResponseDTO();
 
 
-		Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(mapeoCampanaRequestDTO.getMapeoCampanaDTO().getIdABCConfigMapeoCampana());
+		Optional<ABCConfigMapeoCampanaEntity> abcConfigMapeoCampanaEntityOptional = abcConfigMapeoCampanaRepository.findById(idMapeoCampana);
 
 		if (abcConfigMapeoCampanaEntityOptional.isPresent()) {
 

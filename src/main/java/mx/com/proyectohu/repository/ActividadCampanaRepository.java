@@ -10,10 +10,18 @@ import mx.com.proyectohu.dto.MapeoLineaRecordDTO;
 import mx.com.proyectohu.entity.ABCConfigMapeoLineaEntity;
 import mx.com.proyectohu.entity.ActividadCampanaEntity;
 import mx.com.proyectohu.entity.ActividadLineaEntity;
+import mx.com.proyectohu.entity.ActividadMapeoLineaEntity;
 import mx.com.proyectohu.entity.LlaveActividadCampana;
 
 @Repository
 public interface  ActividadCampanaRepository extends JpaRepository<ActividadCampanaEntity, LlaveActividadCampana> {
+	
+	
+	
+	
+	public  List<ActividadCampanaEntity> findByLlaveActividadCampana_IdActividadMapeoCampana(Long idActividadMapeoCampana);
+	
+	
 
 
 	

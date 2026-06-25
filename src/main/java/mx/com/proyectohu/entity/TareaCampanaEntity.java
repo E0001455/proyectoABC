@@ -17,8 +17,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="TTABCTRA_TAREA_CAMPANA" )
-@SequenceGenerator(name = "SEQ_TAREA_CAMPANA_GEN",sequenceName = "SEQ_TTABCTRA_TAREA_CAMPANA",allocationSize = 1)
+@Table(name="SYNONMID_TTABCTRA_TAREA_CAMPANA" )
+@SequenceGenerator(name = "SEQ_TAREA_CAMPANA_GEN",sequenceName = "SYNONMID_SEQ_TTABCTRA_TAREA_CAMPANA",allocationSize = 1)
 public class TareaCampanaEntity implements Serializable {
 	
 	/**
@@ -30,12 +30,8 @@ public class TareaCampanaEntity implements Serializable {
 	@Column(name = "ID_TAREA_CAMPANA")
 	private Long 	idTareaCampana;
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_MAPEO_CAMPANA")
-	private ABCConfigMapeoCampanaEntity MapeoCampana;
-	
-	@Column(name = "ID_ACTIVIDAD_CAMPANA")
-	private Long 	idActividadCampana;
+	@Column(name = "ID_ACTIVIDAD_MAPEO_CAMPANA")
+	private Long 	idActividadMapeoCampana;
 	
 	@Column(name = "ID_ACTIVIDAD")
 	private Long 	idActividad;
@@ -98,33 +94,12 @@ public class TareaCampanaEntity implements Serializable {
 	}
 
 
-
-	/**
-	 * @return the mapeoCampana
-	 */
-	public ABCConfigMapeoCampanaEntity getMapeoCampana() {
-		return MapeoCampana;
+	public Long getIdActividadMapeoCampana() {
+		return idActividadMapeoCampana;
 	}
 
-	/**
-	 * @param mapeoCampana the mapeoCampana to set
-	 */
-	public void setMapeoCampana(ABCConfigMapeoCampanaEntity mapeoCampana) {
-		MapeoCampana = mapeoCampana;
-	}
-
-	/**
-	 * @return the idActividadCampana
-	 */
-	public Long getIdActividadCampana() {
-		return idActividadCampana;
-	}
-
-	/**
-	 * @param idActividadCampana the idActividadCampana to set
-	 */
-	public void setIdActividadCampana(Long idActividadCampana) {
-		this.idActividadCampana = idActividadCampana;
+	public void setIdActividadMapeoCampana(Long idActividadMapeoCampana) {
+		this.idActividadMapeoCampana = idActividadMapeoCampana;
 	}
 
 	/**

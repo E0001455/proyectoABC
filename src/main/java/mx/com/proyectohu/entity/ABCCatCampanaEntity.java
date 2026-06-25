@@ -15,8 +15,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 @CatalogoNotacion
 @Entity
-@Table(name="TCABCCAT_CAMPANA" )
-@SequenceGenerator(name = "SEQ_CAMPANA_GEN",sequenceName = "SEQ_TCABCCAT_CAMPANA",allocationSize = 1)
+@Table(name="SYNONMID_TCABCCAT_CAMPANA" )
+@SequenceGenerator(name = "SEQ_CAMPANA_GEN",sequenceName = "SYNONMID_SEQ_TCABCCAT_CAMPANA",allocationSize = 1)
 public class ABCCatCampanaEntity implements Serializable,CatalogoInterface {
 	
 	/**

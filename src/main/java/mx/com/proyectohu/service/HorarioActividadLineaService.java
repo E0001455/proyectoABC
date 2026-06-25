@@ -25,17 +25,17 @@ public class HorarioActividadLineaService {
 	public HorarioActividadLineaRepository horarioActividadLineaRepository;
 
 
-	public void  registrarHorarioActividadLinea(Long idActividadMapeoLinea,HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
+	public void  registrarHorarioActividadLinea(Long idActividadMapeoLinea,Long idActividad, HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
 
 		HorarioActividadLineaEntity horarioActividadLineaEntity = new HorarioActividadLineaEntity();
 
 
-		for (HorarioLineaDTO horarioLineaDTO :horarioActividadLineaRequestDTO.getHorarioLineaDTO()) {
+		for (HorarioLineaDTO horarioLineaDTO : horarioActividadLineaRequestDTO.getHorarioLineaDTO()) {
 
 			LlaveHorarioActividadLinea llaveHorarioActividadLinea = new LlaveHorarioActividadLinea();
 
 			llaveHorarioActividadLinea.setIdActividadMapeoLinea(idActividadMapeoLinea);
-			llaveHorarioActividadLinea.setIdActividad(horarioLineaDTO.getIdActividad());
+			llaveHorarioActividadLinea.setIdActividad(idActividad);
 			llaveHorarioActividadLinea.setIdDia(horarioLineaDTO.getDia().getIdDia());
 			llaveHorarioActividadLinea.setIdHora(horarioLineaDTO.getDia().getHora().getIdHora());
 
@@ -51,12 +51,12 @@ public class HorarioActividadLineaService {
 
 	}
 
-/*
-	public List<HorarioActividadLineaResponseDTO>  consultarHorariosActividadesLinea(Long idTareaLinea){
+
+	public List<HorarioActividadLineaResponseDTO>  consultarHorariosActividadesLinea(Long idActividadMapeo, Long idActividad){
 		List<HorarioActividadLineaResponseDTO> horarioActividadLineaResponseDTOLista = new ArrayList<HorarioActividadLineaResponseDTO>();
 		List<HorarioActividadLineaEntity>  horarioActividadLineaEntityLista= new ArrayList<HorarioActividadLineaEntity>();
 
-		horarioActividadLineaEntityLista = horarioActividadLineaRepository.findByLlaveHorarioActividadLinea_idActividadLinea(idTareaLinea);
+		horarioActividadLineaEntityLista = horarioActividadLineaRepository.findByLlaveHorarioActividadLinea_IdActividadMapeoLineaAndLlaveHorarioActividadLinea_IdActividad(idActividadMapeo,idActividad);
 
 		if(!horarioActividadLineaEntityLista.isEmpty()) {
 
@@ -86,20 +86,18 @@ public class HorarioActividadLineaService {
 
 
 
-	public HorarioActividadLineaResponseDTO activar(Long idTareaLinea, HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
+	public HorarioActividadLineaResponseDTO activar(Long idActividadMapeo, Long idActividad, HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
 		HorarioActividadLineaResponseDTO horarioActividadLineaResponseDTO = new HorarioActividadLineaResponseDTO();
+		List<HorarioActividadLineaEntity>  horarioActividadLineaEntityLista= new ArrayList<HorarioActividadLineaEntity>();
 
-		for (HorarioLineaDTO horarioLineaDTO :horarioActividadLineaRequestDTO.getHorarioLineaDTO()) {
 
-			LlaveHorarioActividadLinea llaveHorarioActividadLinea = new LlaveHorarioActividadLinea();
+		horarioActividadLineaEntityLista = horarioActividadLineaRepository.findByLlaveHorarioActividadLinea_IdActividadMapeoLineaAndLlaveHorarioActividadLinea_IdActividad(idActividadMapeo,idActividad);
 
-			llaveHorarioActividadLinea.setIdActividadLinea(idTareaLinea);
-			llaveHorarioActividadLinea.setIdDia(horarioLineaDTO.getDia().getIdDia());
-			llaveHorarioActividadLinea.setIdHora(horarioLineaDTO.getDia().getHora().getIdHora());
-			Optional<HorarioActividadLineaEntity> horarioActividadLineaEntityOptional = horarioActividadLineaRepository.findById(llaveHorarioActividadLinea);
 
-			if(horarioActividadLineaEntityOptional.isPresent()) {
-				HorarioActividadLineaEntity horarioActividadLineaEntity = horarioActividadLineaEntityOptional.get();
+		if(!horarioActividadLineaEntityLista.isEmpty()) {
+
+			for(HorarioActividadLineaEntity horarioActividadLineaEntity: horarioActividadLineaEntityLista) {
+
 				if (!horarioActividadLineaEntity.getBolActivo()) {
 
 					horarioActividadLineaEntity.setIdUsuarioUltModificacion(horarioActividadLineaRequestDTO.getIdUsuario());
@@ -107,30 +105,28 @@ public class HorarioActividadLineaService {
 					Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
 					horarioActividadLineaEntity.setFechaUltModificacion(fechaActual);
 					horarioActividadLineaRepository.save(horarioActividadLineaEntity);
-					horarioActividadLineaResponseDTO.setIdActividadLinea(idTareaLinea);
+					horarioActividadLineaResponseDTO.setIdActividadLinea(idActividadMapeo);
 				}
-			}else {
-				continue;
-			}
-		}
 
+			}
+
+
+		}
 		return horarioActividadLineaResponseDTO;
 	}
 
-	public HorarioActividadLineaResponseDTO desactivar(Long idTareaLinea, HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
+	public HorarioActividadLineaResponseDTO desactivar(Long idActividadMapeo, Long idActividad, HorarioActividadLineaRequestDTO horarioActividadLineaRequestDTO) {
 		HorarioActividadLineaResponseDTO horarioActividadLineaResponseDTO = new HorarioActividadLineaResponseDTO();
+		List<HorarioActividadLineaEntity>  horarioActividadLineaEntityLista= new ArrayList<HorarioActividadLineaEntity>();
 
-		for (HorarioLineaDTO horarioLineaDTO :horarioActividadLineaRequestDTO.getHorarioLineaDTO()) {
 
-			LlaveHorarioActividadLinea llaveHorarioActividadLinea = new LlaveHorarioActividadLinea();
+		horarioActividadLineaEntityLista = horarioActividadLineaRepository.findByLlaveHorarioActividadLinea_IdActividadMapeoLineaAndLlaveHorarioActividadLinea_IdActividad(idActividadMapeo,idActividad);
 
-			llaveHorarioActividadLinea.setIdActividadLinea(idTareaLinea);
-			llaveHorarioActividadLinea.setIdDia(horarioLineaDTO.getDia().getIdDia());
-			llaveHorarioActividadLinea.setIdHora(horarioLineaDTO.getDia().getHora().getIdHora());
-			Optional<HorarioActividadLineaEntity> horarioActividadLineaEntityOptional = horarioActividadLineaRepository.findById(llaveHorarioActividadLinea);
 
-			if(horarioActividadLineaEntityOptional.isPresent()) {
-				HorarioActividadLineaEntity horarioActividadLineaEntity = horarioActividadLineaEntityOptional.get();
+		if(!horarioActividadLineaEntityLista.isEmpty()) {
+
+			for(HorarioActividadLineaEntity horarioActividadLineaEntity: horarioActividadLineaEntityLista) {
+
 				if (horarioActividadLineaEntity.getBolActivo()) {
 
 					horarioActividadLineaEntity.setIdUsuarioUltModificacion(horarioActividadLineaRequestDTO.getIdUsuario());
@@ -138,19 +134,21 @@ public class HorarioActividadLineaService {
 					Timestamp fechaActual = new Timestamp(System.currentTimeMillis());
 					horarioActividadLineaEntity.setFechaUltModificacion(fechaActual);
 					horarioActividadLineaRepository.save(horarioActividadLineaEntity);
-
-					horarioActividadLineaResponseDTO.setIdActividadLinea(idTareaLinea);
+					horarioActividadLineaResponseDTO.setIdActividadLinea(idActividadMapeo);
 				}
-			}else {
-				continue;
+
 			}
+
+
 		}
-
-
 		return horarioActividadLineaResponseDTO;
+
+
+
+
 	}
 
-*/
+
 
 
 }

@@ -16,8 +16,8 @@ import mx.com.proyectohu.notacion.CatalogoNotacion;
 
 @CatalogoNotacion
 @Entity
-@Table(name="TCABCCAT_ACTIVIDAD")
-@SequenceGenerator(name = "SEQ_ACTIVIDAD_GEN",sequenceName = "SEQ_TCABCCAT_ACTIVIDAD",allocationSize = 1)
+@Table(name="SYNONMID_TCABCCAT_ACTIVIDAD")
+@SequenceGenerator(name = "SEQ_ACTIVIDAD_GEN",sequenceName = "SYNONMID_SEQ_TCABCCAT_ACTIVIDAD",allocationSize = 1)
 public class ABCCatActividad implements Serializable,CatalogoInterface {
 	
 	/**
