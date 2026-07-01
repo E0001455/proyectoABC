@@ -94,10 +94,10 @@ public class ReporteIndividualCLDAO {
 					if (clResponseDTO.getIdTarea()==0) {
  						clResponseDTO.setIdTarea(null);
 					}
-					clResponseDTO.setIdExtencionPerfil(resultado.getLong("ID_EXTENSION_PERFIL"));
+					clResponseDTO.setIdExtensionPerfil(resultado.getLong("ID_EXTENSION_PERFIL"));
 					
-					if (clResponseDTO.getIdExtencionPerfil()==0) {
-						clResponseDTO.setIdExtencionPerfil(null);
+					if (clResponseDTO.getIdExtensionPerfil()==0) {
+						clResponseDTO.setIdExtensionPerfil(null);
 					}
 					
 					clResponseDTOLista.add(clResponseDTO);

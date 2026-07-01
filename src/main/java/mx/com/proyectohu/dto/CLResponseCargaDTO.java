@@ -36,7 +36,7 @@ public class CLResponseCargaDTO {
 	private String prueba;
 	private String suspension;
 	private String nombreMapeo;
-	private Long idExtencionPerfil;
+	private Long idExtensionPerfil;
 
 
 
@@ -283,16 +283,15 @@ public class CLResponseCargaDTO {
 		 this.nombreMapeo = nombreMapeo;
 	 }
 
-	 public Long getIdExtencionPerfil() {
-		 return idExtencionPerfil;
+	 public Long getIdExtensionPerfil() {
+		 return idExtensionPerfil;
 	 }
 
-	 public void setIdExtencionPerfil(Long idExtencionPerfil) {
-		 this.idExtencionPerfil = idExtencionPerfil;
+	 public void setIdExtensionPerfil(Long idExtensionPerfil) {
+		 this.idExtensionPerfil = idExtensionPerfil;
 	 }
 
-
-
+	
 
 
 

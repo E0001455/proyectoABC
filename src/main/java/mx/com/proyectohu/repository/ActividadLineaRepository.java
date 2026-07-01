@@ -16,7 +16,4 @@ public interface  ActividadLineaRepository extends JpaRepository<ActividadLineaE
 	
 	public  List<ActividadLineaEntity> findByLlaveActividadLinea_IdActividadMapeoLinea(Long idActividadMapeoLinea);
 
-
-	
-
 }

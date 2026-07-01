@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.proyectohu.service.TareaCampanaService;
+import mx.com.proyectohu.service.TareaEmpresaService;
 import mx.com.proyectohu.service.TareaLineaService;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class TareasController {
 	public TareaCampanaService tareaCampanaService;
 
 
+	@Autowired
+	public TareaEmpresaService tareaEmpresaService;
 
 	 
 	@GetMapping(value="/lineas/tareas", produces = "application/json")
@@ -58,6 +61,17 @@ public class TareasController {
 
 
 	}
+	
+	
+	@GetMapping(value="/empresas/tareas", produces = "application/json")
+	public ResponseEntity<?> consultarTareasEmpresas() {
+	
+		String json = tareaEmpresaService.consultarTareasEmpresa();
+
+		return ResponseEntity.ok(json);
+
+	}
+
 	
 
 }
